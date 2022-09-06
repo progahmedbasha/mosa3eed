@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->integer('user_type_id')->unsigned();
             $table->foreign('user_type_id')->references('id')->on('user_types');
 
