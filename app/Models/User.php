@@ -41,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function Organization()
+    {
+      return $this->belongsTo('App\Models\admin\Organization');
+    }
+    public function District()
+    {
+      return $this->belongsTo('App\Models\District');
+    }
 }

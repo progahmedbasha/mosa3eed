@@ -5,7 +5,7 @@
 					<div class="aside-logo flex-column-auto px-9 mb-9" id="kt_aside_logo">
 						<!--begin::Logo-->
 						<a href="../../demo3/dist/index.html">
-							<img alt="Logo" src="assets/media/logos/logo-demo3-default.svg" class="h-20px logo" />
+							<img alt="Logo" src="{{asset('assets/media/logos/logo-demo3-default.svg')}}" class="h-20px logo" />
 						</a>
 						<!--end::Logo-->
 					</div>
@@ -17,7 +17,7 @@
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-rounded fw-bold my-auto" id="#kt_aside_menu" data-kt-menu="true">
 								<div class="menu-item">
-									<a class="menu-link active" href="../../demo3/dist/index.html">
+									<a class="menu-link active" href="{{route('dashboard')}}">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
 											<span class="svg-icon svg-icon-5">
@@ -31,7 +31,25 @@
 										<span class="menu-title">Dashboard</span>
 									</a>
 								</div>
-								
+								{{-- ///////////////////////////////////////////////////////////// --}}
+								<div class="menu-item">
+									<a class="menu-link active" href="{{route('admin.index')}}">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+											<span class="svg-icon svg-icon-5">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
+													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">Admins</span>
+									</a>
+								</div>
+
+
+								{{-- ////////////////////////////////////////////////////////////// --}}
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -108,7 +126,7 @@
 							<div class="d-flex align-items-center">
 								<!--begin::Avatar-->
 								<div class="symbol symbol-circle symbol-40px">
-									<img src="assets/media/avatars/150-26.jpg" alt="photo" />
+									<img src="{{asset('assets/media/avatars/150-26.jpg')}}" alt="photo" />
 								</div>
 								<!--end::Avatar-->
 								<!--begin::User info-->
@@ -142,7 +160,7 @@
 										<div class="menu-content d-flex align-items-center px-3">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-50px me-5">
-												<img alt="Logo" src="assets/media/avatars/150-26.jpg" />
+												<img alt="Logo" src="{{asset('assets/media/avatars/150-26.jpg')}}" />
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Username-->
@@ -232,7 +250,7 @@
 										<a href="#" class="menu-link px-5">
 											<span class="menu-title position-relative">Language
 											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-											<img class="w-15px h-15px rounded-1 ms-2" src="assets/media/flags/united-states.svg" alt="" /></span></span>
+											<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/media/flags/united-states.svg')}}" alt="" /></span></span>
 										</a>
 										<!--begin::Menu sub-->
 										<div class="menu-sub menu-sub-dropdown w-175px py-4">
@@ -240,7 +258,7 @@
 											<div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5 active">
 												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="assets/media/flags/united-states.svg" alt="" />
+													<img class="rounded-1" src="{{asset('assets/media/flags/united-states.svg')}}" alt="" />
 												</span>English</a>
 											</div>
 											<!--end::Menu item-->
@@ -248,7 +266,7 @@
 											<div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
 												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="assets/media/flags/spain.svg" alt="" />
+													<img class="rounded-1" src="{{asset('assets/media/flags/spain.svg')}}" alt="" />
 												</span>Spanish</a>
 											</div>
 											<!--end::Menu item-->
@@ -256,7 +274,7 @@
 											<div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
 												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="assets/media/flags/germany.svg" alt="" />
+													<img class="rounded-1" src="{{asset('assets/media/flags/germany.svg')}}" alt="" />
 												</span>German</a>
 											</div>
 											<!--end::Menu item-->
@@ -264,7 +282,7 @@
 											<div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
 												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="assets/media/flags/japan.svg" alt="" />
+													<img class="rounded-1" src="{{asset('assets/media/flags/japan.svg')}}" alt="" />
 												</span>Japanese</a>
 											</div>
 											<!--end::Menu item-->
@@ -272,7 +290,7 @@
 											<div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
 												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="assets/media/flags/france.svg" alt="" />
+													<img class="rounded-1" src="{{asset('assets/media/flags/france.svg')}}" alt="" />
 												</span>French</a>
 											</div>
 											<!--end::Menu item-->
