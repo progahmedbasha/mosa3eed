@@ -52,7 +52,7 @@ class AdminController extends Controller
             'name'=> 'required|min:2|max:150',
             'email' => 'required|unique:users|email|max:200',
             'password' => 'required|min:4|max:25',
-            'phone' => 'required|min:11|max:13',  
+            'phone' => 'required|min:9|max:15',  
             'user_type_id' => 'required',
             'country_id' => 'required', 
             'city_id' => 'required', 
@@ -120,7 +120,7 @@ class AdminController extends Controller
             'name'=> 'required|min:2|max:150',
             'email' => 'required|email|max:200',
             'password' => 'max:25',
-            'phone' => 'required|min:11|max:13',  
+            'phone' => 'required|min:9|max:15',  
             'user_type_id' => 'required',
             'country_id' => 'required', 
             'city_id' => 'required', 
@@ -130,7 +130,7 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        if (request()->photo){
+        if (request()->password){
         $user->password = Hash::make($request['password']);
         }
         $user->phone = $request->input('phone');

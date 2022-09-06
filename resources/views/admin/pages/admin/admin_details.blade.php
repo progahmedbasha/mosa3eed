@@ -296,6 +296,23 @@
 						</div>
 						<!--end::Container-->
 					</div>
+
+					{{--div for show photo --}}
+								<br>
+						<div class="col-xl-12 mb-30">
+								<div class="card card-statistics h-100">
+									<div class="card-body">
+
+									@if(!empty($data->photo))
+									<img src="{{url('/data/admins')}}/{{$data->photo }}" class="w3-round" width="200px" alt="Norway">
+									@else
+									<img src="{{url('/data/error.png')}}" class="w3-round" width="200px" alt="Norway">
+									@endif  
+								</div>
+								</div>
+							</div>
+							{{--div for show photo --}}
+					</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
       $(document).ready(function () {
