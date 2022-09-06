@@ -64,7 +64,7 @@
 											</span>
 											<!--end::Svg Icon-->
 										</span>
-										<span class="menu-title">Organization</span>
+										<span class="menu-title">Organizations</span>
 									</a>
 								</div>
 

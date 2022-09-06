@@ -256,7 +256,7 @@
 													<td>
 														<div class="d-flex align-items-center">
 															<div class="symbol symbol-45px me-5">
-																<img src="assets/media/avatars/150-11.jpg" alt="" />
+																<img src="{{asset('assets/media/avatars/150-11.jpg')}}" alt="" />
 															</div>
 															<div class="d-flex justify-content-start flex-column">
 																<a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Ana Simmons</a>
@@ -323,7 +323,7 @@
 													<td>
 														<div class="d-flex align-items-center">
 															<div class="symbol symbol-45px me-5">
-																<img src="assets/media/avatars/150-3.jpg" alt="" />
+																<img src="{{asset('assets/media/avatars/150-3.jpg')}}" alt="" />
 															</div>
 															<div class="d-flex justify-content-start flex-column">
 																<a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Jessie Clarcson</a>
@@ -390,7 +390,7 @@
 													<td>
 														<div class="d-flex align-items-center">
 															<div class="symbol symbol-45px me-5">
-																<img src="assets/media/avatars/150-4.jpg" alt="" />
+																<img src="{{asset('assets/media/avatars/150-4.jpg')}}" alt="" />
 															</div>
 															<div class="d-flex justify-content-start flex-column">
 																<a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Lebron Wayde</a>
@@ -457,7 +457,7 @@
 													<td>
 														<div class="d-flex align-items-center">
 															<div class="symbol symbol-45px me-5">
-																<img src="assets/media/avatars/150-5.jpg" alt="" />
+																<img src="{{asset('assets/media/avatars/150-5.jpg')}}" alt="" />
 															</div>
 															<div class="d-flex justify-content-start flex-column">
 																<a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Natali Goodwin</a>
@@ -524,7 +524,7 @@
 													<td>
 														<div class="d-flex align-items-center">
 															<div class="symbol symbol-45px me-5">
-																<img src="assets/media/avatars/150-6.jpg" alt="" />
+																<img src="{{asset('assets/media/avatars/150-6.jpg')}}" alt="" />
 															</div>
 															<div class="d-flex justify-content-start flex-column">
 																<a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Kevin Leonard</a>
@@ -950,7 +950,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/plurk.svg" class="h-50 align-self-center" alt="" />
+														<img src="{{asset('assets/media/svg/brand-logos/plurk.svg')}}" class="h-50 align-self-center" alt="" />
 													</span>
 												</div>
 												<!--end::Symbol-->
@@ -970,7 +970,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/telegram.svg" class="h-50 align-self-center" alt="" />
+														<img src="{{asset('assets/media/svg/brand-logos/telegram.svg')}}" class="h-50 align-self-center" alt="" />
 													</span>
 												</div>
 												<!--end::Symbol-->
@@ -990,7 +990,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/vimeo.svg" class="h-50 align-self-center" alt="" />
+														<img src="{{asset('assets/media/svg/brand-logos/vimeo.svg')}}" class="h-50 align-self-center" alt="" />
 													</span>
 												</div>
 												<!--end::Symbol-->
@@ -1010,7 +1010,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/bebo.svg" class="h-50 align-self-center" alt="" />
+														<img src="{{asset('assets/media/svg/brand-logos/bebo.svg')}}" class="h-50 align-self-center" alt="" />
 													</span>
 												</div>
 												<!--end::Symbol-->
@@ -1030,7 +1030,7 @@
 												<!--begin::Symbol-->
 												<div class="symbol symbol-50px me-5">
 													<span class="symbol-label">
-														<img src="assets/media/svg/brand-logos/kickstarter.svg" class="h-50 align-self-center" alt="" />
+														<img src="{{asset('assets/media/svg/brand-logos/kickstarter.svg')}}" class="h-50 align-self-center" alt="" />
 													</span>
 												</div>
 												<!--end::Symbol-->
