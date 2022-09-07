@@ -181,7 +181,12 @@
 													<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
 														<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
 													</div>
-												</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 125px;">Customer Name</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 165.203px;">Email</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 125px;">Created Date</th><th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
+												</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 125px;">Customer Name</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 165.203px;">Email</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Phone: activate to sort column ascending" style="width: 165.203px;">Phone</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User Type: activate to sort column ascending" style="width: 165.203px;">User Type</th>
+												<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
 											<!--end::Table row-->
 										</thead>
 										<!--end::Table head-->
@@ -237,18 +242,21 @@
 												<!--end::Checkbox-->
 												<!--begin::Name=-->
 												<td>
-													<a href="../../demo3/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{ $user->name }}</a>
+													<a href="admin/{{$user->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $user->name }}</a>
 												</td>
-												<!--end::Name=-->
-												<!--begin::Email=-->
+											
 												<td>
-													<a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $user->email }}</a>
+													<a href="admin/{{$user->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $user->email }}</a>
+												</td>
+												<td>
+													<a href="admin/{{$user->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $user->phone }}</a>
+												</td>
+												<td>
+													<a href="admin/{{$user->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $user->UserType->type }}</a>
 												</td>
 												<!--end::Email=-->
 											
-												<!--begin::Date=-->
-												<td data-order="2020-12-14T20:43:00+02:00">14 Dec 2020, 8:43 pm</td>
-												<!--end::Date=-->
+											
 												<!--begin::Action=-->
 												<td class="text-end">
 													<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">Actions
@@ -285,7 +293,7 @@
 											@endforeach
 											</tbody>
 										<!--end::Table body-->
-									</table></div><div class="row"><div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"><div class="dataTables_length" id="kt_customers_table_length"><label><select name="kt_customers_table_length" aria-controls="kt_customers_table" class="form-select form-select-sm form-select-solid"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div></div><div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end"><div class="dataTables_paginate paging_simple_numbers" id="kt_customers_table_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="kt_customers_table_previous"><a href="#" aria-controls="kt_customers_table" data-dt-idx="0" tabindex="0" class="page-link"><i class="previous"></i></a></li><li class="paginate_button page-item active"><a href="#" aria-controls="kt_customers_table" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item next" id="kt_customers_table_next"><a href="#" aria-controls="kt_customers_table" data-dt-idx="5" tabindex="0" class="page-link"><i class="next"></i></a></li></ul></div></div></div></div>
+									</table></div>
 									<!--end::Table-->
 								</div>
 								<!--end::Card body-->

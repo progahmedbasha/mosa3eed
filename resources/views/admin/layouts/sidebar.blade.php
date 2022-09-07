@@ -86,12 +86,28 @@
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion">
-																				<div class="menu-item">
+										<div class="menu-item">
 											<a class="menu-link" href="{{route('countries.index')}}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Countries</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="{{route('cities.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Cities</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link" href="{{route('districts.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Districts</span>
 											</a>
 										</div>
 

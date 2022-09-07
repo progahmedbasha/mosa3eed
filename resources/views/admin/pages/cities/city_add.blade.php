@@ -6,7 +6,7 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Organization</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New City</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -14,8 +14,8 @@
 										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Organizations</li>
-									<li class="breadcrumb-item text-dark">Organization Add</li>
+									<li class="breadcrumb-item text-muted">Cities</li>
+									<li class="breadcrumb-item text-dark">City Add</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -34,10 +34,10 @@
 
 <br>
 							<div >
-								<span class="fs-2x fw-bolder text-gray-800">Form Organization</span>
+								<span class="fs-2x fw-bolder text-gray-800">Form City</span>
 							</div>
 
-                  <form action="{{route('organizations.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('cities.store')}}" method="post" enctype="multipart/form-data">
                      @csrf
 
 								 <div class="row gx-10 mb-5">
@@ -52,74 +52,20 @@
                                                                 @enderror	
 															</div>
 															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact En</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact En" value="{{old('contact_en')}}" name="contact_en">
-                                                                @error('contact_en')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-															</div>
-															<!--end::Input group-->
-															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact Email</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact Email" value="{{old('email')}}" name="email">
-                                                                @error('email')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
+                                                            <!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
 															<div class="mb-5">
 																<select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
 																	<option value="">Select Country</option>
 																	@foreach ($countries as $data)
-																	<option value="{{$data->id}}" {{(old('country_id')==$data->id)? 'selected':''}}>{{$data->name_en}}</option>
+																	<option value="{{$data->id}}">
+																		{{$data->name}}
+																	</option>
 																	@endforeach
-																</select>
-																@error('country_id')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
+																</select>														
 															</div>
 															<!--end::Input group-->
-															<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
-															<div class="mb-5">
-																	<select id="state-dd" class="form-control"style="padding: 10px;" name="district_id">
-																	<option value="">Select District</option>
-																	@foreach ($districts as $district)
-																		<option value="{{$district->id}}" {{(old('city_id')==$district->id)? 'selected':''}}>{{ $district->name }}</option>
-																	@endforeach
-																	</select>
-																	@error('district_id')
-																	<div class="alert alert-danger">{{ $message }}</div>
-																	@enderror   												
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Type</label>
-															<div class="mb-5">
-																<select class="form-control"style="padding: 10px;" name="type">
-																		<option value="">Select Type</option>
-																		<option value="Pharmacy">Pharmacy</option>
-																		<option value="Store">Store</option>
-																	</select>															   
-																 @error('type')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-																<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Photo</label>
-															<div class="mb-5">
-															<div class="custom-file">
-																<input type="file" class="custom-file-input" id="validatedCustomFile"  name="photo">
-																</div>													
-															</div>
-															<!--end::Input group-->
+														
                                                     </div>
 														<!--end::Col-->
 														<!--begin::Col-->
@@ -132,66 +78,8 @@
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
                                                             </div>
-															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact Ar</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact Ar" value="{{old('contact_ar')}}" name="contact_ar">
-															    @error('contact_ar')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Phone</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Phone" value="{{old('phone')}}" name="phone">
-															    @error('phone')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-																<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
-															<div class="mb-5">
-																  <select id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
-																  <option value="">Select City</option>
-																  @foreach ($cities as $city)
-																	<option value="{{$city->id}}" {{(old('city_id')==$city->id)? 'selected':''}}>{{ $city->name }}</option>
-																  @endforeach
-																  </select>
-																@error('city_id')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror 													
-															</div>
-															<!--end::Input group-->
-															
-                                                            	<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Address</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Address" value="{{old('address')}}" name="address">
-															    @error('address')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Verified status </label>
-															<div class="mb-5">
-																	<select class="form-control"style="padding: 10px;" name="status">
-																	<option value="">Select Status</option>
-																	<option value="Verified">Verified</option>
-																	<option value="Not Verified">Not Verified</option>
-																	</select>
-																	@error('status')
-																	<div class="alert alert-danger">{{ $message }}</div>
-																	@enderror   												
-															</div>
-															<!--end::Input group-->
-														
-														
 
+															
 														</div>
 														<!--end::Col-->
 													</div>
@@ -335,61 +223,4 @@
 						</div>
 						<!--end::Container-->
 					</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-      $(document).ready(function () {
-          $('#country-dd').on('change', function () {
-              var idCountry = this.value;
-              $("#city-dd").html('');
-              $.ajax({
-                  url: "{{route('fetch_city')}}",
-                  type: "POST",
-                  data: {
-                      city_id: idCountry,
-                      _token: '{{csrf_token()}}'
-                  },
-                  dataType: 'json',
-                  success: function (result) {
-                console.log(result.cities);
-
-                      $('#city-dd').html('<option value="">Select City</option>');
-                      $.each(result.cities, function (key, value) {
-                          $("#city-dd").append('<option value="' + value
-                              .id + '">' + value.name_en + '</option>');
-                      });
-                      // $('#city-dd').html('<option value="">Select City</option>');
-                  },
-                  
-              });
-          });
-                  $('#city-dd').on('change', function () {
-                      var idcity = this.value;
-                      $("#state-dd").html('');
-                      
-                      $.ajax({
-                          url: "{{route('fetchdistrict')}}",
-                          type: "POST",
-                          
-                          data: {
-                              city_id: idcity,
-                              _token: '{{csrf_token()}}'
-                          },
-                          dataType: 'json',
-                          success: function (result) {
-                           var locate = {!! json_encode(app()->getLocale()) !!};
-                        console.log(result.districts);
-
-                              $('#state-dd').html('<option value="">Select City</option>');
-                              $.each(result.districts, function (key, value) {
-                                  $("#state-dd").append('<option value="' + value
-                                      .id + '">' + value.name[locate]+ '</option>');
-                              });
-                              // $('#city-dd').html('<option value="">Select City</option>');
-                          },
-                          
-                      });
-                  });
-      });
-  </script>
-
 @endsection

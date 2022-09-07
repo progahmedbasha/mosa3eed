@@ -6,7 +6,7 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Organization</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Edit District</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -14,8 +14,8 @@
 										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Organizations</li>
-									<li class="breadcrumb-item text-dark">Organization Add</li>
+									<li class="breadcrumb-item text-muted">Districts</li>
+									<li class="breadcrumb-item text-dark">District Edit</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -34,92 +34,41 @@
 
 <br>
 							<div >
-								<span class="fs-2x fw-bolder text-gray-800">Form Organization</span>
+								<span class="fs-2x fw-bolder text-gray-800">Form City</span>
 							</div>
 
-                  <form action="{{route('organizations.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('districts.update',$district->id)}}" method="post" enctype="multipart/form-data">
                      @csrf
-
+                     @method('patch')
 								 <div class="row gx-10 mb-5">
 														<!--begin::Col-->
 														<div class="col-lg-6">
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Name En</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Name En" value="{{old('name_en')}}" name="name_en">
+																<input type="text" class="form-control form-control-solid" placeholder="Name En" value="{{$district->getTranslation('name', 'en')}}" name="name_en">
                                                                 @error('name_en')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
 															</div>
 															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact En</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact En" value="{{old('contact_en')}}" name="contact_en">
-                                                                @error('contact_en')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-															</div>
-															<!--end::Input group-->
-															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact Email</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact Email" value="{{old('email')}}" name="email">
-                                                                @error('email')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
+                                                            <!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
 															<div class="mb-5">
 																<select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
-																	<option value="">Select Country</option>
+                                                                     <option value="{{$country_id->id}}"  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
 																	@foreach ($countries as $data)
-																	<option value="{{$data->id}}" {{(old('country_id')==$data->id)? 'selected':''}}>{{$data->name_en}}</option>
+																	<option value="{{$data->id}}">
+																		{{$data->name}}
+																	</option>
 																	@endforeach
 																</select>
-																@error('country_id')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
+                                                                @error('country_id')
+                                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror 														
 															</div>
 															<!--end::Input group-->
-															<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
-															<div class="mb-5">
-																	<select id="state-dd" class="form-control"style="padding: 10px;" name="district_id">
-																	<option value="">Select District</option>
-																	@foreach ($districts as $district)
-																		<option value="{{$district->id}}" {{(old('city_id')==$district->id)? 'selected':''}}>{{ $district->name }}</option>
-																	@endforeach
-																	</select>
-																	@error('district_id')
-																	<div class="alert alert-danger">{{ $message }}</div>
-																	@enderror   												
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Type</label>
-															<div class="mb-5">
-																<select class="form-control"style="padding: 10px;" name="type">
-																		<option value="">Select Type</option>
-																		<option value="Pharmacy">Pharmacy</option>
-																		<option value="Store">Store</option>
-																	</select>															   
-																 @error('type')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-																<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Photo</label>
-															<div class="mb-5">
-															<div class="custom-file">
-																<input type="file" class="custom-file-input" id="validatedCustomFile"  name="photo">
-																</div>													
-															</div>
-															<!--end::Input group-->
+														
                                                     </div>
 														<!--end::Col-->
 														<!--begin::Col-->
@@ -127,71 +76,25 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Name Ar</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Name Ar" value="{{old('name_ar')}}" name="name_ar">
+																<input type="text" class="form-control form-control-solid" placeholder="Name Ar" value="{{$district->getTranslation('name', 'ar')}}" name="name_ar">
 															    @error('name_ar')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
                                                             </div>
-															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact Ar</label>
 															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact Ar" value="{{old('contact_ar')}}" name="contact_ar">
-															    @error('contact_ar')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Phone</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Phone" value="{{old('phone')}}" name="phone">
-															    @error('phone')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-																<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
 															<div class="mb-5">
 																  <select id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
-																  <option value="">Select City</option>
-																  @foreach ($cities as $city)
-																	<option value="{{$city->id}}" {{(old('city_id')==$city->id)? 'selected':''}}>{{ $city->name }}</option>
-																  @endforeach
-																  </select>
-																@error('city_id')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror 													
+																  <option value="{{$city_id->id}}" {{($city_id = $city_id)? 'selected' : '' }}> {{$city_id->name}}</option>   
+																	@foreach ($cities as $city)
+																		<option value="{{$city->id}}">
+																			{{$city->name}}
+																		</option>
+																	@endforeach
+																  </select>													
 															</div>
 															<!--end::Input group-->
 															
-                                                            	<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Address</label>
-															<!--begin::Input group-->
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Address" value="{{old('address')}}" name="address">
-															    @error('address')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror	
-                                                            </div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Verified status </label>
-															<div class="mb-5">
-																	<select class="form-control"style="padding: 10px;" name="status">
-																	<option value="">Select Status</option>
-																	<option value="Verified">Verified</option>
-																	<option value="Not Verified">Not Verified</option>
-																	</select>
-																	@error('status')
-																	<div class="alert alert-danger">{{ $message }}</div>
-																	@enderror   												
-															</div>
-															<!--end::Input group-->
-														
-														
-
 														</div>
 														<!--end::Col-->
 													</div>
@@ -391,5 +294,4 @@
                   });
       });
   </script>
-
 @endsection

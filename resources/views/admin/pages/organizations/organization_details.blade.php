@@ -37,16 +37,16 @@
 								<span class="fs-2x fw-bolder text-gray-800">Form Organization</span>
 							</div>
 
-                  <form action="{{route('organizations.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('organizations.update',$organization->id)}}" method="post" enctype="multipart/form-data">
                      @csrf
-
+                    @method('patch')
 								 <div class="row gx-10 mb-5">
 														<!--begin::Col-->
 														<div class="col-lg-6">
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Name En</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Name En" value="{{old('name_en')}}" name="name_en">
+																<input type="text" class="form-control form-control-solid" placeholder="Name En" value="{{$organization->getTranslation('name', 'en')}}" name="name_en">
                                                                 @error('name_en')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
@@ -55,7 +55,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact En</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact En" value="{{old('contact_en')}}" name="contact_en">
+																<input type="text" class="form-control form-control-solid" placeholder="Contact En" value="{{$organization->getTranslation('contact_name', 'en')}}" name="contact_en">
                                                                 @error('contact_en')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
@@ -65,7 +65,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact Email</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact Email" value="{{old('email')}}" name="email">
+																<input type="text" class="form-control form-control-solid" placeholder="Contact Email" value="{{ $organization->email }}" name="email">
                                                                 @error('email')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
@@ -75,9 +75,9 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
 															<div class="mb-5">
 																<select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
-																	<option value="">Select Country</option>
-																	@foreach ($countries as $data)
-																	<option value="{{$data->id}}" {{(old('country_id')==$data->id)? 'selected':''}}>{{$data->name_en}}</option>
+                                                                    <option  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
+																	@foreach ($countries as $country)
+																	<option value="{{$country->id}}">{{$country->name}}</option>
 																	@endforeach
 																</select>
 																@error('country_id')
@@ -89,9 +89,9 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
 															<div class="mb-5">
 																	<select id="state-dd" class="form-control"style="padding: 10px;" name="district_id">
-																	<option value="">Select District</option>
+																	<option value="{{ $organization->district_id }}">{{ $organization->District->name }}</option>
 																	@foreach ($districts as $district)
-																		<option value="{{$district->id}}" {{(old('city_id')==$district->id)? 'selected':''}}>{{ $district->name }}</option>
+																		<option value="{{$district->id}}">{{ $district->name }}</option>
 																	@endforeach
 																	</select>
 																	@error('district_id')
@@ -103,7 +103,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Type</label>
 															<div class="mb-5">
 																<select class="form-control"style="padding: 10px;" name="type">
-																		<option value="">Select Type</option>
+                                                                        <option value="{{ $organization->type }}">{{ $organization->type }}</option>
 																		<option value="Pharmacy">Pharmacy</option>
 																		<option value="Store">Store</option>
 																	</select>															   
@@ -127,7 +127,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Name Ar</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Name Ar" value="{{old('name_ar')}}" name="name_ar">
+																<input type="text" class="form-control form-control-solid" placeholder="Name Ar" value="{{$organization->getTranslation('name', 'en')}}" name="name_ar">
 															    @error('name_ar')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
@@ -136,7 +136,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Contact Ar</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Contact Ar" value="{{old('contact_ar')}}" name="contact_ar">
+																<input type="text" class="form-control form-control-solid" placeholder="Contact Ar" value="{{$organization->getTranslation('contact_name', 'en')}}" name="contact_ar">
 															    @error('contact_ar')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
@@ -146,7 +146,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Phone</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Phone" value="{{old('phone')}}" name="phone">
+																<input type="text" class="form-control form-control-solid" placeholder="Phone" value="{{$organization->phone}}" name="phone">
 															    @error('phone')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
@@ -156,7 +156,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
 															<div class="mb-5">
 																  <select id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
-																  <option value="">Select City</option>
+																  <option  {{($city_id = $city_id)? 'selected' : '' }}> {{$city_id->name}}</option>
 																  @foreach ($cities as $city)
 																	<option value="{{$city->id}}" {{(old('city_id')==$city->id)? 'selected':''}}>{{ $city->name }}</option>
 																  @endforeach
@@ -170,7 +170,7 @@
                                                             	<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Address</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Address" value="{{old('address')}}" name="address">
+																<input type="text" class="form-control form-control-solid" placeholder="Address" value="{{ $organization->address }}" name="address">
 															    @error('address')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
@@ -180,7 +180,7 @@
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Verified status </label>
 															<div class="mb-5">
 																	<select class="form-control"style="padding: 10px;" name="status">
-																	<option value="">Select Status</option>
+																	<option value="{{ $organization->status }}">{{ $organization->status }}</option>
 																	<option value="Verified">Verified</option>
 																	<option value="Not Verified">Not Verified</option>
 																	</select>
@@ -334,6 +334,22 @@
 							<!--end::Modals-->
 						</div>
 						<!--end::Container-->
+                        </div>
+                        {{--div for show photo --}}
+								<br>
+						<div class="col-xl-12 mb-30">
+								<div class="card card-statistics h-100">
+									<div class="card-body">
+
+									@if(!empty($organization->photo))
+									<img src="{{url('/data/organizations')}}/{{$organization->photo }}" class="w3-round" width="200px" alt="Norway">
+									@else
+									<img src="{{url('/data/error.png')}}" class="w3-round" width="200px" alt="Norway">
+									@endif  
+								</div>
+								</div>
+							</div>
+							{{--div for show photo --}}
 					</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

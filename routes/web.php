@@ -44,6 +44,8 @@ Route::group(
                     Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
                     Route::resource('organizations', 'App\Http\Controllers\Admin\OrganizationController');
                     Route::resource('countries', 'App\Http\Controllers\CountryController');
+                    Route::resource('cities', 'App\Http\Controllers\CityController');
+                    Route::resource('districts', 'App\Http\Controllers\DistrictController');
                 });  
 });
     Auth::routes();

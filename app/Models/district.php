@@ -20,5 +20,8 @@ class district extends Model
     {
       return $this->hassMany('App\Models\User');
     }
-  
+     public function Organization()
+    {
+      return $this->hassMany('App\Models\admin\Organization');
+    }
 }

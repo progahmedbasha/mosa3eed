@@ -6,7 +6,7 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Organization List</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Cities List</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -14,8 +14,8 @@
 										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Organizations</li>
-									<li class="breadcrumb-item text-dark">Organization List</li>
+									<li class="breadcrumb-item text-muted">Cities</li>
+									<li class="breadcrumb-item text-dark">Cities List</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -143,7 +143,7 @@
 											<!--begin::Add customer-->
 											{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Add Customer</button>
 											 --}}
-												<a href="{{route('organizations.create')}}" class="btn btn-primary">Add</a>
+												<a href="{{route('cities.create')}}" class="btn btn-primary">Add</a>
 										
 											<!--end::Add customer-->
 										</div>
@@ -173,15 +173,16 @@
 										<!--begin::Table head-->
 										<thead>
 											<!--begin::Table row-->
-											<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0" role="row"><th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="
-													
-														
-													
-												" style="width: 29.25px;">
+											<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0" role="row">
+											<th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label=" " style="width: 29.25px;">
 													<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
 														<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
 													</div>
-												</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Customer Name: activate to sort column ascending" style="width: 125px;">Customer Name</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending" style="width: 165.203px;">Address</th><th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Type: activate to sort column ascending" style="width: 125px;">Type</th><th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
+												</th>
+													<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label=" Name: activate to sort column ascending" style="width: 125px;">Name</th>
+													<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label=" Country Name: activate to sort column ascending" style="width: 125px;">Country Name</th>
+													<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th>
+												</tr>
 											<!--end::Table row-->
 										</thead>
 										<!--end::Table head-->
@@ -226,7 +227,7 @@
 											
 											
 											
-										 @foreach($organizations as $index=>$organization)	
+										 @foreach($cities as $index=>$city)	
 										<tr class="odd">
 												<!--begin::Checkbox-->
 												<td>
@@ -237,18 +238,15 @@
 												<!--end::Checkbox-->
 												<!--begin::Name=-->
 												<td>
-													<a href="../../demo3/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">{{ $organization->name }}</a>
+													<a href="cities/{{$city->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $city->name }}</a>
 												</td>
 												<!--end::Name=-->
-												<!--begin::Email=-->
+												<!--begin::Name=-->
 												<td>
-													<a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $organization->address }}</a>
+													<a href="cities/{{$city->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $city->Country->name }}</a>
 												</td>
-												<!--end::Email=-->
+												<!--end::Name=-->
 											
-												<!--begin::Date=-->
-												<td data-order="2020-12-14T20:43:00+02:00">{{ $organization->type }}</td>
-												<!--end::Date=-->
 												<!--begin::Action=-->
 												<td class="text-end">
 													<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">Actions
@@ -263,14 +261,13 @@
 													<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
-															<a href="organizations/{{$organization->id}}/edit" class="menu-link px-3">View</a>
+															<a href="cities/{{$city->id}}/edit" class="menu-link px-3">View</a>
 														</div>
 														<!--end::Menu item-->
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
-									                      {{-- <a href="institution_admins/{{$item->id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i></a> --}}
 
-															 <form action="{{route('organizations.destroy',$organization->id)}} " method="POST">
+															 <form action="{{route('cities.destroy',$city->id)}} " method="POST">
 																@csrf
 																@method('DELETE')
 																<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>
@@ -285,7 +282,7 @@
 											@endforeach
 											</tbody>
 										<!--end::Table body-->
-									</table></div>
+									</table></div><div class="row"><div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"><div class="dataTables_length" id="kt_customers_table_length"><label><select name="kt_customers_table_length" aria-controls="kt_customers_table" class="form-select form-select-sm form-select-solid"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div></div><div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end"><div class="dataTables_paginate paging_simple_numbers" id="kt_customers_table_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="kt_customers_table_previous"><a href="#" aria-controls="kt_customers_table" data-dt-idx="0" tabindex="0" class="page-link"><i class="previous"></i></a></li><li class="paginate_button page-item active"><a href="#" aria-controls="kt_customers_table" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="kt_customers_table" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item next" id="kt_customers_table_next"><a href="#" aria-controls="kt_customers_table" data-dt-idx="5" tabindex="0" class="page-link"><i class="next"></i></a></li></ul></div></div></div></div>
 									<!--end::Table-->
 								</div>
 								<!--end::Card body-->

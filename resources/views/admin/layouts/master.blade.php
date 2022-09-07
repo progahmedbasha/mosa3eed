@@ -3179,7 +3179,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Demo-->
 										<div class="overlay overflow-hidden position-relative border border-4 border-gray-200 rounded">
 											<div class="overlay-wrapper">
-												<img src="assets/media/demos/demo2.png" alt="demo" class="w-100" />
+												<img src="{{asset('assets/media/demos/demo2.png')}}" alt="demo" class="w-100" />
 											</div>
 											<div class="overlay-layer bg-dark bg-opacity-10">
 												<a href="https://preview.keenthemes.com/metronic8/demo2" class="btn btn-sm btn-success shadow">Demo 2</a>

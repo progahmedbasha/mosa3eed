@@ -12,9 +12,14 @@ class Organization extends Model
 {
     use HasFactory,HasTranslations;
 
-    public $translatable = ['name'];
-    public function User()
+    public $translatable = ['name','contact_name'];
+
+      public function User()
+   {
+     return $this->hasMany('App\Models\User');
+   }
+     public function District()
     {
-      return $this->hasMany('App\Models\User');
+      return $this->belongsTo('App\Models\District');
     }
 }
