@@ -12,9 +12,11 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $countries = Country::all();
+        //  $countries = Country::whenSearch($request->search)->paginate(50);
+        
         return view('admin.pages.countries.countries', compact('countries'));
     }
 

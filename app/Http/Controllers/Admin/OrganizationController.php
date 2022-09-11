@@ -30,7 +30,7 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-         $countries = Country::all();
+        $countries = Country::all();
         $cities = City::all();
         $districts = District::all();
         return view('admin.pages.organizations.organizations_add', compact('countries','cities','districts'));

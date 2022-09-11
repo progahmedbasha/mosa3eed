@@ -39,13 +39,18 @@ Route::group(
                         Route::get('dashboard', function () {
                             return view('admin.dashboard');
                         })->name('dashboard');
-	                Route::resource('admin', 'App\Http\Controllers\Admin\AdminController');
+	                Route::resource('admin', 'Admin\AdminController');
                     Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
                     Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
-                    Route::resource('organizations', 'App\Http\Controllers\Admin\OrganizationController');
-                    Route::resource('countries', 'App\Http\Controllers\CountryController');
-                    Route::resource('cities', 'App\Http\Controllers\CityController');
-                    Route::resource('districts', 'App\Http\Controllers\DistrictController');
+                    Route::resource('organizations', 'Admin\OrganizationController');
+                    Route::resource('countries', 'CountryController');
+                    // Route::resource('countries', CountryController::class);
+                    Route::resource('cities', 'CityController');
+                    Route::resource('districts', 'DistrictController');
+                    Route::resource('medicins', 'Admin\MedicinController');
+                    Route::resource('settings', 'Admin\SettingController');
+                    Route::resource('branchs', 'Admin\BranchController');
+                    Route::resource('organization_admins', 'Organization\OrganizationAdminController');
                 });  
 });
     Auth::routes();
