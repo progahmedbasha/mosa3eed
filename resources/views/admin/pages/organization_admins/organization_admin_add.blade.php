@@ -37,7 +37,7 @@
 								<span class="fs-2x fw-bolder text-gray-800">Form Organization</span>
 							</div>
 
-                  <form action="{{route('organizations.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('organization_admins.store')}}" method="post" enctype="multipart/form-data">
                      @csrf
 
 								 <div class="row gx-10 mb-5">
@@ -59,10 +59,10 @@
 															<!--end::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
+																<select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
 																	<option value="">Select Users</option>
 																	@foreach ($users as $user)
-																	<option value="{{$user->id}}" {{(old('branch_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
+																	<option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
 																	@endforeach
 																</select>
 																@error('user_id')
@@ -91,10 +91,11 @@
 															<!--end::Input group-->
                                                             <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift</label>															<!--begin::Input group-->
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="shift">
+																<select  id="country-dd" class="form-control"style="padding: 10px;" name="shift_id">
 																	<option value="">Select shift</option>
-																	<option value="1" >1</option>
-                                                                    <option value="2" >2</option>
+																	@foreach ($shifts as $shift)
+																	<option value="{{$shift->id}}" {{(old('branch_id')==$shift->id)? 'selected':''}}>{{$shift->name}}</option>
+																	@endforeach
 																</select>
 																@error('shift')
 																<div class="alert alert-danger">{{ $message }}</div>

@@ -35,7 +35,7 @@
 												</svg>
 											</span>
 											<!--end::Svg Icon-->
-											<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Customers">
+											<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Medicins">
 										</div>
 										<!--end::Search-->
 									</div>
@@ -143,7 +143,7 @@
 											<!--begin::Add customer-->
 											{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Add Customer</button>
 											 --}}
-												<a href="{{route('cities.create')}}" class="btn btn-primary">Add</a>
+												<a href="{{route('medicins.create')}}" class="btn btn-primary">Add</a>
 										
 											<!--end::Add customer-->
 										</div>
