@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         DistrictSeeder::class,
         OrganizationSeeder::class,
         UserSeeder::class,
+        BranchSeeder::class,
+        ShiftSeeder::class,
     ]);
     }
 }
