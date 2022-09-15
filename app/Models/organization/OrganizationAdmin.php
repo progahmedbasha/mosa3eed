@@ -9,6 +9,7 @@ use DB;
 class OrganizationAdmin extends Model
 {
     use HasFactory;
+     public $guarded = [];
      public function User()
     {
       return $this->belongsTo('App\Models\User');
@@ -21,8 +22,8 @@ class OrganizationAdmin extends Model
     {
       return $this->belongsTo('App\Models\admin\Branch');
     }
-      public function Shift()
+      public function OrganizationShift()
     {
-      return $this->belongsTo('App\Models\organization\Shift');
+      return $this->belongsTo('App\Models\organization\OrganizationShift');
     }
 }

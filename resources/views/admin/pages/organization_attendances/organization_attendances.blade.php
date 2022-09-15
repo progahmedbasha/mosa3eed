@@ -6,7 +6,7 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Shift List</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Attendances List</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -14,8 +14,8 @@
 										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Shifts</li>
-									<li class="breadcrumb-item text-dark">Shift Listing</li>
+									<li class="breadcrumb-item text-muted">Attendances</li>
+									<li class="breadcrumb-item text-dark">Attendance Listing</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -35,7 +35,7 @@
 												</svg>
 											</span>
 											<!--end::Svg Icon-->
-											<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Users">
+											<input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Attendance">
 										</div>
 										<!--end::Search-->
 									</div>
@@ -70,7 +70,7 @@
 											<!--begin::Add customer-->
 											{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Add Customer</button>
 											 --}}
-												<a href="{{route('shifts.create')}}" class="btn btn-primary">Add</a>
+												<a href="{{route('organization_attendances.create')}}" class="btn btn-primary">Add</a>
 										
 											<!--end::Add customer-->
 										</div>
@@ -109,9 +109,11 @@
 														<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
 													</div>
 												</th>
-												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Shift Name: activate to sort column ascending" style="width: 125px;">Shift Name</th>
-												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="From: activate to sort column ascending" style="width: 125px;">From</th>
-												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="To: activate to sort column ascending" style="width: 165.203px;">To</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User Name: activate to sort column ascending" style="width: 125px;">User Name</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Organization Name: activate to sort column ascending" style="width: 125px;">Organization Name</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 165.203px;">Date</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Type: activate to sort column ascending" style="width: 165.203px;">Type</th>
 												<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
 											<!--end::Table row-->
 										</thead>
@@ -121,7 +123,7 @@
 											
 											
 											
-										 @foreach($shifts as $index=>$shift)	
+										 @foreach($organization_attendances as $index=>$org_attendance)	
 										<tr class="odd">
 												<!--begin::Checkbox-->
 												<td>
@@ -132,18 +134,22 @@
 												<!--end::Checkbox-->
 												<!--begin::Name=-->
 												<td>
-													<a href="admin/{{$shift->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $shift->name }}</a>
+													<a href="admin/{{$org_attendance->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $org_attendance->User->name }}</a>
 												</td>
 											
 												<td>
-													<a href="admin/{{$shift->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $shift->from }}</a>
+													<a href="admin/{{$org_attendance->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $org_attendance->Organization->name }}</a>
 												</td>
 												<td>
-													<a href="admin/{{$shift->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $shift->to }}</a>
+													<a href="admin/{{$org_attendance->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $org_attendance->Branch->name }}</a>
 												</td>
-												
+												<td>
+													<a href="admin/{{$org_attendance->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $org_attendance->date }} {{ $org_attendance->time }}</a>
+												</td>
+												<td>
+													<a href="admin/{{$org_attendance->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $org_attendance->type }}</a>
+												</td>
 												<!--end::Email=-->
-											
 											
 												<!--begin::Action=-->
 												<td class="text-end">
@@ -159,14 +165,14 @@
 													<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
-															<a href="admin/{{$shift->id}}/edit" class="menu-link px-3">View</a>
+															<a href="admin/{{$org_attendance->id}}/edit" class="menu-link px-3">View</a>
 														</div>
 														<!--end::Menu item-->
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
 									                      {{-- <a href="institution_admins/{{$item->id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i></a> --}}
 
-															 <form action="{{route('admin.destroy',$shift->id)}} " method="POST">
+															 <form action="{{route('admin.destroy',$org_attendance->id)}} " method="POST">
 																@csrf
 																@method('DELETE')
 																<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>

@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         OrganizationSeeder::class,
         UserSeeder::class,
         BranchSeeder::class,
-        ShiftSeeder::class,
+        MedicinSeeder::class,
     ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Setting\StoreRequest;
 use App\Models\admin\Setting;
 use Session;
 class SettingController extends Controller
@@ -13,9 +14,9 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $settings = Setting::all();
+        $settings = Setting::whenSearch($request->search)->paginate(50);
         return view('admin.pages.settings.settings', compact('settings'));
     }
 
@@ -35,13 +36,8 @@ class SettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-         $this->validate($request,[
-            'key'=> 'required|min:2|max:250',
-            'value'=> 'required|min:2|max:250',
-            ]
-            );
         $setting = new Setting();
         $setting->key = $request->input('key');
         $setting->value = $request->input('value');
@@ -80,13 +76,8 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        $this->validate($request,[
-            'key'=> 'required|min:2|max:250',
-            'value'=> 'required|min:2|max:250',
-        ]
-        );
         $setting = Setting::find($id);
         $setting->key = $request->input('key');
         $setting->value = $request->input('value');

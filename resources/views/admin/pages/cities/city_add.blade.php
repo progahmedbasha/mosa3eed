@@ -62,7 +62,10 @@
 																		{{$data->name}}
 																	</option>
 																	@endforeach
-																</select>														
+																</select>
+																@error('country_id')
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror															
 															</div>
 															<!--end::Input group-->
 														

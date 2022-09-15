@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrganizationShiftsTable extends Migration
+class CreatePurchasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateOrganizationShiftsTable extends Migration
      */
     public function up()
     {
-        Schema::create('organization_shifts', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
-            $table->text('days');
-            $table->string('from');
-            $table->string('to');
             $table->integer('organization_id')->unsigned();
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->integer('branch_id')->unsigned();
             $table->foreign('branch_id')->references('id')->on('branches');
+            $table->integer('medicin_id')->unsigned();
+            $table->foreign('medicin_id')->references('id')->on('medicins');
+            $table->string('acd');
+            $table->string('type_measurement');
+            $table->string('due_date');
+            $table->string('qty');
             $table->timestamps();
         });
     }
@@ -34,6 +36,6 @@ class CreateOrganizationShiftsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organization_shifts');
+        Schema::dropIfExists('purchases');
     }
 }

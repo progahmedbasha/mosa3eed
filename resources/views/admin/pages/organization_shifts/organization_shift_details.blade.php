@@ -6,16 +6,16 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Organization</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Edit Shift</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
 									<li class="breadcrumb-item text-muted">
-										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
+										<a href="#" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Organizations</li>
-									<li class="breadcrumb-item text-dark">Organization Add</li>
+									<li class="breadcrumb-item text-muted">Shifts</li>
+									<li class="breadcrumb-item text-dark">Shift Edit</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -34,55 +34,111 @@
 
 <br>
 							<div >
-								<span class="fs-2x fw-bolder text-gray-800">Form Organization</span>
+								<span class="fs-2x fw-bolder text-gray-800">Form Shift</span>
 							</div>
 
-                  <form action="{{route('shifts.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('organization_shifts.update',$org_shift->id)}}" method="post" enctype="multipart/form-data">
                      @csrf
-
+					@method('patch')
 								 <div class="row gx-10 mb-5">
 														<!--begin::Col-->
 														<div class="col-lg-6">
 														<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Name En</label>
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>
 															<div class="mb-5">
-                                                                <input type="text" class="form-control form-control-solid" placeholder="Name En" value="{{old('name_en')}}" name="name_en">
+																<select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_id">
+																<option value="{{$org_shift->organization_id}}" {{($org_shift->organization_id == $org_shift->organization_id)? 'selected' : '' }}>{{$org_shift->Organization->name}}</option>
+																	@foreach ($organizations as $org)
+																	<option value="{{$org->id}}" {{(old('organization_id')==$org->id)? 'selected':''}}>{{$org->name}}</option>
+																	@endforeach
+																</select>
+																@error('organization_id')
+																<div class="alert alert-danger">{{ $message }}</div>
+																@enderror   														
+															</div>
+													<!--begin::Input group-->
+													<!--begin::Input group-->
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift Name En</label>
+															<div class="mb-5">
+																<input type="text" class="form-control form-control-solid" placeholder="Shift Name En" value="{{$org_shift->getTranslation('name', 'en')}}" name="name_en">
 																@error('name_en')
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   														
 															</div>
-															<!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">From</label>
+													<!--begin::Input group-->
+													<!--begin::Input group-->
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Time From</label>
 															<div class="mb-5">
-                                                                <input type="text" class="form-control form-control-solid" placeholder="From" value="{{old('from')}}" name="from">
+															<input type="time" class="form-control form-control-solid" placeholder="Time From" value="{{ $org_shift->from }}" name="from">
 																@error('from')
 																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   		
+																@enderror   														
 															</div>
-															<!--end::Input group-->
+													<!--begin::Input group-->
+													<!--begin::Input group-->
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Days</label>
+															<div class="mb-5" style="width: max-content;">
+																{{-- input ckeck box --}}
+																@foreach ($org_shift->days as $day)
+																<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{ $day }}" name="days[]" checked>
+																		<label class="form-check-label" for="inlineCheckbox1">{{ $day }}</label>
+																    </div>
+																@endforeach
+
+																
+																{{-- @foreach ($days as $day )
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{ $day->id }}" name="day_id[]">
+																		<label class="form-check-label" for="inlineCheckbox1">{{ $day->day }}</label>
+																    </div>
+																@endforeach --}}
+																
+																{{-- input ckeck box --}}
+																@error('days')
+																<div class="alert alert-danger">{{ $message }}</div>
+																@enderror   														
+															</div>
+													<!--begin::Input group-->
 														
 															
                                                     </div>
 														<!--end::Col-->
 														<!--begin::Col-->
 														<div class="col-lg-6">
-                                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Name Ar</label>															<!--begin::Input group-->
+                                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
 															<div class="mb-5">
-                                                             <input type="text" class="form-control form-control-solid" placeholder="Name En" value="{{old('name_ar')}}" name="name_ar">
-																@error('name_ar')
+																<select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
+																<option value="{{$org_shift->branch_id}}" {{($org_shift->branch_id == $org_shift->branch_id)? 'selected' : '' }}>{{$org_shift->Branch->name}}</option>
+																	@foreach ($branches as $branch)
+																	<option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
+																	@endforeach
+																</select>
+																@error('branch_id')
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   		
                                                             </div>
-                                                            <!--end::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">To</label>
+															<!--begin::Input group-->
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift Name Ar</label>
 															<div class="mb-5">
-                                                                <input type="text" class="form-control form-control-solid" placeholder="To" value="{{old('to')}}" name="to">
+																<input type="text" class="form-control form-control-solid" placeholder="Shift Name Ar" value="{{$org_shift->getTranslation('name', 'ar')}}" name="name_ar">
+																@error('name_ar')
+																<div class="alert alert-danger">{{ $message }}</div>
+																@enderror   														
+															</div>
+													<!--begin::Input group-->
+														
+														<!--begin::Input group-->												
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Time To</label>
+															<div class="mb-5">
+															<input type="time" class="form-control form-control-solid" placeholder="Time To" value="{{$org_shift->to}}" name="to">
 																@error('to')
 																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   		
+																@enderror   														
 															</div>
-															<!--end::Input group-->
+													<!--begin::Input group-->
 														
+
 														</div>
 														<!--end::Col-->
 													</div>

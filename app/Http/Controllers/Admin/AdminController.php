@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Admin\StoreRequest;
+use App\Http\Requests\Admin\UpdateRequest;
 use App\Models\User;
 use App\Models\admin\UserType;
 use App\Models\Country;
@@ -46,19 +48,8 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-         $this->validate($request,[
-            'name'=> 'required|min:2|max:150',
-            'email' => 'required|unique:users|email|max:200',
-            'password' => 'required|min:4|max:25',
-            'phone' => 'required|min:9|max:15',  
-            'user_type_id' => 'required',
-            'country_id' => 'required', 
-            'city_id' => 'required', 
-            'district_id' => 'required',     
-            ]
-            );
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -114,19 +105,8 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        $this->validate($request,[
-            'name'=> 'required|min:2|max:150',
-            'email' => 'required|email|max:200',
-            'password' => 'max:25',
-            'phone' => 'required|min:9|max:15',  
-            'user_type_id' => 'required',
-            'country_id' => 'required', 
-            'city_id' => 'required', 
-            'district_id' => 'required',      
-            ]
-            );
         $user = User::find($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class ShiftSeeder extends Seeder
+class MedicinSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,10 +13,9 @@ class ShiftSeeder extends Seeder
      */
     public function run()
     {
-         DB::table('shifts')->insert([
-            'name' => '{"en":"shift1","ar":"shift1"}',
-            'from' => '1',
-            'to' => '2',
+            DB::table('medicins')->insert([
+            'name' => '{"en":"medicin 1","ar":"medicin 1"}',
+            'price' => '10',
         ]);
     }
 }

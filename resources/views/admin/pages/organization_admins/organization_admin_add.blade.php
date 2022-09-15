@@ -6,7 +6,7 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Organization</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Organization Admin</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -14,8 +14,8 @@
 										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Organizations</li>
-									<li class="breadcrumb-item text-dark">Organization Add</li>
+									<li class="breadcrumb-item text-muted">Organization Admins</li>
+									<li class="breadcrumb-item text-dark">Organization Admin Add</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -34,7 +34,7 @@
 
 <br>
 							<div >
-								<span class="fs-2x fw-bolder text-gray-800">Form Organization</span>
+								<span class="fs-2x fw-bolder text-gray-800">Form Organization Admin</span>
 							</div>
 
                   <form action="{{route('organization_admins.store')}}" method="post" enctype="multipart/form-data">
@@ -76,7 +76,7 @@
 														<!--end::Col-->
 														<!--begin::Col-->
 														<div class="col-lg-6">
-                                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>															<!--begin::Input group-->
+                                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branch</label>															<!--begin::Input group-->
 															<div class="mb-5">
 																<select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
 																	<option value="">Select Branches</option>
@@ -91,13 +91,13 @@
 															<!--end::Input group-->
                                                             <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift</label>															<!--begin::Input group-->
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="shift_id">
+																<select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_shift_id">
 																	<option value="">Select shift</option>
 																	@foreach ($shifts as $shift)
-																	<option value="{{$shift->id}}" {{(old('branch_id')==$shift->id)? 'selected':''}}>{{$shift->name}}</option>
+																	<option value="{{$shift->id}}" {{(old('organization_shift_id')==$shift->id)? 'selected':''}}>{{$shift->name}}</option>
 																	@endforeach
 																</select>
-																@error('shift')
+																@error('organization_shift_id')
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   
                                                             </div>

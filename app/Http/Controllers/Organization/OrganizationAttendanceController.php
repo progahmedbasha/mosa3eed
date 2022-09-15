@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Organization;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\organization\Shift;
+use App\Models\organization\OrganizationAttendance;
+use App\Models\admin\Organization;
+use App\Models\admin\Branch;
+use App\Models\User;
 use Session;
-class ShiftController extends Controller
+class OrganizationAttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +18,8 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        $shifts = Shift::all();
-        return view('admin.pages.shifts.shifts', compact('shifts'));
+        $organization_attendances = OrganizationAttendance::all();
+        return view('admin.pages.organization_attendances.organization_attendances', compact('organization_attendances'));
     }
 
     /**
@@ -26,7 +29,10 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.shifts.shift_add');
+        $organizations = Organization::all();
+        $users = User::all();
+        $branches = Branch::all();
+        return view('admin.pages.organization_attendances.organization_attendance_add', compact('organizations','users','branches'));
     }
 
     /**
@@ -37,20 +43,10 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'from'=> 'required|max:250',
-            'to'=> 'required|max:250',
-            ]
-            );
-            $shift = new OrganizationShift();
-            $shift
-            ->setTranslation('name', 'en', $request->input('name_en'))
-            ->setTranslation('name', 'ar', $request->input('name_ar')) ;
-            $shift->from = $request->input('from');
-            $shift->to = $request->input('to');
-            $shift->save();
+        $data = $request->all();
+        OrganizationAttendance::create($data);
+        Session::flash('success','Organization Attendance Added Successfully');
+        return redirect()->route('organization_attendances.index');  
     }
 
     /**

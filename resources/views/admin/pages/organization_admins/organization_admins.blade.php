@@ -133,17 +133,17 @@
 												<!--end::Checkbox-->
 												<!--begin::Name=-->
 												<td>
-													<a href="admin/{{$organization_admin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $organization_admin->User->name }}</a>
+													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $organization_admin->User->name }}</a>
 												</td>
 											
 												<td>
-													<a href="admin/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Organization->name }}</a>
+													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Organization->name }}</a>
 												</td>
 												<td>
-													<a href="admin/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Branch->name }}</a>
+													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Branch->name }}</a>
 												</td>
 												<td>
-													<a href="admin/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Shift->name }}</a>
+													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->OrganizationShift->name }}</a>
 												</td>
 												<!--end::Email=-->
 											
@@ -162,14 +162,14 @@
 													<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
-															<a href="admin/{{$organization_admin->id}}/edit" class="menu-link px-3">View</a>
+															<a href="organization_admins/{{$organization_admin->id}}/edit" class="menu-link px-3">View</a>
 														</div>
 														<!--end::Menu item-->
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
 									                      {{-- <a href="institution_admins/{{$item->id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i></a> --}}
 
-															 <form action="{{route('admin.destroy',$organization_admin->id)}} " method="POST">
+															 <form action="{{route('organization_admins.destroy',$organization_admin->id)}} " method="POST">
 																@csrf
 																@method('DELETE')
 																<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>

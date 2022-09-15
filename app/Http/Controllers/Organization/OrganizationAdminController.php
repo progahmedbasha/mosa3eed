@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Organization;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\organization\OrganizationAdmin;
-use App\Models\organization\Shift;
+use App\Models\organization\OrganizationShift;
 use App\Models\admin\Organization;
 use App\Models\admin\Branch;
 use App\Models\User;
+use App\Http\Requests\OrganizationAdmin\StoreRequest;
 use Session;
 class OrganizationAdminController extends Controller
 {
@@ -19,7 +20,7 @@ class OrganizationAdminController extends Controller
      */
     public function index()
     {
-        $organization_admins = OrganizationAdmin::with('User','Organization','Shift','Branch')->get();
+        $organization_admins = OrganizationAdmin::with('User','Organization','OrganizationShift','Branch')->get();
         return view('admin.pages.organization_admins.organization_admins', compact('organization_admins'));
     }
 
@@ -33,7 +34,7 @@ class OrganizationAdminController extends Controller
          $organizations = Organization::all();
          $branches = Branch::all();
          $users = User::all();
-         $shifts = Shift::all();
+         $shifts = OrganizationShift::all();
         return view('admin.pages.organization_admins.organization_admin_add', compact('organizations','branches','users','shifts'));
     }
 
@@ -43,18 +44,10 @@ class OrganizationAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-         $this->validate($request,[
-            'organization_id'=> 'required',
-            ]
-            );
-        $org_admin = new OrganizationAdmin();
-        $org_admin->organization_id = $request->input('organization_id');
-        $org_admin->branch_id = $request->input('branch_id');
-        $org_admin->user_id = $request->input('user_id');
-        $org_admin->shift_id = $request->input('shift_id');
-        $org_admin->save();
+        $data = $request->all();
+        OrganizationAdmin::create($data);
         Session::flash('success','Organization Admin Added Successfully');
         return redirect()->route('organization_admins.index');
     }
@@ -78,7 +71,12 @@ class OrganizationAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $org_admin = OrganizationAdmin::find($id);
+        $organizations = Organization::all();
+         $branches = Branch::all();
+         $users = User::all();
+         $shifts = OrganizationShift::all();
+        return view('admin.pages.organization_admins.organization_admin_details', compact('org_admin','organizations','branches','users','shifts'));
     }
 
     /**
@@ -88,9 +86,13 @@ class OrganizationAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        //
+        $admin = OrganizationAdmin::find($id);
+        $data = $request->all();
+        $admin->update($data);
+        Session::flash('success','Organization Admin Updated Successfully');
+        return redirect()->route('organization_admins.index');
     }
 
     /**
@@ -101,6 +103,9 @@ class OrganizationAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = OrganizationAdmin::find($id);
+        $admin->delete();
+        Session::flash('success','Organization Admin Deleted Successfully');
+        return redirect()->route('organization_admins.index');
     }
 }

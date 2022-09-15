@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Organization\StoreRequest;
 use App\Models\admin\Organization;
 use App\Models\Country;
 use App\Models\City;
@@ -42,22 +43,8 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-         $this->validate($request,[
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'contact_en'=> 'required|min:2|max:250',
-            'contact_ar'=> 'required|min:2|max:250',
-            'email' => 'required|unique:users|email|max:200',
-            'phone' => 'required|min:9|max:15',  
-            'country_id' => 'required',
-            'city_id' => 'required',
-            'district_id' => 'required',
-            'address' => 'required|max:400',
-             'type' => 'required',
-            ]
-            );
         $org = new Organization();
         $org
         ->setTranslation('name', 'en', $request->input('name_en'))
@@ -116,22 +103,8 @@ class OrganizationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-         $this->validate($request,[
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'contact_en'=> 'required|min:2|max:250',
-            'contact_ar'=> 'required|min:2|max:250',
-            'email' => 'required|email|max:200',
-            'phone' => 'required|min:9|max:15',  
-            'country_id' => 'required',
-            'city_id' => 'required',
-            'district_id' => 'required',
-            'address' => 'required|max:400',
-             'type' => 'required',
-            ]
-            );
         $org = Organization::find($id);
         $org
         ->setTranslation('name', 'en', $request->input('name_en'))

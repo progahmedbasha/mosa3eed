@@ -6,7 +6,7 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Shifts List</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Purchases List</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -14,8 +14,8 @@
 										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Shifts</li>
-									<li class="breadcrumb-item text-dark">Shift Listing</li>
+									<li class="breadcrumb-item text-muted">Purchases</li>
+									<li class="breadcrumb-item text-dark">Purchase Listing</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -70,7 +70,7 @@
 											<!--begin::Add customer-->
 											{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Add Customer</button>
 											 --}}
-												<a href="{{route('organization_shifts.create')}}" class="btn btn-primary">Add</a>
+												<a href="{{route('purchases.create')}}" class="btn btn-primary">Add</a>
 										
 											<!--end::Add customer-->
 										</div>
@@ -109,9 +109,10 @@
 														<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
 													</div>
 												</th>
-												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Shift Name: activate to sort column ascending" style="width: 125px;">Shift Name</th>
+												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Medicin Name: activate to sort column ascending" style="width: 125px;">Medicin Name</th>
 												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Organization Name: activate to sort column ascending" style="width: 125px;">Organization Name</th>
 												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
+                                                <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 165.203px;">Qty</th>
 												<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
 											<!--end::Table row-->
 										</thead>
@@ -121,7 +122,7 @@
 											
 											
 											
-										 @foreach($organization_shifts as $index=>$shift)	
+										 @foreach($purchases as $index=>$purchase)	
 										<tr class="odd">
 												<!--begin::Checkbox-->
 												<td>
@@ -132,14 +133,17 @@
 												<!--end::Checkbox-->
 												<!--begin::Name=-->
 												<td>
-													<a href="admin/{{$shift->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $shift->name }}</a>
+													<a href="purchases/{{$purchase->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $purchase->Medicin->name }}</a>
 												</td>
 											
 												<td>
-													<a href="admin/{{$shift->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $shift->Organization->name }}</a>
+													<a href="purchases/{{$purchase->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $purchase->Organization->name }}</a>
 												</td>
 												<td>
-													<a href="admin/{{$shift->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $shift->Branch->name }}</a>
+													<a href="purchases/{{$purchase->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $purchase->Branch->name }}</a>
+												</td>
+                                                <td>
+													<a href="purchases/{{$purchase->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $purchase->qty }}</a>
 												</td>
 											
 												<!--end::Email=-->
@@ -158,14 +162,14 @@
 													<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
-															<a href="organization_shifts/{{$shift->id}}/edit" class="menu-link px-3">View</a>
+															<a href="purchases/{{$purchase->id}}/edit" class="menu-link px-3">View</a>
 														</div>
 														<!--end::Menu item-->
 														<!--begin::Menu item-->
 														<div class="menu-item px-3">
 									                      {{-- <a href="institution_admins/{{$item->id}}/edit" class="btn btn-info"><i class="fa fa-edit"></i></a> --}}
 
-															 <form action="{{route('organization_shifts.destroy',$shift->id)}} " method="POST">
+															 <form action="{{route('purchases.destroy',$purchase->id)}} " method="POST">
 																@csrf
 																@method('DELETE')
 																<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>

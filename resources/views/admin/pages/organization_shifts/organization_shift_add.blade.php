@@ -58,15 +58,10 @@
 															</div>
 													<!--begin::Input group-->
 													<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift Name En</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="shift_id">
-																	<option value="">Select Shifts</option>
-																	@foreach ($shifts as $shift)
-																	<option value="{{$shift->id}}" {{(old('shift_id')==$shift->id)? 'selected':''}}>{{$shift->name}}</option>
-																	@endforeach
-																</select>
-																@error('shift_id')
+																<input type="text" class="form-control form-control-solid" placeholder="Shift Name En" value="{{old('name_en')}}" name="name_en">
+																@error('name_en')
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   														
 															</div>
@@ -74,8 +69,33 @@
 													<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Time From</label>
 															<div class="mb-5">
-															<input type="text" class="form-control form-control-solid" placeholder="Time From" value="{{old('from')}}" name="from">
+															<input type="time" class="form-control form-control-solid" placeholder="Time From" value="{{old('from')}}" name="from">
 																@error('from')
+																<div class="alert alert-danger">{{ $message }}</div>
+																@enderror   														
+															</div>
+													<!--begin::Input group-->
+													<!--begin::Input group-->
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Days</label>
+															<div class="mb-5" style="width: max-content;">
+																{{-- input ckeck box --}}
+																
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sat" name="days[]">
+																		<label class="form-check-label" for="inlineCheckbox1">sat</label>
+																    </div>
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sun" name="days[]">
+																		<label class="form-check-label" for="inlineCheckbox1">sun</label>
+																    </div>
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="mon" name="days[]">
+																		<label class="form-check-label" for="inlineCheckbox1">mon</label>
+																    </div>
+																
+																
+																{{-- input ckeck box --}}
+																@error('days')
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   														
 															</div>
@@ -98,50 +118,20 @@
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   		
                                                             </div>
-															
-														<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Days</label>
-															<div class="mb-5" style="width: max-content;">
-																{{-- input ckeck box --}}
-																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sat" name="days[]">
-																	<label class="form-check-label" for="inlineCheckbox1">Sat</label>
-																</div>
-																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sun" name="days[]">
-																	<label class="form-check-label" for="inlineCheckbox2">Sun</label>
-																</div>
-																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="mon" name="days[]">
-																	<label class="form-check-label" for="inlineCheckbox2">Mon</label>
-																</div>
-																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tue" name="days[]">
-																	<label class="form-check-label" for="inlineCheckbox2">Tue</label>
-																</div>
-																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="wed" name="days[]">
-																	<label class="form-check-label" for="inlineCheckbox2">Wed</label>
-																</div>
-																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="thurs" name="days[]">
-																	<label class="form-check-label" for="inlineCheckbox2">Thurs</label>
-																</div>
-																<div class="form-check form-check-inline">
-																	<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="fri" name="days[]">
-																	<label class="form-check-label" for="inlineCheckbox2">Fri</label>
-																</div>
-																{{-- input ckeck box --}}
-																@error('days')
+															<!--begin::Input group-->
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift Name Ar</label>
+															<div class="mb-5">
+																<input type="text" class="form-control form-control-solid" placeholder="Shift Name Ar" value="{{old('name_ar')}}" name="name_ar">
+																@error('name_ar')
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   														
 															</div>
 													<!--begin::Input group-->
-														<!--begin::Input group-->
-														<br>
+														
+														<!--begin::Input group-->												
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Time To</label>
 															<div class="mb-5">
-															<input type="text" class="form-control form-control-solid" placeholder="Time To" value="{{old('to')}}" name="to">
+															<input type="time" class="form-control form-control-solid" placeholder="Time To" value="{{old('to')}}" name="to">
 																@error('to')
 																<div class="alert alert-danger">{{ $message }}</div>
 																@enderror   														

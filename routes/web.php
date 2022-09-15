@@ -51,8 +51,9 @@ Route::group(
                     Route::resource('settings', 'Admin\SettingController');
                     Route::resource('branchs', 'Admin\BranchController');
                     Route::resource('organization_admins', 'Organization\OrganizationAdminController');
-                    Route::resource('shifts', 'Organization\ShiftController');
                     Route::resource('organization_shifts', 'Organization\OrganizationshiftController');
+                    Route::resource('organization_attendances', 'Organization\OrganizationAttendanceController');
+                    Route::resource('purchases', 'Organization\PurchaseController');
                 });  
 });
     Auth::routes();

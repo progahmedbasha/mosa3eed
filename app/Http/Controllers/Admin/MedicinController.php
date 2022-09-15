@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Medicin\StoreRequest;
 use Illuminate\Http\Request;
 use App\Models\admin\Medicin;
 use Session;
@@ -35,16 +36,8 @@ class MedicinController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-          $this->validate($request,[
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'price'=> 'required|min:2|max:250',
-      
-      
-            ]
-            );
+    public function store(StoreRequest $request)
+    {  
         $medicin = new Medicin();
         $medicin
         ->setTranslation('name', 'en', $request->input('name_en'))
@@ -85,16 +78,8 @@ class MedicinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-           $this->validate($request,[
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'price'=> 'required|min:2|max:250',
-      
-      
-            ]
-            );
         $medicin = Medicin::find($id);
         $medicin
         ->setTranslation('name', 'en', $request->input('name_en'))

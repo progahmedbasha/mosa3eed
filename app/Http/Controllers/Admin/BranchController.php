@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Branch\StoreRequest;
 use Illuminate\Http\Request;
 use App\Models\admin\Branch;
 use App\Models\admin\Organization;
@@ -17,9 +18,12 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $branchs = Branch::all();
+        $branchs = Branch::whenSearch($request->search)->paginate(50);
+//    $branchs =   Branch::where('name', 'like', '%' . $request->search . '%')->paginate(50);
+       
+     
         return view('admin.pages.branchs.branchs', compact('branchs'));
     }
 
@@ -43,21 +47,8 @@ class BranchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-          $this->validate($request,[
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'phone_1'=> 'required|min:4|max:15',
-            'phone_2'=> 'max:15',
-            'email' => 'required|email|max:200',
-            'country_id' => 'required',
-            'city_id' => 'required',
-            'district_id' => 'required',
-            'organization_id' => 'required',
-            'address' => 'required|max:400',
-            ]
-            );
         $branch = new Branch();
         $branch
         ->setTranslation('name', 'en', $request->input('name_en'))
@@ -114,21 +105,8 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-         $this->validate($request,[
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'phone_1'=> 'required|min:4|max:15',
-            'phone_2'=> 'max:15',
-            'email' => 'required|email|max:200',
-            'country_id' => 'required',
-            'city_id' => 'required',
-            'district_id' => 'required',
-            'organization_id' => 'required',
-            'address' => 'required|max:400',
-            ]
-            );
         $branch = Branch::find($id);
         $branch
         ->setTranslation('name', 'en', $request->input('name_en'))

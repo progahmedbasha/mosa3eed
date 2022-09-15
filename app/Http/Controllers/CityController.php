@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Country;
+use App\Http\Requests\City\StoreRequest;
 use Session;
 use Illuminate\Http\Request;
 
@@ -36,15 +37,9 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-         $this->validate($request,[
-
-            'name_en'=> 'required|min:2|max:150',
-            'name_ar' => 'required|min:2|max:150',
-            'country_id' => 'required',
-            ]
-            );
+        
         $country= new City;
         $country->name_en = $request->name_en;
         $country->name_ar = $request->name_ar;
