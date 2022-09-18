@@ -17,9 +17,14 @@ class PurchaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $purchases = Purchase::all();
+        $search = $request->search;
+        $purchases = Purchase::whereHas('Organization' , function($q) use($search) {
+                $q->where('email',$search)->orWhere('name', 'like', '%' .$search. '%');})
+                ->orWhereHas('Branch' , function($q) use($search) {
+                $q->where('phone_1',$search)->orWhere('name', 'like', '%' .$search. '%');})
+                ->paginate(20);
         return view('admin.pages.purchases.purchases', compact('purchases'));
     }
 

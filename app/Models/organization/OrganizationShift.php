@@ -17,6 +17,14 @@ class OrganizationShift extends Model
     {
       return json_decode($value);
     }
+
+    public function scopeWhenSearch($query,$search){
+          return $query->when($search,function($q)use($search){
+              return $q->where('from',$search)
+                  ->orWhere('to','like',"%$search%")
+                  ->orWhere('name','like',"%$search%");
+          });
+        }
     public function Organization()
     {
       return $this->belongsTo('App\Models\admin\Organization');

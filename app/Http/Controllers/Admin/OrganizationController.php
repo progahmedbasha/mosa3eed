@@ -18,9 +18,9 @@ class OrganizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-          $organizations = Organization::all();
+          $organizations = Organization::whenSearch($request->search)->paginate(50);
           return view('admin.pages.organizations.organizations', compact('organizations'));
     }
 

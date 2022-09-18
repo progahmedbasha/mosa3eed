@@ -16,9 +16,11 @@ class OrganizationAttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $organization_attendances = OrganizationAttendance::all();
+        $search = $request->search;
+        $organization_attendances = OrganizationAttendance::whereHas('User' , function($q) use($search) {
+                $q->where('name',$search)->orWhere('phone', 'like', '%' .$search. '%');})->paginate(20);
         return view('admin.pages.organization_attendances.organization_attendances', compact('organization_attendances'));
     }
 

@@ -11,8 +11,20 @@ use DB;
 class Organization extends Model
 {
     use HasFactory,HasTranslations;
-
+    public $guarded = [];
     public $translatable = ['name','contact_name'];
+
+       public function scopeWhenSearch($query,$search){
+        return $query->when($search,function($q)use($search){
+            return $q->where(('email'),$search)
+                ->orWhere('name','like',"%$search%")
+                ->orWhere('contact_name','like',"%$search%")
+                ->orWhere('phone','like',"%$search%")
+                ->orWhere('status','like',"%$search%")
+                ->orWhere('address','like',"%$search%");
+          });
+          
+      }
 
       public function User()
    {

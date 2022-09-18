@@ -21,9 +21,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::get();
+        $users = User::whenSearch($request->search)->paginate(50);
         return view('admin.pages.admin.list',compact('users'));
     }
 

@@ -19,9 +19,9 @@ class OrganizationshiftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $organization_shifts = OrganizationShift::all();
+        $organization_shifts = OrganizationShift::whenSearch($request->search)->paginate(20);
         return view('admin.pages.organization_shifts.organization_shifts', compact('organization_shifts'));
     }
 

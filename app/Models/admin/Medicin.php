@@ -10,5 +10,12 @@ use DB;
 class Medicin extends Model
 {
     use HasFactory,HasTranslations;
+    public $guarded = [];
     public $translatable = ['name'];
+      public function scopeWhenSearch($query,$search){
+            return $query->when($search,function($q)use($search){
+                return $q->where('price',$search)
+                    ->orWhere('name','like',"%$search%");
+            });
+         }
 }
