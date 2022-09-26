@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         BranchSeeder::class,
         MedicinSeeder::class,
+        MissedItemSeeder::class,
     ]);
     }
 }
