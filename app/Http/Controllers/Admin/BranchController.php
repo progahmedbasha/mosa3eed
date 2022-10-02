@@ -136,6 +136,8 @@ class BranchController extends Controller
     public function destroy($id)
     {
         $branch = Branch::find($id);
+        $branch->JobPost()->delete();
+        $branch->MissedItem()->delete();
         $branch->delete();
         Session::flash('success','Branch Deleted Successfully');
         return redirect()->route('branchs.index');

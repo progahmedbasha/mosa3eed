@@ -19,7 +19,7 @@ class CreateJobPostsTable extends Migration
             $table->integer('job_title_id')->unsigned();
             $table->foreign('job_title_id')->references('id')->on('job_titles');
             $table->integer('branch_id')->unsigned()->nullable();
-            $table->foreign('branch_id')->references('id')->on('branches');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->integer('district_id')->unsigned()->nullable();
             $table->foreign('district_id')->references('id')->on('districts');
             $table->string('address');

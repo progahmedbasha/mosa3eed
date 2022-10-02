@@ -32,4 +32,12 @@ class Branch extends Model
     {
       return $this->belongsTo('App\Models\District');
     }
+    public function JobPost()
+    {
+      return $this->hasMany('App\Models\JobPost');
+    }
+    public function MissedItem()
+    {
+      return $this->hasMany('App\Models\MissedItem');
+    }
 }

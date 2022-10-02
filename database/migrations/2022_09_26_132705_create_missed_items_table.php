@@ -18,7 +18,7 @@ class CreateMissedItemsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('branch_id')->unsigned();
-            $table->foreign('branch_id')->references('id')->on('branches');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->integer('medicin_id')->unsigned();
             $table->foreign('medicin_id')->references('id')->on('medicins');
             $table->string('status')->default('Active');

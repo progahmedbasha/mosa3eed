@@ -21,7 +21,7 @@ class CreateBranchesTable extends Migration
             $table->string('email');
             $table->string('photo')->nullable();
             $table->integer('organization_id')->unsigned();
-            $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->integer('district_id')->unsigned();
             $table->foreign('district_id')->references('id')->on('districts');
             $table->string('address');

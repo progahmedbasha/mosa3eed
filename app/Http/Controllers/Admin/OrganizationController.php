@@ -138,9 +138,10 @@ class OrganizationController extends Controller
     {
         // return $org = Organization::has('User')->get();
         $org = Organization::find($id);
+        $org->Branch()->delete();
         $org->User()->delete();
         $org->delete();
-        Session::flash('success','Category Deleted Successfully');
+        Session::flash('success','Organization Deleted Successfully');
         return redirect()->route('organizations.index');
     }
 }
