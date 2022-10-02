@@ -55,6 +55,7 @@ Route::group(
                     Route::resource('organization_attendances', 'Organization\OrganizationAttendanceController');
                     Route::resource('purchases', 'Organization\PurchaseController');
                     Route::resource('job_titles', 'Jobs\JobTitleController');
+                    Route::resource('job_posts', 'Jobs\JobPostController');
                     Route::resource('missed_items', 'MissedItemController');
                 });  
 });
