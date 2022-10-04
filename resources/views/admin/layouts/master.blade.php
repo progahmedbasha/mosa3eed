@@ -11,17 +11,19 @@
    License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
    -->
 <html lang="en">
+
    @include('admin.layouts.head')
    @include('admin.layouts.sidebar')
-   <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-      @yield('content')
-   </div>
-   @include('admin.layouts.footer')
-   <!--begin::Javascript-->
+      <!--begin::Javascript-->
    <!--begin::Global Javascript Bundle(used by all pages)-->
    @include('admin.layouts.javascripts')
    <!--end::Page Custom Javascript-->
    <!--end::Javascript-->
+   <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+      @yield('content')
+   </div>
+   @include('admin.layouts.footer')
+
    </body>
    <!--end::Body-->
 </html>

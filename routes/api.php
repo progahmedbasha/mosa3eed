@@ -39,6 +39,7 @@ Route::group([
     ], function ($router) {
         Route::get('profile', 'AuthController@profile');
         Route::get('logout', 'AuthController@logout');    
-        Route::get('users', 'AuthController@home');    
+        Route::get('users', 'AuthController@home');
+        Route::resource('medicins', MedicinController::class);    
     });
 });

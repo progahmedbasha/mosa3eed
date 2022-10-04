@@ -1,5 +1,8 @@
 @extends('admin.layouts.master')
 @section('content')
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 <!--begin::Container-->
 <div class="container" id="kt_content_container">
@@ -51,9 +54,9 @@
       <!--begin::Card body-->
       <div class="card-body pt-0">
          @if(Session::has('success'))
-         <div class="alert alert-success">
-            <strong>Success: </strong>{{ Session::get('success') }}
-         </div>
+            <script>
+            toastr.success(" {{ Session::get('success') }} ");
+            </script>
          @endif
          <!--begin::Table-->
          <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">

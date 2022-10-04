@@ -51,9 +51,9 @@
       <!--begin::Card body-->
       <div class="card-body pt-0">
          @if(Session::has('success'))
-         <div class="alert alert-success">
-            <strong>Success: </strong>{{ Session::get('success') }}
-         </div>
+            <script>
+            toastr.success(" {{ Session::get('success') }} ");
+            </script>
          @endif
          <!--begin::Table-->
          <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
