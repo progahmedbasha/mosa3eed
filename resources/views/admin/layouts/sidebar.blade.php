@@ -374,9 +374,9 @@
 											<!--end::Avatar-->
 											<!--begin::Username-->
 											<div class="d-flex flex-column">
-												<div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+												<div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->name }}
 												<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-												<a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+												<a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
 											</div>
 											<!--end::Username-->
 										</div>
@@ -460,11 +460,11 @@
 										<a href="#" class="menu-link px-5">
 											<span class="menu-title position-relative">Language
 											@if ( Config::get('app.locale') =='en')
-											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-											<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/media/flags/united-states.svg')}}" alt="" /></span></span>
+												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
+												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/media/flags/united-states.svg')}}" alt="" /></span></span>
 											@else
-											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">Arabic
-											<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/media/flags/egypt.svg')}}" alt="" /></span></span>
+												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">Arabic
+												<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/media/flags/egypt.svg')}}" alt="" /></span></span>
 											@endif
 										</a>
 										<!--begin::Menu sub-->
