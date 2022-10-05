@@ -17,13 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('homepage');
 Route::get('dashboard', function () {
     return view('admin.index');
 });
 Route::get('list', function () {
     return view('admin.list');
 });
+Route::get('sign_out', 'Auth\AuthController@logout')->name('sign_out');
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),

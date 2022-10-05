@@ -16,7 +16,6 @@ class MedicinResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            // 'data'=>collection($data);
         'id' => $this->id,
         'name' => $this->name,
         'price' => $this->related_to,

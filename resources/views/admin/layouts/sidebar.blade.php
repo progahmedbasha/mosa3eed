@@ -475,34 +475,18 @@
 											<div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
 												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="{{asset('assets/media/flags/spain.svg')}}" alt="" />
-												</span>Spanish</a>
+													<img class="rounded-1" src="{{asset('assets/media/flags/egypt.svg')}}" alt="" />
+												</span>Arabic</a>
 											</div>
 											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item px-3">
-												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
-												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="{{asset('assets/media/flags/germany.svg')}}" alt="" />
-												</span>German</a>
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item px-3">
-												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
-												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="{{asset('assets/media/flags/japan.svg')}}" alt="" />
-												</span>Japanese</a>
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item px-3">
-												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
-												<span class="symbol symbol-20px me-4">
-													<img class="rounded-1" src="{{asset('assets/media/flags/france.svg')}}" alt="" />
-												</span>French</a>
-											</div>
-											<!--end::Menu item-->
+                   
+										@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+										<li class="nav-item">  <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+										<i class="fa fa-globe"></i> {{ $properties['native'] }}
+										</a> </li>
+										@endforeach
+                      
+                     
 										</div>
 										<!--end::Menu sub-->
 									</div>
@@ -514,7 +498,7 @@
 									<!--end::Menu item-->
 									<!--begin::Menu item-->
 									<div class="menu-item px-5">
-										<a href="../../demo3/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
+										<a href="{{route('sign_out')}}" class="menu-link px-5">Sign Out</a>
 									</div>
 									<!--end::Menu item-->
 									<!--begin::Menu separator-->
