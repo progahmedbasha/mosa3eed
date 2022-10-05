@@ -15,7 +15,13 @@ class MedicinController extends Controller
      */
     public function index(Request $request)
     {
-       $medicins = Medicin::whenSearch($request->search)->paginate(20);
+     
+  
+            $medicins = MedicinResource::collection(Medicin::whenSearch($request->search)->paginate(20));
+      
+        //  foreach ($medicins as $key => $value) {
+        //     $med = $value->name;
+        //     }
        return $this->toJson(200,"Success",$medicins);
 
     }
