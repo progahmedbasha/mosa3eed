@@ -455,35 +455,41 @@
 									<div class="separator my-2"></div>
 									<!--end::Menu separator-->
 									<!--begin::Menu item-->
+									
 									<div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end" data-kt-menu-flip="{default: 'top', lg: ''}">
 										<a href="#" class="menu-link px-5">
 											<span class="menu-title position-relative">Language
+											@if ( Config::get('app.locale') =='en')
 											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
 											<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/media/flags/united-states.svg')}}" alt="" /></span></span>
+											@else
+											<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">Arabic
+											<img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/media/flags/egypt.svg')}}" alt="" /></span></span>
+											@endif
 										</a>
 										<!--begin::Menu sub-->
 										<div class="menu-sub menu-sub-dropdown w-175px py-4">
 											<!--begin::Menu item-->
-											<div class="menu-item px-3">
+											{{-- <div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5 active">
 												<span class="symbol symbol-20px me-4">
 													<img class="rounded-1" src="{{asset('assets/media/flags/united-states.svg')}}" alt="" />
 												</span>English</a>
-											</div>
+											</div> --}}
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
-											<div class="menu-item px-3">
+											{{-- <div class="menu-item px-3">
 												<a href="../../demo3/dist/account/settings.html" class="menu-link d-flex px-5">
 												<span class="symbol symbol-20px me-4">
 													<img class="rounded-1" src="{{asset('assets/media/flags/egypt.svg')}}" alt="" />
 												</span>Arabic</a>
-											</div>
+											</div> --}}
 											<!--end::Menu item-->
                    
 										@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-										<li class="nav-item">  <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-										<i class="fa fa-globe"></i> {{ $properties['native'] }}
-										</a> </li>
+											<li class="nav-item">  <a class="menu-link d-flex px-5" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+											<span class="symbol symbol-20px me-4">
+											</span>{{ $properties['native'] }}</a>
 										@endforeach
                       
                      
