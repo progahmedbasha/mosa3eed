@@ -17,10 +17,7 @@ class MedicinController extends Controller
     public function index(Request $request)
     {
         $medicins = Medicin::whenSearch($request->search)->paginate(20);
-    //    return $medicins->('name') ;
-       foreach ($medicins as $key => $value) {
-       return $value->name;
-       }
+
         return view('admin.pages.medicins.medicins', compact('medicins'));
     }
 
