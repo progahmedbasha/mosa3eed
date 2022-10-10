@@ -68,8 +68,8 @@
                               <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                            </div>
                         </th>
-                       <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Medicin Name: activate to sort column ascending" style="width: 125px;">Medicin Name</th>
-						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Organization Name: activate to sort column ascending" style="width: 125px;">Organization Name</th>
+                       <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Medicin Name: activate to sort column ascending" style="width: 165.203px;">Medicin Name</th>
+						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Organization Name: activate to sort column ascending" style="width: 165.203px;">Organization Name</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 165.203px;">Qty</th>
 						<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>

@@ -68,11 +68,11 @@
                               <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                            </div>
                         </th>
-                       <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Subject: activate to sort column ascending" style="width: 165.203px;">Subject</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Subject: activate to sort column ascending" style="width: 165.203px;">Subject</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User Type: activate to sort column ascending" style="width: 165.203px;">User Type</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="price: activate to sort column ascending" style="width: 165.203px;">price</th>
-                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Days: activate to sort column ascending" style="width: 165.203px;">Days</th>
-                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Offer: activate to sort column ascending" style="width: 165.203px;">Offer</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Days: activate to sort column ascending" style="width: 165.203px;">Days</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Offer: activate to sort column ascending" style="width: 165.203px;">Offer</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 165.203px;">Status</th>
 						<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
 					<!--end::Table row-->
