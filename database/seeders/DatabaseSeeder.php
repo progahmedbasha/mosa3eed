@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         MedicinSeeder::class,
         MissedItemSeeder::class,
         JobTitleSeeder::class,
+        SettingSeeder::class,
     ]);
     }
 }
