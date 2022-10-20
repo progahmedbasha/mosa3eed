@@ -108,4 +108,5 @@ class OrganizationAdminController extends Controller
         Session::flash('success','Organization Admin Deleted Successfully');
         return redirect()->route('organization_admins.index');
     }
+
 }

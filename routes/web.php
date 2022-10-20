@@ -43,6 +43,7 @@ Route::group(
                     Route::resource('admin', Admin\AdminController::class);
                     Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
                     Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
+
                     Route::resource('organizations', Admin\OrganizationController::class);
                     Route::resource('countries', CountryController::class);
                     Route::resource('cities', CityController::class);
@@ -56,11 +57,12 @@ Route::group(
                     Route::resource('purchases', Organization\PurchaseController::class);
                     Route::resource('job_titles', Jobs\JobTitleController::class);
                     Route::resource('job_posts', Jobs\JobPostController::class);
+                    Route::post('fetch_branch', [App\Http\Controllers\Jobs\JobPostController::class,'fetch_branch'])->name('fetch_branch');
+
                     Route::resource('missed_items', MissedItemController::class);
                     Route::resource('packages', PackageController::class);
 
                 });  
 });
     Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

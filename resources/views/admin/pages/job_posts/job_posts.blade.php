@@ -91,8 +91,10 @@
 							<a href="purchases/{{$job_post->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $job_post->subject }}</a>
 						</td>
 						<td>
+                     @if(!empty($job_post->branch_id ))
 							<a href="purchases/{{$job_post->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $job_post->Branch->name }}</a>
-						</td>
+                     @endif
+                  </td>
                          <td>
 							<a href="purchases/{{$job_post->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $job_post->status }}</a>
 						</td>

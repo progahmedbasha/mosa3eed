@@ -60,7 +60,7 @@
                                                                     <option value="Pharmacy">Pharmacy</option>
                                                                     <option value="Store">Store</option>
                                                                 </select>
-                                                                @error('price')
+                                                                @error('related_to')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror	
 															</div>

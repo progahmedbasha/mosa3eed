@@ -32,8 +32,8 @@
                <span class="fs-2x fw-bolder text-gray-800">Form Job Post</span>
             </div>
             <form action="{{route('job_posts.update',$job_post->id)}}" method="post" enctype="multipart/form-data">
+              @method('patch')
                @csrf
-               @method('patch')
                <div class="row gx-10 mb-5">
                   <!--begin::Col-->
                   <div class="col-lg-6">
@@ -47,11 +47,38 @@
                      </div>
                      <!--begin::Input group-->
                      <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>														
-                    <!--begin::Input group-->
+                     <div id="block" style="display: none";>
+                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Title Name En</label>
+                        <div class="mb-5">
+                           <input type="text" class="form-control form-control-solid" placeholder="Title Name En" value="{{old('title_name_en')}}" name="title_name_en">
+                           @error('title_name_en')
+                           <div class="alert alert-danger">{{ $message }}</div>
+                           @enderror   														
+                        </div>
+                     </div>   
+                     <!--begin::Input group-->
+                     <!--begin::Input group-->
+                     <div id="block3" style="display: none";>
+                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Related To</label>
+                     	<div class="mb-5">
+                           <select class="form-control"style="padding: 10px;" name="related_to">
+                                 <option value="">Select</option>
+                                 <option value="Pharmacy">Pharmacy</option>
+                                 <option value="Store">Store</option>
+                              </select>
+                              @error('related_to')
+                                 <div class="alert alert-danger">{{ $message }}</div>
+                              @enderror	
+                        </div>
+                     </div>   
+                     <!--begin::Input group-->
+                     <hr>
+                     <!--begin::Input group-->
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_id">
-                          <option  {{($organization_id = $organization_id)? 'selected' : '' }}> {{$organization_id->name}}</option>
+                        <select  id="organization" class="form-control organization_id"style="padding: 10px;" name="organization_id">
+                           <option value="{{$job_post->organization_id}}"  {{($organization_id == $organization_id)? 'selected' : '' }}> {{$organization_id->name}}</option>
+                           <option value="">----------------------------------------------------------</option>   
                            @foreach ($organizations as $organization)
                            <option value="{{$organization->id}}" {{(old('organization_id')==$organization->id)? 'selected':''}}>{{$organization->name}}</option>
                            @endforeach
@@ -61,34 +88,51 @@
                         @enderror   		
                      </div>
                      <!--begin::Input group-->
-                     <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
-                     <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
-                            <option  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
-                           @foreach ($countries as $country)
-                           <option value="{{$country->id}}" {{(old('country_id')==$country->id)? 'selected':''}}>{{$country->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('country_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
-                     </div>
-                     <!--begin::Input group-->
-                     <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
-                     <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="district_id">
-                <option value="{{$job_post->district_id}}" {{($job_post->district_id == $job_post->district_id)? 'selected' : '' }}> {{$job_post->District->name}}</option>
-                           @foreach ($districts as $district)
-                           <option value="{{$district->id}}" {{(old('district_id')==$district->id)? 'selected':''}}>{{$district->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('qty')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
-                     </div>
-                     <!--begin::Input group-->
+                     
+                        <div id="branch_block"  @if(!empty($job_post->branch_id)) style="display: none";  @endif >
+                        <!--begin::Input group-->
+                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
+                        <div class="mb-5">
+                           <select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
+                              @if(!empty($country_id))
+                                 <option  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
+                              @endif
+                              <option value="">----------------------------------------------------------</option>    
+                                 @foreach ($countries as $item)
+                                    <option value="{{$item->id}}" {{(old('country_id')==$country_id)? 'selected':''}}>{{$item->name}}</option>
+                                 @endforeach
+                           </select>
+                           @error('country_id')
+                           <div class="alert alert-danger">{{ $message }}</div>
+                           @enderror   														
+                        </div>
+                        <!--begin::Input group-->
+                        <!--begin::Input group-->
+                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
+                        <div class="mb-5">
+                           <select  id="state-dd" class="form-control"style="padding: 10px;" name="district_id">
+                           @if(!empty($job_post->district_id))
+                              <option value="{{$job_post->district_id}}" {{($job_post->district_id == $job_post->district_id)? 'selected' : '' }}> {{$job_post->District->name}}</option>
+                              <option value="">----------------------------------------------------------</option>
+                                 @foreach ($districts as $district)
+                                 <option value="{{$district->id}}" {{(old('distict_id')==$district->id)? 'selected':''}} > {{$district->name}} </option>
+                                 @endforeach
+                           @else
+                           <option value="">Select District</option>
+                                 @foreach ($districts as $district)
+                                 <option value="{{$district->id}}" {{(old('distict_id')==$district->id)? 'selected':''}} > {{$district->name}} </option>
+                                 @endforeach        
+                           @endif
+
+                           </select>
+                           @error('qty')
+                           <div class="alert alert-danger">{{ $message }}</div>
+                           @enderror   														
+                        </div>
+                        <!--begin::Input group-->
+                        </div>
+                        
+                     <hr>
 					    <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Breif</label>
                      <div class="mb-5">
@@ -102,8 +146,9 @@
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Status</label>
                      <div class="mb-5">
 						<select class="form-control"style="padding: 10px;" name="status">
-                         <option value="{{$job_post->status}}" {{($job_post->status == $job_post->status)? 'selected' : '' }}> {{$job_post->status}}</option>
-							<option value="Active">Active</option>
+                     <option value="{{ $job_post->status }}">{{ $job_post->status }}</option>
+							<option value="">----------------------------------------------------------</option>
+                     <option value="Active">Active</option>
 							<option value="Not Active">Not Active</option>
 						</select>
 						@error('status')
@@ -126,21 +171,40 @@
                   <div class="col-lg-6">
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Job Title</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="job_title_id">
-                        <option value="{{$job_post->job_title_id}}" {{($job_post->job_title_id == $job_post->job_title_id)? 'selected' : '' }}> {{$job_post->JobTitle->name}}</option>
-                           @foreach ($job_titles as $job_title)
-                           <option value="{{$job_title->id}}" {{(old('job_title_id')==$job_title->id)? 'selected':''}}>{{$job_title->name}}</option>
-                           @endforeach
+                        <select  id="title-dd" class="form-control"style="padding: 10px;" name="job_title_id">
+                           <option value="{{$job_post->job_title_id}}" {{($job_post->job_title_id == $job_post->job_title_id)? 'selected' : '' }}> {{$job_post->JobTitle->name}}</option>
+                              @foreach ($job_titles as $job_title)
+                              <option value="{{$job_title->id}}" {{(old('job_title_id')==$job_title->id)? 'selected':''}}>{{$job_title->name}}</option>
+                              @endforeach
+                           <option value="others" id="show">Others</option>
                         </select>
                         @error('job_title_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   														
                      </div>
                      <!--begin::Input group-->
+                     <div id="block2" style="display: none";>
+                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Title Name Ar</label>
+                        <div class="mb-5">
+                           <input type="text" class="form-control form-control-solid" placeholder="Title Name Ar" value="{{old('title_name_ar')}}" name="title_name_ar">
+                           @error('title_name_ar')
+                           <div class="alert alert-danger">{{ $message }}</div>
+                           @enderror   														
+                        </div>
+                     </div>   
+                     <!--begin::Input group-->
+                     <div id="block4" style="display: none";>
+                        <br><br><br><br>
+                     </div>
+                     <hr>
+                     <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
-                          <option value="{{$job_post->branch_id}}" {{($job_post->branch_id == $job_post->branch_id)? 'selected' : '' }}> {{$job_post->Branch->name}}</option>
+                        <select  id="branch-dd" class="form-control"style="padding: 10px;" name="branch_id">
+                        @if(!empty($job_post->branch_id))
+                           <option value="{{$job_post->branch_id}}" {{($branch_id == $branch_id)? 'selected' : '' }}> {{$branch_id->name}}</option>
+                        @endif   
+                           <option value="">----------------------------------------------------------</option>   
                            @foreach ($branches as $branch)
                            <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
                            @endforeach
@@ -149,15 +213,24 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   		
                      </div>
+
+                     <div id="branch_block2" @if(!empty($job_post->branch_id)) style="display: none"; @endif >
                      <!--begin::Input group-->
                      <!--begin::Input group-->												
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="city_id">
-                          <option  {{($city_id = $city_id)? 'selected' : '' }}> {{$city_id->name}}</option>
+                        <select  id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
+                           {{-- <option value="">Select City</option>
                            @foreach ($cities as $city)
                            <option value="{{$city->id}}" {{(old('city_id')==$city->id)? 'selected':''}}>{{$city->name}}</option>
-                           @endforeach
+                           @endforeach --}}
+                           @if(!empty($city_id))
+                                 <option  {{($city_id = $city_id)? 'selected' : '' }}> {{$city_id->name}}</option>
+                              @endif
+                              <option value="">----------------------------------------------------------</option>    
+                                 @foreach ($cities as $city)
+                                    <option value="{{$city->id}}" {{(old('country_id')==$city_id)? 'selected':''}}>{{$city->name}}</option>
+                                 @endforeach
                         </select>
                         @error('due_date')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -173,7 +246,9 @@
                         @enderror   														
                      </div>
                      <!--begin::Input group-->
-					 	         <!--begin::Input group-->
+                     </div>
+                     <hr>
+                     <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Experience</label>
                      <div class="mb-5">
                         <input type="text" class="form-control form-control-solid" placeholder="Experience" value="{{$job_post->experince}}" name="experince">
@@ -203,6 +278,7 @@
                   </div>
                   <!--end::Col-->
                </div>
+
                <button type="submit" class="btn btn-primary">Save</button>
                <br><br>
             </form>
@@ -333,4 +409,45 @@
    </div>
    <!--end::Container-->
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+   // start show and hide input other title
+   $("#title-dd").change(function(){
+            if($("#title-dd").val() == "others")
+               {
+                  $("#block").show(500);
+                  $("#block2").show(500);
+                  $("#block3").show(500);
+                  $("#block4").show(500);
+               }
+            else{
+                  $("#block").hide(500);
+                  $("#block2").hide(500);
+                  $("#block3").hide(500);
+                  $("#block4").hide(500);
+               }   
+      });
+   // end show and hide input other title   
+   // start show and hide branch block 
+   $("#branch-dd").click(function(){
+            if($("#branch-dd").val() == "")
+               {
+                  $("#branch_block").show(500);
+                  $("#branch_block2").show(500);
+               }
+            else{
+                  $("#branch_block").hide(500);
+                  $("#branch_block2").hide(500);
+               }   
+      });
+   // end show and hide branch block    
+});
+
+</script>
+   {{-- component for fetch branch --}}
+   @include('admin.pages.component.fetch_branch')
+
+   {{-- component for fetch country+city+district --}}
+   @include('admin.pages.component.country_city_district')
 @endsection

@@ -92,9 +92,8 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Setting $setting)
     {
-        $setting = Setting::find($id);
         $setting->delete();
         Session::flash('success','Setting Deleted Successfully');
         return redirect()->route('settings.index');

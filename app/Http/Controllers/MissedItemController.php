@@ -26,6 +26,7 @@ class MissedItemController extends Controller
                  ->orWhereHas('Medicin' , function($q) use($search) {
                 $q->where('price',$search)->orWhere('name', 'like', '%' .$search. '%');})
                 ->paginate(20);
+
         return view('admin.pages.missed_items.missed_items', compact('missed_items'));
     }
 
