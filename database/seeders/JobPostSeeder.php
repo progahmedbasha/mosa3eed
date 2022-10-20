@@ -24,6 +24,7 @@ class JobPostSeeder extends Seeder
             'status' => 'Active',
             'expected_salary' => '1000',
             'email_contract' => 'email@gmail.com',
+            'phone_contract' => '010101021211'
         ]);
     }
 }
