@@ -233,9 +233,10 @@ class JobPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(JobPost $job_post)
     {
-        //
+        $job_post->delete();
+        return redirect()->route('job_posts.index')->with('success', 'Job Post Deleted Successfully');
     }
     public function fetch_branch(Request $request)
     {
