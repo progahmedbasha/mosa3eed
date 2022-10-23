@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\JobPost;
 use App\Models\ApplyJob;
+use App\Http\Resources\ApplyJobResource;
 class JobApplyController extends Controller
 {
     /**
@@ -13,15 +13,9 @@ class JobApplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->search;
-        $job_applies = ApplyJob::WhereHas('JobPost' , function($q) use($search) {
-                $q->Where('subject', 'like', '%' .$search. '%');})
-                ->orWhereHas('User' , function($q) use($search) {
-                $q->where('email',$search)->orWhere('name', 'like', '%' .$search. '%')->orWhere('phone', 'like', '%' .$search. '%');})
-                ->paginate(20);
-        return view('admin.pages.job_applies.job_applies', compact('job_applies'));
+        return "1";
     }
 
     /**
@@ -42,7 +36,13 @@ class JobApplyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $job= new ApplyJob;
+        $job->user_id = $request->user_id;
+        $job->job_post_id = $request->job_post_id;
+        $job->save();
+
+        $job_post = new ApplyJobResource($job);
+        return $this->toJson(200,"Success",$job_post);     
     }
 
     /**
@@ -85,15 +85,8 @@ class JobApplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-       public function destroy($id)
+    public function destroy($id)
     {
-        $apply_job = ApplyJob::find($id);
-        $apply_job->delete();
-        return redirect()->route('job_applies.index')->with('success', 'Apply Job Deleted Successfully');
-
+        //
     }
-       public function get_attacment($id)
-    {
-        $apply_job = ApplyJob::find($id);
-        return view('admin.pages.job_applies.job_apply_attachment', compact('apply_job'));    }
 }

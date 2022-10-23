@@ -40,6 +40,8 @@ Route::group([
         Route::get('profile', 'AuthController@profile');
         Route::get('logout', 'AuthController@logout');    
         Route::get('users', 'AuthController@home');
-        Route::resource('medicins', MedicinController::class);    
+        Route::resource('medicins', MedicinController::class);
+        Route::resource('job_applies', JobApplyController::class);
+        //  Route::post('job_applies_post', [JobApplyController::class,'store'])->name('job_applies_post');
     });
 });

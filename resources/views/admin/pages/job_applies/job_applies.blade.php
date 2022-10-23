@@ -96,7 +96,7 @@
 							<a href="job_applies/{{$job_apply->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $job_apply->JobPost->subject }}</a>
 						</td>
 						<td>
-							<a href="job_applies/{{$job_apply->id}}/edit" class="text-gray-600 text-hover-primary mb-1">Browse</a>
+							<a href="get_attacment/{{$job_apply->id}}" class="text-gray-600 text-hover-primary mb-1">Browse</a>
 						</td>
 						<td>
 							<a href="job_applies/{{$job_apply->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $job_apply->created_at }}</a>

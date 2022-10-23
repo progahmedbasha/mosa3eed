@@ -62,6 +62,8 @@ Route::group(
                     Route::resource('missed_items', MissedItemController::class);
                     Route::resource('packages', PackageController::class);
                     Route::resource('job_applies', JobApplyController::class);
+                    Route::get('get_attacment/{id}', [App\Http\Controllers\JobApplyController::class,'get_attacment'])->name('get_attacment');
+
                     
 
                 });  
