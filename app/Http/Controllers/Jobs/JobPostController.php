@@ -22,7 +22,17 @@ class JobPostController extends Controller
      */
     public function index(Request $request)
     {
-        $job_posts = JobPost::whenSearch($request->search)->paginate(50);
+        $search = $request->search;
+        // $job_posts = JobPost::whenSearch($request->search)->paginate(50);
+         $job_posts = JobPost::whenSearch($request->search)->orWhereHas('Organization' , function($q) use($search) {
+                $q->where('email',$search)->orWhere('name', 'like', '%' .$search. '%');})
+                ->orWhereHas('Branch' , function($q) use($search) {
+                $q->where('phone_1',$search)->orWhere('name', 'like', '%' .$search. '%');})
+                ->orWhereHas('District' , function($q) use($search) {
+                $q->where('name',$search);})
+                ->orWhereHas('JobTitle' , function($q) use($search) {
+                $q->where('related_to',$search)->orWhere('name', 'like', '%' .$search. '%');})
+                ->paginate(20);
         return view('admin.pages.job_posts.job_posts', compact('job_posts'));
     }
 

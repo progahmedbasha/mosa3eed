@@ -20,7 +20,7 @@ class PurchaseController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $purchases = Purchase::whereHas('Organization' , function($q) use($search) {
+        $purchases = Purchase::whenSearch($request->search)->orWhereHas('Organization' , function($q) use($search) {
                 $q->where('email',$search)->orWhere('name', 'like', '%' .$search. '%');})
                 ->orWhereHas('Branch' , function($q) use($search) {
                 $q->where('phone_1',$search)->orWhere('name', 'like', '%' .$search. '%');})

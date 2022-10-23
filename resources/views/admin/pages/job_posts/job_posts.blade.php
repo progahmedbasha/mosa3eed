@@ -5,7 +5,7 @@
 <div class="container" id="kt_content_container">
    <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
       <!--begin::Heading-->
-      <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Job Post  List</h1>
+      <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Recruitment List</h1>
       <!--end::Heading-->
       <!--begin::Breadcrumb-->
       <ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -13,8 +13,8 @@
             <a href="../../demo3/dist/index.html" class="text-muted">Home</a>
          </li>
          <li class="breadcrumb-item text-muted">Applications</li>
-         <li class="breadcrumb-item text-muted">Job Posts</li>
-         <li class="breadcrumb-item text-dark">Job Post List</li>
+         <li class="breadcrumb-item text-muted">Recruitment</li>
+         <li class="breadcrumb-item text-dark">Recruitment List</li>
       </ul>
       <!--end::Breadcrumb-->
    </div>
@@ -68,9 +68,11 @@
                               <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                            </div>
                         </th>
-                       <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Subject: activate to sort column ascending" style="width: 165.203px;">Subject</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Subject: activate to sort column ascending" style="width: 165.203px;">Subject</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Organization: activate to sort column ascending" style="width: 165.203px;">Organization</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 165.203px;">Status</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Date-time : activate to sort column ascending" style="width: 165.203px;">Date-time </th>
 						<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
 					<!--end::Table row-->
                   </thead>
@@ -87,8 +89,11 @@
                         </td>
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
-                       <td>
+                  <td>
 							<a href="purchases/{{$job_post->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $job_post->subject }}</a>
+						</td>
+                  <td>
+							<a href="purchases/{{$job_post->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $job_post->Organization->name }}</a>
 						</td>
 						<td>
                      @if(!empty($job_post->branch_id ))
@@ -97,6 +102,9 @@
                   </td>
                          <td>
 							<a href="purchases/{{$job_post->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $job_post->status }}</a>
+						</td>
+                   <td>
+							<a href="purchases/{{$job_post->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $job_post->created_at }}</a>
 						</td>
                         <!--end::Name=-->
                         <!--begin::Action=-->
