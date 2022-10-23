@@ -84,4 +84,8 @@ class User extends Authenticatable implements JWTSubject
     {
       return $this->belongsTo('App\Models\District');
     }
+      public function ApplyJob()
+    {
+      return $this->hasMany('App\Models\ApplyJob');
+    }
 }

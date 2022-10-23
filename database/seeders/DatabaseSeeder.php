@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         JobTitleSeeder::class,
         SettingSeeder::class,
         JobPostSeeder::class,
+        ApplyJobSeeder::class,
     ]);
     }
 }

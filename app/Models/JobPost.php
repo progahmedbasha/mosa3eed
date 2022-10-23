@@ -37,5 +37,9 @@ class JobPost extends Model
     {
       return $this->belongsTo('App\Models\District');
     }
+       public function ApplyJob()
+    {
+      return $this->hasMany('App\Models\ApplyJob');
+    }
 
 }

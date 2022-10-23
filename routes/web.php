@@ -61,6 +61,8 @@ Route::group(
 
                     Route::resource('missed_items', MissedItemController::class);
                     Route::resource('packages', PackageController::class);
+                    Route::resource('job_applies', JobApplyController::class);
+                    
 
                 });  
 });
