@@ -42,6 +42,8 @@ Route::group([
         Route::get('users', 'AuthController@home');
         Route::resource('medicins', MedicinController::class);
         Route::resource('job_applies', JobApplyController::class);
+        Route::resource('post_likes', PostLikeController::class);
+        Route::resource('post_comments', PostCommentController::class);
         //  Route::post('job_applies_post', [JobApplyController::class,'store'])->name('job_applies_post');
     });
 });

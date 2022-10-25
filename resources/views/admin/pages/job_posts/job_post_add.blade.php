@@ -120,7 +120,7 @@
 					    <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Breif</label>
                      <div class="mb-5">
-                        <input type="text" class="form-control form-control-solid" placeholder="Breif" value="{{old('breif')}}" name="breif">
+                        <textarea class="form-control" aria-label="With textarea" value="{{old('breif')}}" name="breif"></textarea> 
                         @error('breif')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   														
@@ -224,7 +224,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Experience</label>
                      <div class="mb-5">
-                        <input type="text" class="form-control form-control-solid" placeholder="Experience" value="{{old('experince')}}" name="experince">
+                        <textarea class="form-control" aria-label="With textarea" value="{{old('experince')}}" name="experince"></textarea> 
                         @error('experince')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   														

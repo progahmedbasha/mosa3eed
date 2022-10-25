@@ -46,7 +46,7 @@
          <!--begin::Table-->
          <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
            
-           <h5 class="card-title">Attached File :</h5>
+           <h5 class="card-title">Attached File For User : ({{$apply_job->User->name}})</h5>
                 
                     <iframe src="{{url('/data/organizations')}}/{{$apply_job->cv_attachment }}" frameborder="0" height="800px" width="100%" ></iframe>
           

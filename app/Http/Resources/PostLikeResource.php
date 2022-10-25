@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MedicinResource extends JsonResource
+class PostLikeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,11 @@ class MedicinResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-        'id' => $this->id,
-        'name' => $this->name,
-        'price' => $this->price,
-        'created_at' => $this->created_at,
-        'updated_at' => $this->updated_at,
-        ];
+                    'id' => $this->id,
+                    'user_id' => $this->user_id,
+                    'job_post_id' => $this->job_post_id,
+                    'created_at' => $this->created_at,
+                    'updated_at' => $this->updated_at,
+                ];
     }
 }

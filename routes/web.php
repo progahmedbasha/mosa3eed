@@ -63,8 +63,13 @@ Route::group(
                     Route::resource('packages', PackageController::class);
                     Route::resource('job_applies', JobApplyController::class);
                     Route::get('get_attacment/{id}', [App\Http\Controllers\JobApplyController::class,'get_attacment'])->name('get_attacment');
-
+                    Route::resource('posttimelines', Jobs\PostTimelineController::class);
+                    Route::get('post_like/{id}', [App\Http\Controllers\Jobs\PostTimelineController::class,'post_like'])->name('post_like');
+                    Route::get('post_comment/{id}', [App\Http\Controllers\Jobs\PostTimelineController::class,'post_comment'])->name('post_comment');
+                    Route::post('comment_status_change/{id}', [App\Http\Controllers\Jobs\PostTimelineController::class,'comment_status_change'])->name('comment_status_change');
                     
+                    
+
 
                 });  
 });

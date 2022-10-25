@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Jobs;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\JobPost\StoreRequest;
+use App\Http\Requests\JobPost\JobPostRequest;
 use App\Models\JobPost;
 use App\Models\JobTitle;
 use App\Models\admin\Branch;
@@ -58,7 +58,7 @@ class JobPostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobPostRequest $request)
     { 
         // first if condition for if title=others create first job title then create job post (save in two table)
         if (request()->job_title_id =="others"){
@@ -175,7 +175,7 @@ class JobPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(JobPostRequest $request, $id)
     {
         // $job_post = JobPost::find($id);
               // first if condition for if title=others create first job title then create job post (save in two table)
