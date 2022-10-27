@@ -17,7 +17,7 @@
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-rounded fw-bold my-auto" id="#kt_aside_menu" data-kt-menu="true">
 								<div class="menu-item">
-									<a class="menu-link active" href="{{route('dashboard')}}">
+									<a class="menu-link active" href="{{route('organization_dashboard.index')}}">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
 											<span class="svg-icon svg-icon-5">
@@ -31,9 +31,28 @@
 										<span class="menu-title">Dashboard</span>
 									</a>
 								</div>
+									{{-- ///////////////////////////////////////////////////////////// --}}
+								<div class="menu-item">
+									<a class="menu-link active" href="{{route('organization_profile.index')}}">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+											<span class="svg-icon svg-icon-5">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
+													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
+												</svg>
+											</span>
+											<!--end::Svg Icon-->
+										</span>
+										<span class="menu-title">Profile</span>
+									</a>
+								</div>
+
+
+								{{-- ////////////////////////////////////////////////////////////// --}}
 								{{-- ///////////////////////////////////////////////////////////// --}}
 								<div class="menu-item">
-									<a class="menu-link active" href="{{route('admin.index')}}">
+									<a class="menu-link active" href="{{route('pharmacy_admins.index')}}">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
 											<span class="svg-icon svg-icon-5">
@@ -44,35 +63,15 @@
 											</span>
 											<!--end::Svg Icon-->
 										</span>
-										<span class="menu-title">Admins</span>
+										<span class="menu-title">Organization Admins</span>
 									</a>
 								</div>
 
 
 								{{-- ////////////////////////////////////////////////////////////// --}}
-
-									{{-- ///////////////////////////////////////////////////////////// --}}
+								{{-- ///////////////////////////////////////////////////////////// --}}
 								<div class="menu-item">
-									<a class="menu-link active" href="{{route('organizations.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Organizations</span>
-									</a>
-								</div>
-
-
-								{{-- ////////////////////////////////////////////////////////////// --}}
-									{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('medicins.index')}}">
+									<a class="menu-link active" href="{{route('organization_medicins.index')}}">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
 											<span class="svg-icon svg-icon-5">
@@ -89,271 +88,10 @@
 
 
 								{{-- ////////////////////////////////////////////////////////////// --}}
-									{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('settings.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Settings</span>
-									</a>
-								</div>
 
+							
 
-								{{-- ////////////////////////////////////////////////////////////// --}}
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<span class="menu-link">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Countries</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<div class="menu-sub menu-sub-accordion">
-										<div class="menu-item">
-											<a class="menu-link" href="{{route('countries.index')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Countries</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link" href="{{route('cities.index')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Cities</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link" href="{{route('districts.index')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Districts</span>
-											</a>
-										</div>
-
-										
-										
-									</div>
-										{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('branchs.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Branchs</span>
-									</a>
-								</div>
-
-
-								{{-- ////////////////////////////////////////////////////////////// --}}
-											{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('organization_admins.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Organization Admins</span>
-									</a>
-								</div>
-								{{-- ////////////////////////////////////////////////////////////// --}}
-								{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('organization_shifts.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Organization Shifts</span>
-									</a>
-								</div>
-
-
-								{{-- ////////////////////////////////////////////////////////////// --}}
-								{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('organization_attendances.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Organization Attendances</span>
-									</a>
-								</div>
-
-
-								{{-- ////////////////////////////////////////////////////////////// --}}
-								{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('purchases.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Purchses</span>
-									</a>
-								</div>
-
-
-								{{-- ////////////////////////////////////////////////////////////// --}}
-									{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('job_titles.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Job Titles</span>
-									</a>
-								</div>
-
-
-								{{-- ////////////////////////////////////////////////////////////// --}}
-									{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('missed_items.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Missed Items</span>
-									</a>
-								</div>
-
-
-								{{-- ////////////////////////////////////////////////////////////// --}}
-								{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('job_posts.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Job Posts</span>
-									</a>
-								</div>
-								{{-- ////////////////////////////////////////////////////////////// --}}
-										{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('packages.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Packages</span>
-									</a>
-								</div>
-								{{-- ////////////////////////////////////////////////////////////// --}}
-														{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('job_applies.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">List of employee</span>
-									</a>
-								</div>
-								{{-- ////////////////////////////////////////////////////////////// --}}
-								{{-- ///////////////////////////////////////////////////////////// --}}
-								<div class="menu-item">
-									<a class="menu-link active" href="{{route('posttimelines.index')}}">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-											<span class="svg-icon svg-icon-5">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black"></path>
-													<path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black"></path>
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<span class="menu-title">Post Timelines</span>
-									</a>
-								</div>
-								{{-- ////////////////////////////////////////////////////////////// --}}
-
-
-								</div>
+			
 							
 							</div>
 							<!--end::Menu-->

@@ -13,6 +13,11 @@ use App\Http\Controllers\Jobs\JobTitleController;
 use App\Http\Controllers\Jobs\JobPostController;
 use App\Http\Controllers\JobApplyController;
 use App\Http\Controllers\Jobs\PostTimelineController;
+// for organization admin
+use App\Http\Controllers\OrganizationAdmin\PharmacyAdminController;
+use App\Http\Controllers\OrganizationAdmin\DashboardController;
+use App\Http\Controllers\OrganizationAdmin\ProfileController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,10 +100,15 @@ Route::group(
                     'middleware' => [ 'auth:sanctum', 'verified' , 'organization'],
                 ], function()
                 {
-                        Route::get('dashboard', function () {
-                            return view('admin.dashboard');
-                        })->name('dashboard');
-                    // Route::resource('organization_admins', Admin\AdminController::class);
+                        // Route::get('organization_dashboard', function () {
+                        //     return view('organization.dashboard')->name('organization_dashboard');
+                        // })->name('dashboard');
+                    // Route::post('fetch_branch', [Jobs\JobPostController::class,'fetch_branch'])->name('fetch_branch');
+                    Route::resource('organization_dashboard', OrganizationAdmin\DashboardController::class);
+                    Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
+                    Route::resource('organization_medicins', OrganizationAdmin\MedicinController::class);
+                    Route::resource('organization_profile', OrganizationAdmin\ProfileController::class);
+                    Route::resource('organization_branchs', OrganizationAdmin\BranchController::class);
             
                 });  
 });
