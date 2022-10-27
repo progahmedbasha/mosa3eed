@@ -39,6 +39,11 @@ class JobApplyController extends Controller
         $job= new ApplyJob;
         $job->user_id = $request->user_id;
         $job->job_post_id = $request->job_post_id;
+        if (request()->cv_attachment){
+            $filename = time().'.'.request()->cv_attachment->getClientOriginalExtension();
+            request()->cv_attachment->move(public_path('data/organizations'), $filename);
+            $job->cv_attachment=$filename;
+        }
         $job->save();
 
         $job_post = new ApplyJobResource($job);

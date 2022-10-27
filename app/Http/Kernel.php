@@ -65,6 +65,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'customer' => \App\Http\Middleware\CustomerRole::class,
         'jwt' => \App\Http\Middleware\JwtMiddleware::class,
+        // roles
+        'admin' => \App\Http\Middleware\AdminRole::class,
+        'organization' => \App\Http\Middleware\OrganizationRole::class,
             // localization
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,

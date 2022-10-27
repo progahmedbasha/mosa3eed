@@ -15,11 +15,12 @@ class ApplyJobResource extends JsonResource
     public function toArray($request)
     {
          return [
-        'id' => $this->id,
-        'user_id' => $this->user_id,
-        'job_post_id' => $this->job_post_id,
-        'created_at' => $this->created_at,
-        'updated_at' => $this->updated_at,
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'job_post_id' => $this->job_post_id,
+            'cv_attachment' => asset('data/job_applies/' .$this->cv_attachment),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

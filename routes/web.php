@@ -2,6 +2,17 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Country_state_cityController;
+use App\Http\Controllers\Admin\MedicinController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Organization\OrganizationAdminController;
+use App\Http\Controllers\Organization\OrganizationshiftController;
+use App\Http\Controllers\Organization\OrganizationAttendanceController;
+use App\Http\Controllers\Organization\PurchaseController;
+use App\Http\Controllers\Jobs\JobTitleController;
+use App\Http\Controllers\Jobs\JobPostController;
+use App\Http\Controllers\JobApplyController;
+use App\Http\Controllers\Jobs\PostTimelineController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +29,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('homepage');
-Route::get('dashboard', function () {
-    return view('admin.index');
-});
-Route::get('list', function () {
-    return view('admin.list');
-});
+// Route::get('dashboard', function () {
+//     return view('admin.index');
+// });
+// Route::get('list', function () {
+//     return view('admin.list');
+// });
 Route::get('sign_out', 'Auth\AuthController@logout')->name('sign_out');
+// routes for admin
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -34,7 +46,7 @@ Route::group(
             Route::group(
                 [
                     'prefix' => 'admin',
-                    'middleware' => [ 'auth:sanctum', 'verified' ],
+                    'middleware' => [ 'auth:sanctum', 'verified' ,'admin' ],
                 ], function()
                 {
                         Route::get('dashboard', function () {
@@ -57,20 +69,37 @@ Route::group(
                     Route::resource('purchases', Organization\PurchaseController::class);
                     Route::resource('job_titles', Jobs\JobTitleController::class);
                     Route::resource('job_posts', Jobs\JobPostController::class);
-                    Route::post('fetch_branch', [App\Http\Controllers\Jobs\JobPostController::class,'fetch_branch'])->name('fetch_branch');
+                    Route::post('fetch_branch', [Jobs\JobPostController::class,'fetch_branch'])->name('fetch_branch');
 
                     Route::resource('missed_items', MissedItemController::class);
                     Route::resource('packages', PackageController::class);
                     Route::resource('job_applies', JobApplyController::class);
-                    Route::get('get_attacment/{id}', [App\Http\Controllers\JobApplyController::class,'get_attacment'])->name('get_attacment');
+                    Route::get('get_attacment/{id}', [JobApplyController::class,'get_attacment'])->name('get_attacment');
                     Route::resource('posttimelines', Jobs\PostTimelineController::class);
-                    Route::get('post_like/{id}', [App\Http\Controllers\Jobs\PostTimelineController::class,'post_like'])->name('post_like');
-                    Route::get('post_comment/{id}', [App\Http\Controllers\Jobs\PostTimelineController::class,'post_comment'])->name('post_comment');
-                    Route::post('comment_status_change/{id}', [App\Http\Controllers\Jobs\PostTimelineController::class,'comment_status_change'])->name('comment_status_change');
-                    
-                    
-
-
+                    Route::get('post_like/{id}', [PostTimelineController::class,'post_like'])->name('post_like');
+                    Route::get('post_comment/{id}', [PostTimelineController::class,'post_comment'])->name('post_comment');
+                    Route::post('comment_status_change/{id}', [PostTimelineController::class,'comment_status_change'])->name('comment_status_change');
+            
+                });  
+});
+// routes for organization(pharmacy)
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ], 
+    ], function()
+    {
+            Route::group(
+                [
+                    'prefix' => 'organization',
+                    'middleware' => [ 'auth:sanctum', 'verified' , 'organization'],
+                ], function()
+                {
+                        Route::get('dashboard', function () {
+                            return view('admin.dashboard');
+                        })->name('dashboard');
+                    // Route::resource('organization_admins', Admin\AdminController::class);
+            
                 });  
 });
     Auth::routes();
