@@ -15,7 +15,7 @@ class CustomerRole
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->user_type_id == 1){
+        if(auth()->user()->user_type_id == 3){
             return $next($request);
         }
         return redirect()->route('welcome');
