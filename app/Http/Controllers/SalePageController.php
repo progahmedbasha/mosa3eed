@@ -121,23 +121,33 @@ class SalePageController extends Controller
     }
     public function sale_store_ajax(Request $request)
     {
-            $medicin = Medicin::where('barcode', $request->product_id)->first();
-            $product_bill = new OrderItem();
-            $product_bill->bill_number = $request->order_number;
-            $product_bill->medicin_id = $medicin->id;
-            $product_bill->price = $medicin->price;
-            $product_bill->qty = $request->qty;
-            $product_bill->total_cost = $medicin->price * $product_bill->qty;
-            $product_bill->save();
+    
+        $medicin = Medicin::where('barcode', $request->product_id)->first();
+        $product_bill = new OrderItem();
+        $product_bill->bill_number = $request->order_number;
+        $product_bill->medicin_id = $medicin->id;
+        $product_bill->price = $medicin->price;
+        $product_bill->qty = $request->qty;
+        $product_bill->total_cost = $medicin->price * $product_bill->qty;
+        $product_bill->save();
 
-            $product_name = $product_bill->Medicin;
-            $price = $product_bill->price * $product_bill->qty;
+        $product_name = $product_bill->Medicin;
+        $price = $product_bill->price * $product_bill->qty;
+        $total = $product_bill->price * $product_bill->qty;
 
-            // $total = OrderItem::where('bill_number', $product_bill->bill_number)->get();
-            $total_order = $product_bill->where('bill_number', $product_bill->bill_number)->sum('total_cost');
-        
         $html = view('admin.pages.pos.buying_table_ajax', compact('product_name','product_bill','price'))->render();
-        return response()->json(['status' => true, 'result' => $html, 'total_order' =>$total_order]);
+        return response()->json(['status' => true, 'result' => $html, 'total' =>$total]);
+    }
+    public function sale_ajax_destroy(Request $request)
+    {
+        $id = $request->id_product;
+        $row = OrderItem::where('id', $id)->first();
+        $price = $row->qty * $row->price;
+        $row->delete();
+        return response()->json([
+            'success' => 'Record deleted successfully!',
+            'price' => $price,
+        ]);
     }
     
 }

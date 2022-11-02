@@ -88,6 +88,8 @@ Route::group(
                     Route::post('comment_status_change/{id}', [TimelinePostController::class,'comment_status_change'])->name('comment_status_change');
                     Route::resource('sale_page', SalePageController::class);
                     Route::post('sale_store_ajax', 'SalePageController@sale_store_ajax')->name('sale_store_ajax');
+                    Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
+                    
                 });  
 });
 // routes for organization(pharmacy)
