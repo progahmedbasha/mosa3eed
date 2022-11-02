@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Jobs;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\JobPost;
+use App\Models\TimelinePost;
 use App\Models\PostLike;
+use App\Models\User;
 use App\Models\PostComment;
-class PostTimelineController extends Controller
+class TimelinePostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class PostTimelineController extends Controller
      */
     public function index()
     {
-        $post_timelines = JobPost::with('PostLike')->paginate(20);
+           $post_timelines = TimelinePost::with('PostLike')->paginate(20);
       return view('admin.pages.post_timelines.post_timelines', compact('post_timelines'));
     }
 
@@ -60,7 +60,9 @@ class PostTimelineController extends Controller
      */
     public function edit($id)
     {
-        //
+        $timeline_post = TimelinePost::find($id);
+        $user_types = User::get();
+        return view('admin.pages.post_timelines.post_timeline_details', compact('timeline_post','user_types'));
     }
 
     /**
@@ -72,7 +74,9 @@ class PostTimelineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $timeline_post = TimelinePost::find($id);
+        $timeline_post->update(['status' => $request->status]);
+        return redirect()->route('timeline_posts.index')->with('success', 'Status Changed Successfully');  
     }
 
     /**
@@ -83,18 +87,20 @@ class PostTimelineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = PostLike::find($id);
+        $post->delete();
+        return redirect()->route('packages.index')->with('success','Post Deleted Successfully');
     }
-    public function post_like($id)
+     public function post_like($id)
     {
-        $post_likes = PostLike::where('job_post_id', $id)->paginate(20);
-        $post_name = JobPost::where('id', $id)->first();
+        $post_likes = PostLike::where('timeline_post_id', $id)->paginate(20);
+        $post_name = TimelinePost::where('id', $id)->first();
         return view('admin.pages.post_timelines.post_likes_show', compact('post_likes','post_name'));
     }
     public function post_comment($id)
     {
-        $post_comments = PostComment::where('job_post_id', $id)->paginate(20);
-        $post_name = JobPost::where('id', $id)->first();
+        $post_comments = PostComment::where('timeline_post_id', $id)->paginate(20);
+        $post_name = TimelinePost::where('id', $id)->first();
         return view('admin.pages.post_timelines.post_comments_show', compact('post_comments','post_name'));
     }
         public function comment_status_change(Request $request, $id)
@@ -103,5 +109,4 @@ class PostTimelineController extends Controller
         $post_comments->update(['status'=> $request->status]);
         return redirect()->back()->with('success', 'Status Changed Successfully');  
     }
-    
 }

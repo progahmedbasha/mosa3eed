@@ -14,6 +14,7 @@ class MedicinSeeder extends Seeder
     public function run()
     {
             DB::table('medicins')->insert([
+            'barcode' => '1',   
             'name' => '{"en":"medicin 1","ar":"medicin 1"}',
             'price' => '10',
         ]);

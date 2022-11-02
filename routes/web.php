@@ -12,7 +12,7 @@ use App\Http\Controllers\Organization\PurchaseController;
 use App\Http\Controllers\Jobs\JobTitleController;
 use App\Http\Controllers\Jobs\JobPostController;
 use App\Http\Controllers\JobApplyController;
-use App\Http\Controllers\Jobs\PostTimelineController;
+use App\Http\Controllers\TimelinePostController;
 // for organization admin
 use App\Http\Controllers\OrganizationAdmin\PharmacyAdminController;
 use App\Http\Controllers\OrganizationAdmin\DashboardController;
@@ -80,11 +80,14 @@ Route::group(
                     Route::resource('packages', PackageController::class);
                     Route::resource('job_applies', JobApplyController::class);
                     Route::get('get_attacment/{id}', [JobApplyController::class,'get_attacment'])->name('get_attacment');
-                    Route::resource('posttimelines', Jobs\PostTimelineController::class);
-                    Route::get('post_like/{id}', [PostTimelineController::class,'post_like'])->name('post_like');
-                    Route::get('post_comment/{id}', [PostTimelineController::class,'post_comment'])->name('post_comment');
-                    Route::post('comment_status_change/{id}', [PostTimelineController::class,'comment_status_change'])->name('comment_status_change');
-            
+                    Route::resource('timeline_posts', 'TimelinePostController');
+
+                    Route::get('post_like/{id}', 'TimelinePostController@post_like')->name('post_like');
+                    // Route::get('post_like/{id}', [TimelinePostController::class,'post_like'])->name('post_like');
+                    Route::get('post_comment/{id}', [TimelinePostController::class,'post_comment'])->name('post_comment');
+                    Route::post('comment_status_change/{id}', [TimelinePostController::class,'comment_status_change'])->name('comment_status_change');
+                    Route::resource('sale_page', SalePageController::class);
+                    Route::post('sale_store_ajax', 'SalePageController@sale_store_ajax')->name('sale_store_ajax');
                 });  
 });
 // routes for organization(pharmacy)

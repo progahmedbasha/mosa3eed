@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         SettingSeeder::class,
         JobPostSeeder::class,
         ApplyJobSeeder::class,
+        TimelinePostSeeder::class,
         PostLikeSeeder::class,
         PostCommentSeeder::class,
     ]);

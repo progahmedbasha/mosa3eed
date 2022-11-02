@@ -13,12 +13,13 @@ class TimelinePostsTable extends Migration
      */
     public function up()
     {
-            Schema::create('timelineposts', function (Blueprint $table) {
+            Schema::create('timeline_posts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('post');
             $table->string('photo')->nullable();
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }

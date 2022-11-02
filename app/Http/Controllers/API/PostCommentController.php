@@ -39,7 +39,7 @@ class PostCommentController extends Controller
     {
         $comment= new PostComment;
         $comment->user_id = $request->user_id;
-        $comment->job_post_id = $request->job_post_id;
+        $comment->timeline_post_id = $request->timeline_post_id;
         $comment->comment = $request->comment;
         $comment->save();
 

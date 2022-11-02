@@ -16,7 +16,7 @@ class PostLikeSeeder extends Seeder
            
         DB::table('post_likes')->insert([
             'user_id' => '1',
-            'job_post_id' => '1',
+            'timeline_post_id' => '1',
             'created_at' => '2022-10-23 00:00:00'
         ]);
     }

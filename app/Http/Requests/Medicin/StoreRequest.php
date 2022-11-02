@@ -26,6 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'name_en'=> 'required|min:2|max:250',
             'name_ar' => 'required|min:2|max:250',
+            'barcode'=> 'required|max:250',
             'price'=> 'required|max:250',
         ];
     }

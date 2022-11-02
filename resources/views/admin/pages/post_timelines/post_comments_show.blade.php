@@ -26,7 +26,7 @@
          <div class="card-title">
             <!--begin::Search-->
             <div class="d-flex align-items-center position-relative my-1">
-                <h1>Users has Commented on Post: ({{$post_name->subject}})  </h1>
+                <h1>Users has Commented on Post From User : ({{$post_name->User->name}})  </h1>
                {{-- <form method="get" class="form-inline" action="{{url('admin/packages')}}">
                   <input class="form-control form-control-solid w-250px ps-15" name="search" type="text" placeholder="Search Posts" required>
             </div>

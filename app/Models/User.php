@@ -88,4 +88,8 @@ class User extends Authenticatable implements JWTSubject
     {
       return $this->hasMany('App\Models\ApplyJob');
     }
+     public function TimelinePost()
+    {
+      return $this->hasMany('App\Models\TimelinePost');
+    }
 }

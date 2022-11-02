@@ -10,9 +10,9 @@ class PostLike extends Model
     use HasFactory;
     public $guarded = [];
 
-        public function JobPost()
+    public function TimelinePost()
     {
-      return $this->belongsTo('App\Models\JobPost');
+      return $this->belongsTo('App\Models\TimelinePost');
     }
     public function User()
     {

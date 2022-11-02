@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMedicinsTable extends Migration
+class CreateSaleBillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMedicinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('medicins', function (Blueprint $table) {
+        Schema::create('sale_bills', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('barcode');
-            $table->text('name');
-            $table->float('price');
+            $table->string('bill_number');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('status')->default('Not Active');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateMedicinsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicins');
+        Schema::dropIfExists('sale_bills');
     }
 }

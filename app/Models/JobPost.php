@@ -41,12 +41,12 @@ class JobPost extends Model
     {
       return $this->hasMany('App\Models\ApplyJob');
     }
-    public function PostComment()
-    {
-      return $this->hasMany('App\Models\PostComment');
-    }
-       public function PostLike()
-    {
-      return $this->hasMany('App\Models\PostLike');
-    }
+    // public function PostComment()
+    // {
+    //   return $this->hasMany('App\Models\PostComment');
+    // }
+    //    public function PostLike()
+    // {
+    //   return $this->hasMany('App\Models\PostLike');
+    // }
 }

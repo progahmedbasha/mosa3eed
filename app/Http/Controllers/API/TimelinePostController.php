@@ -4,11 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PostLike;
-use App\Http\Resources\PostLikeResource;
-use App\Http\Requests\PostLike\PostLikeRequest;
-
-class PostLikeController extends Controller
+use App\Models\TimelinePost;
+use App\Http\Resources\TimelinePostResource;
+class TimelinePostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,13 +36,18 @@ class PostLikeController extends Controller
      */
     public function store(Request $request)
     {
-        $like= new PostLike;
-        $like->user_id = $request->user_id;
-        $like->timeline_post_id = $request->timeline_post_id;
-        $like->save();
+        $post= new TimelinePost;
+        $post->user_id = $request->user_id;
+        $post->post = $request->post;
+         if (request()->photo){
+            $filename = time().'.'.request()->photo->getClientOriginalExtension();
+            request()->photo->move(public_path('data/organizations'), $filename);
+            $post->photo=$filename;
+        }
+        $post->save();
 
-        $like_post = new PostLikeResource($like);
-        return $this->toJson(200,"Success",$like_post);   
+        $time_post = new TimelinePostResource($post);
+        return $this->toJson(200,"Success",$time_post);   
     }
 
     /**

@@ -68,7 +68,7 @@
                               <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                            </div>
                         </th>
-                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Subject: activate to sort column ascending" style="width: 165.203px;">Subject</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 165.203px;">User</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Likes: activate to sort column ascending" style="width: 165.203px;">Likes</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Comments: activate to sort column ascending" style="width: 165.203px;">Comments</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Date-Time: activate to sort column ascending" style="width: 165.203px;">Date-Time</th>
@@ -89,7 +89,7 @@
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
                        <td>
-							<a href="job_posts/{{$post_timeline->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $post_timeline->subject }}</a>
+							<a href="timeline_posts/{{$post_timeline->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $post_timeline->User->name }}</a>
 						</td>
                  
                         <td>
@@ -136,12 +136,12 @@
                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-								<a href="job_posts/{{$post_timeline->id}}/edit" class="menu-link px-3">View</a>
+								<a href="timeline_posts/{{$post_timeline->id}}/edit" class="menu-link px-3">View</a>
                               </div>
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                 <form action="{{route('packages.destroy',$post_timeline->id)}} " method="POST">
+                                 <form action="{{route('timeline_posts.destroy',$post_timeline->id)}} " method="POST">
 									@csrf
 									@method('DELETE')
 									<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>

@@ -86,7 +86,7 @@
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
                        <td>
-							<a href="packages/{{$post_like->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $post_like->User->name }}</a>
+							<a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $post_like->User->name }}</a>
 						</td>
                  
                                             </tr>

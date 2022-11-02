@@ -17,8 +17,8 @@ class CreatePostCommentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('job_post_id')->unsigned();
-            $table->foreign('job_post_id')->references('id')->on('job_posts')->onDelete('cascade');
+            $table->integer('timeline_post_id')->unsigned();
+            $table->foreign('timeline_post_id')->references('id')->on('timeline_posts')->onDelete('cascade');
             $table->string('comment');
             $table->string('status')->default('Active');
             $table->timestamps();

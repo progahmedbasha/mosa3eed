@@ -16,7 +16,7 @@ class PostCommentSeeder extends Seeder
          
                DB::table('post_comments')->insert([
                 'user_id' => '1',
-                'job_post_id' => '1',
+                'timeline_post_id' => '1',
                 'comment' => 'coment 1',
                 'status' => 'Active',
                 'created_at' => '2022-10-23 00:00:00'
