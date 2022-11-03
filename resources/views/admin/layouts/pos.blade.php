@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{url('pos/style.css')}}">
 
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css?family=Amiri|Cairo" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amiri|Cairo" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,6 +16,8 @@
 		<!--begin::Page Vendors Javascript(used by this page)-->
 		<script src="{{asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
 		<!--end::Page Vendors Javascript-->
+    {{-- //sweet alert  --}}
+		<link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 
 
 

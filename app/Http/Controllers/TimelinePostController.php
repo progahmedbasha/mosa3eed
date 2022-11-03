@@ -16,7 +16,7 @@ class TimelinePostController extends Controller
      */
     public function index()
     {
-           $post_timelines = TimelinePost::with('PostLike')->paginate(20);
+           $post_timelines = TimelinePost::withCount('PostLike')->withCount('PostComment')->paginate(20);
       return view('admin.pages.post_timelines.post_timelines', compact('post_timelines'));
     }
 

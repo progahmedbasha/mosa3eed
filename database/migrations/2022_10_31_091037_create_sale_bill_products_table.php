@@ -15,7 +15,8 @@ class CreateSaleBillProductsTable extends Migration
     {
         Schema::create('sale_bill_products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('bill_id');
+            $table->integer('sale_bill_id')->unsigned();
+            $table->foreign('sale_bill_id')->references('id')->on('sale_bills')->onDelete('cascade');
             $table->integer('medicin_id')->unsigned();
             $table->foreign('medicin_id')->references('id')->on('medicins')->onDelete('cascade');
             $table->float('price');

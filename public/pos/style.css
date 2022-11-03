@@ -6,7 +6,16 @@ body {
     font-family: 'Cairo', sans-serif;
 }
 
-nav {
+.test {
+    direction: ltr;
+    margin-right: 180px;
+}
+
+.order_number {
+    margin-right: 368px;
+}
+
+. nav {
     direction: ltr;
 }
 

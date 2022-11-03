@@ -87,6 +87,9 @@ Route::group(
                     Route::get('post_comment/{id}', [TimelinePostController::class,'post_comment'])->name('post_comment');
                     Route::post('comment_status_change/{id}', [TimelinePostController::class,'comment_status_change'])->name('comment_status_change');
                     Route::resource('sale_page', SalePageController::class);
+                    Route::get('item_edite/{order}/{id}', 'SalePageController@item_edite')->name('item_edite');
+                    Route::patch('item_update/{id}', 'SalePageController@item_update')->name('item_update');
+                    Route::delete('order_item_delete/{order}/{id}', 'SalePageController@order_item_delete')->name('order_item_delete');
                     Route::post('sale_store_ajax', 'SalePageController@sale_store_ajax')->name('sale_store_ajax');
                     Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
                     

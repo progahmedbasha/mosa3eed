@@ -1,5 +1,6 @@
 @extends('admin.layouts.pos')
 @section('content')
+
 <h2 class='hclass hid' hidden/> أســواق البــاشـــــــا </h2>
 <div class="modal fade" id="code_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
    <div class="modal-dialog" role="document">
@@ -62,8 +63,8 @@
          </div>
       </div>
       <div class="col-sm-9">
-         <div class="form-inline" action="#">
-            <div class="form-group">
+         <div class="form-inline test" action="#">
+            <div class="form-group order_number">
                <label  >Order Number :</label>
                <!-- customers -->
                <input type="text"  class="form-control pr" value="{{$order_number}}" id="order_number"  name="order_number" readonly>
@@ -71,24 +72,26 @@
                <br><br>
             </div>
             <div class="form-inline">
-               <button type="button"  onclick="window.print()" class="btn btn-info no-print" style="background-color:#333;">
-               <span class="glyphicon glyphicon-print  no-print"></span> </button>
+               
                <label class='no-print' >Qty :</label>
                <div class="form-group mb-2">
-                  <input type="text" value="1"  style="width:50px" class="form-control no-print" id="qty" placeholder="ادخل الرقم" name="qty" >
+                  <input type="text" value="1"  style="width:50px" class="form-control no-print" id="qty" placeholder="Qty" name="qty" >
                </div>
                <label class='no-print' >Discount :</label>
                <div class="form-group mx-sm-3 mb-2">
-                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="disc" placeholder="ادخل الرقم" name="disc" > <label class='no-print'>%</label> 
+                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="disc" placeholder="Dicount" name="disc" > <label class='no-print'>%</label> 
                </div>
                <label class='no-print' >Discount :</label>
                <div class="form-group mx-sm-3 mb-2">
-                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="discNuma" placeholder="ادخل الرقم" name="discNuma" >
+                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="discNuma" placeholder="Dicount" name="discNuma" >
                </div>
                <label class='no-print' >Medicin Code :</label>
                <div class="form-group mx-sm-3 mb-2">
-                  <input type="text"  class="form-control no-print" id="barcode" placeholder="ادخل الرقم" name="product" autofocus>
+                  <input type="text"  class="form-control no-print" id="barcode" placeholder="Barcode" name="product" autofocus>
                </div>
+               &nbsp;
+               <button type="button"  onclick="window.print()" class="btn btn-info no-print" style="background-color:#333;">
+                  <span class="glyphicon glyphicon-print  no-print"></span> </button>
             </div>
          </div>
       </div>

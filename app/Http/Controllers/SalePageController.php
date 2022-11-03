@@ -15,23 +15,11 @@ class SalePageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $empty = SaleBill::get();
-        if($empty->count() < 1)
-        {
-            $order_number = 1;
-        }
-    //   return  $order = [];
-        // $order_number = SaleBill::get()->last()->id+1;
-        // if(!empty($empty)){
-        //   $order_number = 1;
-        // }
-        else {
-            $order_number = SaleBill::get()->last()->bill_number+1;
-        }
-    
-        return view('admin.pages.pos.sale_page', compact('order_number'));
+         $search = $request->search;
+        $sale_bills = SaleBill::withCount('SaleBillProduct')->whenSearch($request->search)->paginate(20);
+        return view('admin.pages.sale_bills.sale_bills', compact('sale_bills'));
     }
 
     /**
@@ -41,7 +29,17 @@ class SalePageController extends Controller
      */
     public function create()
     {
-        //
+        $empty = SaleBill::get();
+        if($empty->count() < 1)
+        {
+            $order_number = 1;
+        }
+
+        else {
+            $order_number = SaleBill::get()->last()->bill_number+1;
+        }
+    
+        return view('admin.pages.pos.sale_page', compact('order_number'));
     }
 
     /**
@@ -62,7 +60,7 @@ class SalePageController extends Controller
             // // save in multi record
               for($i=0; $i<$countItems; $i++){
                 $product_bill = new SaleBillProduct();
-                $product_bill->bill_id = $order->id;
+                $product_bill->sale_bill_id = $order->id;
                 $product_bill->medicin_id = $request->product_id[$i];
                 $product_bill->price = $request->price[$i];
                 $product_bill->qty = $request->qty[$i];
@@ -81,9 +79,11 @@ class SalePageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+         $search = $request->search;
+        $sale_bills = SaleBillProduct::where('sale_bill_id', $id)->whenSearch($request->search)->paginate(20);
+        return view('admin.pages.sale_bills.sale_bill_items_show', compact('sale_bills','id'));
     }
 
     /**
@@ -117,7 +117,35 @@ class SalePageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bill = SaleBill::find($id);
+        $bill->delete();
+        return redirect()->route('sale_page.index')->with('success','SaleBill Deleted Successfully');
+    }
+    public function item_edite($order , $id)
+    {
+         $bill_number = SaleBill::find($order);
+         $bill_item = SaleBillProduct::find($id);
+        $medicins = Medicin::all();
+         return view('admin.pages.sale_bills.sale_bill_item_edit', compact('bill_item','bill_number','medicins'));
+    }
+    public function item_update(Request $request , $id)
+    {
+         // for return page order id 
+         $bill_number = $request->input('bill_number');
+
+        $item = SaleBillProduct::find($id);
+        $item->medicin_id = $request->input('medicin_id');
+        $item->qty = $request->input('qty');
+        $item->price = $request->input('price');
+        $item->total_cost = $request->input('price') * $request->input('qty');
+        $item->save();
+      return redirect()->route('sale_page.show',$bill_number)->with('success','Request Updated Successfully');
+    }
+    public function  order_item_delete($order, $id)
+    {
+        $bill = SaleBillProduct::find($id);
+        $bill->delete();
+        return redirect()->route('sale_page.show',$order)->with('success','Item Deleted Successfully');
     }
     public function sale_store_ajax(Request $request)
     {
