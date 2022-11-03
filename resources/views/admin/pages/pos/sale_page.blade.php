@@ -1,7 +1,7 @@
 @extends('admin.layouts.pos')
 @section('content')
 
-<h2 class='hclass hid' hidden/> أســواق البــاشـــــــا </h2>
+<h2 class='hclass hid' hidden/> Mosa3eed </h2>
 <div class="modal fade" id="code_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
    <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -87,7 +87,7 @@
                </div>
                <label class='no-print' >Medicin Code :</label>
                <div class="form-group mx-sm-3 mb-2">
-                  <input type="text"  class="form-control no-print" id="barcode" placeholder="Barcode" name="product" autofocus>
+                  <input type="text"  class="form-control no-print" id="barcode" placeholder="Barcode" name="product" autofocus autocomplete="off">
                </div>
                &nbsp;
                <button type="button"  onclick="window.print()" class="btn btn-info no-print" style="background-color:#333;">
@@ -116,7 +116,7 @@
          <th style="text-align:center;">%</th>
          <th style="text-align:center;">-</th>
          <th style="text-align:center;">Total Price</th>
-         <th style="text-align:center;">Action</th>
+         <th style="text-align:center;" class="no-print">Action</th>
       </tr>
       <tbody id="tbody">
       </tbody>

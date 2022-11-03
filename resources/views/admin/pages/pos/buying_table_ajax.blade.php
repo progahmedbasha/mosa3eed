@@ -7,7 +7,7 @@
     <td>--</td>
     <td>--</td>
     <td>  {{ @$price }}</td>
-    <td ><button type="button" data-id="{{ $product_bill->id }}" class="btn btn-danger delete_order_item delete" ><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+    <td class="no-print"><button type="button" data-id="{{ $product_bill->id }}" class="btn btn-danger delete_order_item delete" style="padding: 0px;" ><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
 
 </tr>
 

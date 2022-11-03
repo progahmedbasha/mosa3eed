@@ -11,7 +11,7 @@ use App\Http\Controllers\Organization\OrganizationAttendanceController;
 use App\Http\Controllers\Organization\PurchaseController;
 use App\Http\Controllers\Jobs\JobTitleController;
 use App\Http\Controllers\Jobs\JobPostController;
-use App\Http\Controllers\JobApplyController;
+// use App\Http\Controllers\JobApplyController;
 use App\Http\Controllers\TimelinePostController;
 // for organization admin
 use App\Http\Controllers\OrganizationAdmin\PharmacyAdminController;
@@ -79,7 +79,7 @@ Route::group(
                     Route::resource('missed_items', MissedItemController::class);
                     Route::resource('packages', PackageController::class);
                     Route::resource('job_applies', JobApplyController::class);
-                    Route::get('get_attacment/{id}', [JobApplyController::class,'get_attacment'])->name('get_attacment');
+                    Route::get('get_attacment/{id}', 'JobApplyController@get_attacment')->name('get_attacment');
                     Route::resource('timeline_posts', 'TimelinePostController');
 
                     Route::get('post_like/{id}', 'TimelinePostController@post_like')->name('post_like');

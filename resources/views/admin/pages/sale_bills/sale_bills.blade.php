@@ -5,7 +5,7 @@
 <div class="container" id="kt_content_container">
    <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
       <!--begin::Heading-->
-      <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Orders</h1>
+      <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Orders List</h1>
       <!--end::Heading-->
       <!--begin::Breadcrumb-->
       <ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -73,6 +73,7 @@
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Items: activate to sort column ascending" style="width: 165.203px;">Items</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Total Price: activate to sort column ascending" style="width: 165.203px;">Total Price</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 165.203px;">Status</th>
+                  						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Date - Time: activate to sort column ascending" style="width: 165.203px;">Date - Time</th>
 						<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
 					<!--end::Table row-->
                   </thead>
@@ -111,8 +112,11 @@
                         </td> 
                         
                         <td>
-							<a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->status}}</a>
-						</td>
+                           <a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->status}}</a>
+                        </td>
+                         <td>
+                           <a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->created_at}}</a>
+                        </td>
                         <!--end::Name=-->
                         <!--begin::Action=-->
                         <td class="text-end">

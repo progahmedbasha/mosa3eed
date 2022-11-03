@@ -353,7 +353,7 @@
 								{{-- ////////////////////////////////////////////////////////////// --}}
 									{{-- ///////////////////////////////////////////////////////////// --}}
 								<div class="menu-item">
-									<a class="menu-link active" href="{{route('sale_page.create')}}">
+									<a class="menu-link active" href="{{route('sale_page.create')}}" target="_blank">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
 											<span class="svg-icon svg-icon-5">

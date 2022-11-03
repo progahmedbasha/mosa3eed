@@ -39,11 +39,11 @@ class TimelinePostController extends Controller
         $post= new TimelinePost;
         $post->user_id = $request->user_id;
         $post->post = $request->post;
-         if (request()->photo){
-            $filename = time().'.'.request()->photo->getClientOriginalExtension();
-            request()->photo->move(public_path('data/organizations'), $filename);
-            $post->photo=$filename;
-        }
+            if (request()->photo){
+                $filename = time().'.'.request()->photo->getClientOriginalExtension();
+                request()->photo->move(public_path('data/timeline_posts'), $filename);
+                $post->photo=$filename;
+            }
         $post->save();
 
         $time_post = new TimelinePostResource($post);
