@@ -5,7 +5,7 @@
 <div class="container" id="kt_content_container">
    <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
       <!--begin::Heading-->
-      <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Order ( {{$id}} ) Items</h1>
+      <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Order : #{{$id}}</h1>
       <!--end::Heading-->
       <!--begin::Breadcrumb-->
       <ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -65,19 +65,11 @@
                         </td>
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
-                       <td>
-							<a href="sale_page/{{$sale_bill->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->Medicin->name}}</a>
-						</td>
+                       <td>{{$sale_bill->Medicin->name}}</td>
 
-                         <td>
-							<a href="sale_page/{{$sale_bill->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->price}}</a>
-						</td>
-                        <td>
-                            <a href="sale_page/{{$sale_bill->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->qty}}</a>
-                        </td>
-                         <td>
-                            <a href="sale_page/{{$sale_bill->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->total_cost}}</a>
-                        </td>
+                         <td>{{$sale_bill->price}}</td>
+                        <td>{{$sale_bill->qty}}</td>
+                         <td>{{$sale_bill->total_cost}}</td>
                         
  
                         <!--end::Name=-->
@@ -120,7 +112,7 @@
                   </tbody>
                   <!--end::Table body-->
                </table>
-               <h1>Order Total : {{$sale_bill->sum('total_cost')}}</h1>
+               <h1>Order Total : {{$sale_bills->sum('total_cost')}}</h1>
                {{ $sale_bills->links() }}
             </div>
             <!--end::Table-->
