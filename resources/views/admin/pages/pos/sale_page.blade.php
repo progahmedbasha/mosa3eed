@@ -158,8 +158,7 @@
                            // alert('a');
    						$('#tbody').append(response.result);
                      // $('#total_order').html(response.total_order);
-      $('#total_order').text(parseFloat($('#total_order').text()) + parseFloat(response.total));
-
+                     $('#total_order').text(parseFloat($('#total_order').text()) + parseFloat(response.total));
                      $("#barcode").val("");
                      $("#barcode").focus();
    					 }

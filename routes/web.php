@@ -91,6 +91,8 @@ Route::group(
                     Route::patch('item_update/{id}', 'SalePageController@item_update')->name('item_update');
                     Route::delete('order_item_delete/{order}/{id}', 'SalePageController@order_item_delete')->name('order_item_delete');
                     Route::post('sale_store_ajax', 'SalePageController@sale_store_ajax')->name('sale_store_ajax');
+                    Route::post('update_qty_ajax', 'SalePageController@update_qty_ajax')->name('update_qty_ajax');
+                    
                     Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
                     
                 });  

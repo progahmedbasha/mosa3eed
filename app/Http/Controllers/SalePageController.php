@@ -50,6 +50,8 @@ class SalePageController extends Controller
      */
     public function store(Request $request)
     {
+        // for ceate last otder number
+        $order_number = SaleBill::get()->last()->bill_number+1;
         $order = new SaleBill();
         $order->bill_number = $request->order_number;
         $order->user_id = Auth::user()->id;
@@ -64,8 +66,8 @@ class SalePageController extends Controller
                 $product_bill->medicin_id = $request->product_id[$i];
                 $product_bill->price = $request->price[$i];
                 $product_bill->qty = $request->qty[$i];
-                $product_bill->total_cost = $request->total_cost[$i];
-
+                // $product_bill->total_cost = $request->total_cost[$i];
+                $product_bill->total_cost = $request->price[$i] * $request->qty[$i];
                 $product_bill->save();
               }
               OrderItem::where('bill_number', $order->bill_number)->delete();
@@ -81,9 +83,10 @@ class SalePageController extends Controller
      */
     public function show(Request $request, $id)
     {
-         $search = $request->search;
+        $sale_number = SaleBill::where('id', $id)->first();
+        $search = $request->search;
         $sale_bills = SaleBillProduct::where('sale_bill_id', $id)->whenSearch($request->search)->paginate(20);
-        return view('admin.pages.sale_bills.sale_bill_items_show', compact('sale_bills','id'));
+        return view('admin.pages.sale_bills.sale_bill_items_show', compact('sale_bills','sale_number','id'));
     }
 
     /**
@@ -176,6 +179,16 @@ class SalePageController extends Controller
             'success' => 'Record deleted successfully!',
             'price' => $price,
         ]);
+    }
+    public function update_qty_ajax(Request $request)
+    {
+        // return 11;
+        $new_qty = $request->qty;
+        $product = OrderItem::where('id',$request->product_id)->first();
+        $old_qty = $product->qty;
+        $product->update(['qty' => $new_qty]);
+       $total_price_item = $request->qty * $request->price;
+        return response()->json(['status' => true, 'total_price_item' => $total_price_item]);
     }
     
 }
