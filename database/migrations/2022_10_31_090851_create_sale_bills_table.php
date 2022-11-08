@@ -18,6 +18,8 @@ class CreateSaleBillsTable extends Migration
             $table->string('bill_number');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('branch_id')->unsigned();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('status')->default('Not Active');
             $table->timestamps();
         });

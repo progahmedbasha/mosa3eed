@@ -20,7 +20,9 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
             'user_type_id' => '1',
+            'branch_id' => '1',
             'district_id' => '1',
+            
         ]);
         DB::table('users')->insert([
             'name' => 'org',
@@ -28,6 +30,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
             'organization_id' => '1',
+            'branch_id' => '1',
             'user_type_id' => '2',
             'district_id' => '1',
         ]);
@@ -37,6 +40,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
             'organization_id' => '1',
+            'branch_id' => '1',
             'user_type_id' => '3',
             'district_id' => '1',
         ]);

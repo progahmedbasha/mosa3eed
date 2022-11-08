@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('organization.layouts.master')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 <!--begin::Container-->
@@ -26,7 +26,7 @@
          <div class="card-title">
             <!--begin::Search-->
             <div class="d-flex align-items-center position-relative my-1">
-               <form method="get" class="form-inline" action="{{url('admin/sale_page')}}">
+               <form method="get" class="form-inline" action="{{url('organization/sale_page')}}">
                   <input class="form-control form-control-solid w-250px ps-15" name="search" type="text" placeholder="Search Orders" required>
             </div>
             <!--end::Search-->
@@ -37,7 +37,7 @@
          <!--begin::Toolbar-->
          <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
          <button type="submit" class="btn btn-light-primary me-3"><i class="fa fa-search"></i></button>
-         <a href="{{url('admin/sale_page')}}" class="btn btn-light-primary me-3" style="margin-top:0px;"><i class="fa fa-times"></i></a>
+         <a href="{{url('organization/sale_page')}}" class="btn btn-light-primary me-3" style="margin-top:0px;"><i class="fa fa-times"></i></a>
          </form>
          {{-- paginate --}}
          <a href="{{route('sale_page.create')}}" class="btn btn-primary">Add</a>
@@ -91,14 +91,14 @@
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
                        <td>
-							<a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->bill_number}}</a>
+							<a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->bill_number}}</a>
 						</td>
 
                          <td>
-							<a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->User->name}}</a>
+							<a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->User->name}}</a>
 						</td>
                         <td>
-                            <a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->sale_bill_product_count}}</a>
+                            <a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->sale_bill_product_count}}</a>
                         </td>
                         <td>
                             <?php
@@ -112,10 +112,10 @@
                         </td> 
                         
                         <td>
-                           <a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->status}}</a>
+                           <a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->status}}</a>
                         </td>
                          <td>
-                           <a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->created_at}}</a>
+                           <a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->created_at}}</a>
                         </td>
                         <!--end::Name=-->
                         <!--begin::Action=-->
@@ -134,12 +134,12 @@
                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-								<a href="{{route('sale_page.show',$sale_bill->id)}}" class="menu-link px-3">View</a>
+								<a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="menu-link px-3">View</a>
                               </div>
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                 <form action="{{route('sale_page.destroy',$sale_bill->id)}} " method="POST">
+                                 <form action="{{route('organization_sale_page.destroy',$sale_bill->id)}} " method="POST">
 									@csrf
 									@method('DELETE')
 									<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>
