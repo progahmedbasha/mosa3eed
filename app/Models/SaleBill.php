@@ -26,4 +26,8 @@ class SaleBill extends Model
     {
       return $this->hasMany('App\Models\SaleBillProduct');
     }
+      public function Branch()
+    {
+      return $this->belongsTo('App\Models\admin\Branch');
+    }
 }

@@ -20,7 +20,7 @@ class SalePageController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $sale_bills = SaleBill::withCount('SaleBillProduct')->whenSearch($request->search)->paginate(20);
+        $sale_bills = SaleBill::where('user_id',Auth::user()->id)->withCount('SaleBillProduct')->whenSearch($request->search)->paginate(20);
         return view('organization.pages.sale_bills.sale_bills', compact('sale_bills'));
     }
 
@@ -31,14 +31,14 @@ class SalePageController extends Controller
      */
     public function create()
     {
-         $empty = SaleBill::get();
+         $empty = SaleBill::where('branch_id',Auth::user()->branch_id)->get();
         if($empty->count() < 1)
         {
             $order_number = 1;
         }
 
         else {
-            $order_number = SaleBill::get()->last()->bill_number+1;
+            $order_number = SaleBill::where('branch_id',Auth::user()->branch_id)->get()->last()->bill_number+1;
         }
     
         return view('organization.pages.pos.sale_page', compact('order_number'));

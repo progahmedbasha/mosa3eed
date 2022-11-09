@@ -26,7 +26,7 @@
          <div class="card-title">
             <!--begin::Search-->
             <div class="d-flex align-items-center position-relative my-1">
-               <form method="get" class="form-inline" action="{{url('organization/sale_page')}}">
+               <form method="get" class="form-inline" action="{{url('organization/organization_sale_page')}}">
                   <input class="form-control form-control-solid w-250px ps-15" name="search" type="text" placeholder="Search Orders" required>
             </div>
             <!--end::Search-->
@@ -37,7 +37,7 @@
          <!--begin::Toolbar-->
          <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
          <button type="submit" class="btn btn-light-primary me-3"><i class="fa fa-search"></i></button>
-         <a href="{{url('organization/sale_page')}}" class="btn btn-light-primary me-3" style="margin-top:0px;"><i class="fa fa-times"></i></a>
+         <a href="{{url('organization/organization_sale_page')}}" class="btn btn-light-primary me-3" style="margin-top:0px;"><i class="fa fa-times"></i></a>
          </form>
          {{-- paginate --}}
          <a href="{{route('sale_page.create')}}" class="btn btn-primary">Add</a>
@@ -70,6 +70,7 @@
                         </th>
                   <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Bill Number: activate to sort column ascending" style="width: 165.203px;">Bill Number</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 165.203px;">User</th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Items: activate to sort column ascending" style="width: 165.203px;">Items</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Total Price: activate to sort column ascending" style="width: 165.203px;">Total Price</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 165.203px;">Status</th>
@@ -97,6 +98,7 @@
                          <td>
 							<a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->User->name}}</a>
 						</td>
+                        
                         <td>
                             <a href="{{route('organization_sale_page.show',$sale_bill->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->sale_bill_product_count}}</a>
                         </td>

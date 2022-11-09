@@ -70,6 +70,7 @@
                         </th>
                   <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Bill Number: activate to sort column ascending" style="width: 165.203px;">Bill Number</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 165.203px;">User</th>
+                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Items: activate to sort column ascending" style="width: 165.203px;">Items</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Total Price: activate to sort column ascending" style="width: 165.203px;">Total Price</th>
 						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 165.203px;">Status</th>
@@ -95,7 +96,10 @@
 						</td>
 
                          <td>
-							<a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->User->name}}</a>
+                        <a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->User->name}}</a>
+                     </td>
+                     <td>
+							<a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-600 text-hover-primary mb-1">{{$sale_bill->Branch->name}}</a>
 						</td>
                         <td>
                             <a href="{{route('sale_page.show',$sale_bill->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$sale_bill->sale_bill_product_count}}</a>
