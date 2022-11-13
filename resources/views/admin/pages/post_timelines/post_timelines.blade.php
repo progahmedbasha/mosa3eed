@@ -40,7 +40,7 @@
          <a href="{{url('admin/packages')}}" class="btn btn-light-primary me-3" style="margin-top:0px;"><i class="fa fa-times"></i></a>
          </form>
          {{-- paginate --}}
-         <a href="{{route('packages.create')}}" class="btn btn-primary">Add</a>
+         <a href="{{route('timeline_posts.create')}}" class="btn btn-primary">Add</a>
          <!--end::Add customer-->
          </div>
          <!--end::Toolbar-->
@@ -51,9 +51,9 @@
       <!--begin::Card body-->
       <div class="card-body pt-0">
          @if(Session::has('success'))
-            <script>
+         <script>
             toastr.success(" {{ Session::get('success') }} ");
-            </script>
+         </script>
          @endif
          <!--begin::Table-->
          <div id="kt_customers_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -68,17 +68,19 @@
                               <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                            </div>
                         </th>
-                  <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 165.203px;">User</th>
-						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Likes: activate to sort column ascending" style="width: 165.203px;">Likes</th>
-						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Comments: activate to sort column ascending" style="width: 165.203px;">Comments</th>
-						<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Date-Time: activate to sort column ascending" style="width: 165.203px;">Date-Time</th>
-						<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
-					<!--end::Table row-->
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 165.203px;">User</th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Likes: activate to sort column ascending" style="width: 165.203px;">Likes</th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Comments: activate to sort column ascending" style="width: 165.203px;">Comments</th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 165.203px;">Status</th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Date-Time: activate to sort column ascending" style="width: 165.203px;">Date-Time</th>
+                        <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th>
+                     </tr>
+                     <!--end::Table row-->
                   </thead>
                   <!--end::Table head-->
                   <!--begin::Table body-->
                   <tbody class="fw-bold text-gray-600">
-                       @foreach($post_timelines as $index=>$post_timeline)		
+                     @foreach($post_timelines as $index=>$post_timeline)		
                      <tr class="odd">
                         <!--begin::Checkbox-->
                         <td>
@@ -88,17 +90,20 @@
                         </td>
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
-                       <td>
-							<a href="timeline_posts/{{$post_timeline->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $post_timeline->User->name }}</a>
-						</td>
-                  <td href="post_like/{{$post_timeline->id}}">{{$post_timeline->post_like_count}}</td>
-                       
-                  <td href="post_comment/{{$post_timeline->id}}">{{$post_timeline->post_comment_count}}</td>
-
-						
-                         <td>
-							<a href="purchases/{{$post_timeline->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $post_timeline->created_at }}</a>
-						</td>
+                        <td>
+                           <a href="timeline_posts/{{$post_timeline->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $post_timeline->User->name }}</a>
+                        </td>
+                        <td>
+                           <a href="post_like/{{$post_timeline->id}}">{{$post_timeline->post_like_count}}</a>
+                        </td>
+                        <td>
+                           <a href="post_comment/{{$post_timeline->id}}">{{$post_timeline->post_comment_count}}</a>
+                        <td>
+                           <a href="purchases/{{$post_timeline->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $post_timeline->status }}</a>
+                        </td>
+                        <td>
+                           <a href="purchases/{{$post_timeline->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $post_timeline->created_at }}</a>
+                        </td>
                         <!--end::Name=-->
                         <!--begin::Action=-->
                         <td class="text-end">
@@ -116,16 +121,16 @@
                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-								<a href="timeline_posts/{{$post_timeline->id}}/edit" class="menu-link px-3">View</a>
+                                 <a href="timeline_posts/{{$post_timeline->id}}/edit" class="menu-link px-3">View</a>
                               </div>
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
                                  <form action="{{route('timeline_posts.destroy',$post_timeline->id)}} " method="POST">
-									@csrf
-									@method('DELETE')
-									<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>
-								</form>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>
+                                 </form>
                               </div>
                               <!--end::Menu item-->
                            </div>

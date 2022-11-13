@@ -8,6 +8,7 @@ use App\Models\organization\Purchase;
 use App\Models\admin\Branch;
 use App\Models\admin\Organization;
 use App\Models\admin\Medicin;
+use App\Models\BranchMedicin;
 use App\Http\Requests\Purchase\StoreRequest;
 use Session;
 class PurchaseController extends Controller
@@ -49,10 +50,24 @@ class PurchaseController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $data = $request->all();
-        Purchase::create($data);
-        Session::flash('success','Purchases Added Successfully');
-        return redirect()->route('purchases.index');  
+      
+        Purchase::create([
+            'organization_id' => $request->organization_id ,
+            'medicin_id' => $request->medicin_id ,
+            'type_measurement' => $request->type_measurement ,
+            'qty' => $request->qty ,
+            'branch_id' => $request->branch_id ,
+            'acd' => $request->acd ,
+            'due_date' => $request->due_date ,
+          ]);
+        BranchMedicin::create([
+            'branch_id' => $request->branch_id ,
+            'medicin_id' => $request->medicin_id ,
+            'available_quantity' => $request->qty ,
+            'price' => $request->price ,
+          ]);
+        
+        return redirect()->route('purchases.index')->with('success','Purchases Added Successfully');  
     }
 
     /**

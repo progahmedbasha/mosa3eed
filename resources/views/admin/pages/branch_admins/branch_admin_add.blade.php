@@ -6,16 +6,16 @@
 
 						<div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
 								<!--begin::Heading-->
-								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Purchase</h1>
+								<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Branch Admin</h1>
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
 									<li class="breadcrumb-item text-muted">
-										<a href="#" class="text-muted">Home</a>
+										<a href="../../demo3/dist/index.html" class="text-muted">Home</a>
 									</li>
 									<li class="breadcrumb-item text-muted">Applications</li>
-									<li class="breadcrumb-item text-muted">Purchases</li>
-									<li class="breadcrumb-item text-dark">Purchase Add</li>
+									<li class="breadcrumb-item text-muted">Branches</li>
+									<li class="breadcrumb-item text-dark">Admin Add</li>
 								</ul>
 								<!--end::Breadcrumb-->
 							</div>
@@ -34,109 +34,50 @@
 
 <br>
 							<div >
-								<span class="fs-2x fw-bolder text-gray-800">Form Purchase</span>
+								<span class="fs-2x fw-bolder text-gray-800">Form Branch Admin</span>
 							</div>
 
-                  <form action="{{route('purchases.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('branch_admins.store')}}" method="post" enctype="multipart/form-data">
                      @csrf
 
-								 <div class="row gx-10 mb-5">
-														<!--begin::Col-->
-														<div class="col-lg-6">
-														<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>
-															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_id">
-																	<option value="">Select Organization</option>
-																	@foreach ($organizations as $org)
-																	<option value="{{$org->id}}" {{(old('organization_id')==$org->id)? 'selected':''}}>{{$org->name}}</option>
-																	@endforeach
-																</select>
-																@error('organization_id')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
-															</div>
-													<!--begin::Input group-->
-													<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Medicins</label>
-															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="medicin_id">
-																	<option value="">Select Medicin</option>
-																	@foreach ($medicins as $medicin)
-																	<option value="{{$medicin->id}}" {{(old('medicin_id')==$medicin->id)? 'selected':''}}>{{$medicin->name}}</option>
-																	@endforeach
-																</select>
-																@error('medicin_id')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
-															</div>
-													<!--begin::Input group-->
-													<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Type Of Measurement</label>
-															<div class="mb-5">
-															<input type="text" class="form-control form-control-solid" placeholder="Type Of Measurement" value="{{old('type_measurement')}}" name="type_measurement">
-																@error('type_measurement')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
-															</div>
-													<!--begin::Input group-->
-													<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Qty</label>
-															<div class="mb-5">
-															<input type="text" class="form-control form-control-solid" placeholder="qty" value="{{old('qty')}}" name="qty">
-																@error('qty')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
-															</div>
-													<!--begin::Input group-->
-													
+								<div class="col-lg-6">
+                                            <!--begin::Input group-->
+                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
+                                            <div class="mb-5">
+                                                <select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+                                                    <option value="">Select User</option>
+                                                    @foreach ($users as $user)
+                                                    <option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('user_id')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror   														
+                                            </div>
+                                            <!--end::Input group-->
+														
 															
-                                                    </div>
+                                </div>
 														<!--end::Col-->
 														<!--begin::Col-->
 														<div class="col-lg-6">
-                                                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
+															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branch</label>
+															<!--begin::Input group-->
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
-																	<option value="">Select Branches</option>
+																	<select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
+																	<option value="">Select Branch</option>
 																	@foreach ($branches as $branch)
 																	<option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
 																	@endforeach
 																</select>
 																@error('branch_id')
 																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   		
+																@enderror   
                                                             </div>
-															<!--begin::Input group-->
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Acd Custom Item</label>
-															<div class="mb-5">
-																<input type="text" class="form-control form-control-solid" placeholder="Acd Custom Item" value="{{old('acd')}}" name="acd">
-																@error('acd')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
-															</div>
-													<!--begin::Input group-->
-														
-														<!--begin::Input group-->												
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Due Date</label>
-															<div class="mb-5">
-															<input type="date" class="form-control form-control-solid" placeholder="Due Date" value="{{old('due_date')}}" name="due_date">
-																@error('due_date')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
-															</div>
-													<!--begin::Input group-->
-														<!--begin::Input group-->												
-															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Price</label>
-															<div class="mb-5">
-															<input type="text" class="form-control form-control-solid" placeholder="Price" value="{{old('price')}}" name="price">
-																@error('price')
-																<div class="alert alert-danger">{{ $message }}</div>
-																@enderror   														
-															</div>
-													<!--begin::Input group-->
-														
 
+													
+														
+														
 														</div>
 														<!--end::Col-->
 													</div>
@@ -280,6 +221,60 @@
 						</div>
 						<!--end::Container-->
 					</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+      $(document).ready(function () {
+          $('#country-dd').on('change', function () {
+              var idCountry = this.value;
+              $("#city-dd").html('');
+              $.ajax({
+                  url: "{{route('fetch_city')}}",
+                  type: "POST",
+                  data: {
+                      city_id: idCountry,
+                      _token: '{{csrf_token()}}'
+                  },
+                  dataType: 'json',
+                  success: function (result) {
+                console.log(result.cities);
 
+                      $('#city-dd').html('<option value="">Select City</option>');
+                      $.each(result.cities, function (key, value) {
+                          $("#city-dd").append('<option value="' + value
+                              .id + '">' + value.name_en + '</option>');
+                      });
+                      // $('#city-dd').html('<option value="">Select City</option>');
+                  },
+                  
+              });
+          });
+                  $('#city-dd').on('change', function () {
+                      var idcity = this.value;
+                      $("#state-dd").html('');
+                      
+                      $.ajax({
+                          url: "{{route('fetchdistrict')}}",
+                          type: "POST",
+                          
+                          data: {
+                              city_id: idcity,
+                              _token: '{{csrf_token()}}'
+                          },
+                          dataType: 'json',
+                          success: function (result) {
+                           var locate = {!! json_encode(app()->getLocale()) !!};
+                        console.log(result.districts);
 
+                              $('#state-dd').html('<option value="">Select City</option>');
+                              $.each(result.districts, function (key, value) {
+                                  $("#state-dd").append('<option value="' + value
+                                      .id + '">' + value.name[locate]+ '</option>');
+                              });
+                              // $('#city-dd').html('<option value="">Select City</option>');
+                          },
+                          
+                      });
+                  });
+      });
+  </script>
 @endsection

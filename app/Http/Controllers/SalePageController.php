@@ -6,7 +6,7 @@ use App\Models\SaleBill;
 use App\Models\admin\Medicin;
 use App\Models\OrderItem;
 use App\Models\SaleBillProduct;
-use App\Models\organization\Purchase;
+use App\Models\BranchMedicin;
 use Illuminate\Http\Request;
 
 class SalePageController extends Controller
@@ -74,7 +74,7 @@ class SalePageController extends Controller
 
                 //update qty
                 $new_qty =  $request->qty[$i];
-                $product = Purchase::where('medicin_id',$request->product_id[$i])->where('branch_id',Auth::user()->branch_id )->first();
+                $product = BranchMedicin::where('medicin_id',$request->product_id[$i])->where('branch_id',Auth::user()->branch_id )->first();
                 $old_qty = $product->qty;
                 $set_qty = $old_qty - $new_qty ;
                 $product->update(['qty' => $set_qty]);

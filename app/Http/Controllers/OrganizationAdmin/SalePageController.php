@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SaleBill;
 use App\Models\admin\Medicin;
+use App\Models\admin\Branch;
+use App\Models\UserBranch;
 use App\Models\OrderItem;
 use App\Models\SaleBillProduct;
 use App\Models\organization\Purchase;
@@ -31,6 +33,7 @@ class SalePageController extends Controller
      */
     public function create()
     {
+        $branches = UserBranch::where('user_id' , Auth::user()->id)->get();
          $empty = SaleBill::where('branch_id',Auth::user()->branch_id)->get();
         if($empty->count() < 1)
         {
@@ -38,10 +41,10 @@ class SalePageController extends Controller
         }
 
         else {
-            $order_number = SaleBill::where('branch_id',Auth::user()->branch_id)->get()->last()->bill_number+1;
+          return  $order_number = SaleBill::where('branch_id',Auth::user()->branch_id)->get()->last()->bill_number+1;
         }
     
-        return view('organization.pages.pos.sale_page', compact('order_number'));
+        return view('organization.pages.pos.sale_page', compact('order_number','branches'));
     }
 
     /**
@@ -52,8 +55,9 @@ class SalePageController extends Controller
      */
      public function store(Request $request)
     {
+        // return $request;
         // for ceate last otder number
-       $sales = SaleBill::first();
+       $sales = SaleBill::where('branch_id', $request->branch_id)->first();
         //if condiction sallbill empty 
         if($sales == null)
         {
@@ -62,7 +66,7 @@ class SalePageController extends Controller
         $order = new SaleBill();
         $order->bill_number = 1;
         $order->user_id = Auth::user()->id;
-        $order->branch_id = Auth::user()->branch_id;
+        $order->branch_id = $request->branch_id;
         $order->status = "Active";
         $order->save();
 
@@ -80,7 +84,7 @@ class SalePageController extends Controller
 
                 //update qty
                 $new_qty =  $request->qty[$i];
-                $product = Purchase::where('medicin_id',$request->product_id[$i])->where('branch_id',Auth::user()->branch_id )->first();
+                $product = Purchase::where('medicin_id',$request->product_id[$i])->where('branch_id', $request->branch_id )->first();
                 $old_qty = $product->qty;
                 $set_qty = $old_qty - $new_qty ;
                 $product->update(['qty' => $set_qty]);
@@ -88,12 +92,11 @@ class SalePageController extends Controller
         }
         else
         {
-            // return 2;
-        $order_number = SaleBill::get()->last()->bill_number+1;
+        $order_number = SaleBill::where('branch_id', $request->branch_id)->get()->last()->bill_number+1;
         $order = new SaleBill();
-        $order->bill_number = $request->order_number;
+        $order->bill_number = $order_number;
         $order->user_id = Auth::user()->id;
-        $order->branch_id = Auth::user()->branch_id;
+        $order->branch_id = $request->branch_id;
         $order->status = "Active";
         $order->save();
 
@@ -111,7 +114,7 @@ class SalePageController extends Controller
 
                 //update qty
                 $new_qty =  $request->qty[$i];
-                $product = Purchase::where('medicin_id',$request->product_id[$i])->where('branch_id',Auth::user()->branch_id )->first();
+                $product = Purchase::where('medicin_id',$request->product_id[$i])->where('branch_id',$request->branch_id )->first();
                 $old_qty = $product->qty;
                 $set_qty = $old_qty - $new_qty ;
                 $product->update(['qty' => $set_qty]);
@@ -237,6 +240,19 @@ class SalePageController extends Controller
         $product->update(['qty' => $new_qty]);
        $total_price_item = $request->qty * $request->price;
         return response()->json(['status' => true, 'total_price_item' => $total_price_item]);
+    }
+    public function get_bill_number_ajax(Request $request)
+    {
+        // return 1;
+        $order_number = SaleBill::where('branch_id', $request->branch)->first();
+        if($order_number == null)
+        {
+            $order_number = 1;
+        }
+        else{
+            $order_number = SaleBill::where('branch_id', $request->branch)->get()->last()->bill_number+1;
+        }
+      return response()->json(['status' => true, 'order_number' => $order_number]);
     }
     
 }

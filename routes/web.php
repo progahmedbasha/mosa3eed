@@ -5,6 +5,7 @@ use App\Http\Controllers\Country_state_cityController;
 use App\Http\Controllers\Admin\MedicinController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BranchController;
+// use App\Http\Controllers\Admin\UserBranchController;
 use App\Http\Controllers\Organization\OrganizationAdminController;
 use App\Http\Controllers\Organization\OrganizationshiftController;
 use App\Http\Controllers\Organization\OrganizationAttendanceController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\TimelinePostController;
 use App\Http\Controllers\OrganizationAdmin\PharmacyAdminController;
 use App\Http\Controllers\OrganizationAdmin\DashboardController;
 use App\Http\Controllers\OrganizationAdmin\ProfileController;
+use App\Http\Controllers\OrganizationAdmin\BranchMedicinController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +70,7 @@ Route::group(
                     Route::resource('medicins', Admin\MedicinController::class);
                     Route::resource('settings', Admin\SettingController::class);
                     Route::resource('branchs', Admin\BranchController::class);
+                    Route::resource('branch_admins', Admin\UserBranchController::class);
                     Route::resource('organization_admins', Organization\OrganizationAdminController::class);
                     Route::resource('organization_shifts', Organization\OrganizationshiftController::class);
                     Route::resource('organization_attendances', Organization\OrganizationAttendanceController::class);
@@ -127,6 +130,9 @@ Route::group(
                     Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('sale_store_ajax');
                     Route::post('update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('update_qty_ajax');
                     Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
+                    Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
+                    Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
+                    // Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
                 });  
 });
     Auth::routes();

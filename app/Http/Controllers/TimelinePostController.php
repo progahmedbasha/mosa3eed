@@ -7,6 +7,7 @@ use App\Models\TimelinePost;
 use App\Models\PostLike;
 use App\Models\User;
 use App\Models\PostComment;
+use Illuminate\Support\Facades\Auth;
 class TimelinePostController extends Controller
 {
     /**
@@ -27,7 +28,7 @@ class TimelinePostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.post_timelines.post_timeline_add');
     }
 
     /**
@@ -38,7 +39,16 @@ class TimelinePostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post= new TimelinePost;
+        $post->user_id = Auth::user()->id;
+        $post->post = $request->post;
+            if (request()->photo){
+                $filename = time().'.'.request()->photo->getClientOriginalExtension();
+                request()->photo->move(public_path('data/timeline_posts'), $filename);
+                $post->photo=$filename;
+            }
+        $post->save();
+        return redirect()->route('timeline_posts.index')->with('success', 'Post Added Successfully');
     }
 
     /**
@@ -87,9 +97,9 @@ class TimelinePostController extends Controller
      */
     public function destroy($id)
     {
-        $post = PostLike::find($id);
+        $post = TimelinePost::find($id);
         $post->delete();
-        return redirect()->route('packages.index')->with('success','Post Deleted Successfully');
+        return redirect()->route('timeline_posts.index')->with('success','Post Deleted Successfully');
     }
      public function post_like($id)
     {

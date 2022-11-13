@@ -5,7 +5,7 @@
 <div class="container" id="kt_content_container">
 <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
    <!--begin::Heading-->
-   <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Timeline Post Show</h1>
+   <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Post</h1>
    <!--end::Heading-->
    <!--begin::Breadcrumb-->
    <ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
@@ -13,8 +13,8 @@
          <a href="#" class="text-muted">Home</a>
       </li>
       <li class="breadcrumb-item text-muted">Applications</li>
-      <li class="breadcrumb-item text-muted">Timeline Post</li>
-      <li class="breadcrumb-item text-dark">Timeline Post Show</li>
+      <li class="breadcrumb-item text-muted">Posts</li>
+      <li class="breadcrumb-item text-dark">Post Add</li>
    </ul>
    <!--end::Breadcrumb-->
 </div>
@@ -29,47 +29,37 @@
          <div class="table-responsive">
             <br>
             <div >
-               <span class="fs-2x fw-bolder text-gray-800">Post From User : ( {{$timeline_post->User->name}} )</span>
+               <span class="fs-2x fw-bolder text-gray-800">Form Post</span>
             </div>
-            <form action="{{route('timeline_posts.update',$timeline_post->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('timeline_posts.store')}}" method="post" enctype="multipart/form-data">
                @csrf
-               @method('patch')
                <div class="row gx-10 mb-5">
                   <!--begin::Col-->
                   <div class="col-lg-6">
-              
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Post</label>
-                        <div class="mb-5">
-                            <textarea class="form-control" aria-label="With textarea" value="{{$timeline_post->post}}" name="post" >{{$timeline_post->post}}</textarea> 
-
-                            @error('post')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror   														
-                        </div>
-                     <!--begin::Input group-->
-                              <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Status</label>
                      <div class="mb-5">
-						<select class="form-control"style="padding: 10px;" name="status">
-                     <option value="{{ $timeline_post->status }}">{{ $timeline_post->status }}</option>
-							<option value="">----------------------------------------------------------</option>
-                     <option value="Active">Active</option>
-							<option value="Not Active">Not Active</option>
-						</select>
-						@error('status')
+                        <textarea class="form-control" aria-label="With textarea" value="{{old('post')}}" name="post"></textarea> 
+                        @error('post')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   														
                      </div>
                      <!--begin::Input group-->
+      			<!--begin::Input group-->
+                  <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Photo</label>
+                  <div class="mb-5">
+                  <div class="custom-file">
+                     <input type="file" class="custom-file-input" id="validatedCustomFile"  name="photo">
+                     </div>													
                   </div>
-                  <!--end::Col-->
-     
-                 
+                  <!--end::Input group-->
+
+
+                   
+            
                   </div>
                   <!--end::Col-->
                </div>
-               <br>
                <button type="submit" class="btn btn-primary">Save</button>
                <br><br>
             </form>
@@ -199,20 +189,5 @@
       <!--end::Modals-->
    </div>
    <!--end::Container-->
-              {{--div for show photo --}}
-								<br>
-						<div class="col-xl-12 mb-30">
-								<div class="card card-statistics h-100">
-									<div class="card-body">
-
-									@if(!empty($timeline_posts->photo))
-									<img src="{{url('/data/timeline_posts')}}/{{$timeline_posts->photo }}" class="w3-round" width="200px" alt="Norway">
-									@else
-									<img src="{{url('/data/error.png')}}" class="w3-round" width="200px" alt="Norway">
-									@endif  
-								</div>
-								</div>
-							</div>
-							{{--div for show photo --}}
 </div>
 @endsection

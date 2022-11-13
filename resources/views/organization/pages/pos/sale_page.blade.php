@@ -64,13 +64,22 @@
       </div>
       <div class="col-sm-9">
          <div class="form-inline test" action="#">
-            <div class="form-group order_number">
+            <div class="form-group order_number" >
+               {{-- <form class="form-inline" action="{{route('organization_sale_page.store')}}" method="post" enctype="multipart/form-data">
+   @csrf --}}
                <label  >Order Number :</label>
-               <!-- customers -->
-               <input type="text"  class="form-control pr" value="{{$order_number}}" id="order_number"  name="order_number" readonly>
+                  <input type="text"  class="form-control pr"  id="order_number"  name="order_number" readonly>
+               <label>Branch :</label>
+                <select  class="form-control" name="branch_id" id="branch">
+                        <option value="">Select Branch</option>
+                        @foreach ($branches as $branch)
+                        <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->Branch->name}}</option>
+                        @endforeach
+                     </select>   
+                     
+             </div>
          
-               <br><br>
-            </div>
+          <br><br>
             <div class="form-inline">
                
                <label class='no-print' >Qty :</label>
@@ -121,11 +130,12 @@
       <tbody id="tbody">
       </tbody>
    </table>
-   <input type="hidden"  value="{{$order_number}}" id="order_number"  name="order_number" >
+   <input type="hidden"   id="order_number2"  name="order_number" >
+   <input type="hidden"   id="branch_id"  name="branch_id" >
    <br>
    <div class="form-inline" style="margin-left: 150px;">
 
-      <button type="submit" class="btn btn-info no-print" style="background-color:#333;"><span class="glyphicon glyphicon-save"></span> Save</button>
+      <button type="submit"  class="btn btn-info no-print" style="background-color:#333;"><span class="glyphicon glyphicon-save"></span> Save</button>
    </div>
 </form>
 {{-- send form data --}}
@@ -167,7 +177,32 @@
                  });
    }
              });
-   
+      //////// for get value from select without submit form 
+             $('#branch').on('change ', function (e) {
+                 var branch = $('#branch').val();
+                $("#branch_id").val(branch);
+
+               //   var qty = $('#qty').val();
+                
+                 $.ajax({
+                     url: "{{route('get_bill_number_ajax')}}",
+                     type: "POST",
+                     data: {
+   					//   order_num: order_num,
+                         branch: branch,
+                         _token: '{{csrf_token()}}'
+                     },
+                    success:function(response){
+   					 if (response) {
+                           // alert('a');
+   						$("#order_number").val(response.order_number);
+                     $("#order_number2").val(response.order_number);
+   					 }
+                     },
+                 });
+
+
+             });
    });
    
 </script>

@@ -52,7 +52,7 @@
                                                                 @enderror	
 															</div>
 
-                                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Price</label>
+                                                            <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Expected Price</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
 																<input type="text" class="form-control form-control-solid" placeholder="Price" value="{{old('price')}}" name="price">
