@@ -69,7 +69,6 @@
                               <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="1">
                            </div>
                         </th>
-                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 165.203px;">User</th>
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
                         <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th>
                      </tr>
@@ -88,9 +87,7 @@
                         </td>
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
-                        <td>
-                           <a href="organization_branches/{{$admin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $admin->User->name }}</a>
-                        </td>
+                   
                         <td>
                            <a href="organization_branches/{{$admin->id}}">{{$admin->Branch->name}}</a>
                         </td>

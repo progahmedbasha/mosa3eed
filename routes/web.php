@@ -129,10 +129,10 @@ Route::group(
                     Route::delete('order_item_delete/{order}/{id}', 'OrganizationAdmin\SalePageController@order_item_delete')->name('order_item_delete');
                     Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('sale_store_ajax');
                     Route::post('update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('update_qty_ajax');
-                    Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
+                    Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
                     Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
-                    Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
-                    // Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
+                    // Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
+                    Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
                 });  
 });
     Auth::routes();

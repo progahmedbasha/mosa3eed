@@ -2,12 +2,12 @@
     <td> {{ @$product_bill->medicin_id }}  <input  type ="hidden" name="product_id[]" value="{{ $product_bill->medicin_id }}"/></td>
     <td>  {{ @$product_name->name }}</td>
     <td>  {{ @$product_bill->price }} <input  type ="hidden" name="price[]" class="item_price" value="{{ $product_bill->price }}"/></td>
-    <td>  <input  type ="text" data-id="{{ $product_bill->id }}" name="qty[]" style="width:50px" class="form-control qty" value="{{ $product_bill->qty }}"/></td>
+    <td>  <input  type ="text" data-id="{{ $product_bill->id }}" name="qty[]" style="width:50px" class="form-control qty" autocomplete="off" value="{{ $product_bill->qty }}"/></td>
     <td class="first_price">  {{ $product_bill->qty * $product_bill->price }} </td>
     <td>--</td>
-    <td>--</td>
+    <td>{{$product_bill->discnum}}</td>
     {{-- <td>  {{ @$price }}</td> --}}
-    <td class="price">  {{ $product_bill->qty * $product_bill->price }} </td>
+    <td class="price">  {{ $product_bill->total_cost }} </td>
     <td class="no-print"><button type="button" data-id="{{ $product_bill->id }}" class="btn btn-danger delete_order_item delete" style="padding: 0px;" ><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
 
 </tr>
@@ -27,7 +27,8 @@
                             },
 
                                 success:function(response){
-                                    $('#total_order').text(parseFloat($('#total_order').text()) - parseFloat(response.price));
+                                    // $('#total_order').text(parseFloat($('#total_order').text()) - parseFloat(response.price));
+                                    $('#total_order').text(parseFloat(parseFloat($('#total_order').text()) - parseFloat(response.price)).toFixed(2));
                                     // $('.total_qty').text(parseFloat($('.total_qty').text()) - parseFloat(response.qty));
                                 }
                             });

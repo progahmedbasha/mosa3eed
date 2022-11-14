@@ -20,7 +20,9 @@ class CreateOrderItemsTable extends Migration
             $table->foreign('medicin_id')->references('id')->on('medicins')->onDelete('cascade');
             $table->float('price');
             $table->float('qty');
-            $table->float('total_cost');
+            $table->float('discnum');
+            $table->float('discpersent')->nullable();
+            $table->float('total_cost')->nullable();
             $table->timestamps();
         });
     }

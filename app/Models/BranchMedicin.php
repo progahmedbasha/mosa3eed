@@ -9,4 +9,9 @@ class BranchMedicin extends Model
 {
     use HasFactory;
     public $guarded = [];
+    
+    public function Medicin()
+    {
+      return $this->belongsTo('App\Models\admin\Medicin');
+    }
 }

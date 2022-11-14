@@ -41,7 +41,9 @@
                </h3>
             </div>
             <div class="brand " style="font-size:40px;line-height:50px;padding-bottom:20px;color:#333;background:#f0f0f0">
-               <span class='no-print' id="total_order">0</span> <label class='no-print' > : LE</label>
+               <span class='no-print' id="total_order">
+                 0
+                  </span> <label class='no-print' > : LE</label>
             </div>
             <div class="coupon midnight-blue" style="margin-top:-30px;height:150px;background-color:#333">
                <div class="form-group" style="margin-top:-10px;color:white">
@@ -86,13 +88,13 @@
                <div class="form-group mb-2">
                   <input type="text" value="1"  style="width:50px" class="form-control no-print" id="qty" placeholder="Qty" name="qty" >
                </div>
-               <label class='no-print' >Discount :</label>
+               <label class='no-print' >Discount:</label>
                <div class="form-group mx-sm-3 mb-2">
-                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="disc" placeholder="Dicount" name="disc" > <label class='no-print'>%</label> 
+                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="discpersent" placeholder="Dicount" name="disc" > <label class='no-print'>%</label> 
                </div>
-               <label class='no-print' >Discount :</label>
+               <label class='no-print' >Discount:</label>
                <div class="form-group mx-sm-3 mb-2">
-                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="discNuma" placeholder="Dicount" name="discNuma" >
+                  <input type="text" value="0" style="width:50px" class="form-control no-print" id="discnum" placeholder="Dicount" name="discNuma" >
                </div>
                <label class='no-print' >Medicin Code :</label>
                <div class="form-group mx-sm-3 mb-2">
@@ -152,6 +154,8 @@
                  var product_id = $('#barcode').val();
                  var order_number = $('#order_number').val();
                  var qty = $('#qty').val();
+                 var discnum = $('#discnum').val();
+                 var discpersent = $('#discpersent').val();
                 
                  $.ajax({
                      url: "{{route('sale_store_ajax')}}",
@@ -161,6 +165,8 @@
                          product_id: product_id,
                         order_number: order_number,
                         qty: qty,
+                        discnum:discnum,
+                        discpersent:discpersent,
                          _token: '{{csrf_token()}}'
                      },
                     success:function(response){
@@ -168,7 +174,12 @@
                            // alert('a');
    						$('#tbody').append(response.result);
                      // $('#total_order').html(response.total_order);
-                     $('#total_order').text(parseFloat($('#total_order').text()) + parseFloat(response.total));
+                     //  $('#total_order').text(parseFloat($('#total_order').text()) + parseFloat(response.total));
+
+                        $('#total_order').text(parseFloat(parseFloat($('#total_order').text()) + parseFloat(response.total)).toFixed(2));
+                     // $ x = parseFloat($('#total_order').text()) + parseFloat(response.total);
+                     // $('#total_order').text($x);
+                     
                      $("#barcode").val("");
                      $("#barcode").focus();
    					 }

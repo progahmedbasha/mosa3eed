@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SaleBill;
 use App\Models\admin\Medicin;
 use App\Models\admin\Branch;
+use App\Models\BranchMedicin;
 use App\Models\UserBranch;
 use App\Models\OrderItem;
 use App\Models\SaleBillProduct;
@@ -84,10 +85,10 @@ class SalePageController extends Controller
 
                 //update qty
                 $new_qty =  $request->qty[$i];
-                $product = Purchase::where('medicin_id',$request->product_id[$i])->where('branch_id', $request->branch_id )->first();
-                $old_qty = $product->qty;
+                $product = BranchMedicin::where('medicin_id',$request->product_id[$i])->where('branch_id', $request->branch_id )->first();
+                $old_qty = $product->available_quantity;
                 $set_qty = $old_qty - $new_qty ;
-                $product->update(['qty' => $set_qty]);
+                $product->update(['available_quantity' => $set_qty]);
               }
         }
         else
@@ -114,10 +115,10 @@ class SalePageController extends Controller
 
                 //update qty
                 $new_qty =  $request->qty[$i];
-                $product = Purchase::where('medicin_id',$request->product_id[$i])->where('branch_id',$request->branch_id )->first();
-                $old_qty = $product->qty;
+                $product = BranchMedicin::where('medicin_id',$request->product_id[$i])->where('branch_id', $request->branch_id )->first();
+                $old_qty = $product->available_quantity;
                 $set_qty = $old_qty - $new_qty ;
-                $product->update(['qty' => $set_qty]);
+                $product->update(['available_quantity' => $set_qty]);
               }
         }
         //endif condiction sallbill empty 
@@ -210,12 +211,24 @@ class SalePageController extends Controller
         $product_bill->medicin_id = $medicin->id;
         $product_bill->price = $medicin->price;
         $product_bill->qty = $request->qty;
-        $product_bill->total_cost = $medicin->price * $product_bill->qty;
+        // $product_bill->discnum = ($medicin->price - $request->discnum);
+        $product_bill->discnum = $request->discnum;
+        $product_bill->discpersent = $request->discpersent;
+
+         if (request()->discpersent){
+        // $product_bill->total_cost =  ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty ;
+     $product_bill->total_cost =   number_format( ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty , 2);
+        //  $product_bill->total_cost = ( $medicin->price * ($request['discpersent']/100) ) * $product_bill->qty;
+        }else{
+            $product_bill->total_cost = ($medicin->price  - $product_bill->discnum ) * $product_bill->qty ;
+        }
         $product_bill->save();
 
         $product_name = $product_bill->Medicin;
         $price = $product_bill->price * $product_bill->qty;
-        $total = $product_bill->price * $product_bill->qty;
+        // $total = $product_bill->price * $product_bill->qty;
+        // $price = $product_bill->total_cost;
+         $total = $product_bill->total_cost;
 
         $html = view('admin.pages.pos.buying_table_ajax', compact('product_name','product_bill','price'))->render();
         return response()->json(['status' => true, 'result' => $html, 'total' =>$total]);
@@ -224,7 +237,8 @@ class SalePageController extends Controller
     {
         $id = $request->id_product;
         $row = OrderItem::where('id', $id)->first();
-        $price = $row->qty * $row->price;
+        // $price = $row->qty * $row->price;
+        $price = $row->total_cost ;
         $row->delete();
         return response()->json([
             'success' => 'Record deleted successfully!',
@@ -238,7 +252,7 @@ class SalePageController extends Controller
         $product = OrderItem::where('id',$request->product_id)->first();
         $old_qty = $product->qty;
         $product->update(['qty' => $new_qty]);
-       $total_price_item = $request->qty * $request->price;
+       $total_price_item = $request->qty * $product->total_cost;
         return response()->json(['status' => true, 'total_price_item' => $total_price_item]);
     }
     public function get_bill_number_ajax(Request $request)

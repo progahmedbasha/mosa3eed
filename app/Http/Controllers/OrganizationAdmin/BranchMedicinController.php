@@ -5,6 +5,7 @@ namespace App\Http\Controllers\OrganizationAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserBranch;
+use App\Models\BranchMedicin;
 use Illuminate\Support\Facades\Auth;
 class BranchMedicinController extends Controller
 {
@@ -15,8 +16,8 @@ class BranchMedicinController extends Controller
      */
     public function index(Request $request)
     {
-     return   $medicins = UserBranch::where('user_id',Auth::user()->id)->paginate(50);
-        return view('organization.pages.branchs.branchs', compact('branchs'));
+        $branchs = UserBranch::where('user_id',Auth::user()->id)->paginate(50);
+        return view('organization.pages.branch_medicins.branch_medicins', compact('branchs'));
     }
 
     /**
@@ -48,7 +49,8 @@ class BranchMedicinController extends Controller
      */
     public function show($id)
     {
-        //
+        $medicins = BranchMedicin::where('branch_id',$id)->paginate(50);
+        return view('organization.pages.branch_medicins.branch_medicin_show', compact('medicins'));
     }
 
     /**
