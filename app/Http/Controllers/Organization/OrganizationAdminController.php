@@ -8,6 +8,7 @@ use App\Models\organization\OrganizationAdmin;
 use App\Models\organization\OrganizationShift;
 use App\Models\admin\Organization;
 use App\Models\admin\Branch;
+use App\Models\UserBranch;
 use App\Models\User;
 use App\Http\Requests\OrganizationAdmin\StoreRequest;
 use Session;
@@ -20,7 +21,7 @@ class OrganizationAdminController extends Controller
      */
     public function index()
     {
-        $organization_admins = OrganizationAdmin::with('User','Organization','OrganizationShift','Branch')->get();
+        $organization_admins = User::where('organization_id',!null)->get();
         return view('admin.pages.organization_admins.organization_admins', compact('organization_admins'));
     }
 
@@ -46,10 +47,28 @@ class OrganizationAdminController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $data = $request->all();
-        OrganizationAdmin::create($data);
-        Session::flash('success','Organization Admin Added Successfully');
-        return redirect()->route('organization_admins.index');
+        $admin = new OrganizationAdmin();
+        $admin->organization_id = $request->organization_id;
+        $admin->user_id = $request->user_id;
+        $admin->organization_shift_id = $request->organization_shift_id;
+        $admin->save();
+        if(request()->branch_id)
+        {
+            $countItems = count($request->branch_id);
+            // // save in multi record
+              for($i=0; $i<$countItems; $i++){
+                    $branch = new UserBranch();
+                    $branch->user_id = $admin->user_id;
+                    $branch->branch_id = $request->branch_id[$i];
+                    $branch->save();
+              }
+              User::where('id', $admin->user_id)->update(['user_type_id' => 4]);
+        }
+        else{
+            User::where('id', $admin->user_id)->update(['user_type_id' => 3]);
+        }
+        
+        return redirect()->route('organization_admins.index')->with('success','Organization Admin Added Successfully');
     }
 
     /**
@@ -73,10 +92,9 @@ class OrganizationAdminController extends Controller
     {
         $org_admin = OrganizationAdmin::find($id);
         $organizations = Organization::all();
-         $branches = Branch::all();
          $users = User::all();
          $shifts = OrganizationShift::all();
-        return view('admin.pages.organization_admins.organization_admin_details', compact('org_admin','organizations','branches','users','shifts'));
+        return view('admin.pages.organization_admins.organization_admin_details', compact('org_admin','organizations','users','shifts'));
     }
 
     /**

@@ -17,8 +17,8 @@ class CreateOrganizationAdminsTable extends Migration
             $table->increments('id');
             $table->integer('organization_id')->unsigned();
             $table->foreign('organization_id')->references('id')->on('organizations');
-            $table->integer('branch_id')->unsigned()->nullable();
-            $table->foreign('branch_id')->references('id')->on('branches');
+            // $table->integer('branch_id')->unsigned()->nullable();
+            // $table->foreign('branch_id')->references('id')->on('branches');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('organization_shift_id')->unsigned()->nullable();

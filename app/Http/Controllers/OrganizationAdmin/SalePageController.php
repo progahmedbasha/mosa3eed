@@ -13,6 +13,7 @@ use App\Models\UserBranch;
 use App\Models\OrderItem;
 use App\Models\SaleBillProduct;
 use App\Models\organization\Purchase;
+use Session;
 class SalePageController extends Controller
 {
     /**
@@ -34,13 +35,20 @@ class SalePageController extends Controller
      */
     public function create()
     {
-        $branches = UserBranch::where('user_id' , Auth::user()->id)->get();
+        if(Auth::user()->user_type_id == 4)
+        {
+            $branches = UserBranch::where('user_id' , Auth::user()->id)->get();
+        }
+        elseif(Auth::user()->user_type_id == 3)
+        {
+            $branches = Branch::where('organization_id' , Auth::user()->organization_id)->get();
+        }
+        // $branches = UserBranch::where('user_id' , Auth::user()->id)->get();
          $empty = SaleBill::where('branch_id',Auth::user()->branch_id)->get();
         if($empty->count() < 1)
         {
             $order_number = 1;
         }
-
         else {
           return  $order_number = SaleBill::where('branch_id',Auth::user()->branch_id)->get()->last()->bill_number+1;
         }
@@ -89,6 +97,7 @@ class SalePageController extends Controller
                 $old_qty = $product->available_quantity;
                 $set_qty = $old_qty - $new_qty ;
                 $product->update(['available_quantity' => $set_qty]);
+             
               }
         }
         else
@@ -204,34 +213,48 @@ class SalePageController extends Controller
     }
     public function sale_store_ajax(Request $request)
     {
-    
-        $medicin = Medicin::where('barcode', $request->product_id)->first();
-        $product_bill = new OrderItem();
-        $product_bill->bill_number = $request->order_number;
-        $product_bill->medicin_id = $medicin->id;
-        $product_bill->price = $medicin->price;
-        $product_bill->qty = $request->qty;
-        // $product_bill->discnum = ($medicin->price - $request->discnum);
-        $product_bill->discnum = $request->discnum;
-        $product_bill->discpersent = $request->discpersent;
+        // return $request;
+    if(request()->branch)
+    {
+            $new_qty =  $request->qty;
+            $product = BranchMedicin::where('medicin_id',$request->product_id)->where('branch_id', $request->branch )->first();
+            $old_qty = $product->available_quantity;
+        if($old_qty >= $new_qty)
+        {        
+            $medicin = Medicin::where('barcode', $request->product_id)->first();
+            $product_bill = new OrderItem();
+            $product_bill->bill_number = $request->order_number;
+            $product_bill->medicin_id = $medicin->id;
+            $product_bill->price = $medicin->price;
+            $product_bill->qty = $request->qty;
+            $product_bill->discnum = $request->discnum;
+            $product_bill->discpersent = $request->discpersent;
 
-         if (request()->discpersent){
-        // $product_bill->total_cost =  ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty ;
-        $product_bill->total_cost =   number_format( ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty , 2);
-        //  $product_bill->total_cost = ( $medicin->price * ($request['discpersent']/100) ) * $product_bill->qty;
-        }else{
-            $product_bill->total_cost = ($medicin->price  - $product_bill->discnum ) * $product_bill->qty ;
+            if (request()->discpersent){
+            $product_bill->total_cost =   number_format( ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty , 2);
+            }else{
+                $product_bill->total_cost = ($medicin->price  - $product_bill->discnum ) * $product_bill->qty ;
+            }
+            $product_bill->save();
+
+            $product_name = $product_bill->Medicin;
+            $price = $product_bill->price * $product_bill->qty;
+            $total = $product_bill->total_cost;
+
+            $html = view('admin.pages.pos.buying_table_ajax', compact('product_name','product_bill','price'))->render();
+            return response()->json(['status' => true, 'result' => $html, 'total' =>$total]);
+            }
+            else{
+                $response['error'] = "qty not true"; 
+                return $response;
+            }
         }
-        $product_bill->save();
-
-        $product_name = $product_bill->Medicin;
-        $price = $product_bill->price * $product_bill->qty;
-        // $total = $product_bill->price * $product_bill->qty;
-        // $price = $product_bill->total_cost;
-         $total = $product_bill->total_cost;
-
-        $html = view('admin.pages.pos.buying_table_ajax', compact('product_name','product_bill','price'))->render();
-        return response()->json(['status' => true, 'result' => $html, 'total' =>$total]);
+    else{
+        $msg= "No branch"; 
+        // return $response;
+        $total = 0 ;
+         return response()->json(['status' => false, 'total' =>$total, 'error_branch' => $msg]);
+    }    
     }
     public function sale_ajax_destroy(Request $request)
     {

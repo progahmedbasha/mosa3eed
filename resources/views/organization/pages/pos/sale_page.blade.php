@@ -23,6 +23,16 @@
    toastr.success(" {{ Session::get('success') }} ");
 </script>
 @endif
+{{-- ////////// --}}
+@if(Session::has('error'))
+<script>
+  Swal.fire(
+  'Good job!',
+  'You clicked the button!',
+  'success'
+)
+</script>
+@endif
 <div style="padding-left:16px">
    <h2  class="hclass no-print">Create Order :</h2>
    <table class='no-print' style="width:40%;">
@@ -74,12 +84,23 @@
                <label  >Order Number :</label>
                   <input type="text"  class="form-control pr"  id="order_number"  name="order_number" readonly>
                <label>Branch :</label>
+               {{-- لو كان اليوزر مدير صيدليه هظهر كل الفروع ولو كان مدير فرع هظهر الفروع التابع لها من تابل userbranches --}}
+               @if (Auth::user()->user_type_id == 4)
                 <select  class="form-control" name="branch_id" id="branch">
                         <option value="">Select Branch</option>
                         @foreach ($branches as $branch)
-                        <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->Branch->name}}</option>
+                        <option value="{{$branch->branch_id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->Branch->name}}</option>
                         @endforeach
                      </select>   
+               @endif
+                @if (Auth::user()->user_type_id == 3)
+                <select  class="form-control" name="branch_id" id="branch">
+                        <option value="">Select Branch</option>
+                        @foreach ($branches as $branch)
+                        <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
+                        @endforeach
+                     </select>   
+               @endif
                      
              </div>
          
@@ -158,6 +179,7 @@
                  var qty = $('#qty').val();
                  var discnum = $('#discnum').val();
                  var discpersent = $('#discpersent').val();
+                 var branch = $('#branch').val();
                 
                  $.ajax({
                      url: "{{route('sale_store_ajax')}}",
@@ -165,6 +187,7 @@
                      data: {
    					//   order_num: order_num,
                          product_id: product_id,
+                         branch: branch,
                         order_number: order_number,
                         qty: qty,
                         discnum:discnum,
@@ -175,15 +198,27 @@
    					 if (response) {
                            // alert('a');
    						$('#tbody').append(response.result);
-                     // $('#total_order').html(response.total_order);
-                     //  $('#total_order').text(parseFloat($('#total_order').text()) + parseFloat(response.total));
-
-                        $('#total_order').text(parseFloat(parseFloat($('#total_order').text()) + parseFloat(response.total)).toFixed(2));
-                     // $ x = parseFloat($('#total_order').text()) + parseFloat(response.total);
-                     // $('#total_order').text($x);
-                     
+                     $('#total_order').text(parseFloat(parseFloat($('#total_order').text()) + parseFloat(response.total)).toFixed(2));     
                      $("#barcode").val("");
                      $("#barcode").focus();
+                     if(response.error)
+                     {
+                          Swal.fire(
+                           'Error For Qty!',
+                           'Available Qty less than qty in branch!',
+                           'error'
+                           )
+                     }
+                     if(response.error_branch)
+                     {
+                          Swal.fire(
+                           'Error For Select Branch!',
+                           'Please Select Branch After Sale!',
+                           'error'
+                           )
+                           $("#total_order").val(response.total);
+                     }
+
    					 }
    				
                      },

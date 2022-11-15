@@ -18,10 +18,10 @@ class OrganizationAdmin extends Model
     {
       return $this->belongsTo('App\Models\admin\Organization');
     }
-       public function Branch()
-    {
-      return $this->belongsTo('App\Models\admin\Branch');
-    }
+    //    public function Branch()
+    // {
+    //   return $this->belongsTo('App\Models\admin\Branch');
+    // }
       public function OrganizationShift()
     {
       return $this->belongsTo('App\Models\organization\OrganizationShift');

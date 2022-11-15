@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
             'organization_id' => '1',
-            'user_type_id' => '2',
+            'user_type_id' => '3',
             'district_id' => '1',
         ]);
         DB::table('users')->insert([
@@ -39,6 +39,15 @@ class UserSeeder extends Seeder
             'phone' => '123456789',
             'organization_id' => '1',
             'user_type_id' => '3',
+            'district_id' => '1',
+        ]);
+            DB::table('users')->insert([
+            'name' => 'ahmed',
+            'email' => 'ahmed@gmail.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '123456789',
+            'organization_id' => '1',
+            'user_type_id' => '4',
             'district_id' => '1',
         ]);
     }

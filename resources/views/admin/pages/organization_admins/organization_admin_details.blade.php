@@ -50,37 +50,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   														
                      </div>
-                     <!--end::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
-                     <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
-                        <option value="{{$org_admin->user_id}}" {{($org_admin->user_id == $org_admin->user_id)? 'selected' : '' }}>{{$org_admin->User->name}}</option>
-                           @foreach ($users as $user)
-                           <option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('user_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   		
-                     </div>
-                     <!--end::Input group-->
-                  </div>
-                  <!--end::Col-->
-                  <!--begin::Col-->
-                  <div class="col-lg-6">
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branch</label>															<!--begin::Input group-->
-                     <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
-                        <option value="{{$org_admin->branch_id}}" {{($org_admin->branch_id == $org_admin->branch_id)? 'selected' : '' }}>{{$org_admin->Branch->name}}</option>
-                           @foreach ($branches as $branch)
-                           <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('branch_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   		
-                     </div>
-                     <!--end::Input group-->
+                              <!--end::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift</label>															<!--begin::Input group-->
                      <div class="mb-5">
                         <select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_shift_id">
@@ -94,6 +64,27 @@
                         @enderror   
                      </div>
                      <!--end::Input group-->
+                   
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-lg-6">
+            
+              <!--end::Input group-->
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
+                     <div class="mb-5">
+                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+                        <option value="{{$org_admin->user_id}}" {{($org_admin->user_id == $org_admin->user_id)? 'selected' : '' }}>{{$org_admin->User->name}}</option>
+                           @foreach ($users as $user)
+                           <option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
+                           @endforeach
+                        </select>
+                        @error('user_id')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror   		
+                     </div>
+                     <!--end::Input group-->
+
                   </div>
                   <!--end::Col-->
                </div>

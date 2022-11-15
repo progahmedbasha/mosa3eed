@@ -111,8 +111,6 @@
 												</th>
 												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="User Name: activate to sort column ascending" style="width: 125px;">User Name</th>
 												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Organization Name: activate to sort column ascending" style="width: 125px;">Organization Name</th>
-												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Branch: activate to sort column ascending" style="width: 165.203px;">Branch</th>
-												<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label="Shift: activate to sort column ascending" style="width: 165.203px;">Shift</th>
 												<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th></tr>
 											<!--end::Table row-->
 										</thead>
@@ -133,18 +131,14 @@
 												<!--end::Checkbox-->
 												<!--begin::Name=-->
 												<td>
-													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $organization_admin->User->name }}</a>
+													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $organization_admin->name }}</a>
 												</td>
 											
 												<td>
 													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Organization->name }}</a>
 												</td>
-												<td>
-													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">@if(!empty($organization_admin->branch_id )) {{ $organization_admin->Branch->name }} @endif </a>
-												</td>
-												<td>
-													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">@if(!empty($organization_admin->organization_shift_id )) {{ $organization_admin->OrganizationShift->name }} @endif</a>
-												</td>
+										
+											
 												<!--end::Email=-->
 											
 											

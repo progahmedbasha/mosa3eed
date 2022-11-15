@@ -16,7 +16,7 @@ class PharmacyAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('user_type_id', '2')->where('organization_id',Auth::user()->organization_id)->whenSearch($request->search)->paginate(50);
+        $users = User::where('user_type_id', '3')->where('organization_id',Auth::user()->organization_id)->whenSearch($request->search)->paginate(50);
         return view('organization.pages.admins.admins',compact('users'));
     }
 
