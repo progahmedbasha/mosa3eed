@@ -140,10 +140,10 @@
 													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Organization->name }}</a>
 												</td>
 												<td>
-													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->Branch->name }}</a>
+													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">@if(!empty($organization_admin->branch_id )) {{ $organization_admin->Branch->name }} @endif </a>
 												</td>
 												<td>
-													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $organization_admin->OrganizationShift->name }}</a>
+													<a href="organization_admins/{{$organization_admin->id}}/edit" class="text-gray-600 text-hover-primary mb-1">@if(!empty($organization_admin->organization_shift_id )) {{ $organization_admin->OrganizationShift->name }} @endif</a>
 												</td>
 												<!--end::Email=-->
 											

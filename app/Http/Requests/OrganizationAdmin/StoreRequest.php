@@ -27,7 +27,7 @@ class StoreRequest extends FormRequest
   
              'user_id'=> 'required',
              'organization_id'=> 'required',
-             'organization_shift_id'=> 'required',
+            
         ];
     }
 }

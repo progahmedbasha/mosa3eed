@@ -40,21 +40,23 @@
                   Order Total :
                </h3>
             </div>
+            {{-- <span class='test' id="test_total">1</span> --}}
+            {{-- <input value="1" id="test_total"> --}}
             <div class="brand " style="font-size:40px;line-height:50px;padding-bottom:20px;color:#333;background:#f0f0f0">
-               <span class='no-print' id="total_order">
-                 0
-                  </span> <label class='no-print' > : LE</label>
+               <span class='no-print' id="total_order">0</span> <label class='no-print' > : LE</label>
             </div>
             <div class="coupon midnight-blue" style="margin-top:-30px;height:150px;background-color:#333">
                <div class="form-group" style="margin-top:-10px;color:white">
                   <div class="form-inline">
                      <label class='no-print' for="exampleInputName2">Dicount %</label>
-                     <input  type="text" value="0" class="form-control no-print" style="margin:2px;width:50%;" id="ordDisc" placeholder="نسبة الخصم">
+                     <input  type="text"  class="form-control no-print" style="margin:2px;width:50%;" id="ordDiscPers" placeholder="نسبة الخصم">
                   </div>
                   <div class="form-inline">
                      <label class='no-print' for="exampleInputName2">Discount</label>
-                     <input  type="text" value="0" class="form-control no-print" style="margin:2px;width:50%;"  id="ordDiscNum" placeholder="سعر الخصم">
+                     <input  type="text"  class="form-control no-print" style="margin:2px;width:50%;"  id="ordDiscNum" placeholder="سعر الخصم">
                   </div>
+                  <br>
+                  <span class='no-print' id="total_order2">0</span> <label class='no-print' > :  الاجمالي بعد الخصم </label>
                   {{-- 
                   <div  id="code-2" class="collapse in code no-print" style="cursor: cell;margin:3px;width:100%">
                      اضافة فاتورة
@@ -212,6 +214,51 @@
                      },
                  });
 
+
+             });
+              ////////discount form 
+             $('#ordDiscNum').on('keyup ', function (e) {
+                 var total = $('#total_order').text();
+			          var dicount = $(this).val();
+                
+                 $.ajax({
+                     url: "{{route('get_order_disc_num_ajax')}}",
+                     type: "POST",
+                     data: {
+                         total: total,
+                         dicount: dicount,
+                         _token: '{{csrf_token()}}'
+                     },
+                    success:function(response){
+   					 if (response) {
+                     // $('#total_order').text(parseFloat(parseFloat(response.total) - parseFloat(response.dic)).toFixed(2));
+                     $('#total_order2').text(parseFloat(parseFloat(response.order_total_dic) ).toFixed(2));
+   					 }
+                     },
+                 });
+
+
+             });
+             ///////////dicount persent
+                    $('#ordDiscPers').on('keyup ', function (e) {
+                 var total = $('#total_order').text();
+			          var dicount = $(this).val();
+                
+                 $.ajax({
+                     url: "{{route('get_order_disc_persent_ajax')}}",
+                     type: "POST",
+                     data: {
+                         total: total,
+                         dicount: dicount,
+                         _token: '{{csrf_token()}}'
+                     },
+                    success:function(response){
+   					 if (response) {
+                     $('#total_order2').text(parseFloat(response.order_total_dic));
+
+   					 }
+                     },
+                 });
 
              });
    });

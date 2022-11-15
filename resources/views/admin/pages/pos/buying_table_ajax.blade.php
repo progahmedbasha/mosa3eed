@@ -4,7 +4,7 @@
     <td>  {{ @$product_bill->price }} <input  type ="hidden" name="price[]" class="item_price" value="{{ $product_bill->price }}"/></td>
     <td>  <input  type ="text" data-id="{{ $product_bill->id }}" name="qty[]" style="width:50px" class="form-control qty" autocomplete="off" value="{{ $product_bill->qty }}"/></td>
     <td class="first_price">  {{ $product_bill->qty * $product_bill->price }} </td>
-    <td>--</td>
+    <td>{{$product_bill->discpersent}}</td>
     <td>{{$product_bill->discnum}}</td>
     {{-- <td>  {{ @$price }}</td> --}}
     <td class="price">  {{ $product_bill->total_cost }} </td>

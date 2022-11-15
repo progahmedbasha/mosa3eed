@@ -217,7 +217,7 @@ class SalePageController extends Controller
 
          if (request()->discpersent){
         // $product_bill->total_cost =  ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty ;
-     $product_bill->total_cost =   number_format( ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty , 2);
+        $product_bill->total_cost =   number_format( ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty , 2);
         //  $product_bill->total_cost = ( $medicin->price * ($request['discpersent']/100) ) * $product_bill->qty;
         }else{
             $product_bill->total_cost = ($medicin->price  - $product_bill->discnum ) * $product_bill->qty ;
@@ -267,6 +267,24 @@ class SalePageController extends Controller
             $order_number = SaleBill::where('branch_id', $request->branch)->get()->last()->bill_number+1;
         }
       return response()->json(['status' => true, 'order_number' => $order_number]);
+    }
+    public function get_order_disc_num_ajax(Request $request)
+    {
+            // return $request;
+            $total = $request->total;
+            $dic = $request->dicount;
+            $new_total = $total - $dic;
+            $order_total_dic =   number_format( ( $total - $dic ) , 2);
+        return response()->json(['status' => true, 'dic' => $dic, 'total' => $total, 'order_total_dic' => $order_total_dic]);
+    }
+        public function get_order_disc_persent_ajax(Request $request)
+    {
+            // return $request;
+            $total = $request->total;
+            $dic = $request->dicount;
+            $order_total_dic =   number_format( ( $total -   ($total  * $dic / 100  ) ) , 2);
+            // $new_total = $total - $dic;
+        return response()->json(['status' => true, 'dic' => $dic, 'total' => $total, 'order_total_dic' =>$order_total_dic]);
     }
     
 }

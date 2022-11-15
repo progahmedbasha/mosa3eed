@@ -131,6 +131,9 @@ Route::group(
                     Route::post('update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('update_qty_ajax');
                     Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
                     Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
+                    Route::post('get_order_disc_num_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_num_ajax')->name('get_order_disc_num_ajax');
+                    Route::post('get_order_disc_persent_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_persent_ajax')->name('get_order_disc_persent_ajax');
+                    
                     // Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
                     Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
                 });  
