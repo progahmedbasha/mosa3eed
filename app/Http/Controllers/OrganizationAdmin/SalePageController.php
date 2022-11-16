@@ -218,6 +218,12 @@ class SalePageController extends Controller
     {
             $new_qty =  $request->qty;
             $product = BranchMedicin::where('medicin_id',$request->product_id)->where('branch_id', $request->branch )->first();
+            if($product ==null)
+            {
+                $msg = "qty not in stock"; 
+                $total = $request->total ;
+                return response()->json(['status' => false, 'total' =>$total, 'error_stock' => $msg]);
+            }
             $old_qty = $product->available_quantity;
         if($old_qty >= $new_qty)
         {        
@@ -245,8 +251,9 @@ class SalePageController extends Controller
             return response()->json(['status' => true, 'result' => $html, 'total' =>$total]);
             }
             else{
-                $response['error'] = "qty not true"; 
-                return $response;
+                    $msg = "qty not true"; 
+                    $total = $request->total ;
+                    return response()->json(['status' => false, 'total' =>$total, 'error' => $msg]);
             }
         }
     else{

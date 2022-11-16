@@ -65,6 +65,14 @@ class OrganizationAdminController extends Controller
               User::where('id', $admin->user_id)->update(['user_type_id' => 4]);
         }
         else{
+            // for save if user admin for all branches 
+            $branches = Branch::where('organization_id', $request->organization_id)->get();
+            foreach ($branches as $key => $value) {
+                    $branch = new UserBranch();
+                    $branch->user_id = $admin->user_id;
+                    $branch->branch_id = $value->id;
+                    $branch->save();
+            }
             User::where('id', $admin->user_id)->update(['user_type_id' => 3]);
         }
         

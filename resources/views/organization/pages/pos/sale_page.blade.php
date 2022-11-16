@@ -180,6 +180,8 @@
                  var discnum = $('#discnum').val();
                  var discpersent = $('#discpersent').val();
                  var branch = $('#branch').val();
+                 //for get error total
+                 var total = $('#total_order').text();
                 
                  $.ajax({
                      url: "{{route('sale_store_ajax')}}",
@@ -192,6 +194,7 @@
                         qty: qty,
                         discnum:discnum,
                         discpersent:discpersent,
+                        total: total,
                          _token: '{{csrf_token()}}'
                      },
                     success:function(response){
@@ -201,6 +204,14 @@
                      $('#total_order').text(parseFloat(parseFloat($('#total_order').text()) + parseFloat(response.total)).toFixed(2));     
                      $("#barcode").val("");
                      $("#barcode").focus();
+                     if(response.error_stock)
+                     {
+                          Swal.fire(
+                           'No Product In Branch!',
+                           'Product Not Available In This Branch!',
+                           'error'
+                           )
+                     }
                      if(response.error)
                      {
                           Swal.fire(
@@ -208,6 +219,8 @@
                            'Available Qty less than qty in branch!',
                            'error'
                            )
+                           $("#total_order").text(response.total);
+                           // $('#total_order').text(parseFloat(response.total));
                      }
                      if(response.error_branch)
                      {

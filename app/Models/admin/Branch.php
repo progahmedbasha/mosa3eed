@@ -40,4 +40,8 @@ class Branch extends Model
     {
       return $this->hasMany('App\Models\MissedItem');
     }
+      public function BranchMedicin()
+    {
+      return $this->hasMany('App\Models\BranchMedicin');
+    }
 }

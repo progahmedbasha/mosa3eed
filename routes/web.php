@@ -19,6 +19,7 @@ use App\Http\Controllers\OrganizationAdmin\PharmacyAdminController;
 use App\Http\Controllers\OrganizationAdmin\DashboardController;
 use App\Http\Controllers\OrganizationAdmin\ProfileController;
 use App\Http\Controllers\OrganizationAdmin\BranchMedicinController;
+// use App\Http\Controllers\OrganizationAdmin\PurchaseController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -136,6 +137,8 @@ Route::group(
                     
                     // Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
                     Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
+                    Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
+
                 });  
 });
     Auth::routes();
