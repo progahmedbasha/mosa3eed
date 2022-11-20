@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\OrganizationAdmin;
+namespace App\Http\Controllers\BranchAdmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,7 @@ use App\Http\Requests\OrganizationDashboard\purchases\StoreRequest;
 use App\Models\organization\Purchase;
 use App\Models\admin\Branch;
 use App\Models\admin\Medicin;
+use App\Models\UserBranch;
 use App\Models\BranchMedicin;
 class PurchaseController extends Controller
 {
@@ -19,13 +20,14 @@ class PurchaseController extends Controller
      */
     public function index(Request $request)
     {
+        $user_branch = UserBranch::where('user_id',Auth::user()->id)->get();
         $search = $request->search;
-        $purchases = Purchase::where('organization_id', Auth::user()->oraganization_id)->whenSearch($request->search)->orWhereHas('Organization' , function($q) use($search) {
+        $purchases = Purchase::where('branch_id', $user_branch)->whenSearch($request->search)->orWhereHas('Organization' , function($q) use($search) {
                 $q->where('email',$search)->orWhere('name', 'like', '%' .$search. '%');})
                 ->orWhereHas('Branch' , function($q) use($search) {
                 $q->where('phone_1',$search)->orWhere('name', 'like', '%' .$search. '%');})
                 ->paginate(20);
-        return view('organization.pages.purchases.purchases', compact('purchases'));
+        return view('branch_admin.pages.purchases.purchases', compact('purchases'));
     }
 
     /**
@@ -37,7 +39,7 @@ class PurchaseController extends Controller
     {
         $branches = Branch::all();
         $medicins = Medicin::all();
-        return view('organization.pages.purchases.purchase_add', compact('branches','medicins'));
+        return view('branch_admin.pages.purchases.purchase_add', compact('branches','medicins'));
     }
 
     /**
@@ -71,7 +73,7 @@ class PurchaseController extends Controller
         else {
          BranchMedicin::where('medicin_id', $product->medicin_id)->where('branch_id', $product->branch_id)->update(['available_quantity' => $medicin->available_quantity + $request->qty]);
         }
-        return redirect()->route('organization_purchases.index')->with('success','Purchases Added Successfully');  
+        return redirect()->route('branch_admin_purchases.index')->with('success','Purchases Added Successfully');  
     }
 
     /**

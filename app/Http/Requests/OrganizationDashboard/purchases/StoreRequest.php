@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
             'acd' => 'required|min:2|max:150',
             'type_measurement' => 'required',
             'due_date'=> 'required|min:2|max:150',
+            'price'=> 'required|max:150',
             'qty'=> 'required|max:150',
         ];
     }

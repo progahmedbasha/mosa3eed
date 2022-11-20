@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AdminRole
+class BranchAdminRole
 {
     /**
      * Handle an incoming request.
@@ -16,15 +16,10 @@ class AdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->user_type_id == 1){
+        if(auth()->user()->user_type_id == 4){
             return $next($request);
         }
-        if(auth()->user()->user_type_id == 3){
-            return redirect()->route('organization_dashboard.index');
-        }
-        // if(auth()->user()->user_type_id == 3){
-        //     return redirect('/');
-        // }
+        
         return redirect('login');
     }
 }

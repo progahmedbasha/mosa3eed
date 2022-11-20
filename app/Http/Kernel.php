@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         // roles
         'admin' => \App\Http\Middleware\AdminRole::class,
         'organization' => \App\Http\Middleware\OrganizationRole::class,
+        'BranchAdmin' => \App\Http\Middleware\BranchAdminRole::class,
             // localization
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,

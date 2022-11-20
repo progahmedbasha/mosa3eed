@@ -51,7 +51,7 @@ class PurchaseController extends Controller
     public function store(StoreRequest $request)
     {
       
-        Purchase::create([
+       $product = Purchase::create([
             'organization_id' => $request->organization_id ,
             'medicin_id' => $request->medicin_id ,
             'type_measurement' => $request->type_measurement ,
@@ -60,12 +60,20 @@ class PurchaseController extends Controller
             'acd' => $request->acd ,
             'due_date' => $request->due_date ,
           ]);
-        BranchMedicin::create([
+       $medicin = BranchMedicin::where('medicin_id', $product->medicin_id)->where('branch_id', $product->branch_id)->first();
+       if($medicin == null)
+       {
+            BranchMedicin::create([
             'branch_id' => $request->branch_id ,
             'medicin_id' => $request->medicin_id ,
             'available_quantity' => $request->qty ,
             'price' => $request->price ,
           ]);
+       }
+       else {
+         BranchMedicin::where('medicin_id', $product->medicin_id)->where('branch_id', $product->branch_id)->update(['available_quantity' => $medicin->available_quantity + $request->qty]);
+       }
+    
         
         return redirect()->route('purchases.index')->with('success','Purchases Added Successfully');  
     }

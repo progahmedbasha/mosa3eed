@@ -141,5 +141,42 @@ Route::group(
 
                 });  
 });
+// routes for Branch Admin
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ], 
+    ], function()
+    {
+            Route::group(
+                [
+                    'prefix' => 'branch_admin',
+                    'middleware' => [ 'auth:sanctum', 'verified' , 'BranchAdmin'],
+                ], function()
+                {
+                  
+                    Route::resource('branch_dashboard', BranchAdmin\DashboardController::class);
+                    Route::resource('branch_admin_profile', BranchAdmin\ProfileController::class);
+                    Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
+                    Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
+                    Route::resource('branch_admin_branches', BranchAdmin\UserBranchController::class);
+                     Route::resource('branch_admin_purchases', BranchAdmin\PurchaseController::class);
+                    Route::resource('branch_admin_branch_medicins', BranchAdmin\BranchMedicinController::class);
+                    Route::resource('branch_admin_sale_page', BranchAdmin\SalePageController::class);
+                    
+                    Route::get('item_edite/{order}/{id}', 'BranchAdmin\SalePageController@item_edite')->name('item_edite');
+                    Route::patch('item_update/{id}', 'BranchAdmin\SalePageController@item_update')->name('item_update');
+                    Route::delete('order_item_delete/{order}/{id}', 'BranchAdmin\SalePageController@order_item_delete')->name('order_item_delete');
+                    Route::post('sale_store_ajax', 'BranchAdmin\SalePageController@sale_store_ajax')->name('sale_store_ajax');
+                    Route::post('update_qty_ajax', 'BranchAdmin\SalePageController@update_qty_ajax')->name('update_qty_ajax');
+                    Route::delete('sale_ajax_destroy', 'BranchAdmin\SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
+                    Route::post('get_bill_number_ajax', 'BranchAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
+                    Route::post('get_order_disc_num_ajax', 'BranchAdmin\SalePageController@get_order_disc_num_ajax')->name('get_order_disc_num_ajax');
+                    Route::post('get_order_disc_persent_ajax', 'BranchAdmin\SalePageController@get_order_disc_persent_ajax')->name('get_order_disc_persent_ajax');
+
+                    
+
+                });  
+});
     Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

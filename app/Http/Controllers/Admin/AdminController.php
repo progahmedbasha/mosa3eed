@@ -13,6 +13,9 @@ use App\Models\Country;
 use App\Models\City;
 use App\Models\District;
 use App\Models\admin\Organization;
+use App\Models\organization\OrganizationAdmin;
+use App\Models\UserBranch;
+use App\Models\admin\Branch;
 use Session;
 class AdminController extends Controller
 {
@@ -57,13 +60,29 @@ class AdminController extends Controller
         $user->phone = $request->input('phone');
         $user->organization_id = $request->input('organization_id');
         $user->district_id = $request->input('district_id');
-         $user->user_type_id = $request->input('user_type_id');        
+         $user->user_type_id = $request->input('user_type_id');     
         if (request()->photo){
             $filename = time().'.'.request()->photo->getClientOriginalExtension();
             request()->photo->move(public_path('data/admins'), $filename);
             $user->photo=$filename;
             }
         $user->save();
+         if($request->user_type_id == 3 )
+         {
+             $admin = new OrganizationAdmin();
+            $admin->organization_id = $request->organization_id;
+            $admin->user_id = $user->id;
+            $admin->save();
+              // for save if user admin for all branches 
+            $branches = Branch::where('organization_id',$request->organization_id)->get();
+            foreach ($branches as $key => $value) {
+                    $branch = new UserBranch();
+                    $branch->user_id = $admin->user_id;
+                    $branch->branch_id = $value->id;
+                    $branch->save();
+            }
+
+         }
         Session::flash('success','Admin Added Successfully');
         return redirect()->route('admin.index');
     }
@@ -93,7 +112,7 @@ class AdminController extends Controller
         $districts = District::all();
         $country_id = Country::where('id',$data->District->City->country_id)->first();
         $countries = Country::all();
-        $cities = Country::all();
+        $cities = City::all();
         $city_id = City::where('id',$data->District->city_id)->first(); 
         return view('admin.pages.admin.admin_details' ,compact('data','user_types','districts','country_id','city_id','organizations','countries','cities'));
     }
