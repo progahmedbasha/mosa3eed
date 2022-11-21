@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('branch_admin.layouts.master')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 <!--begin::Container-->
@@ -31,25 +31,14 @@
                <div >
                   <span class="fs-2x fw-bolder text-gray-800">Post From User : ( {{$timeline_post->User->name}} )</span>
                </div>
-               <form action="{{route('timeline_posts.update',$timeline_post->id)}}" method="post" enctype="multipart/form-data">
+               <form action="{{route('branch_admin_timeline_posts.update',$timeline_post->id)}}" method="post" enctype="multipart/form-data">
                   @csrf
                   @method('patch')
                   <div class="row gx-10 mb-5">
                      <!--begin::Col-->
                      <div class="col-lg-6">
-                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
-                        <div class="mb-5">
-                           <select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
-                              <option value="{{$timeline_post->user_id}}" {{($timeline_post->user_id == $timeline_post->user_id)? 'selected' : '' }}>{{$timeline_post->User->name}}</option>
-                              <option>----------------------------------------------------------</option>
-                              @foreach ($users as $user)
-                              <option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
-                              @endforeach
-                           </select>
-                           @error('user_id')
-                           <div class="alert alert-danger">{{ $message }}</div>
-                           @enderror   		
-                        </div>
+                        {{-- <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label> --}}
+                        <input type="hidden" value="{{Auth::user()->id}}" />
                         <!--begin::Input group-->
                         <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Post</label>
                         <div class="mb-5">

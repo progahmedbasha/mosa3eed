@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('organization.layouts.master')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 <!--begin::Container-->
@@ -31,7 +31,7 @@
                <div >
                   <span class="fs-2x fw-bolder text-gray-800">Post From User : ( {{$timeline_post->User->name}} )</span>
                </div>
-               <form action="{{route('timeline_posts.update',$timeline_post->id)}}" method="post" enctype="multipart/form-data">
+               <form action="{{route('organization_timeline_posts.update',$timeline_post->id)}}" method="post" enctype="multipart/form-data">
                   @csrf
                   @method('patch')
                   <div class="row gx-10 mb-5">

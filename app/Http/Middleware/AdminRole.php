@@ -22,6 +22,9 @@ class AdminRole
         if(auth()->user()->user_type_id == 3){
             return redirect()->route('organization_dashboard.index');
         }
+        if(auth()->user()->user_type_id == 4){
+            return redirect()->route('branch_dashboard.index');
+        }
         // if(auth()->user()->user_type_id == 3){
         //     return redirect('/');
         // }

@@ -36,6 +36,18 @@
                <div class="row gx-10 mb-5">
                   <!--begin::Col-->
                   <div class="col-lg-6">
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
+															<div class="mb-5">
+																<select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+																	<option value="">Select Users</option>
+																	@foreach ($users as $user)
+																	<option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
+																	@endforeach
+																</select>
+																@error('user_id')
+																<div class="alert alert-danger">{{ $message }}</div>
+																@enderror   		
+															</div>
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Post</label>
                      <div class="mb-5">

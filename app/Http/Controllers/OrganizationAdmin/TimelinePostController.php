@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\OrganizationAdmin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostTimeline\PostTimelineRequest;
 use App\Models\TimelinePost;
@@ -18,8 +18,8 @@ class TimelinePostController extends Controller
      */
     public function index()
     {
-           $post_timelines = TimelinePost::withCount('PostLike')->withCount('PostComment')->paginate(20);
-      return view('admin.pages.post_timelines.post_timelines', compact('post_timelines'));
+        $post_timelines = TimelinePost::withCount('PostLike')->withCount('PostComment')->paginate(20);
+        return view('organization.pages.post_timelines.post_timelines', compact('post_timelines'));
     }
 
     /**
@@ -29,8 +29,8 @@ class TimelinePostController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('admin.pages.post_timelines.post_timeline_add', compact('users'));
+        $users = User::where('organization_id', Auth::user()->organization_id)->get();
+        return view('organization.pages.post_timelines.post_timeline_add', compact('users'));
     }
 
     /**
@@ -50,7 +50,7 @@ class TimelinePostController extends Controller
                 $post->photo=$filename;
             }
         $post->save();
-        return redirect()->route('timeline_posts.index')->with('success', 'Post Added Successfully');
+        return redirect()->route('organization_timeline_posts.index')->with('success', 'Post Added Successfully');
     }
 
     /**
@@ -73,8 +73,8 @@ class TimelinePostController extends Controller
     public function edit($id)
     {
         $timeline_post = TimelinePost::find($id);
-        $users = User::all();
-        return view('admin.pages.post_timelines.post_timeline_details', compact('timeline_post','users'));
+        $users = User::where('organization_id', Auth::user()->organization_id)->get();
+        return view('organization.pages.post_timelines.post_timeline_details', compact('timeline_post','users'));
     }
 
     /**
@@ -88,7 +88,7 @@ class TimelinePostController extends Controller
     {
         $timeline_post = TimelinePost::find($id);
         $timeline_post->update($request->all());
-        return redirect()->route('timeline_posts.index')->with('success', 'Status Changed Successfully');  
+        return redirect()->route('organization_timeline_posts.index')->with('success', 'Status Changed Successfully');  
     }
 
     /**
@@ -101,19 +101,19 @@ class TimelinePostController extends Controller
     {
         $post = TimelinePost::find($id);
         $post->delete();
-        return redirect()->route('timeline_posts.index')->with('success','Post Deleted Successfully');
+        return redirect()->route('organization_timeline_posts.index')->with('success','Post Deleted Successfully');
     }
      public function post_like($id)
     {
         $post_likes = PostLike::where('timeline_post_id', $id)->paginate(20);
         $post_name = TimelinePost::where('id', $id)->first();
-        return view('admin.pages.post_timelines.post_likes_show', compact('post_likes','post_name'));
+        return view('organization.pages.post_timelines.post_likes_show', compact('post_likes','post_name'));
     }
     public function post_comment($id)
     {
         $post_comments = PostComment::where('timeline_post_id', $id)->paginate(20);
         $post_name = TimelinePost::where('id', $id)->first();
-        return view('admin.pages.post_timelines.post_comments_show', compact('post_comments','post_name'));
+        return view('organization.pages.post_timelines.post_comments_show', compact('post_comments','post_name'));
     }
         public function comment_status_change(Request $request, $id)
     {

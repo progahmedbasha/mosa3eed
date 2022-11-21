@@ -13,12 +13,14 @@ use App\Http\Controllers\Organization\PurchaseController;
 use App\Http\Controllers\Jobs\JobTitleController;
 use App\Http\Controllers\Jobs\JobPostController;
 // use App\Http\Controllers\JobApplyController;
-use App\Http\Controllers\TimelinePostController;
+// use App\Http\Controllers\TimelinePostController;
 // for organization admin
 use App\Http\Controllers\OrganizationAdmin\PharmacyAdminController;
 use App\Http\Controllers\OrganizationAdmin\DashboardController;
 use App\Http\Controllers\OrganizationAdmin\ProfileController;
 use App\Http\Controllers\OrganizationAdmin\BranchMedicinController;
+use App\Http\Controllers\OrganizationAdmin\TimelinePostController;
+
 // use App\Http\Controllers\OrganizationAdmin\PurchaseController;
 
 use Illuminate\Support\Facades\Route;
@@ -138,6 +140,10 @@ Route::group(
                     // Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
                     Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
                     Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
+                    Route::resource('organization_timeline_posts', OrganizationAdmin\TimelinePostController::class);
+                    Route::get('post_like/{id}', 'OrganizationAdmin\TimelinePostController@post_like')->name('post_like');
+                    Route::get('post_comment/{id}', 'OrganizationAdmin\TimelinePostController@post_comment')->name('post_comment');
+                    Route::post('comment_status_change/{id}', 'OrganizationAdmin\TimelinePostController@comment_status_change')->name('comment_status_change');
 
                 });  
 });
@@ -173,7 +179,11 @@ Route::group(
                     Route::post('get_bill_number_ajax', 'BranchAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
                     Route::post('get_order_disc_num_ajax', 'BranchAdmin\SalePageController@get_order_disc_num_ajax')->name('get_order_disc_num_ajax');
                     Route::post('get_order_disc_persent_ajax', 'BranchAdmin\SalePageController@get_order_disc_persent_ajax')->name('get_order_disc_persent_ajax');
-
+                    
+                    Route::resource('branch_admin_timeline_posts', BranchAdmin\TimelinePostController::class);
+                    Route::get('post_like/{id}', 'BranchAdmin\TimelinePostController@post_like')->name('post_like');
+                    Route::get('post_comment/{id}', 'BranchAdmin\TimelinePostController@post_comment')->name('post_comment');
+                    Route::post('comment_status_change/{id}', 'BranchAdmin\TimelinePostController@comment_status_change')->name('comment_status_change');
                     
 
                 });  
