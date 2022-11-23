@@ -48,7 +48,6 @@ class PurchaseController extends Controller
      */
  public function store(StoreRequest $request)
     {
-      
        $product = Purchase::create([
             'organization_id' => Auth::user()->organization_id ,
             'medicin_id' => $request->medicin_id ,
@@ -93,7 +92,11 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $purchase = Purchase::find($id);
+        $branches = Branch::all();
+        $medicins = Medicin::all();
+        $price = BranchMedicin::where('branch_id', $purchase->branch_id)->where('medicin_id', $purchase->medicin_id)->first();
+        return view('organization.pages.purchases.purchase_details', compact('purchase','branches','medicins','price'));
     }
 
     /**
@@ -105,7 +108,24 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Purchase::find($id);
+        $product->update([
+            'organization_id' => Auth::user()->organization_id ,
+            'medicin_id' => $request->medicin_id ,
+            'type_measurement' => $request->type_measurement ,
+            'qty' => $request->qty ,
+            'branch_id' => $request->branch_id ,
+            'acd' => $request->acd ,
+            'due_date' => $request->due_date ,
+          ]);
+        $medicin = BranchMedicin::where('medicin_id', $product->medicin_id)->where('branch_id', $product->branch_id)->first();
+         $medicin->update([
+            'available_quantity' => $medicin->available_quantity + $request->qty,
+             'price' => $request->price
+             ]);
+        
+        return redirect()->route('organization_purchases.index')->with('success','Purchases Updated Successfully');  
+
     }
 
     /**
@@ -117,6 +137,10 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         $purchase = Purchase::find($id);
+        $medicin = BranchMedicin::where('medicin_id', $purchase->medicin_id)->where('branch_id', $purchase->branch_id)->first();
+        $medicin->update([
+            'available_quantity' => $medicin->available_quantity - $purchase->qty,
+             ]);
         $purchase->delete();
         return redirect()->route('organization_purchases.index')->with('success','Purchase Deleted Successfully');
     }

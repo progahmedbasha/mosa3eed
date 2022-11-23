@@ -21,7 +21,7 @@ class PharmacyAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('user_type_id', '3')->where('organization_id',Auth::user()->organization_id)->whenSearch($request->search)->paginate(50);
+        $users = OrganizationAdmin::where('organization_id',Auth::user()->organization_id)->paginate(50);
         return view('organization.pages.admins.admins',compact('users'));
     }
 
@@ -46,13 +46,15 @@ class PharmacyAdminController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $admin = new OrganizationAdmin();
-        $admin->organization_id = Auth::user()->organization_id;
-        $admin->user_id = $request->user_id;
-        $admin->organization_shift_id = $request->organization_shift_id;
-        $admin->save();
+   
         if(request()->branch_id)
         {
+            $admin = new OrganizationAdmin();
+            $admin->organization_id = Auth::user()->organization_id;
+            $admin->user_id = $request->user_id;
+            $admin->organization_shift_id = $request->organization_shift_id;
+            $admin->type = "Branch Admin";
+            $admin->save();
             $countItems = count($request->branch_id);
             // // save in multi record
               for($i=0; $i<$countItems; $i++){
@@ -64,6 +66,12 @@ class PharmacyAdminController extends Controller
               User::where('id', $admin->user_id)->update(['user_type_id' => 4]);
         }
         else{
+                 $admin = new OrganizationAdmin();
+                $admin->organization_id = Auth::user()->organization_id;
+                $admin->user_id = $request->user_id;
+                $admin->organization_shift_id = $request->organization_shift_id;
+                $admin->type = "Organization Admin";
+                $admin->save();
             // for save if user admin for all branches 
             $branches = Branch::where('organization_id', Auth::user()->organization_id)->get();
             foreach ($branches as $key => $value) {
@@ -95,9 +103,14 @@ class PharmacyAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edite($user_id, $id)
     {
-        //
+        $user = OrganizationAdmin::find($id);
+        $user_branch = UserBranch::where('user_id', $user_id)->get();
+        $branches = Branch::where('organization_id', Auth::user()->organization_id)->get();
+        $users = User::where('organization_id', Auth::user()->organization_id)->get();
+        $shifts = OrganizationShift::where('organization_id', Auth::user()->organization_id)->get();
+        return view('organization.pages.admins.admin_details', compact('user','user_branch','branches','users','shifts'));
     }
 
     /**
@@ -109,7 +122,55 @@ class PharmacyAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+  
+        
+             $branchs = request()->branch_id;
+            foreach ($branchs as $key => $branch) {
+                // for save only selected branch
+                if($branch !== null)
+                {
+                    $admin = OrganizationAdmin::find($id);
+                    $admin->organization_id = Auth::user()->organization_id;
+                    $admin->user_id = $request->user_id;
+                    $admin->organization_shift_id = $request->organization_shift_id;
+                    $admin->type = "Branch Admin";
+                    $admin->save();
+                    $user_branch = UserBranch::where('user_id', $request->user_id)->get();
+                        foreach ($user_branch as $key => $value) {
+                            $value->delete();
+                        }
+                    $countItems = count($request->branch_id);
+                        // // save in multi record
+                        for($i=0; $i<$countItems; $i++){
+                                $branch = new UserBranch();
+                                $branch->user_id = $admin->user_id;
+                                $branch->branch_id = $request->branch_id[$i];
+                                $branch->save();
+                        }
+                        User::where('id', $admin->user_id)->update(['user_type_id' => 4]);
+                }else{
+                     // for save if user admin for all branches 
+                        $admin = OrganizationAdmin::find($id);
+                        $admin->organization_id = Auth::user()->organization_id;
+                        $admin->user_id = $request->user_id;
+                        $admin->organization_shift_id = $request->organization_shift_id;
+                        $admin->type = "Organization Admin";
+                        $admin->save();
+                        $user_branch = UserBranch::where('user_id', $request->user_id)->get();
+                            foreach ($user_branch as $key => $value) {
+                                $value->delete();
+                            }
+                        $branches = Branch::where('organization_id', Auth::user()->organization_id)->get();
+                        foreach ($branches as $key => $value) {
+                                $branch = new UserBranch();
+                                $branch->user_id = $admin->user_id;
+                                $branch->branch_id = $value->id;
+                                $branch->save();
+                        }
+                        User::where('id', $admin->user_id)->update(['user_type_id' => 3]);
+                }
+            }
+        return redirect()->route('pharmacy_admins.index')->with('success','Organization Admin Added Successfully');
     }
 
     /**
@@ -120,6 +181,9 @@ class PharmacyAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // return $id;
+       $user = User::where('id', $id)->first();
+       $user->delete();
+       return redirect()->route('pharmacy_admins.index')->with('success','Organization Admin Deleted Successfully');
     }
 }

@@ -118,12 +118,12 @@
                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-								<a href="organization_purchases/{{$purchase->id}}/edit" class="menu-link px-3">View</a>
+								<a href="branch_admin_purchases/{{$purchase->id}}/edit" class="menu-link px-3">View</a>
                               </div>
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                 <form action="{{route('organization_purchases.destroy',$purchase->id)}} " method="POST">
+                                 <form action="{{route('branch_admin_purchases.destroy',$purchase->id)}} " method="POST">
 									@csrf
 									@method('DELETE')
 									<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>

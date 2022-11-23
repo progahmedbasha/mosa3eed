@@ -5,7 +5,7 @@ namespace App\Http\Controllers\OrganizationAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Organization\StoreRequest;
+use App\Http\Requests\OrganizationDashboard\Organization\StoreRequest;
 use App\Models\admin\Organization;
 use App\Models\Country;
 use App\Models\City;

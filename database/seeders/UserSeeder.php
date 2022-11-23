@@ -42,8 +42,8 @@ class UserSeeder extends Seeder
             'district_id' => '1',
         ]);
             DB::table('users')->insert([
-            'name' => 'ahmed',
-            'email' => 'ahmed@gmail.com',
+            'name' => 'branch',
+            'email' => 'branch@gmail.com',
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
             'organization_id' => '1',

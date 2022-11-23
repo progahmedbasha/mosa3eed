@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('organization.layouts.master')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 <!--begin::Container-->
@@ -31,36 +31,32 @@
             <div >
                <span class="fs-2x fw-bolder text-gray-800">Form Purchase</span>
             </div>
-            <form action="{{route('purchases.update',$purchase->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('organization_purchases.update',$purchase->id)}}" method="post" enctype="multipart/form-data">
                @csrf
                @method('patch')
                <div class="row gx-10 mb-5">
                   <!--begin::Col-->
                   <div class="col-lg-6">
-                     <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>
+                    
+                     
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_id">
-                        <option value="{{$purchase->organization_id}}" {{($purchase->organization_id == $purchase->organization_id)? 'selected' : '' }}>{{$purchase->Organization->name}}</option>
-                        @foreach ($organizations as $org)
-                        <option value="{{$org->id}}" {{(old('organization_id')==$org->id)? 'selected':''}}>{{$org->name}}</option>
+                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
+                        <option value="{{$purchase->branch_id}}" {{($purchase->branch_id == $purchase->branch_id)? 'selected' : '' }}>{{$purchase->Branch->name}}</option>
+                        @foreach ($branches as $branch)
+                        <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
                         @endforeach
                         </select>
-                        @error('organization_id')
+                        @error('branch_id')
                         <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
+                        @enderror   		
                      </div>
                      <!--begin::Input group-->
-                     <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Medicins</label>
+                              <!--begin::Input group-->
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Acd Custom Item</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="medicin_id">
-                        <option value="{{$purchase->medicin_id}}" {{($purchase->medicin_id == $purchase->medicin_id)? 'selected' : '' }}>{{$purchase->Medicin->name}}</option>
-                           @foreach ($medicins as $medicin)
-                           <option value="{{$medicin->id}}" {{(old('medicin_id')==$medicin->id)? 'selected':''}}>{{$medicin->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('medicin_id')
+                        <input type="text" class="form-control form-control-solid" placeholder="Acd Custom Item" value="{{$purchase->acd}}" name="acd">
+                        @error('acd')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   														
                      </div>
@@ -87,27 +83,20 @@
                   <!--end::Col-->
                   <!--begin::Col-->
                   <div class="col-lg-6">
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
-                     <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
-                        <option value="{{$purchase->branch_id}}" {{($purchase->branch_id == $purchase->branch_id)? 'selected' : '' }}>{{$purchase->Branch->name}}</option>
-                        @foreach ($branches as $branch)
-                        <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
-                        @endforeach
-                        </select>
-                        @error('branch_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   		
-                     </div>
                      <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Acd Custom Item</label>
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Medicins</label>
                      <div class="mb-5">
-                        <input type="text" class="form-control form-control-solid" placeholder="Acd Custom Item" value="{{$purchase->acd}}" name="acd">
-                        @error('acd')
+                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="medicin_id">
+                        <option value="{{$purchase->medicin_id}}" {{($purchase->medicin_id == $purchase->medicin_id)? 'selected' : '' }}>{{$purchase->Medicin->name}}</option>
+                           @foreach ($medicins as $medicin)
+                           <option value="{{$medicin->id}}" {{(old('medicin_id')==$medicin->id)? 'selected':''}}>{{$medicin->name}}</option>
+                           @endforeach
+                        </select>
+                        @error('medicin_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   														
                      </div>
-                     <!--begin::Input group-->
+            
                      <!--begin::Input group-->												
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Due Date</label>
                      <div class="mb-5">
@@ -117,6 +106,15 @@
                         @enderror   														
                      </div>
                      <!--begin::Input group-->
+                     <!--begin::Input group-->												
+                        <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Price</label>
+                        <div class="mb-5">
+                        <input type="text" class="form-control form-control-solid" placeholder="Price" value="{{$price->price}}" name="price">
+                           @error('price')
+                           <div class="alert alert-danger">{{ $message }}</div>
+                           @enderror   														
+                        </div>
+                  <!--begin::Input group-->
                   </div>
                   <!--end::Col-->
                </div>

@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         TimelinePostSeeder::class,
         PostLikeSeeder::class,
         PostCommentSeeder::class,
+        OrganizationAdminSeeder::class,
+        UserBranchSeeder::class,
     ]);
     }
 }

@@ -122,9 +122,12 @@ Route::group(
                     // Route::post('fetch_branch', [Jobs\JobPostController::class,'fetch_branch'])->name('fetch_branch');
                     Route::resource('organization_dashboard', OrganizationAdmin\DashboardController::class);
                     Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
+                    Route::get('organization_admin_edit/{user_id}/{id}', 'OrganizationAdmin\PharmacyAdminController@edite')->name('organization_admin_edit');
+
                     Route::resource('organization_medicins', OrganizationAdmin\MedicinController::class);
                     Route::resource('organization_profile', OrganizationAdmin\ProfileController::class);
                     Route::resource('organization_branchs', OrganizationAdmin\BranchController::class);
+                    
 
                     Route::resource('organization_sale_page', OrganizationAdmin\SalePageController::class);
                     Route::get('item_edite/{order}/{id}', 'OrganizationAdmin\SalePageController@item_edite')->name('item_edite');

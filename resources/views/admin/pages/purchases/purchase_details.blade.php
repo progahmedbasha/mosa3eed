@@ -117,6 +117,15 @@
                         @enderror   														
                      </div>
                      <!--begin::Input group-->
+                        <!--begin::Input group-->												
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Price</label>
+                     <div class="mb-5">
+                     <input type="text" class="form-control form-control-solid" placeholder="Price" value="{{$price->price}}" name="price">
+                        @error('price')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror   														
+                     </div>
+               <!--begin::Input group-->
                   </div>
                   <!--end::Col-->
                </div>

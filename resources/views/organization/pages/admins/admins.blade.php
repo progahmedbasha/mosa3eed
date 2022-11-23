@@ -90,17 +90,17 @@
                         <!--end::Checkbox-->
                         <!--begin::Name=-->
                         <td>
-													<a href="admin/{{$user->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $user->name }}</a>
+													<a  class="text-gray-800 text-hover-primary mb-1">{{ $user->User->name }}</a>
 												</td>
 											
 												<td>
-													<a href="admin/{{$user->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $user->email }}</a>
+													<a  class="text-gray-600 text-hover-primary mb-1">{{ $user->User->email }}</a>
 												</td>
 												<td>
-													<a href="admin/{{$user->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $user->phone }}</a>
+													<a  class="text-gray-600 text-hover-primary mb-1">{{ $user->User->phone }}</a>
 												</td>
 												<td>
-													<a href="admin/{{$user->id}}/edit" class="text-gray-600 text-hover-primary mb-1">{{ $user->UserType->type }}</a>
+													<a  class="text-gray-600 text-hover-primary mb-1">{{ $user->type }}</a>
 												</td>
                         <!--end::Name=-->
                         <!--begin::Action=-->
@@ -119,12 +119,15 @@
                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                 <a href="admin/{{$user->id}}/edit" class="menu-link px-3">View</a>
+                                 {{-- <a href="pharmacy_admins/{{$user->id}}/edit" class="menu-link px-3">View</a> --}}
+                                 
+                              <a href="{{route('organization_admin_edit', [ 'user_id' => $user->user_id , 'id' => $user->id] )}}" class="menu-link px-3">View</a>
+
                               </div>
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                <form action="{{route('admin.destroy',$user->id)}} " method="POST">
+                                <form action="{{route('pharmacy_admins.destroy',$user->user_id)}} " method="POST">
 									@csrf
 									@method('DELETE')
 									<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>

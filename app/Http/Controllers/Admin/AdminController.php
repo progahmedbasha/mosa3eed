@@ -72,6 +72,7 @@ class AdminController extends Controller
              $admin = new OrganizationAdmin();
             $admin->organization_id = $request->organization_id;
             $admin->user_id = $user->id;
+            $admin->type = "Organization Admin";
             $admin->save();
               // for save if user admin for all branches 
             $branches = Branch::where('organization_id',$request->organization_id)->get();

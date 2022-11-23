@@ -101,7 +101,8 @@ class PurchaseController extends Controller
         $organizations = Organization::all();
         $branches = Branch::all();
         $medicins = Medicin::all();
-        return view('admin.pages.purchases.purchase_details', compact('purchase','organizations','branches','medicins'));
+        $price = BranchMedicin::where('branch_id', $purchase->branch_id)->where('medicin_id', $purchase->medicin_id)->first();
+        return view('admin.pages.purchases.purchase_details', compact('purchase','organizations','branches','medicins','price'));
     }
 
     /**
@@ -113,11 +114,22 @@ class PurchaseController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
-        $purchase = Purchase::find($id);
-        $data = $request->all();
-        $purchase->update($data);
-        Session::flash('success','Purchase Updated Successfully');
-        return redirect()->route('purchases.index');  
+        $product = Purchase::find($id);
+        $product->update([
+            'organization_id' => $request->organization_id ,
+            'medicin_id' => $request->medicin_id ,
+            'type_measurement' => $request->type_measurement ,
+            'qty' => $request->qty ,
+            'branch_id' => $request->branch_id ,
+            'acd' => $request->acd ,
+            'due_date' => $request->due_date ,
+          ]);
+        $medicin = BranchMedicin::where('medicin_id', $product->medicin_id)->where('branch_id', $product->branch_id)->first();
+         $medicin->update([
+            'available_quantity' => $medicin->available_quantity + $request->qty,
+             'price' => $request->price
+             ]);
+        return redirect()->route('purchases.index')->with('success','Purchase Updated Successfully');  
     }
 
     /**
@@ -129,8 +141,11 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         $purchase = Purchase::find($id);
+        $medicin = BranchMedicin::where('medicin_id', $purchase->medicin_id)->where('branch_id', $purchase->branch_id)->first();
+        $medicin->update([
+            'available_quantity' => $medicin->available_quantity - $purchase->qty,
+             ]);
         $purchase->delete();
-        Session::flash('success','Purchase Deleted Successfully');
-        return redirect()->route('purchases.index');
+        return redirect()->route('purchases.index')->with('success','Purchase Deleted Successfully');
     }
 }

@@ -1,20 +1,20 @@
-@extends('branch_admin.layouts.master')
+@extends('organization.layouts.master')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 <!--begin::Container-->
 <div class="container" id="kt_content_container">
 <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
    <!--begin::Heading-->
-   <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Edit Purchase</h1>
+   <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Organization Admin</h1>
    <!--end::Heading-->
    <!--begin::Breadcrumb-->
    <ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
       <li class="breadcrumb-item text-muted">
-         <a href="#" class="text-muted">Home</a>
+         <a href="../../demo3/dist/index.html" class="text-muted">Home</a>
       </li>
       <li class="breadcrumb-item text-muted">Applications</li>
-      <li class="breadcrumb-item text-muted">Purchases</li>
-      <li class="breadcrumb-item text-dark">Purchas Edit</li>
+      <li class="breadcrumb-item text-muted">Organization Admins</li>
+      <li class="breadcrumb-item text-dark">Organization Admin Add</li>
    </ul>
    <!--end::Breadcrumb-->
 </div>
@@ -29,91 +29,69 @@
          <div class="table-responsive">
             <br>
             <div >
-               <span class="fs-2x fw-bolder text-gray-800">Form Purchase</span>
+               <span class="fs-2x fw-bolder text-gray-800">Form Organization Admin</span>
             </div>
-            <form action="{{route('branch_admin_purchases.update',$purchase->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('pharmacy_admins.update',$user->id)}}" method="post" enctype="multipart/form-data">
                @csrf
                @method('patch')
                <div class="row gx-10 mb-5">
                   <!--begin::Col-->
                   <div class="col-lg-6">
-                       <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
+                     <!--end::Input group-->
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
-                        <option value="{{$purchase->branch_id}}" {{($purchase->branch_id == $purchase->branch_id)? 'selected' : '' }}>{{$purchase->Branch->name}}</option>
-                        @foreach ($branches as $branch)
-                        <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
-                        @endforeach
-                        </select>
-                        @error('branch_id')
+                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+                              <option value="{{$user->user_id}}" {{($user->user_id == $user->user_id)? 'selected' : '' }}>{{$user->User->name}}</option>
+                              <option>----------------------------------------------------------</option>
+                              @foreach ($users as $usere)
+                              <option value="{{$usere->id}}" {{(old('user_id')==$usere->id)? 'selected':''}}>{{$usere->name}}</option>
+                              @endforeach
+                           </select>
+                        @error('user_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror   		
                      </div>
-                      <!--begin::Input group-->
-                    <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Acd Custom Item</label>
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <input type="text" class="form-control form-control-solid" placeholder="Acd Custom Item" value="{{$purchase->acd}}" name="acd">
-                        @error('acd')
+                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_shift_id">
+                           <option value="">Select shift</option>
+                           @foreach ($shifts as $shift)
+                           <option value="{{$shift->id}}" {{(old('organization_shift_id')==$shift->id)? 'selected':''}}>{{$shift->name}}</option>
+                           @endforeach
+                        </select>
+                        @error('organization_shift_id')
                         <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
+                        @enderror   
                      </div>
-                     <!--begin::Input group-->
-                     <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Type Of Measurement</label>
-                     <div class="mb-5">
-                        <input type="text" class="form-control form-control-solid" placeholder="Type Of Measurement" value="{{$purchase->type_measurement}}" name="type_measurement">
-                        @error('type_measurement')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
-                     </div>
-                     <!--begin::Input group-->
-                     <!--begin::Input group-->
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Qty</label>
-                     <div class="mb-5">
-                        <input type="text" class="form-control form-control-solid" placeholder="qty" value="{{$purchase->qty}}" name="qty">
-                        @error('qty')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
-                     </div>
-                     <!--begin::Input group-->
+                     <!--end::Input group-->
                   </div>
                   <!--end::Col-->
                   <!--begin::Col-->
                   <div class="col-lg-6">
-                  
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Medicins</label>
+                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branch</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="medicin_id">
-                        <option value="{{$purchase->medicin_id}}" {{($purchase->medicin_id == $purchase->medicin_id)? 'selected' : '' }}>{{$purchase->Medicin->name}}</option>
-                           @foreach ($medicins as $medicin)
-                           <option value="{{$medicin->id}}" {{(old('medicin_id')==$medicin->id)? 'selected':''}}>{{$medicin->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('medicin_id')
+                        {{-- if first for send specifi branches only , second if for send all branches --}}
+                        @if($user->type =="Branch Admin")
+                            <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id[]" multiple>
+                                    <option value="">Select Branches</option>
+                                    @foreach ($user_branch as $branch)
+                                    <option value="{{$branch->branch_id}}" selected>{{$branch->Branch->name}}</option>
+                                    @endforeach
+                            </select>
+                        @endif
+                        @if($user->type =="Organization Admin")
+                            <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id[]" multiple>
+                                    <option value="" selected>Select Branches</option>
+                                    @foreach ($user_branch as $branch)
+                                    <option value="{{$branch->branch_id}}" >{{$branch->Branch->name}}</option>
+                                    @endforeach
+                            </select>
+                        @endif
+                        @error('branch_id')
                         <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
+                        @enderror   		
                      </div>
-                     <!--begin::Input group-->
-                     
-                     <!--begin::Input group-->												
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Due Date</label>
-                     <div class="mb-5">
-                        <input type="date" class="form-control form-control-solid" placeholder="Due Date" value="{{$purchase->due_date}}" name="due_date">
-                        @error('to')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
-                     </div>
-                     <!--begin::Input group-->
-                             <!--begin::Input group-->												
-                     <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Price</label>
-                     <div class="mb-5">
-                     <input type="text" class="form-control form-control-solid" placeholder="Price" value="{{$price->price}}" name="price">
-                        @error('price')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror   														
-                     </div>
-               <!--begin::Input group-->
+                     <!--end::Input group-->
                   </div>
                   <!--end::Col-->
                </div>
