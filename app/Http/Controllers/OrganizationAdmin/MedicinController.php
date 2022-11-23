@@ -40,6 +40,7 @@ class MedicinController extends Controller
     public function store(StoreRequest $request)
     {  
         $medicin = new Medicin();
+        $medicin->barcode = $request->input('barcode');
         $medicin
         ->setTranslation('name', 'en', $request->input('name_en'))
         ->setTranslation('name', 'ar', $request->input('name_ar')) ;
@@ -82,6 +83,7 @@ class MedicinController extends Controller
     public function update(StoreRequest $request, $id)
     {
         $medicin = Medicin::find($id);
+        $medicin->barcode = $request->input('barcode');
         $medicin
         ->setTranslation('name', 'en', $request->input('name_en'))
         ->setTranslation('name', 'ar', $request->input('name_ar')) ;
@@ -101,7 +103,6 @@ class MedicinController extends Controller
     {
         $medicin = Medicin::find($id);
         $medicin->delete();
-        Session::flash('success','Medicins Deleted Successfully');
-        return redirect()->route('organization_medicins.index');
+        return redirect()->route('organization_medicins.index')->with('success','Medicins Deleted Successfully');
     }
 }

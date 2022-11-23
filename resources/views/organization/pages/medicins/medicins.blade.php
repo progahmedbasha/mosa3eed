@@ -72,6 +72,7 @@
                            </div>
                         </th>
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label=" Medicin Name: activate to sort column ascending" style="width: 125px;">Medicin Name</th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label=" Barcode: activate to sort column ascending" style="width: 125px;">Barcode</th>
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_customers_table" rowspan="1" colspan="1" aria-label=" Price: activate to sort column ascending" style="width: 125px;">Price</th>
                         <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 79.625px;">Actions</th>
                      </tr>
@@ -94,6 +95,9 @@
                            <a href="organization_medicins/{{$medicin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $medicin->name }}</a>
                         </td>
                         <!--end::Name=-->
+                        <td>
+                           <a href="medicins/{{$medicin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $medicin->barcode }}</a>
+                        </td>
                         <!--begin::Name=-->
                         <td>
                            <a href="organization_medicins/{{$medicin->id}}/edit" class="text-gray-800 text-hover-primary mb-1">{{ $medicin->price }}</a>
