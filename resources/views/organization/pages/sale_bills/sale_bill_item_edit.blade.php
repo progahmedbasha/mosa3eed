@@ -31,7 +31,7 @@
             <div >
                <span class="fs-2x fw-bolder text-gray-800">Form Item</span>
             </div>
-            <form action="{{route('item_update',$bill_item->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('org_item_update',$bill_item->id)}}" method="post" enctype="multipart/form-data">
                @csrf
                @method('patch')
                <div class="row gx-10 mb-5">

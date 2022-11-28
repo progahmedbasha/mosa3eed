@@ -40,7 +40,7 @@
          <a href="{{url('organization/organization_sale_page')}}" class="btn btn-light-primary me-3" style="margin-top:0px;"><i class="fa fa-times"></i></a>
          </form>
          {{-- paginate --}}
-         <a href="{{route('sale_page.create')}}" class="btn btn-primary">Add</a>
+         <a href="{{route('organization_sale_page.create')}}" target="__blank" class="btn btn-primary">Add</a>
          <!--end::Add customer-->
          </div>
          <!--end::Toolbar-->

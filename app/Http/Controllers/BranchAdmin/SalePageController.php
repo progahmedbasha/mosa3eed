@@ -24,7 +24,8 @@ class SalePageController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $sale_bills = SaleBill::where('user_id',Auth::user()->id)->withCount('SaleBillProduct')->whenSearch($request->search)->paginate(20);
+        $user_branch = UserBranch::where('user_id',Auth::user()->id)->first();
+        $sale_bills = SaleBill::where('branch_id', $user_branch->branch_id)->withCount('SaleBillProduct')->whenSearch($request->search)->paginate(20);
         return view('branch_admin.pages.sale_bills.sale_bills', compact('sale_bills'));
     }
 
@@ -214,54 +215,54 @@ class SalePageController extends Controller
     public function sale_store_ajax(Request $request)
     {
         // return $request;
-    if(request()->branch)
-    {
-            $new_qty =  $request->qty;
-            $product = BranchMedicin::where('medicin_id',$request->product_id)->where('branch_id', $request->branch )->first();
-            if($product ==null)
-            {
-                $msg = "qty not in stock"; 
-                $total = $request->total ;
-                return response()->json(['status' => false, 'total' =>$total, 'error_stock' => $msg]);
-            }
-            $old_qty = $product->available_quantity;
-        if($old_qty >= $new_qty)
-        {        
-            $medicin = Medicin::where('barcode', $request->product_id)->first();
-            $product_bill = new OrderItem();
-            $product_bill->bill_number = $request->order_number;
-            $product_bill->medicin_id = $medicin->id;
-            $product_bill->price = $medicin->price;
-            $product_bill->qty = $request->qty;
-            $product_bill->discnum = $request->discnum;
-            $product_bill->discpersent = $request->discpersent;
-
-            if (request()->discpersent){
-            $product_bill->total_cost =   number_format( ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty , 2);
-            }else{
-                $product_bill->total_cost = ($medicin->price  - $product_bill->discnum ) * $product_bill->qty ;
-            }
-            $product_bill->save();
-
-            $product_name = $product_bill->Medicin;
-            $price = $product_bill->price * $product_bill->qty;
-            $total = $product_bill->total_cost;
-
-            $html = view('admin.pages.pos.buying_table_ajax', compact('product_name','product_bill','price'))->render();
-            return response()->json(['status' => true, 'result' => $html, 'total' =>$total]);
-            }
-            else{
-                    $msg = "qty not true"; 
+   if(request()->branch)
+        {
+                $new_qty =  $request->qty;
+                $product = BranchMedicin::where('medicin_id',$request->product_id)->where('branch_id', $request->branch )->first();
+                if($product ==null)
+                {
+                    $msg = "qty not in stock"; 
                     $total = $request->total ;
-                    return response()->json(['status' => false, 'total' =>$total, 'error' => $msg]);
-            }
+                    return response()->json(['status' => false, 'total' =>$total, 'error_stock' => $msg]);
+                }
+                $old_qty = $product->available_quantity;
+            if($old_qty >= $new_qty)
+            {        
+                $medicin = Medicin::where('barcode', $request->product_id)->first();
+                $product_bill = new OrderItem();
+                $product_bill->bill_number = $request->order_number;
+                $product_bill->medicin_id = $medicin->id;
+                $product_bill->price = $medicin->price;
+                $product_bill->qty = $request->qty;
+                $product_bill->discnum = $request->discnum;
+                $product_bill->discpersent = $request->discpersent;
+
+                if (request()->discpersent){
+                $product_bill->total_cost =   number_format( ( $medicin->price -   ($medicin->price  * $product_bill->discpersent / 100  ) )* $request->qty , 2);
+                }else{
+                    $product_bill->total_cost = ($medicin->price  - $product_bill->discnum ) * $product_bill->qty ;
+                }
+                $product_bill->save();
+
+                $product_name = $product_bill->Medicin;
+                $price = $product_bill->price * $product_bill->qty;
+                $total = $product_bill->total_cost;
+
+                $html = view('branch_admin.pages.pos.buying_table_ajax', compact('product_name','product_bill','price'))->render();
+                return response()->json(['status' => true, 'result' => $html, 'total' =>$total]);
+                }
+                else{
+                        $msg = "qty not true"; 
+                        $total = $request->total ;
+                        return response()->json(['status' => false, 'total' =>$total, 'error' => $msg]);
+                }
         }
-    else{
-        $msg= "No branch"; 
-        // return $response;
-        $total = 0 ;
-         return response()->json(['status' => false, 'total' =>$total, 'error_branch' => $msg]);
-    }    
+        else{
+            $msg= "No branch"; 
+            // return $response;
+            $total = 0 ;
+            return response()->json(['status' => false, 'total' =>$total, 'error_branch' => $msg]);
+        }   
     }
     public function sale_ajax_destroy(Request $request)
     {
@@ -277,13 +278,24 @@ class SalePageController extends Controller
     }
     public function update_qty_ajax(Request $request)
     {
-        // return 11;
-        $new_qty = $request->qty;
-        $product = OrderItem::where('id',$request->product_id)->first();
-        $old_qty = $product->qty;
-        $product->update(['qty' => $new_qty]);
-       $total_price_item = $request->qty * $product->total_cost;
-        return response()->json(['status' => true, 'total_price_item' => $total_price_item]);
+       
+        // return $request;    
+                $branchprod_qty = BranchMedicin::where('medicin_id',$request->medicin_id)->first();
+                $old_qty =  $branchprod_qty->available_quantity;
+                $new_qty = $request->qty;
+      
+        if($old_qty >= $new_qty)
+            {
+                $product = OrderItem::where('id',$request->product_id)->first();
+                $product->update(['qty' => $new_qty]);
+                $total_price_item = $request->qty * $product->total_cost;
+                return response()->json(['status' => true, 'total_price_item' => $total_price_item]);
+            }
+        else{
+            $msg= "qty error"; 
+            $total = 0 ;
+            return response()->json(['status' => false, 'total' =>$total, 'error_qty' => $msg]);
+        }
     }
     public function get_bill_number_ajax(Request $request)
     {

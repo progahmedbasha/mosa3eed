@@ -184,7 +184,7 @@
                  var total = $('#total_order').text();
                 
                  $.ajax({
-                     url: "{{route('sale_store_ajax')}}",
+                     url: "{{route('org_sale_store_ajax')}}",
                      type: "POST",
                      data: {
    					//   order_num: order_num,
@@ -204,6 +204,7 @@
                      $('#total_order').text(parseFloat(parseFloat($('#total_order').text()) + parseFloat(response.total)).toFixed(2));     
                      $("#barcode").val("");
                      $("#barcode").focus();
+                     
                      if(response.error_stock)
                      {
                           Swal.fire(
@@ -246,7 +247,7 @@
                //   var qty = $('#qty').val();
                 
                  $.ajax({
-                     url: "{{route('get_bill_number_ajax')}}",
+                     url: "{{route('org_get_bill_number_ajax')}}",
                      type: "POST",
                      data: {
    					//   order_num: order_num,
@@ -270,7 +271,7 @@
 			          var dicount = $(this).val();
                 
                  $.ajax({
-                     url: "{{route('get_order_disc_num_ajax')}}",
+                     url: "{{route('org_get_order_disc_num_ajax')}}",
                      type: "POST",
                      data: {
                          total: total,
@@ -293,7 +294,7 @@
 			          var dicount = $(this).val();
                 
                  $.ajax({
-                     url: "{{route('get_order_disc_persent_ajax')}}",
+                     url: "{{route('org_get_order_disc_persent_ajax')}}",
                      type: "POST",
                      data: {
                          total: total,

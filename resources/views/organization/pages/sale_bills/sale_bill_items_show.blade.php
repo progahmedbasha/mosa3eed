@@ -90,13 +90,13 @@
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
 								{{-- <a href="{{route('sale_page.show',$sale_bill->id)}}" class="menu-link px-3">View</a> --}}
-                                <a href="{{route('item_edite', ['order'	=> $id, 'id' => $sale_bill->id] )}}" class="menu-link px-3">View</a>
+                                <a href="{{route('org_item_edite', ['order'	=> $id, 'id' => $sale_bill->id] )}}" class="menu-link px-3">View</a>
 
                               </div>
                               <!--end::Menu item-->
                               <!--begin::Menu item-->
                               <div class="menu-item px-3">
-                                 <form action="{{route('order_item_delete',['order'	=> $id, 'id' => $sale_bill->id])}} " method="POST">
+                                 <form action="{{route('org_order_item_delete',['order'	=> $id, 'id' => $sale_bill->id])}} " method="POST">
 									@csrf
 									@method('DELETE')
 									<button  class="menu-link px-3" style="background: transparent;border: 0;" data-kt-customer-table-filter="delete_row">Delete</button>

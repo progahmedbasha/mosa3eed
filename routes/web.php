@@ -97,7 +97,7 @@ Route::group(
                     Route::patch('item_update/{id}', 'SalePageController@item_update')->name('item_update');
                     Route::delete('order_item_delete/{order}/{id}', 'SalePageController@order_item_delete')->name('order_item_delete');
                     Route::post('sale_store_ajax', 'SalePageController@sale_store_ajax')->name('sale_store_ajax');
-                    Route::post('update_qty_ajax', 'SalePageController@update_qty_ajax')->name('update_qty_ajax');
+                    // Route::post('update_qty_ajax', 'SalePageController@update_qty_ajax')->name('update_qty_ajax');
                     
                     Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
                     
@@ -130,15 +130,15 @@ Route::group(
                     
 
                     Route::resource('organization_sale_page', OrganizationAdmin\SalePageController::class);
-                    Route::get('item_edite/{order}/{id}', 'OrganizationAdmin\SalePageController@item_edite')->name('item_edite');
-                    Route::patch('item_update/{id}', 'OrganizationAdmin\SalePageController@item_update')->name('item_update');
-                    Route::delete('order_item_delete/{order}/{id}', 'OrganizationAdmin\SalePageController@order_item_delete')->name('order_item_delete');
-                    Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('sale_store_ajax');
-                    Route::post('update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('update_qty_ajax');
-                    Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
-                    Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
-                    Route::post('get_order_disc_num_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_num_ajax')->name('get_order_disc_num_ajax');
-                    Route::post('get_order_disc_persent_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_persent_ajax')->name('get_order_disc_persent_ajax');
+                    Route::get('item_edite/{order}/{id}', 'OrganizationAdmin\SalePageController@item_edite')->name('org_item_edite');
+                    Route::patch('item_update/{id}', 'OrganizationAdmin\SalePageController@item_update')->name('org_item_update');
+                    Route::delete('order_item_delete/{order}/{id}', 'OrganizationAdmin\SalePageController@order_item_delete')->name('org_order_item_delete');
+                    Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('org_sale_store_ajax');
+                    Route::post('org_update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('org_update_qty_ajax');
+                    Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('org_sale_ajax_destroy');
+                    Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('org_get_bill_number_ajax');
+                    Route::post('get_order_disc_num_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_num_ajax')->name('org_get_order_disc_num_ajax');
+                    Route::post('get_order_disc_persent_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_persent_ajax')->name('org_get_order_disc_persent_ajax');
                     
                     // Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
                     Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
@@ -177,7 +177,7 @@ Route::group(
                     Route::patch('item_update/{id}', 'BranchAdmin\SalePageController@item_update')->name('item_update');
                     Route::delete('order_item_delete/{order}/{id}', 'BranchAdmin\SalePageController@order_item_delete')->name('order_item_delete');
                     Route::post('sale_store_ajax', 'BranchAdmin\SalePageController@sale_store_ajax')->name('sale_store_ajax');
-                    Route::post('update_qty_ajax', 'BranchAdmin\SalePageController@update_qty_ajax')->name('update_qty_ajax');
+                    Route::post('update_qty_ajax', 'BranchAdmin\SalePageController@update_qty_ajax')->name('branch_update_qty_ajax');
                     Route::delete('sale_ajax_destroy', 'BranchAdmin\SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
                     Route::post('get_bill_number_ajax', 'BranchAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
                     Route::post('get_order_disc_num_ajax', 'BranchAdmin\SalePageController@get_order_disc_num_ajax')->name('get_order_disc_num_ajax');

@@ -1,13 +1,13 @@
 <tr>
     <td> {{ @$product_bill->medicin_id }}  <input  type ="hidden" name="product_id[]" value="{{ $product_bill->medicin_id }}"/></td>
-    <td>  {{ @$product_name->name }}</td>
+    <td>  {{ @$product_name->name }} <input  type ="hidden" name="medicin_id[]" class="medicin_id" value="{{ $product_bill->medicin_id }}"/></td>
     <td>  {{ @$product_bill->price }} <input  type ="hidden" name="price[]" class="item_price" value="{{ $product_bill->price }}"/></td>
     <td>  <input  type ="text" data-id="{{ $product_bill->id }}" name="qty[]" style="width:50px" class="form-control qty" value="{{ $product_bill->qty }}"/></td>
     <td class="first_price">  {{ $product_bill->qty * $product_bill->price }} </td>
-    <td>--</td>
-    <td>--</td>
+    <td>{{$product_bill->discpersent}}</td>
+    <td>{{$product_bill->discnum}}</td>
     {{-- <td>  {{ @$price }}</td> --}}
-    <td class="price">  {{ $product_bill->qty * $product_bill->price }} </td>
+    <td class="price">  {{ $product_bill->total_cost }} </td>
     <td class="no-print"><button type="button" data-id="{{ $product_bill->id }}" class="btn btn-danger delete_order_item delete" style="padding: 0px;" ><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
 
 </tr>
@@ -40,18 +40,17 @@
           $('.qty').on('keyup', function () {
               var product_id = $(this).attr('data-id');
 			  var qty = $(this).val();
-			// var total_qty = $('.total_qty').text();
+            var medicin_id = $('.medicin_id').val();
 			var price = $(this).closest('tr').find('.item_price').val();
-			//var price = $(this).find('.item-item_price').val();
 
 				if(qty != ''){
 					$.ajax({
-                  url: "{{route('update_qty_ajax')}}",
+                  url: "{{route('branch_update_qty_ajax')}}",
                   type: "POST",
                   data: {
                       product_id: product_id,
 					  qty: qty,
-					//   total_qty:total_qty,
+					  medicin_id:medicin_id,
 					  price:price,
                       _token: '{{csrf_token()}}'
                   },
@@ -70,7 +69,15 @@
 							sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
 						});
 						$('#total_order').html(sum);
-                      
+                       if(response.error_qty)
+                     {
+                          Swal.fire(
+                           'Error For qty!',
+                           'Available Qty Not Found in branch  !',
+                           'error'
+                           )
+                           $("#total_order").val(response.total);
+                     }
 
                   },
               });
