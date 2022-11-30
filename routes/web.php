@@ -46,6 +46,8 @@ Route::get('/', function () {
 //     return view('admin.list');
 // });
 Route::get('sign_out', 'Auth\AuthController@logout')->name('sign_out');
+Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
+Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
 // routes for admin
 Route::group(
     [
@@ -63,8 +65,7 @@ Route::group(
                             return view('admin.dashboard');
                         })->name('dashboard');
                     Route::resource('admin', Admin\AdminController::class);
-                    Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
-                    Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
+              
 
                     Route::resource('organizations', Admin\OrganizationController::class);
                     Route::resource('countries', CountryController::class);
@@ -166,8 +167,8 @@ Route::group(
                   
                     Route::resource('branch_dashboard', BranchAdmin\DashboardController::class);
                     Route::resource('branch_admin_profile', BranchAdmin\ProfileController::class);
-                    Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
-                    Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
+                    // Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
+                    // Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
                     Route::resource('branch_admin_branches', BranchAdmin\UserBranchController::class);
                      Route::resource('branch_admin_purchases', BranchAdmin\PurchaseController::class);
                     Route::resource('branch_admin_branch_medicins', BranchAdmin\BranchMedicinController::class);
