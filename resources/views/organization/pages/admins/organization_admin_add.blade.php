@@ -39,7 +39,7 @@
                      <!--end::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+                        <select  id="country-dd" class="form-control" name="user_id">
                            <option value="">Select Users</option>
                            @foreach ($users as $user)
                            <option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
@@ -51,7 +51,7 @@
                      </div>
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_shift_id">
+                        <select  id="country-dd" class="form-control" name="organization_shift_id">
                            <option value="">Select shift</option>
                            @foreach ($shifts as $shift)
                            <option value="{{$shift->id}}" {{(old('organization_shift_id')==$shift->id)? 'selected':''}}>{{$shift->name}}</option>
@@ -68,7 +68,7 @@
                   <div class="col-lg-6">
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branch</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id[]" multiple>
+                        <select  id="country-dd" class="form-control" name="branch_id[]" multiple>
                            <option value="">Select Branches</option>
                            @foreach ($branches as $branch)
                            <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>

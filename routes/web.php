@@ -19,7 +19,8 @@ use App\Http\Controllers\OrganizationAdmin\PharmacyAdminController;
 use App\Http\Controllers\OrganizationAdmin\DashboardController;
 use App\Http\Controllers\OrganizationAdmin\ProfileController;
 use App\Http\Controllers\OrganizationAdmin\BranchMedicinController;
-use App\Http\Controllers\OrganizationAdmin\TimelinePostController;
+// use App\Http\Controllers\OrganizationAdmin\TimelinePostController;
+use App\Http\Controllers\TimelinePostController;
 
 // use App\Http\Controllers\OrganizationAdmin\PurchaseController;
 
@@ -91,10 +92,10 @@ Route::group(
 
                     Route::get('post_like/{id}', 'TimelinePostController@post_like')->name('post_like');
                     // Route::get('post_like/{id}', [TimelinePostController::class,'post_like'])->name('post_like');
-                    Route::get('post_comment/{id}', [TimelinePostController::class,'post_comment'])->name('post_comment');
-                    Route::post('comment_status_change/{id}', [TimelinePostController::class,'comment_status_change'])->name('comment_status_change');
+                    Route::get('post_comments/{id}', [TimelinePostController::class,'post_comment'])->name('post_comments');
+                    Route::post('comment_status_changes/{id}', [TimelinePostController::class,'comment_status_change'])->name('comment_status_changes');
                     Route::resource('sale_page', SalePageController::class);
-                    Route::get('item_edite/{order}/{id}', 'SalePageController@item_edite')->name('item_edite');
+                    Route::get('item_edites/{order}/{id}', 'SalePageController@item_edite')->name('item_edites');
                     Route::patch('item_update/{id}', 'SalePageController@item_update')->name('item_update');
                     Route::delete('order_item_delete/{order}/{id}', 'SalePageController@order_item_delete')->name('order_item_delete');
                     Route::post('sale_store_ajax', 'SalePageController@sale_store_ajax')->name('sale_store_ajax');
@@ -146,7 +147,7 @@ Route::group(
                     Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
                     Route::resource('organization_timeline_posts', OrganizationAdmin\TimelinePostController::class);
                     Route::get('post_like/{id}', 'OrganizationAdmin\TimelinePostController@post_like')->name('post_like');
-                    Route::get('post_comment/{id}', 'OrganizationAdmin\TimelinePostController@post_comment')->name('post_comment');
+                    // Route::get('post_comment/{id}', 'OrganizationAdmin\TimelinePostController@post_comment')->name('post_comment');
                     Route::post('comment_status_change/{id}', 'OrganizationAdmin\TimelinePostController@comment_status_change')->name('comment_status_change');
 
                 });  
@@ -186,7 +187,7 @@ Route::group(
                     
                     Route::resource('branch_admin_timeline_posts', BranchAdmin\TimelinePostController::class);
                     Route::get('post_like/{id}', 'BranchAdmin\TimelinePostController@post_like')->name('post_like');
-                    Route::get('post_comment/{id}', 'BranchAdmin\TimelinePostController@post_comment')->name('post_comment');
+                    Route::get('branch_post_comment/{id}', 'BranchAdmin\TimelinePostController@post_comment')->name('branch_post_comment');
                     Route::post('comment_status_change/{id}', 'BranchAdmin\TimelinePostController@comment_status_change')->name('comment_status_change');
                     
 

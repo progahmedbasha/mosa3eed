@@ -55,7 +55,7 @@
                                                             <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Related To</label>
 															<!--begin::Input group-->
 															<div class="mb-5">
-	                                                            <select class="form-control"style="padding: 10px;" name="related_to">
+	                                                            <select class="form-control" name="related_to">
 																	<option value="{{ $job_title->related_to }}">{{ $job_title->related_to }}</option>
                                                                     <option value="Pharmacy">Pharmacy</option>
                                                                     <option value="Store">Store</option>

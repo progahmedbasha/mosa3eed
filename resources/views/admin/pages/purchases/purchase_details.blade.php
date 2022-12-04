@@ -40,7 +40,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_id">
+                        <select  id="country-dd" class="form-control" name="organization_id">
                         <option value="{{$purchase->organization_id}}" {{($purchase->organization_id == $purchase->organization_id)? 'selected' : '' }}>{{$purchase->Organization->name}}</option>
                         @foreach ($organizations as $org)
                         <option value="{{$org->id}}" {{(old('organization_id')==$org->id)? 'selected':''}}>{{$org->name}}</option>
@@ -54,7 +54,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Medicins</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="medicin_id">
+                        <select  id="country-dd" class="form-control" name="medicin_id">
                         <option value="{{$purchase->medicin_id}}" {{($purchase->medicin_id == $purchase->medicin_id)? 'selected' : '' }}>{{$purchase->Medicin->name}}</option>
                            @foreach ($medicins as $medicin)
                            <option value="{{$medicin->id}}" {{(old('medicin_id')==$medicin->id)? 'selected':''}}>{{$medicin->name}}</option>
@@ -89,7 +89,7 @@
                   <div class="col-lg-6">
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
+                        <select  id="country-dd" class="form-control" name="branch_id">
                         <option value="{{$purchase->branch_id}}" {{($purchase->branch_id == $purchase->branch_id)? 'selected' : '' }}>{{$purchase->Branch->name}}</option>
                         @foreach ($branches as $branch)
                         <option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>

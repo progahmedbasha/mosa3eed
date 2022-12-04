@@ -21,7 +21,8 @@ class OrganizationAdminController extends Controller
      */
     public function index()
     {
-        $organization_admins = User::where('organization_id',!null)->get();
+        // $organization_admins = User::where('organization_id',!null)->get();
+        $organization_admins = OrganizationAdmin::paginate(50);
         return view('admin.pages.organization_admins.organization_admins', compact('organization_admins'));
     }
 
@@ -47,13 +48,14 @@ class OrganizationAdminController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $admin = new OrganizationAdmin();
-        $admin->organization_id = $request->organization_id;
-        $admin->user_id = $request->user_id;
-        $admin->organization_shift_id = $request->organization_shift_id;
-        $admin->save();
         if(request()->branch_id)
         {
+            $admin = new OrganizationAdmin();
+            $admin->organization_id = $request->organization_id;
+            $admin->user_id = $request->user_id;
+            $admin->organization_shift_id = $request->organization_shift_id;
+            $admin->type = "Branch Admin";
+            $admin->save();
             $countItems = count($request->branch_id);
             // // save in multi record
               for($i=0; $i<$countItems; $i++){
@@ -65,6 +67,12 @@ class OrganizationAdminController extends Controller
               User::where('id', $admin->user_id)->update(['user_type_id' => 4]);
         }
         else{
+                 $admin = new OrganizationAdmin();
+                $admin->organization_id = $request->organization_id;
+                $admin->user_id = $request->user_id;
+                $admin->organization_shift_id = $request->organization_shift_id;
+                $admin->type = "Organization Admin";
+                $admin->save();
             // for save if user admin for all branches 
             $branches = Branch::where('organization_id', $request->organization_id)->get();
             foreach ($branches as $key => $value) {
@@ -98,11 +106,14 @@ class OrganizationAdminController extends Controller
      */
     public function edit($id)
     {
+        // return $id;
         $org_admin = OrganizationAdmin::find($id);
         $organizations = Organization::all();
+        $user_branch = UserBranch::where('user_id', $org_admin->user_id)->get();
+        $branches = Branch::get();
          $users = User::all();
          $shifts = OrganizationShift::all();
-        return view('admin.pages.organization_admins.organization_admin_details', compact('org_admin','organizations','users','shifts'));
+        return view('admin.pages.organization_admins.organization_admin_details', compact('org_admin','organizations','users','shifts','user_branch','branches'));
     }
 
     /**
@@ -114,11 +125,53 @@ class OrganizationAdminController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
-        $admin = OrganizationAdmin::find($id);
-        $data = $request->all();
-        $admin->update($data);
-        Session::flash('success','Organization Admin Updated Successfully');
-        return redirect()->route('organization_admins.index');
+           $branchs = request()->branch_id;
+            foreach ($branchs as $key => $branch) {
+                // for save only selected branch
+                if($branch !== null)
+                {
+                    $admin = OrganizationAdmin::find($id);
+                    $admin->organization_id = $request->organization_id;
+                    $admin->user_id = $request->user_id;
+                    $admin->organization_shift_id = $request->organization_shift_id;
+                    $admin->type = "Branch Admin";
+                    $admin->save();
+                    $user_branch = UserBranch::where('user_id', $request->user_id)->get();
+                        foreach ($user_branch as $key => $value) {
+                            $value->delete();
+                        }
+                    $countItems = count($request->branch_id);
+                        // // save in multi record
+                        for($i=0; $i<$countItems; $i++){
+                                $branch = new UserBranch();
+                                $branch->user_id = $admin->user_id;
+                                $branch->branch_id = $request->branch_id[$i];
+                                $branch->save();
+                        }
+                        User::where('id', $admin->user_id)->update(['user_type_id' => 4]);
+                }else{
+                     // for save if user admin for all branches 
+                        $admin = OrganizationAdmin::find($id);
+                        $admin->organization_id = $request->organization_id;
+                        $admin->user_id = $request->user_id;
+                        $admin->organization_shift_id = $request->organization_shift_id;
+                        $admin->type = "Organization Admin";
+                        $admin->save();
+                        $user_branch = UserBranch::where('user_id', $request->user_id)->get();
+                            foreach ($user_branch as $key => $value) {
+                                $value->delete();
+                            }
+                        $branches = Branch::where('organization_id', $request->organization_id)->get();
+                        foreach ($branches as $key => $value) {
+                                $branch = new UserBranch();
+                                $branch->user_id = $admin->user_id;
+                                $branch->branch_id = $value->id;
+                                $branch->save();
+                        }
+                        User::where('id', $admin->user_id)->update(['user_type_id' => 3]);
+                }
+            }
+        return redirect()->route('organization_admins.index')->with('success','Organization Admin Added Successfully');
     }
 
     /**

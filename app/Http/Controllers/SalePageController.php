@@ -135,6 +135,7 @@ class SalePageController extends Controller
     }
     public function item_edite($order , $id)
     {
+        // return $id;
          $bill_number = SaleBill::find($order);
          $bill_item = SaleBillProduct::find($id);
         $medicins = Medicin::all();

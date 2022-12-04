@@ -80,7 +80,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
+																<select  id="country-dd" class="form-control" name="country_id">
                                                                     <option  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
 																	@foreach ($countries as $country)
 																	<option value="{{$country->id}}">{{$country->name}}</option>
@@ -94,7 +94,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
 															<div class="mb-5">
-																	<select id="state-dd" class="form-control"style="padding: 10px;" name="district_id">
+																	<select id="state-dd" class="form-control" name="district_id">
 																	<option value="{{ $organization->district_id }}">{{ $organization->District->name }}</option>
 																	@foreach ($districts as $district)
 																		<option value="{{$district->id}}">{{ $district->name }}</option>
@@ -108,7 +108,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Type</label>
 															<div class="mb-5">
-																<select class="form-control"style="padding: 10px;" name="type">
+																<select class="form-control" name="type">
                                                                         <option value="{{ $organization->type }}">{{ $organization->type }}</option>
 																		<option value="Pharmacy">Pharmacy</option>
 																		<option value="Store">Store</option>
@@ -161,7 +161,7 @@
 																<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
 															<div class="mb-5">
-																  <select id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
+																  <select id="city-dd" class="form-control" name="city_id">
 																  <option  {{($city_id = $city_id)? 'selected' : '' }}> {{$city_id->name}}</option>
 																  @foreach ($cities as $city)
 																	<option value="{{$city->id}}" {{(old('city_id')==$city->id)? 'selected':''}}>{{ $city->name }}</option>
@@ -185,7 +185,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Verified status </label>
 															<div class="mb-5">
-																	<select class="form-control"style="padding: 10px;" name="status">
+																	<select class="form-control" name="status">
 																	<option value="{{ $organization->status }}">{{ $organization->status }}</option>
 																	<option value="Verified">Verified</option>
 																	<option value="Not Verified">Not Verified</option>

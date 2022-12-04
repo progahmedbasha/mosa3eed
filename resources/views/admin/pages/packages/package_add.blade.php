@@ -48,7 +48,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Status</label>
                      <div class="mb-5">
-                        <select class="form-control"style="padding: 10px;" name="status">
+                        <select class="form-control" name="status">
                            <option value="">Select Status</option>
                            <option value="Active">Active</option>
                            <option value="Not Active">Not Active</option>
@@ -92,7 +92,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User Type</label>
                      <div class="mb-5">
-                        <select class="form-control"style="padding: 10px;" name="user_type_id">
+                        <select class="form-control" name="user_type_id">
                            <option value="">Select User</option>
                            @foreach ($user_types as $user_type)
                            <option value="{{$user_type->id}}" {{(old('medicin_id')==$user_type->id)? 'selected':''}}>{{$user_type->name}}</option>

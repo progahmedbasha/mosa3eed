@@ -46,7 +46,7 @@
 														<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+																<select  id="country-dd" class="form-control" name="user_id">
                                                                     <option value="{{$missed_item->user_id}}" {{($missed_item->user_id == $missed_item->user_id)? 'selected' : '' }}>{{$missed_item->User->name}}</option>
 																	@foreach ($users as $user)
 																	<option value="{{$user->id}}" {{(old('organization_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
@@ -60,7 +60,7 @@
 													<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Medicins</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="medicin_id">
+																<select  id="country-dd" class="form-control" name="medicin_id">
                                                                     <option value="{{$missed_item->medicin_id}}" {{($missed_item->medicin_id == $missed_item->medicin_id)? 'selected' : '' }}>{{$missed_item->Medicin->name}}</option>
 																	@foreach ($medicins as $medicin)
 																	<option value="{{$medicin->id}}" {{(old('medicin_id')==$medicin->id)? 'selected':''}}>{{$medicin->name}}</option>
@@ -87,7 +87,7 @@
 														<div class="col-lg-6">
                                                         <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
+																<select  id="country-dd" class="form-control" name="branch_id">
                                                                     <option value="{{$missed_item->branch_id}}" {{($missed_item->branch_id == $missed_item->branch_id)? 'selected' : '' }}>{{$missed_item->Branch->name}}</option>
 																	@foreach ($branches as $branch)
 																	<option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
@@ -100,7 +100,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Status</label>
 															<div class="mb-5">
-                                                                    <select class="form-control"style="padding: 10px;" name="status">
+                                                                    <select class="form-control" name="status">
                                                                         <option value="{{$missed_item->status}}" {{($missed_item->status == $missed_item->status)? 'selected' : '' }}>{{$missed_item->status}}</option>
                                                                         <option value="Active">Active</option>
                                                                         <option value="Not Active">Not Active</option>

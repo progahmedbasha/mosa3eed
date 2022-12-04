@@ -46,7 +46,7 @@
 														<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_id">
+																<select  id="country-dd" class="form-control" name="organization_id">
 																	<option value="">Select Organization</option>
 																	@foreach ($organizations as $org)
 																	<option value="{{$org->id}}" {{(old('organization_id')==$org->id)? 'selected':''}}>{{$org->name}}</option>
@@ -60,7 +60,7 @@
 													<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+																<select  id="country-dd" class="form-control" name="user_id">
 																	<option value="">Select Users</option>
 																	@foreach ($users as $user)
 																	<option value="{{$user->id}}" {{(old('user_id')==$user->id)? 'selected':''}}>{{$user->name}}</option>
@@ -87,7 +87,7 @@
 														<div class="col-lg-6">
                                                         <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id">
+																<select  id="country-dd" class="form-control" name="branch_id">
 																	<option value="">Select Branches</option>
 																	@foreach ($branches as $branch)
 																	<option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)? 'selected':''}}>{{$branch->name}}</option>
@@ -100,7 +100,7 @@
                                                             <!--begin::Input group-->
 																<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Type</label>
 															<div class="mb-5">
-															<select  id="country-dd" class="form-control"style="padding: 10px;" name="type">
+															<select  id="country-dd" class="form-control" name="type">
 																	<option value="">Select Type</option>
 																	<option value="Check In" >Check In</option>
 																	<option value="Check Out" >Check Out</option>

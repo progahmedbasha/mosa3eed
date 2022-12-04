@@ -40,7 +40,7 @@
                      <!--end::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">User</label>
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="user_id">
+                        <select  id="country-dd" class="form-control" name="user_id">
                               <option value="{{$user->user_id}}" {{($user->user_id == $user->user_id)? 'selected' : '' }}>{{$user->User->name}}</option>
                               <option>----------------------------------------------------------</option>
                               @foreach ($users as $usere)
@@ -53,7 +53,7 @@
                      </div>
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Shift</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_shift_id">
+                        <select  id="country-dd" class="form-control" name="organization_shift_id">
                            <option value="">Select shift</option>
                            @foreach ($shifts as $shift)
                            <option value="{{$shift->id}}" {{(old('organization_shift_id')==$shift->id)? 'selected':''}}>{{$shift->name}}</option>
@@ -72,7 +72,7 @@
                      <div class="mb-5">
                         {{-- if first for send specifi branches only , second if for send all branches --}}
                         @if($user->type =="Branch Admin")
-                            <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id[]" multiple>
+                            <select  id="country-dd" class="form-control" name="branch_id[]" multiple>
                                     <option value="">Select Branches</option>
                                     @foreach ($user_branch as $branch)
                                     <option value="{{$branch->branch_id}}" selected>{{$branch->Branch->name}}</option>
@@ -80,7 +80,7 @@
                             </select>
                         @endif
                         @if($user->type =="Organization Admin")
-                            <select  id="country-dd" class="form-control"style="padding: 10px;" name="branch_id[]" multiple>
+                            <select  id="country-dd" class="form-control" name="branch_id[]" multiple>
                                     <option value="" selected>Select Branches</option>
                                     @foreach ($user_branch as $branch)
                                     <option value="{{$branch->branch_id}}" >{{$branch->Branch->name}}</option>

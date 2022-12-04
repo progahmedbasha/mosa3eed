@@ -55,7 +55,7 @@
                                                             <!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
+																<select  id="country-dd" class="form-control" name="country_id">
                                                                      <option value="{{$country_id->id}}"  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
 																	@foreach ($countries as $data)
 																	<option value="{{$data->id}}">

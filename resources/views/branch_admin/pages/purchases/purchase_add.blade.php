@@ -1,4 +1,4 @@
-@extends('organization.layouts.master')
+@extends('branch_admin.layouts.master')
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Container-->

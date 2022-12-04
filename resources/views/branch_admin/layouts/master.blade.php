@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<!--
-   Author: Keenthemes
-   Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
-   Purchase: https://1.envato.market/EA4JP
-   Website: http://www.keenthemes.com
-   Contact: support@keenthemes.com
-   Follow: www.twitter.com/keenthemes
-   Dribbble: www.dribbble.com/keenthemes
-   Like: www.facebook.com/keenthemes
-   License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
-   -->
 <html lang="en">
 
+   <!-- Mirrored from askbootstrap.com/preview/vidoe-v2-3/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 24 Nov 2022 13:21:49 GMT -->
    @include('branch_admin.layouts.head')
-   @include('branch_admin.layouts.sidebar')
-      <!--begin::Javascript-->
-   <!--begin::Global Javascript Bundle(used by all pages)-->
-   @include('branch_admin.layouts.javascripts')
-   <!--end::Page Custom Javascript-->
-   <!--end::Javascript-->
-   <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-      @yield('content')
-   </div>
+
+   <body id="page-top">
+      @include('branch_admin.layouts.navbar')
+      <div id="wrapper">
+
+         @include('branch_admin.layouts.sidebar')
+@include('branch_admin.layouts.javascripts')
+
+         <div id="content-wrapper">
+            <div class="container-fluid pb-0">
+
+               <div class="top-category section-padding mb-4">
+                  @yield('content')
+
+               </div>
+
+            </div>
+
+         </div>
+
+
+
+         
+   </body>
    @include('branch_admin.layouts.footer')
 
-   </body>
-   <!--end::Body-->
 </html>

@@ -73,7 +73,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
+																<select  id="country-dd" class="form-control" name="country_id">
                                                                     <option  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
 																	@foreach ($countries as $data)
 																	<option value="{{$data->id}}" {{(old('country_id')==$data->id)? 'selected':''}}>{{$data->name_en}}</option>
@@ -87,7 +87,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
 															<div class="mb-5">
-																	<select id="state-dd" class="form-control"style="padding: 10px;" name="district_id">
+																	<select id="state-dd" class="form-control" name="district_id">
 																	<option value="{{ $branch->district_id }}">{{ $branch->District->name }}</option>
 																	@foreach ($districts as $district)
 																		<option value="{{$district->id}}" {{(old('district_id')==$district->id)? 'selected':''}}>{{ $district->name }}</option>
@@ -132,7 +132,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="organization_id">
+																<select  id="country-dd" class="form-control" name="organization_id">
 																	<option value="{{ $branch->organization_id }}">{{ $branch->Organization->name }}</option>
 																	@foreach ($organizations as $org)
 																	<option value="{{$org->id}}" {{(old('organization_id')==$org->id)? 'selected':''}}>{{$org->name}}</option>
@@ -146,7 +146,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
 															<div class="mb-5">
-																  <select id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
+																  <select id="city-dd" class="form-control" name="city_id">
 																  <option  {{($city_id = $city_id)? 'selected' : '' }}> {{$city_id->name}}</option>
 																  @foreach ($cities as $city)
 																	<option value="{{$city->id}}" {{(old('city_id')==$city->id)? 'selected':''}}>{{ $city->name }}</option>

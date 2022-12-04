@@ -55,7 +55,7 @@
                                                             <!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
 															<div class="mb-5">
-																<select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
+																<select  id="country-dd" class="form-control" name="country_id">
 																	<option value="">Select Country</option>
 																	@foreach ($countries as $data)
 																	<option value="{{$data->id}}">
@@ -81,7 +81,7 @@
 															<!--begin::Input group-->
 															<label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
 															<div class="mb-5">
-																  <select id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
+																  <select id="city-dd" class="form-control" name="city_id">
 																  </select>													
 															</div>
 															<!--end::Input group-->

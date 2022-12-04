@@ -41,7 +41,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Medicn Name</label>
                      <div class="mb-5">
-                        <select class="form-control"style="padding: 10px;" name="medicin_id">
+                        <select class="form-control" name="medicin_id">
                           <option value="{{$bill_item->medicin_id}}" {{($bill_item->medicin_id == $bill_item->medicin_id)? 'selected' : '' }}>{{$bill_item->Medicin->name}}</option>
                            @foreach ($medicins as $medicin)
                            <option value="{{$medicin->id}}" {{(old('medicin_id')==$medicin->id)? 'selected':''}}>{{$medicin->name}}</option>

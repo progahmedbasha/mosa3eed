@@ -61,7 +61,7 @@
                      <div id="block3" style="display: none";>
                         <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Related To</label>
                      	<div class="mb-5">
-                           <select class="form-control"style="padding: 10px;" name="related_to">
+                           <select class="form-control" name="related_to">
                                  <option value="">Select</option>
                                  <option value="Pharmacy">Pharmacy</option>
                                  <option value="Store">Store</option>
@@ -76,7 +76,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Organization</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="organization" class="form-control organization_id"style="padding: 10px;" name="organization_id">
+                        <select  id="organization" class="form-control organization_id" name="organization_id">
                            <option value="{{$job_post->organization_id}}"  {{($organization_id == $organization_id)? 'selected' : '' }}> {{$organization_id->name}}</option>
                            <option value="">----------------------------------------------------------</option>   
                            @foreach ($organizations as $organization)
@@ -93,7 +93,7 @@
                         <!--begin::Input group-->
                         <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Country</label>
                         <div class="mb-5">
-                           <select  id="country-dd" class="form-control"style="padding: 10px;" name="country_id">
+                           <select  id="country-dd" class="form-control" name="country_id">
                               @if(!empty($country_id))
                                  <option  {{($country_id = $country_id)? 'selected' : '' }}> {{$country_id->name}}</option>
                               @endif
@@ -110,7 +110,7 @@
                         <!--begin::Input group-->
                         <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">District</label>
                         <div class="mb-5">
-                           <select  id="state-dd" class="form-control"style="padding: 10px;" name="district_id">
+                           <select  id="state-dd" class="form-control" name="district_id">
                            @if(!empty($job_post->district_id))
                               <option value="{{$job_post->district_id}}" {{($job_post->district_id == $job_post->district_id)? 'selected' : '' }}> {{$job_post->District->name}}</option>
                               <option value="">----------------------------------------------------------</option>
@@ -145,7 +145,7 @@
 					 		    <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Status</label>
                      <div class="mb-5">
-						<select class="form-control"style="padding: 10px;" name="status">
+						<select class="form-control" name="status">
                      <option value="{{ $job_post->status }}">{{ $job_post->status }}</option>
 							<option value="">----------------------------------------------------------</option>
                      <option value="Active">Active</option>
@@ -171,7 +171,7 @@
                   <div class="col-lg-6">
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Job Title</label>
                      <div class="mb-5">
-                        <select  id="title-dd" class="form-control"style="padding: 10px;" name="job_title_id">
+                        <select  id="title-dd" class="form-control" name="job_title_id">
                            <option value="{{$job_post->job_title_id}}" {{($job_post->job_title_id == $job_post->job_title_id)? 'selected' : '' }}> {{$job_post->JobTitle->name}}</option>
                               @foreach ($job_titles as $job_title)
                               <option value="{{$job_title->id}}" {{(old('job_title_id')==$job_title->id)? 'selected':''}}>{{$job_title->name}}</option>
@@ -200,7 +200,7 @@
                      <!--begin::Input group-->
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">Branches</label>															<!--begin::Input group-->
                      <div class="mb-5">
-                        <select  id="branch-dd" class="form-control"style="padding: 10px;" name="branch_id">
+                        <select  id="branch-dd" class="form-control" name="branch_id">
                         @if(!empty($job_post->branch_id))
                            <option value="{{$job_post->branch_id}}" {{($branch_id == $branch_id)? 'selected' : '' }}> {{$branch_id->name}}</option>
                         @endif   
@@ -219,7 +219,7 @@
                      <!--begin::Input group-->												
                      <label class="form-label fs-6 fw-bolder text-gray-700 mb-3">City</label>
                      <div class="mb-5">
-                        <select  id="city-dd" class="form-control"style="padding: 10px;" name="city_id">
+                        <select  id="city-dd" class="form-control" name="city_id">
                            {{-- <option value="">Select City</option>
                            @foreach ($cities as $city)
                            <option value="{{$city->id}}" {{(old('city_id')==$city->id)? 'selected':''}}>{{$city->name}}</option>
