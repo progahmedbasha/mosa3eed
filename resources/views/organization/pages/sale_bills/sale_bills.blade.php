@@ -17,7 +17,7 @@
 
             <div class="row">
                <div class="col mb-3">
-                  <a href="{{ route('organization_sale_page.create') }}" class="btn  btn-outline-primary">Add</a>
+                  <a href="{{ route('organization_sale_page.create') }}" target="__blank" class="btn  btn-outline-primary">Add</a>
                </div>
                {{-- search --}}
                <div class="col mb-3">

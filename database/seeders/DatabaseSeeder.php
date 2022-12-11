@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         PostCommentSeeder::class,
         OrganizationAdminSeeder::class,
         UserBranchSeeder::class,
+        EmployeeSeeder::class,
     ]);
     }
 }

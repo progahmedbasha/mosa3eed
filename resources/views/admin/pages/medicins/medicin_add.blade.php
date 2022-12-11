@@ -14,7 +14,7 @@
 		<div class="card card-statistics h-100">
 			<div class="card-body">
 				<div class="row">
-					<h5 class="card-title">Form Admin</h5>
+					<h5 class="card-title">Form Medicin</h5>
 				</div>
 				<form action="{{route('medicins.store')}}" method="post" enctype="multipart/form-data">
 					@csrf
@@ -39,7 +39,7 @@
 					<br>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="inputPassword4">Password</label>
+							<label for="inputPassword4">Price</label>
 							<input type="text" class="form-control" placeholder="Price" value="{{old('price')}}"
 								name="price">
 							@error('price')

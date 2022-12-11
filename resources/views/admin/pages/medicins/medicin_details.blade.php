@@ -14,7 +14,7 @@
 		<div class="card card-statistics h-100">
 			<div class="card-body">
 				<div class="row">
-					<h5 class="card-title">Form Admin</h5>
+					<h5 class="card-title">Form Medicin</h5>
 				</div>
 				<form action="{{route('medicins.update',$medicin->id)}}" method="post" enctype="multipart/form-data">
 					@csrf

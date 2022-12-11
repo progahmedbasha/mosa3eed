@@ -62,7 +62,7 @@
                               <form action="{{route('branchs.destroy',$branch->id)}}" method="POST">
                                  @csrf
                                  @method('DELETE')
-                                 <a href="branchs/{{$branch->id}}/edit" class="btn btn-info"><i
+                                 <a href= "{{route('branchs.edit',$branch->id)}}" class="btn btn-info"><i
                                        class="fa fa-edit"></i></a>
 
                                  <button class="btn btn-danger"><i class="fa fa-trash"></i></button>

@@ -9,24 +9,31 @@
       <div id="wrapper">
 
          @include('admin.layouts.sidebar')
-@include('admin.layouts.javascripts')
+
+         @include('admin.layouts.javascripts')
 
          <div id="content-wrapper">
-            <div class="container-fluid pb-0">
+            @if (Route::is('timeline_posts.index') )
+            <div class="container-fluid pb-0" style="width: 84%;margin-right: 22%;">
+               @else
+               <div class="container-fluid pb-0">
+               @endif
+                  <div class="top-category section-padding mb-4">
+                     @yield('content')
 
-               <div class="top-category section-padding mb-4">
-                  @yield('content')
+                  </div>
 
                </div>
 
             </div>
 
-         </div>
 
 
 
-         
    </body>
+   {{-- @if (Route::!is('warehouse_products.index') ) --}}
+   @if (Route::currentRouteName() != 'timeline_posts.index')
    @include('admin.layouts.footer')
+   @endif
 
 </html>

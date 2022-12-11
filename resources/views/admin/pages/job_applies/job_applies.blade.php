@@ -17,7 +17,7 @@
 
             <div class="row">
                <div class="col mb-3">
-                  <a href="{{ route('job_applies.create') }}" class="btn  btn-outline-primary">Add</a>
+                  {{-- <a href="{{ route('job_applies.create') }}" class="btn  btn-outline-primary">Add</a> --}}
                </div>
                {{-- search --}}
                <div class="col mb-3">

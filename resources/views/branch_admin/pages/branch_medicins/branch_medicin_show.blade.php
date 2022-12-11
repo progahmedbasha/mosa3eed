@@ -46,7 +46,6 @@
                         <th style="text-align:center;">Medicin Name</th>
                         <th style="text-align:center;">Price</th>
                         <th style="text-align:center;">Available Qty</th>
-                        <th style="text-align:center;">Actions</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -56,18 +55,7 @@
                         <td>{{ $medicin->Medicin->name }}</td>
                         <td>{{ $medicin->price }}</td>
                         <td>{{ $medicin->available_quantity }}</td>
-                        <td>
-                           <div class="btn-icon-list">
-                              <form action="{{route('organization_branchs.destroy',$medicin->id)}} " method="POST">
-                                 @csrf
-                                 @method('DELETE')
-                                 <a href="organization_branchs/{{$medicin->id}}/edit" class="btn btn-info"><i
-                                       class="fa fa-edit"></i></a>
-
-                                 <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                              </form>
-                           </div>
-                        </td>
+               
                      </tr>
                      @endforeach
                   </tbody>

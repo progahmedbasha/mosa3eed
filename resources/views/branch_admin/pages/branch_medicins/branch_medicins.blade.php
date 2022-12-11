@@ -17,7 +17,7 @@
 
             <div class="row">
                <div class="col mb-3">
-                  <a href="{{ route('branch_admin_branch_medicins.create') }}" class="btn  btn-outline-primary">Add</a>
+                  {{-- <a href="{{ route('branch_admin_branch_medicins.create') }}" class="btn  btn-outline-primary">Add</a> --}}
                </div>
                {{-- search --}}
                <div class="col mb-3">
@@ -58,7 +58,7 @@
                                  @csrf
                                  @method('DELETE')
                                  <a href="{{route('branch_admin_branch_medicins.show',$branch->id)}}" class="btn btn-info"><i
-                                       class="fa fa-edit"></i></a>
+                                       class="fa fa-eye"></i></a>
 
                                  <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                               </form>

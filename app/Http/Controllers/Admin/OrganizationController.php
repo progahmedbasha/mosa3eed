@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Organization\StoreRequest;
 use App\Models\admin\Organization;
+use App\Models\admin\Branch;
+use App\Models\organization\OrganizationAdmin;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\User;
@@ -76,7 +78,8 @@ class OrganizationController extends Controller
      */
     public function show($id)
     {
-        //
+        $branchs = Branch::where('organization_id', $id)->get();
+        return view('admin.pages.branchs.branchs', compact('branchs'));
     }
 
     /**
@@ -143,5 +146,11 @@ class OrganizationController extends Controller
         $org->delete();
         Session::flash('success','Organization Deleted Successfully');
         return redirect()->route('organizations.index');
+    }
+    public function org_admins($id)
+    {
+         $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
+        return view('admin.pages.organization_admins.organization_admins', compact('organization_admins'));
+
     }
 }

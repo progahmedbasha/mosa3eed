@@ -37,7 +37,7 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        $branches = Branch::all();
+        $branches = UserBranch::where('user_id', Auth::user()->id)->get();
         $medicins = Medicin::all();
         return view('branch_admin.pages.purchases.purchase_add', compact('branches','medicins'));
     }
@@ -50,7 +50,6 @@ class PurchaseController extends Controller
      */
  public function store(StoreRequest $request)
     {
-      
        $product = Purchase::create([
             'organization_id' => Auth::user()->organization_id ,
             'medicin_id' => $request->medicin_id ,
@@ -96,7 +95,7 @@ class PurchaseController extends Controller
     public function edit($id)
     {
         $purchase = Purchase::find($id);
-        $branches = Branch::all();
+        $branches = UserBranch::where('user_id', Auth::user()->id)->get();
         $medicins = Medicin::all();
         $price = BranchMedicin::where('branch_id', $purchase->branch_id)->where('medicin_id', $purchase->medicin_id)->first();
         return view('branch_admin.pages.purchases.purchase_details', compact('purchase','branches','medicins','price'));

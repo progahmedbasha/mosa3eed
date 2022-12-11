@@ -69,6 +69,7 @@ Route::group(
               
 
                     Route::resource('organizations', Admin\OrganizationController::class);
+                     Route::get('org_admins/{id}', [OrganizationController::class,'org_admins'])->name('org_admins');
                     Route::resource('countries', CountryController::class);
                     Route::resource('cities', CityController::class);
                     Route::resource('districts', DistrictController::class);
@@ -102,6 +103,7 @@ Route::group(
                     // Route::post('update_qty_ajax', 'SalePageController@update_qty_ajax')->name('update_qty_ajax');
                     
                     Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
+                    Route::resource('employees', EmployeeController::class);
                     
                 });  
 });
@@ -147,8 +149,8 @@ Route::group(
                     Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
                     Route::resource('organization_timeline_posts', OrganizationAdmin\TimelinePostController::class);
                     Route::get('post_like/{id}', 'OrganizationAdmin\TimelinePostController@post_like')->name('post_like');
-                    // Route::get('post_comment/{id}', 'OrganizationAdmin\TimelinePostController@post_comment')->name('post_comment');
-                    Route::post('comment_status_change/{id}', 'OrganizationAdmin\TimelinePostController@comment_status_change')->name('comment_status_change');
+                    Route::get('org_post_comment/{id}', 'OrganizationAdmin\TimelinePostController@post_comment')->name('org_post_comment');
+                    Route::post('org_comment_status_change/{id}', 'OrganizationAdmin\TimelinePostController@comment_status_change')->name('org_comment_status_change');
 
                 });  
 });
