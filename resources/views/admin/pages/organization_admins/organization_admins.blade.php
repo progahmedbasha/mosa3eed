@@ -1,34 +1,38 @@
 @extends('admin.layouts.master')
 @section('content')
 
-<div class="row">
-   <div class="col-md-12">
-      <div class="main-title">
-         <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Admins For Organization List :</h1>
+<div id="content-wrapper">
+   <div class="container-fluid pb-0">
+      <div class="top-category section-padding mb-4">
+
+         <div class="row">
+            <div class="col-md-12">
+               <div class="main-title">
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Admins For Organization List :</h1>
+               </div>
+            </div>
+
+         </div>
+
+         <div class="row">
+            <div class="col mb-3" style="margin-bottom:-1rem!important;">
+               <a href="{{ route('organization_admins.create') }}" class="btn btn-primary">Add</a>
+            </div>
+
+         </div>
       </div>
-   </div>
+      <hr>
+      @if(Session::has('success'))
+      <script>
+         toastr.success(" {{ Session::get('success') }} ");
+      </script>
+      @endif
+      <div class="row">
+         {{-- // --}}
+         @foreach ($organization_admins as $organization_admin)
 
-</div>
-
-<div class="row">
-   <div class="col mb-3" style="margin-bottom:-1rem!important;">
-      <a href="{{ route('organization_admins.create') }}" class="btn btn-primary">Add</a>
-   </div>
-
-</div>
-</div>
-<hr>
-@if(Session::has('success'))
-<script>
-   toastr.success(" {{ Session::get('success') }} ");
-</script>
-@endif
-<div class="row">
-   {{-- // --}}
-   @foreach ($organization_admins as $organization_admin)
-
-   <div class="col-xl-3 col-sm-6 mb-3">
-      {{-- <div class="card" style="width: 15rem;">
+         <div class="col-xl-3 col-sm-6 mb-3">
+            {{-- <div class="card" style="width: 15rem;">
          <div class="channels-card-image">
             <div class="dropdown">
                <a  type="button" id="dropdownMenuButton1"
@@ -42,8 +46,8 @@
                </ul>
             </div>
             <a href=" {{route('organization_admins.edit',$organization_admin->id)}} ">
-               <img class="img-fluid" style="margin-top: 30px;margin-left: 83px;" src="{{url('/data/user_error.png')}}"
-                  alt="">
+            <img class="img-fluid" style="margin-top: 30px;margin-left: 83px;" src="{{url('/data/user_error.png')}}"
+               alt="">
             </a>
             <div class="card-body">
                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
@@ -64,7 +68,7 @@
 
             <div class="channels-card-image-btn"><button type="button" class="btn btn-success btn-sm border-none">
                   {{ $organization_admin->Organization->name }}
-               </button> <a href= " {{route('organization_admins.edit',$organization_admin->id)}} "  
+               </button> <a href=" {{route('organization_admins.edit',$organization_admin->id)}} "
                   class="btn btn-warning btn-sm border-none"><i class="fas fa-eye"></i></a>
             </div>
 
@@ -92,5 +96,7 @@
    {{-- // --}}
 </div>
 <hr>
-
+</div>
+</div>
+</div>
 @endsection

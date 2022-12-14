@@ -1,5 +1,9 @@
 @extends('admin.layouts.master')
 @section('content')
+<div id="content-wrapper">
+   <div class="container-fluid pb-0">
+      <div class="top-category section-padding mb-4">
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="main-title">
@@ -62,4 +66,7 @@
 	</div>
 </div>
 <hr>
+	</div>
+	</div>
+</div>
 @endsection

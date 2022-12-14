@@ -12,20 +12,20 @@
 
          @include('admin.layouts.javascripts')
 
-         <div id="content-wrapper">
-            @if (Route::is('timeline_posts.index') )
-            <div class="container-fluid pb-0" style="width: 84%;margin-right: 22%;">
-               @else
-               <div class="container-fluid pb-0">
-               @endif
-                  <div class="top-category section-padding mb-4">
+         {{-- <div id="content-wrapper"> --}}
+            {{-- @if (Route::is('timeline_posts.index') ) --}}
+            {{-- <div class="container-fluid pb-0" style="width: 84%;margin-right: 22%;"> --}}
+               {{-- @else --}}
+               {{-- <div class="container-fluid pb-0"> --}}
+               {{-- @endif --}}
+                  {{-- <div class="top-category section-padding mb-4"> --}}
                      @yield('content')
 
-                  </div>
+                  {{-- </div> --}}
 
-               </div>
+               {{-- </div> --}}
 
-            </div>
+            {{-- </div> --}}
 
 
 

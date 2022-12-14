@@ -9,6 +9,7 @@ use App\Models\admin\Organization;
 use App\Models\admin\Branch;
 use App\Models\User;
 use Session;
+use Carbon\Carbon;
 class OrganizationAttendanceController extends Controller
 {
     /**
@@ -45,10 +46,18 @@ class OrganizationAttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        OrganizationAttendance::create($data);
-        Session::flash('success','Organization Attendance Added Successfully');
-        return redirect()->route('organization_attendances.index');  
+      return  $date_time = Carbon::now();
+        $date = $date_time->toDateString();
+        $time = $date_time->toTimeString();
+        OrganizationAttendance::create([
+            'organization_id' => $request->organization_id ,
+            'branch_id' => $request->branch_id ,
+            'user_id' => $request->user_id ,
+            'type' => $request->type ,
+            'date' => $date ,
+            'time' => $time ,
+          ]);
+        return redirect()->route('organization_attendances.index')->with('success','Organization Attendance Added Successfully');  
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Requests\PostTimeline\PostTimelineRequest;
 use App\Models\TimelinePost;
 use App\Models\PostLike;
 use App\Models\User;
+use App\Models\Ad;
 use App\Models\PostComment;
 use Illuminate\Support\Facades\Auth;
 class TimelinePostController extends Controller
@@ -19,7 +20,9 @@ class TimelinePostController extends Controller
     public function index()
     {
            $post_timelines = TimelinePost::withCount('PostLike')->withCount('PostComment')->paginate(20);
-      return view('admin.pages.post_timelines.post_timelines', compact('post_timelines'));
+           $ads = Ad::all();
+           $users = User::all();
+      return view('admin.pages.post_timelines.post_timelines', compact('post_timelines','ads','users'));
     }
 
     /**

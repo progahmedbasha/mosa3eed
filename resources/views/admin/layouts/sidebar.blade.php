@@ -1,4 +1,7 @@
 <style>
+   .sidebar .nav-item .nav-link {
+          padding: 12px 22px!important;
+   }
    /* Fixed sidenav, full height */
    .sidenav {
 
@@ -8,7 +11,7 @@
    /* Style the sidenav links and the dropdown button */
    .sidenav a,
    .dropdown-btn {
-      padding: 6px 8px 6px 14px;
+      padding: 6px 8px 6px 24px;
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
@@ -138,7 +141,7 @@
 
 
    <div class="sidenav">
-      <button class="dropdown-btn"><i class="fa fa-globe"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span>HR</span>
+      <button class="dropdown-btn"><i class="fa fa-bars"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>HR</span>
          <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-container">
@@ -151,7 +154,7 @@
    </div>
 
    <div class="sidenav">
-      <button class="dropdown-btn"><i class="fa fa-globe"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span>Jobs</span>
+      <button class="dropdown-btn"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Jobs</span>
          <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-container">

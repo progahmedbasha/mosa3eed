@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         OrganizationAdminSeeder::class,
         UserBranchSeeder::class,
         EmployeeSeeder::class,
+        AdSeeder::class,
     ]);
     }
 }
