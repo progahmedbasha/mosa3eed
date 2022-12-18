@@ -90,10 +90,11 @@ Route::group(
                     Route::resource('job_applies', JobApplyController::class);
                     Route::get('get_attacment/{id}', 'JobApplyController@get_attacment')->name('get_attacment');
                     Route::resource('timeline_posts', 'TimelinePostController');
-
+                    // Route::get('change_comment_satus/{id}', 'TimelinePostController@change_comment_satus')->name('change_comment_satus');
                     Route::get('post_like/{id}', 'TimelinePostController@post_like')->name('post_like');
                     // Route::get('post_like/{id}', [TimelinePostController::class,'post_like'])->name('post_like');
-                    Route::get('post_comments/{id}', [TimelinePostController::class,'post_comment'])->name('post_comments');
+                    
+                    Route::post('change_comment_satus', [TimelinePostController::class,'change_comment_satus'])->name('change_comment_satus');
                     Route::post('comment_status_changes/{id}', [TimelinePostController::class,'comment_status_change'])->name('comment_status_changes');
                     Route::resource('sale_page', SalePageController::class);
                     Route::get('item_edites/{order}/{id}', 'SalePageController@item_edite')->name('item_edites');

@@ -19,7 +19,7 @@ class TimelinePostController extends Controller
      */
     public function index()
     {
-           $post_timelines = TimelinePost::withCount('PostLike')->withCount('PostComment')->paginate(20);
+           $post_timelines = TimelinePost::with('PostComment')->withCount('PostLike')->withCount('PostComment')->paginate(20);
            $ads = Ad::all();
            $users = User::all();
       return view('admin.pages.post_timelines.post_timelines', compact('post_timelines','ads','users'));
@@ -112,16 +112,29 @@ class TimelinePostController extends Controller
         $post_name = TimelinePost::where('id', $id)->first();
         return view('admin.pages.post_timelines.post_likes_show', compact('post_likes','post_name'));
     }
-    public function post_comment($id)
+    public function change_comment_satus(Request $request)
     {
-        $post_comments = PostComment::where('timeline_post_id', $id)->paginate(20);
-        $post_name = TimelinePost::where('id', $id)->first();
-        return view('admin.pages.post_timelines.post_comments_show', compact('post_comments','post_name'));
-    }
-        public function comment_status_change(Request $request, $id)
-    {
-        $post_comments = PostComment::find($id);
-        $post_comments->update(['status'=> $request->status]);
-        return redirect()->back()->with('success', 'Status Changed Successfully');  
-    }
+        $post_comments = PostComment::where('id', $request->new_id)->first();
+         if($request->has('active')){
+            if($post_comments->status =='Active')
+            {
+                $post_comments->update(['status' => 'Not Active']);
+                return response()->json(['status' => true, 'result' => $post_comments]);
+            }
+              if($post_comments->status =='Not Active')
+            {
+                $post_comments->update(['status' =>'Active']);
+                return response()->json(['status' => true, 'result' => $post_comments]);
+            }
+        }
+            
+        
+    }  
+    
+    //     public function comment_status_change(Request $request, $id)
+    // {
+    //     $post_comments = PostComment::find($id);
+    //     $post_comments->update(['status'=> $request->status]);
+    //     return redirect()->back()->with('success', 'Status Changed Successfully');  
+    // }
 }
