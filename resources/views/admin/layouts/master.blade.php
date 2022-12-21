@@ -32,8 +32,8 @@
 
    </body>
    {{-- @if (Route::!is('warehouse_products.index') ) --}}
-   @if (Route::currentRouteName() != 'timeline_posts.index')
+   {{-- @if (Route::currentRouteName() != 'timeline_posts.index') --}}
    @include('admin.layouts.footer')
-   @endif
+   {{-- @endif --}}
 
 </html>

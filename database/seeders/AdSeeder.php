@@ -14,8 +14,9 @@ class AdSeeder extends Seeder
     public function run()
     {
           DB::table('ads')->insert([
-            'title' => 'title 1',
+            'title' => 'Here are many variati of passages of Lorem',
             'link' => 'http/link',
+            'created_at' => '2022-12-12 13:03:19',
         ]);
     }
 }

@@ -106,6 +106,8 @@ Route::group(
                     Route::delete('sale_ajax_destroy', 'SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
                     Route::resource('employees', EmployeeController::class);
                     Route::resource('ads', AdController::class);
+                    Route::post('add_comment_ajax', [TimelinePostController::class,'add_comment_ajax'])->name('add_comment_ajax');
+                    
                     
                 });  
 });

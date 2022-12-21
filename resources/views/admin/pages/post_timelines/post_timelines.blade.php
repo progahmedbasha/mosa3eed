@@ -76,6 +76,7 @@
 
                   @include('admin.pages.post_timelines.add_post_component')
 
+
                   <div class="box mb-3 single-video-comment-tabs">
                      <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
@@ -145,11 +146,14 @@
                                              <i class="fas fa-ellipsis-v"></i>
                                           </a>
                                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                             <li><a class="dropdown-item" style="padding: 3px 14px!important"
-                                                   href="timeline_posts/{{$post_timeline->id}}/edit"><i
-                                                      class="fas fa-eye"></i> View &
-                                                   Edit
-                                                </a></li>
+
+                                             <button class="dropdown-item" data-effect="effect-sign" data-toggle="modal"
+                                                data-target="#ModalEdit{{ $post_timeline->id }}"
+                                                style="background: transparent;border: 0;padding: 0px 14px!important"
+                                                data-kt-customer-table-filter="delete_row"><i class="fas fa-eye"></i>
+                                                View & Edit</button>
+
+
                                              <li>
                                                 <form action="{{route('timeline_posts.destroy',$post_timeline->id)}} "
                                                    method="POST">
@@ -170,18 +174,25 @@
                                     </div>
                                     <div class="reviews-members-body">
                                        <p> {{ $post_timeline->post }}</p>
+                                       <div>
+                                          @if(!empty($post_timeline->photo))
+                                          <img style="width: 36%; height:50%; padding-bottom:7px;border-radius:10px; "
+                                             src="{{url('/data/timeline_posts')}}/{{$post_timeline->photo }}"
+                                             class="img-fluid" alt="Responsive image">
+                                          @endif
+                                       </div>
                                     </div>
                                     <div class="reviews-members-footer">
                                        <a class="total-like" href="post_like/{{$post_timeline->id}}"><i
                                              class="fas fa-thumbs-up"></i>
-                                          {{$post_timeline->post_like_count}}</a> <a class="total-like"
-                                          href="post_comments/{{$post_timeline->id}}"><i class="fas fa-comments"></i>
-                                          {{$post_timeline->post_comment_count}}</a>
-                                       <a class="total-like" onclick="myFunction({{$post_timeline->id}})">comments <i
-                                             class="fas fa-chevron-circle-down"></i></a>
+                                          {{$post_timeline->post_like_count}}</a>
+                                       <a class="total-like" onclick="myFunction({{$post_timeline->id}})"><i
+                                             class="fas fa-comments"></i>
+                                          {{$post_timeline->post_comment_count}}</i></a>
 
                                     </div>
                                     <br>
+                                    @include('admin.pages.post_timelines.edit_post_modal')
                                     {{-- div for show comments --}}
                                     <div class="reviews-members-footer" style="display: none;"
                                        id="{{$post_timeline->id}}">
@@ -200,7 +211,7 @@
                                                 alt=""></a>
                                           @endif
                                           {{-- div for show comments --}}
-                                          <div class="reviews-members-header" style="width:84%">
+                                          <div class="reviews-members-header" id="tbody" style="width:84%">
                                              <h6 class="mb-1"><a class="text-black"
                                                    href="#">{{ $post_timeline->User->name }}
                                                 </a>
@@ -214,13 +225,13 @@
                                                 <div class="dropdown" style="margin-left: 92%; margin-top: -3%;">
                                                    <label class="switch">
                                                       @if ($comments->status == "Active")
-                                                         <input type="checkbox" class="actives" checked value="0"
+                                                      <input type="checkbox" class="actives" checked value="0"
                                                          name="active" data-id="{{ $comments->id }}">
                                                       @else
-                                                         <input type="checkbox" class="actives"  value="1"
-                                                         name="active" data-id="{{ $comments->id }}">
+                                                      <input type="checkbox" class="actives" value="1" name="active"
+                                                         data-id="{{ $comments->id }}">
                                                       @endif
-                                                      
+
                                                       <span class="slider round"></span>
                                                    </label>
                                                 </div>
@@ -238,12 +249,13 @@
                                        {{-- create comment --}}
                                        <div class="media-body" style="width: 83%;margin-left:9%;">
                                           <div class="form-members-body">
-                                             <textarea rows="1" placeholder="Add a public comment..."
-                                                class="form-control"></textarea>
+                                             <textarea rows="1" placeholder="Add a public comment..." value="{{old('comment_input')}}"
+                                                class="form-control " id="inputadd{{ $post_timeline->id }}"></textarea>
+                                                {{-- <input type="text" class="comment_input" id="inputadd{{ $post_timeline->id }}" > --}}
                                           </div>
                                           <div class="form-members-footer text-right mt-2">
                                              <button class="btn btn-outline-danger btn-sm" type="button">CANCEL</button>
-                                             <button class="btn btn-danger btn-sm" type="button">COMMENT</button>
+                                             <button class="btn btn-danger btn-sm comment" onclick="mydFunction({{$post_timeline->id}} , inputadd{{$post_timeline->id}}  )"  data-id="{{ $post_timeline->id }}" type="button">COMMENT</button>
                                           </div>
                                        </div>
                                        {{-- create comment --}}
@@ -263,9 +275,6 @@
             @include('admin.pages.post_timelines.right_nav')
          </div>
       </div>
-
-
-
 
       <hr>
       <script type="text/javascript">
@@ -305,7 +314,7 @@
    function myFunction(id) {
  
    var x = document.getElementById(id);
-   console.log(x);
+   // console.log(x);
    if (x.style.display === "none") {
       x.style.display = "block";
    } else {
@@ -338,7 +347,62 @@
              });
    
    });
+
+     function mydFunction(id , inputad) {
+      //   console.log(id);
+
+      //   $('.comment').on('click ', function (e) {
+                 var inputad = $(inputad).val();
+               
+                 $.ajax({
+                     url: "{{route('add_comment_ajax')}}",
+                     type: "POST",
+                     data: {
+                         id:id,
+                         inputad:inputad,
+                         _token: '{{csrf_token()}}'
+                     },
+                    success:function(response){
+                     if(response)
+                        {
+                           $('#tbody').append(response.result);
+                           toastr.success(" Comment Added Successfuly ");
+                        }
+                     },
+                 });
    
+            //  });
+        }
+
+   ///save comment
+   //     $(document).ready(function(){
+   //           //change status active
+   //           $('.comment').on('click ', function (e) {
+   //             //   var comment = $('.comment').val();
+   //               var comment_input = $('.comment_input').val();
+   //                var id = $(this).attr('data-id');
+   //                var comm_id = $('#com').attr('data-id');
+   //                console.log(comm_id);
+   //               $.ajax({
+   //                   url: "{{route('add_comment_ajax')}}",
+   //                   type: "POST",
+   //                   data: {
+   //                       comment_input: comment_input,
+   //                       new_id:new_id,
+   //                       comm_id:comm_id,
+   //                       _token: '{{csrf_token()}}'
+   //                   },
+   //                  success:function(response){
+   //                   if(response)
+   //                      {
+   //                         toastr.success(" Comment Added Successfuly ");
+   //                      }
+   //                   },
+   //               });
+   
+   //           });
+   
+   // });
 
 </script>
 @endsection

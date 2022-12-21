@@ -89,8 +89,21 @@ class TimelinePostController extends Controller
      */
     public function update(PostTimelineRequest $request, $id)
     {
+        // return $request;
         $timeline_post = TimelinePost::find($id);
-        $timeline_post->update($request->all());
+        if($request->img_delete ==1)
+        {
+            $timeline_post->photo = null;
+            $timeline_post->save();
+        }
+        $timeline_post->user_id = $request->user_id;
+            $timeline_post->post = $request->post;
+        if (request()->photo){
+            $filename = time().'.'.request()->photo->getClientOriginalExtension();
+            request()->photo->move(public_path('data/timeline_posts'), $filename);
+            $timeline_post->photo=$filename;
+        }
+        $timeline_post->save();
         return redirect()->route('timeline_posts.index')->with('success', 'Status Changed Successfully');  
     }
 
@@ -131,10 +144,15 @@ class TimelinePostController extends Controller
         
     }  
     
-    //     public function comment_status_change(Request $request, $id)
-    // {
-    //     $post_comments = PostComment::find($id);
-    //     $post_comments->update(['status'=> $request->status]);
-    //     return redirect()->back()->with('success', 'Status Changed Successfully');  
-    // }
+        public function add_comment_ajax(Request $request)
+    {
+        // return $request;
+        $post_comments = new PostComment();
+        $post_comments->user_id = Auth::user()->id; 
+        $post_comments->timeline_post_id = $request->id;
+        $post_comments->comment = $request->inputad;
+        $post_comments->save();
+        $html = view('admin.pages.post_timelines.div_show_comment_ajax', compact('post_comments'))->render();
+        return response()->json(['status' => true, 'result' => $html]);
+    }
 }

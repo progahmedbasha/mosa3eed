@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Ad\AdStoreRequest;
 use App\Models\Ad;
 class AdController extends Controller
 {
@@ -33,7 +34,7 @@ class AdController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdStoreRequest $request)
     {
         $ad= new Ad;
         $ad->title = $request->title;
@@ -76,9 +77,23 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdStoreRequest $request, $id)
     {
-        //
+        $ad= Ad::find($id);
+        if($request->img_delete ==1)
+            {
+                $ad->photo = null;
+                $ad->save();
+            }
+        $ad->title = $request->title;
+        $ad->link = $request->link;
+        if (request()->photo){
+            $filename = time().'.'.request()->photo->getClientOriginalExtension();
+            request()->photo->move(public_path('data/org_ads'), $filename);
+            $ad->photo=$filename;
+            }
+        $ad->save();
+        return back();
     }
 
     /**
@@ -89,6 +104,8 @@ class AdController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ad = Ad::find($id);
+        $ad->delete();
+        return redirect()->route('timeline_posts.index')->with('success','Missed Ad Deleted Successfully');
     }
 }

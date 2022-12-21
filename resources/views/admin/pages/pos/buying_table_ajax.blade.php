@@ -17,7 +17,7 @@
     //
         $('.delete').click(function(){
                     $(this).closest('tr').remove();
-                    $id_product = $(this).attr('data-id');
+                    $id_product = $(this).attr('data-id'); $id_product = $(this).attr('data-id');
                     $.ajax({
                             url: "{{route('sale_ajax_destroy')}}",
                             type: "Delete",

@@ -28,13 +28,12 @@
             <div class="col-md-12">
 
                 @foreach ($ads as $ad)
-                @if ($ad->photo !==null)
+                @if ($ad->title !=null)
                 <div class="video-card video-card-list">
                     <div class="video-card-image">
                         <a class="play-icon" href="#"><i class="fas fa-eye"></i></a>
                         <a href="{{ $ad->link }}"><img class="img-fluid" src="{{url('/data/org_ads')}}/{{$ad->photo }}"
                                 alt=""></a>
-                        {{-- <div class="time">3:50</div> --}}
                     </div>
                     <div class="video-card-body">
                         <div class="btn-group float-right right-action">
@@ -43,11 +42,14 @@
                                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="organizations/{{$ad->id}}/edit"><i
-                                        class="fa fa-edit"></i> &nbsp; Edit</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp;
-                                    Viewed</a>
-                                <form action="{{route('organizations.destroy',$ad->id)}} " method="POST">
+                                {{-- <a class="dropdown-item" href="organizations/{{$ad->id}}/edit"><i
+                                    class="fa fa-edit"></i> &nbsp; Edit</a> --}}
+                                <button class="dropdown-item" data-effect="effect-sign" data-toggle="modal"
+                                    data-target="#ModalAddEdit{{ $ad->id }}" style="background: transparent;border: 0;"
+                                    data-kt-customer-table-filter="delete_row"><i class="fas fa-edit"></i>
+                                    Edit</button>
+
+                                <form action="{{route('ads.destroy',$ad->id)}} " method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <div class="channels-card-image-btn">
@@ -61,6 +63,8 @@
                                     Close</a>
                             </div>
                         </div>
+                        @include('admin.pages.post_timelines.edit_ad_modal')
+
                         <div class="video-title">
                             <a href="#">{{ $ad->title }}</a>
                         </div>
@@ -74,18 +78,18 @@
                     </div>
                 </div>
                 @else
-                <div class="adblock mt-0">
-                    <div class="btn-group float-right right-action">
+                <div class="adblock mt-0" style="padding:0px 0px;">
+                    <div class="btn-group float-right right-action" style="position: absolute;">
                         <a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            <i class="fa fa-ellipsis-v" aria-hidden="true" style="margin-left: 268px;"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="organizations/{{$ad->id}}/edit"><i class="fa fa-edit"></i>
-                                &nbsp; Edit</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-fw fa-signal"></i> &nbsp;
-                                Viewed</a>
-                            <form action="{{route('organizations.destroy',$ad->id)}} " method="POST">
+                            <button class="dropdown-item" data-effect="effect-sign" data-toggle="modal"
+                                data-target="#ModalAddEdit{{ $ad->id }}" style="background: transparent;border: 0;"
+                                data-kt-customer-table-filter="delete_row"><i class="fas fa-edit"></i>
+                                Edit</button>
+                            <form action="{{route('ads.destroy',$ad->id)}} " method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <div class="channels-card-image-btn">
@@ -99,10 +103,12 @@
                                 Close</a>
                         </div>
                     </div>
-                    <div class="img">
-                        Google AdSense<br>
-                        336 x 280
-                    </div>
+                     @include('admin.pages.post_timelines.edit_ad_modal_only_pic')
+                    {{-- <div class="img"> --}}
+                    <img src="{{url('/data/org_ads')}}/{{$ad->photo }}" style="height: 93px;width: 242px;">
+                    {{-- Google AdSense<br>
+                        336 x 280 --}}
+                    {{-- </div> --}}
                 </div>
                 @endif
                 @endforeach
