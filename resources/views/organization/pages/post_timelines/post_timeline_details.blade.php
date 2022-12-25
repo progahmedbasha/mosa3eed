@@ -16,7 +16,7 @@
             <div class="row">
                <h5 class="card-title">Post From User : ( {{$timeline_post->User->name}} )</h5>
             </div>
-            <form action="{{route('organization_timeline_posts.update',$timeline_post->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('timeline_posts.update',$timeline_post->id)}}" method="post" enctype="multipart/form-data">
                @csrf
                 @method('patch')
                <div class="form-row">

@@ -9,23 +9,10 @@
       <div id="wrapper">
 
          @include('branch_admin.layouts.sidebar')
-@include('branch_admin.layouts.javascripts')
+         @include('branch_admin.layouts.javascripts')
 
-         <div id="content-wrapper">
-            <div class="container-fluid pb-0">
+         @yield('content')
 
-               <div class="top-category section-padding mb-4">
-                  @yield('content')
-
-               </div>
-
-            </div>
-
-         </div>
-
-
-
-         
    </body>
    @include('branch_admin.layouts.footer')
 

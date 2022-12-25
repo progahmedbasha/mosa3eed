@@ -9,23 +9,10 @@
       <div id="wrapper">
 
          @include('organization.layouts.sidebar')
-@include('organization.layouts.javascripts')
+         @include('organization.layouts.javascripts')
 
-         <div id="content-wrapper">
-            <div class="container-fluid pb-0">
+         @yield('content')
 
-               <div class="top-category section-padding mb-4">
-                  @yield('content')
-
-               </div>
-
-            </div>
-
-         </div>
-
-
-
-         
    </body>
    @include('organization.layouts.footer')
 

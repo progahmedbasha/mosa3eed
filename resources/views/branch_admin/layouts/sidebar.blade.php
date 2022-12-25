@@ -1,4 +1,7 @@
 <style>
+   .sidebar .nav-item .nav-link {
+          padding: 12px 22px!important;
+   }
    /* Fixed sidenav, full height */
    .sidenav {
 
@@ -8,7 +11,7 @@
    /* Style the sidenav links and the dropdown button */
    .sidenav a,
    .dropdown-btn {
-      padding: 6px 8px 6px 14px;
+      padding: 6px 8px 6px 24px;
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
@@ -82,57 +85,38 @@
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('branch_admin_profile.index')}}">
-         <i class="fas fa-fw fa-users"></i>
+         <i class="fas fa-fw fa-user"></i>
          <span>Profile</span>
       </a>
    </li>
    <li class="nav-item">
-      <a class="nav-link" href="{{route('branch_admin_branches.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
-         <span>Branches</span>
-      </a>
-   </li>
-   <li class="nav-item">
       <a class="nav-link" href="{{route('branch_admin_purchases.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
+         <i class="fa fa-shopping-cart"></i>
          <span>Purchases</span>
       </a>
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('branch_admin_branch_medicins.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
+         <i class="fa fa-plus-square"></i>
          <span>Branch Medicins</span>
       </a>
    </li>
 
-   {{-- <div class="sidenav">
-      <button class="dropdown-btn"><i class="fas fa-fw fa-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span>Countries</span>
-         <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-container">
-         <a class="dropdown-item" href="{{route('countries.index')}}">Countries</a>
-         <a class="dropdown-item" href="{{route('cities.index')}}">City</a>
-         <a class="dropdown-item" href="{{route('districts.index')}}">District</a>
-      </div>
-
-   </div> --}}
-
-
    <li class="nav-item">
       <a class="nav-link" href="{{route('branch_admin_sale_page.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
+         <i class="fa fa-shopping-basket"></i>
          <span>Orders</span>
       </a>
    </li>
    <li class=" nav-item">
             <a class="nav-link" target="__blank" href="{{route('branch_admin_sale_page.create')}}">
-               <i class="fas fa-fw fa-history"></i>
+               <i class="fas fa-receipt"></i>
                <span>POS</span>
             </a>
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('branch_admin_timeline_posts.index')}}">
-         <i class="fas fa-fw fa-history"></i>
+         <i class="fas fa-fw fa-indent"></i>
          <span>TimeLine Posts</span>
       </a>
    </li>

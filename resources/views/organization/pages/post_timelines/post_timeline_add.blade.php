@@ -16,7 +16,7 @@
             <div class="row">
                <h5 class="card-title">Form Post</h5>
             </div>
-            <form action="{{route('organization_timeline_posts.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('timeline_posts.store')}}" method="post" enctype="multipart/form-data">
                @csrf
                <div class="form-row">
                   <div class="col">

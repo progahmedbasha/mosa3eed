@@ -152,9 +152,10 @@ Route::group(
                     Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
                     Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
                     Route::resource('organization_timeline_posts', OrganizationAdmin\TimelinePostController::class);
-                    Route::get('post_like/{id}', 'OrganizationAdmin\TimelinePostController@post_like')->name('post_like');
-                    Route::get('org_post_comment/{id}', 'OrganizationAdmin\TimelinePostController@post_comment')->name('org_post_comment');
-                    Route::post('org_comment_status_change/{id}', 'OrganizationAdmin\TimelinePostController@comment_status_change')->name('org_comment_status_change');
+                     Route::post('change_comment_satus', 'OrganizationAdmin\TimelinePostController@change_comment_satus')->name('org_change_comment_satus');
+                      Route::resource('org_ads',OrganizationAdmin\AdController::class);
+                    Route::post('add_comment_ajax', 'OrganizationAdmin\TimelinePostController@add_comment_ajax')->name('org_add_comment_ajax');
+
 
                 });  
 });
@@ -176,7 +177,7 @@ Route::group(
                     Route::resource('branch_admin_profile', BranchAdmin\ProfileController::class);
                     // Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
                     // Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
-                    Route::resource('branch_admin_branches', BranchAdmin\UserBranchController::class);
+                    // Route::resource('branch_admin_branches', BranchAdmin\UserBranchController::class);
                      Route::resource('branch_admin_purchases', BranchAdmin\PurchaseController::class);
                     Route::resource('branch_admin_branch_medicins', BranchAdmin\BranchMedicinController::class);
                     Route::resource('branch_admin_sale_page', BranchAdmin\SalePageController::class);
@@ -192,9 +193,10 @@ Route::group(
                     Route::post('get_order_disc_persent_ajax', 'BranchAdmin\SalePageController@get_order_disc_persent_ajax')->name('get_order_disc_persent_ajax');
                     
                     Route::resource('branch_admin_timeline_posts', BranchAdmin\TimelinePostController::class);
-                    Route::get('post_like/{id}', 'BranchAdmin\TimelinePostController@post_like')->name('post_like');
-                    Route::get('branch_post_comment/{id}', 'BranchAdmin\TimelinePostController@post_comment')->name('branch_post_comment');
-                    Route::post('comment_status_change/{id}', 'BranchAdmin\TimelinePostController@comment_status_change')->name('comment_status_change');
+                   
+                    Route::post('change_comment_satus', 'OrganizationAdmin\TimelinePostController@change_comment_satus')->name('branch_change_comment_satus');
+                    Route::resource('branch_ads',BranchAdmin\AdController::class);
+                    Route::post('add_comment_ajax', 'OrganizationAdmin\TimelinePostController@add_comment_ajax')->name('branch_add_comment_ajax');
                     
 
                 });  

@@ -1,4 +1,7 @@
 <style>
+   .sidebar .nav-item .nav-link {
+          padding: 12px 22px!important;
+   }
    /* Fixed sidenav, full height */
    .sidenav {
 
@@ -8,7 +11,7 @@
    /* Style the sidenav links and the dropdown button */
    .sidenav a,
    .dropdown-btn {
-      padding: 6px 8px 6px 14px;
+      padding: 6px 8px 6px 24px;
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
@@ -82,25 +85,25 @@
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('organization_profile.index')}}">
-         <i class="fas fa-fw fa-users"></i>
+         <i class="fas fa-fw fa-user"></i>
          <span>Profile</span>
       </a>
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('pharmacy_admins.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
+         <i class="fa fa-users"></i>
          <span>Organization Admins</span>
       </a>
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('organization_branchs.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
+         <i class="fa fa-sitemap"></i>
          <span>Organization Branches</span>
       </a>
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('organization_purchases.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
+         <i class="fa fa-shopping-cart"></i>
          <span>Purchases</span>
       </a>
    </li>
@@ -120,31 +123,31 @@
 
    <li class="nav-item">
       <a class="nav-link" href="{{route('organization_branch_medicins.index')}}">
-         <i class="fas fa-fw fa-list-alt"></i>
+         <i class="fa fa-plus-square"></i>
          <span>Branches Medicins</span>
       </a>
    </li>
    <li class=" nav-item">
             <a class="nav-link"  href="{{route('organization_medicins.index')}}">
-               <i class="fas fa-fw fa-history"></i>
+               <i class="fa fa-plus-square"></i>
                <span>Medicins</span>
             </a>
    </li>
    <li class="nav-item">
       <a class="nav-link" href="{{route('organization_sale_page.index')}}">
-         <i class="fas fa-fw fa-history"></i>
+         <i class="fa fa-shopping-basket"></i>
          <span>Orders</span>
       </a>
    </li>
       <li class="nav-item">
       <a class="nav-link" target="__blank" href="{{route('organization_sale_page.create')}}">
-         <i class="fas fa-fw fa-history"></i>
+         <i class="fa fa-receipt"></i>
          <span>POS</span>
       </a>
    </li>
       <li class="nav-item">
       <a class="nav-link" href="{{route('organization_timeline_posts.index')}}">
-         <i class="fas fa-fw fa-history"></i>
+         <i class="fa fa-indent"></i>
          <span>TimeLine Posts</span>
       </a>
    </li>

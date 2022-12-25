@@ -75,9 +75,9 @@ class TimelinePostController extends Controller
      */
     public function edit($id)
     {
-        $timeline_post = TimelinePost::find($id);
-        $users = User::all();
-        return view('admin.pages.post_timelines.post_timeline_details', compact('timeline_post','users'));
+        // $timeline_post = TimelinePost::find($id);
+        // $users = User::all();
+        // return view('admin.pages.post_timelines.post_timeline_details', compact('timeline_post','users'));
     }
 
     /**
@@ -119,12 +119,12 @@ class TimelinePostController extends Controller
         $post->delete();
         return redirect()->route('timeline_posts.index')->with('success','Post Deleted Successfully');
     }
-     public function post_like($id)
-    {
-        $post_likes = PostLike::where('timeline_post_id', $id)->paginate(20);
-        $post_name = TimelinePost::where('id', $id)->first();
-        return view('admin.pages.post_timelines.post_likes_show', compact('post_likes','post_name'));
-    }
+    //  public function post_like($id)
+    // {
+    //     $post_likes = PostLike::where('timeline_post_id', $id)->paginate(20);
+    //     $post_name = TimelinePost::where('id', $id)->first();
+    //     return view('admin.pages.post_timelines.post_likes_show', compact('post_likes','post_name'));
+    // }
     public function change_comment_satus(Request $request)
     {
         $post_comments = PostComment::where('id', $request->new_id)->first();
