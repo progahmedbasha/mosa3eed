@@ -150,7 +150,8 @@ class TimelinePostController extends Controller
         $post_comments = new PostComment();
         $post_comments->user_id = Auth::user()->id; 
         $post_comments->timeline_post_id = $request->id;
-        $post_comments->comment = $request->inputad;
+        $post_comments->comment = $request->input_id;
+        $post_comments->status = "Active";
         $post_comments->save();
         $html = view('admin.pages.post_timelines.div_show_comment_ajax', compact('post_comments'))->render();
         return response()->json(['status' => true, 'result' => $html]);
