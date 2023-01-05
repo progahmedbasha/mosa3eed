@@ -1,7 +1,8 @@
 <style>
    .sidebar .nav-item .nav-link {
-          padding: 12px 22px!important;
+      padding: 12px 22px !important;
    }
+
    /* Fixed sidenav, full height */
    .sidenav {
 
@@ -89,24 +90,30 @@
          <span>Profile</span>
       </a>
    </li>
-   <li class="nav-item">
+      <li class="nav-item">
+      <a class="nav-link" href="{{route('user_organizations.index')}}">
+         <i class="fa fa-university"></i>
+         <span>Organizations</span>
+      </a>
+   </li>
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('pharmacy_admins.index')}}">
          <i class="fa fa-users"></i>
          <span>Organization Admins</span>
       </a>
-   </li>
-   <li class="nav-item">
+   </li> --}}
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('organization_branchs.index')}}">
          <i class="fa fa-sitemap"></i>
          <span>Organization Branches</span>
       </a>
-   </li>
-   <li class="nav-item">
+   </li> --}}
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('organization_purchases.index')}}">
          <i class="fa fa-shopping-cart"></i>
          <span>Purchases</span>
       </a>
-   </li>
+   </li> --}}
 
    {{-- <div class="sidenav">
       <button class="dropdown-btn"><i class="fas fa-fw fa-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span>Countries</span>
@@ -114,45 +121,59 @@
       </button>
       <div class="dropdown-container">
          <a class="dropdown-item" href="{{route('countries.index')}}">Countries</a>
-         <a class="dropdown-item" href="{{route('cities.index')}}">City</a>
-         <a class="dropdown-item" href="{{route('districts.index')}}">District</a>
-      </div>
+   <a class="dropdown-item" href="{{route('cities.index')}}">City</a>
+   <a class="dropdown-item" href="{{route('districts.index')}}">District</a>
+   </div>
 
    </div> --}}
 
 
-   <li class="nav-item">
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('organization_branch_medicins.index')}}">
          <i class="fa fa-plus-square"></i>
          <span>Branches Medicins</span>
       </a>
-   </li>
-   <li class=" nav-item">
-            <a class="nav-link"  href="{{route('organization_medicins.index')}}">
-               <i class="fa fa-plus-square"></i>
-               <span>Medicins</span>
-            </a>
-   </li>
-   <li class="nav-item">
+   </li> --}}
+   {{-- <li class=" nav-item">
+      <a class="nav-link" href="{{route('organization_medicins.index')}}">
+         <i class="fa fa-plus-square"></i>
+         <span>Medicins</span>
+      </a>
+   </li> --}}
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('organization_sale_page.index')}}">
          <i class="fa fa-shopping-basket"></i>
          <span>Orders</span>
       </a>
-   </li>
-      <li class="nav-item">
+   </li> --}}
+   {{-- <li class="nav-item">
       <a class="nav-link" target="__blank" href="{{route('organization_sale_page.create')}}">
          <i class="fa fa-receipt"></i>
          <span>POS</span>
       </a>
-   </li>
-      <li class="nav-item">
+   </li> --}}
+   {{-- <div class="sidenav">
+      <button class="dropdown-btn"><i class="fa fa-bars"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>HR</span>
+         <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('org_shifts.index')}}">Shifts</a>
+         <a class="dropdown-item" style="margin-left: 17px;"
+            href="{{route('org_attendances.index')}}">Attendance</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('org_shifts.create')}}">Easy
+            Sign</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('org_employees.index')}}">Employee</a>
+      </div>
+
+   </div> --}}
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('organization_timeline_posts.index')}}">
          <i class="fa fa-indent"></i>
          <span>TimeLine Posts</span>
       </a>
-   </li>
- 
-<hr>
+   </li> --}}
+
+   <hr>
 </ul>
 <script>
    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */

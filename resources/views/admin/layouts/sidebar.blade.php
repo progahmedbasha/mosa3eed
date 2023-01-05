@@ -1,7 +1,8 @@
 <style>
    .sidebar .nav-item .nav-link {
-          padding: 12px 22px!important;
+      padding: 12px 22px !important;
    }
+
    /* Fixed sidenav, full height */
    .sidenav {
 
@@ -101,12 +102,26 @@
          <span>Medicins</span>
       </a>
    </li>
-   <li class="nav-item">
+
+   <div class="sidenav">
+      <button class="dropdown-btn"><i
+            class="fa fa-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Settings</span>
+         <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+         <a class="dropdown-item" style="margin-left: 17px;"
+            href="{{route('effective_materials.index')}}">EffectiveMaterial</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('suppliers.index')}}">Suppliers</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('medicin_shapes.index')}}">Medicin Shape</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('medicin_types.index')}}">Medicin Types</a>
+      </div>
+   </div>
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('settings.index')}}">
          <i class="fa fa-cog"></i>
          <span>Settings</span>
       </a>
-   </li>
+   </li> --}}
 
    <div class="sidenav">
       <button class="dropdown-btn"><i class="fa fa-globe"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span>Countries</span>
@@ -120,24 +135,24 @@
 
    </div>
 
-   <li class="nav-item">
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('branchs.index')}}">
          <i class="fa fa-sitemap"></i>
          <span>Branchs</span>
       </a>
-   </li>
-   <li class=" nav-item">
+   </li> --}}
+   {{-- <li class=" nav-item">
       <a class="nav-link" href="{{route('organization_admins.index')}}">
          <i class="fa fa-users"></i>
          <span>Organization Admins</span>
       </a>
-   </li>
-   <li class="nav-item">
+   </li> --}}
+   {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('branch_admins.index')}}">
          <i class="fa fa-users"></i>
          <span>Branch Admins</span>
       </a>
-   </li>
+   </li> --}}
 
 
    <div class="sidenav">
@@ -146,8 +161,10 @@
       </button>
       <div class="dropdown-container">
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('organization_shifts.index')}}">Shifts</a>
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('organization_attendances.index')}}">Attendance</a>
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('organization_attendances.create')}}">Easy Sign</a>
+         <a class="dropdown-item" style="margin-left: 17px;"
+            href="{{route('organization_attendances.index')}}">Attendance</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('organization_attendances.create')}}">Easy
+            Sign</a>
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees.index')}}">Employee</a>
       </div>
 
@@ -164,7 +181,7 @@
       </div>
 
    </div>
- 
+
    <li class="nav-item">
       <a class="nav-link" href="{{route('purchases.index')}}">
          <i class="fa fa-shopping-cart"></i>
@@ -172,7 +189,7 @@
       </a>
    </li>
 
- 
+   
 
    <li class="nav-item">
       <a class="nav-link" href="{{route('missed_items.index')}}">
@@ -186,7 +203,7 @@
          <span>Packages</span>
       </a>
    </li>
- 
+
    <li class="nav-item">
       <a class="nav-link" href="{{route('timeline_posts.index')}}">
          <i class="fa fa-indent"></i>

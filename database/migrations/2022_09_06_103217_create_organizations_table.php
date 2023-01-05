@@ -19,12 +19,15 @@ class CreateOrganizationsTable extends Migration
             $table->text('contact_name');
             $table->string('phone');
             $table->string('email');
+            $table->string('bio')->nullable();
             $table->string('photo')->nullable();
             $table->integer('district_id')->unsigned();
             $table->foreign('district_id')->references('id')->on('districts');
             $table->string('address');
             $table->string('type');
             $table->string('status');
+            $table->integer('owner_id')->unsigned()->nullable();
+            $table->foreign('owner_id')->references('id')->on('owners');
             $table->timestamps();
         });
     }

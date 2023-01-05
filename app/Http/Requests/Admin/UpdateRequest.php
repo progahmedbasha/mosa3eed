@@ -32,7 +32,6 @@ class UpdateRequest extends FormRequest
             'country_id' => 'required', 
             'city_id' => 'required', 
             'district_id' => 'required', 
-            'organization_id' => 'required',   
         ];
     }
 }

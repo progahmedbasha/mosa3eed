@@ -15,7 +15,12 @@ class OrganizationAdminSeeder extends Seeder
     {
           DB::table('organization_admins')->insert([
             'organization_id' => 1,
-            'user_id' => 2,
+            'user_id' => 3,
+            'type' => 'Owner Admin'
+        ]);
+          DB::table('organization_admins')->insert([
+            'organization_id' => 1,
+            'user_id' => 4,
             'type' => 'Organization Admin'
         ]);
     }

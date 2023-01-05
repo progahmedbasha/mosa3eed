@@ -12,7 +12,7 @@ class Organization extends Model
 {
     use HasFactory,HasTranslations;
     public $guarded = [];
-    public $translatable = ['name','contact_name'];
+    public $translatable = ['name'];
 
        public function scopeWhenSearch($query,$search){
         return $query->when($search,function($q)use($search){
@@ -26,15 +26,19 @@ class Organization extends Model
           
       }
 
-      public function User()
+    public function User()
    {
      return $this->hasMany('App\Models\User');
    }
-        public function Branch()
+    public function Owner()
+    {
+      return $this->belongsTo('App\Models\Owner');
+    }
+    public function Branch()
    {
      return $this->hasMany('App\Models\admin\Branch');
    }
-     public function District()
+    public function District()
     {
       return $this->belongsTo('App\Models\District');
     }

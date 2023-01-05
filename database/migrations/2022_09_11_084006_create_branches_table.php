@@ -25,6 +25,8 @@ class CreateBranchesTable extends Migration
             $table->integer('district_id')->unsigned();
             $table->foreign('district_id')->references('id')->on('districts');
             $table->string('address');
+            // $table->integer('organization_shift_id')->unsigned()->nullable();
+            // $table->foreign('organization_shift_id')->references('id')->on('organization_shifts');
             $table->timestamps();
         });
     }

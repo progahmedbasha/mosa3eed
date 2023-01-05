@@ -48,6 +48,9 @@ class OrganizationAdminController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        // for return page after update
+        $org_id = $request->input('organization_id');
+
         if(request()->branch_id)
         {
             $admin = new OrganizationAdmin();
@@ -84,7 +87,7 @@ class OrganizationAdminController extends Controller
             User::where('id', $admin->user_id)->update(['user_type_id' => 3]);
         }
         
-        return redirect()->route('organization_admins.index')->with('success','Organization Admin Added Successfully');
+        return redirect()->route('organizations.show',$org_id)->with('success','Organization Admin Added Successfully');
     }
 
     /**
@@ -125,6 +128,9 @@ class OrganizationAdminController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        // for return page after update
+        $org_id = $request->input('organization_id');
+
            $branchs = request()->branch_id;
             foreach ($branchs as $key => $branch) {
                 // for save only selected branch
@@ -171,7 +177,7 @@ class OrganizationAdminController extends Controller
                         User::where('id', $admin->user_id)->update(['user_type_id' => 3]);
                 }
             }
-        return redirect()->route('organization_admins.index')->with('success','Organization Admin Added Successfully');
+        return redirect()->route('organizations.show',$org_id)->with('success','Organization Admin Updated Successfully');
     }
 
     /**
@@ -184,8 +190,7 @@ class OrganizationAdminController extends Controller
     {
         $admin = OrganizationAdmin::find($id);
         $admin->delete();
-        Session::flash('success','Organization Admin Deleted Successfully');
-        return redirect()->route('organization_admins.index');
+        return redirect()->back()->with('success','Admin Deleted Successfully');
     }
 
 }

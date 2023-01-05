@@ -19,8 +19,11 @@
                <div class="card-body">
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('organizations.create') }}" class="btn  btn-outline-primary">Add</a>
+                        <button type="submit" data-effect="effect-sign" 
+                        data-toggle="modal" href="#modaldemo9" class="btn btn-primary">Add</button>
                      </div>
+                     
+                     @include('admin.pages.organizations.modal_add')
                      {{-- search --}}
                      <div class="col mb-3">
                         <form method="get" class="form-inline" action="{{url('admin/organizations')}}"
@@ -58,15 +61,21 @@
                                           View &
                                           Edit
                                        </a></li>
-                                    <li><a class="dropdown-item" style="padding: 3px 14px!important"
-                                          href="organizations/{{$organization->id}}"><i class="fas fa-university"></i>
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                          href="organization_branches/{{$organization->id}}"><i
+                                             class="fas fa-university"></i>
                                           Branches</a>
                                     </li>
-                                    <li><a class="dropdown-item" style="padding: 3px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
                                           href="org_admins/{{ $organization->id }}"><i class="fas fa-user-circle"></i>
                                           Admins</a>
                                     </li>
-                                    <li><a class="dropdown-item" style="padding: 3px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                          href="branch_admins/{{ $organization->id }}"><i
+                                             class="fas fa-user-circle"></i>
+                                          Branch Admins</a>
+                                    </li>
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
                                           href="employees/{{ $organization->id }}"><i class="fas fa-users"></i>
                                           employees</a>
                                     </li>
@@ -85,7 +94,7 @@
                                     </li>
                                  </ul>
                               </div>
-                              <a href="organizations/{{$organization->id}}/edit">
+                              <a href="organizations/{{$organization->id}}">
                                  @if(!empty($organization->photo))
                                  <img class="img-fluid" src="{{url('/data/organizations')}}/{{$organization->photo }}"
                                     alt="" style="height: 154px;">

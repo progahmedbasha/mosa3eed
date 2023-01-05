@@ -19,7 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('phone');
             $table->integer('organization_id')->unsigned();
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
-            $table->integer('branch_id')->unsigned();
+            $table->integer('branch_id')->unsigned()->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->timestamps();
         });

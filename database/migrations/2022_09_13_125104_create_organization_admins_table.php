@@ -21,8 +21,7 @@ class CreateOrganizationAdminsTable extends Migration
             // $table->foreign('branch_id')->references('id')->on('branches');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('organization_shift_id')->unsigned()->nullable();
-            $table->foreign('organization_shift_id')->references('id')->on('organization_shifts');
+       
             $table->string('type')->nullable();
             $table->timestamps();
         });

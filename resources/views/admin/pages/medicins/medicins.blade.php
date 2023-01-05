@@ -37,20 +37,10 @@
                               <th>#</th>
                               <th>Medicin Name</th>
                               <th>Barcode</th>
-                              <th>Price</th>
                               <th>Action</th>
 
                            </tr>
                         </thead>
-                        <tfoot>
-                           <tr>
-                              <th>#</th>
-                              <th>Medicin Name</th>
-                              <th>Barcode</th>
-                              <th>Price</th>
-                              <th>Action</th>
-                           </tr>
-                        </tfoot>
                         <tbody>
 
                            @foreach($medicins as $index=>$medicin)
@@ -58,7 +48,6 @@
                               <td>{{ $index+1 }}</td>
                               <td>{{ $medicin->name }}</td>
                               <td>{{ $medicin->barcode }}</td>
-                              <td>{{ $medicin->price }}</td>
 
                               <td>
                                  <div class="btn-icon-list">

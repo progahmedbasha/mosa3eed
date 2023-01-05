@@ -114,6 +114,20 @@
                <span>POS</span>
             </a>
    </li>
+      <div class="sidenav">
+      <button class="dropdown-btn"><i class="fa fa-bars"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>HR</span>
+         <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('branch_shifts.index')}}">Shifts</a>
+         <a class="dropdown-item" style="margin-left: 17px;"
+            href="{{route('branch_attendances.index')}}">Attendance</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('branch_shifts.create')}}">Easy
+            Sign</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('branch_employees.index')}}">Employee</a>
+      </div>
+
+   </div>
    <li class="nav-item">
       <a class="nav-link" href="{{route('branch_admin_timeline_posts.index')}}">
          <i class="fas fa-fw fa-indent"></i>

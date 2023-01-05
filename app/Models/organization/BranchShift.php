@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class OrganizationShift extends Model
+class BranchShift extends Model
 {
     use HasFactory,HasTranslations;
 

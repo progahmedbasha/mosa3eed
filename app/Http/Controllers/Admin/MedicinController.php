@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Medicin\StoreRequest;
 use Illuminate\Http\Request;
 use App\Models\admin\Medicin;
+use App\Models\EffectiveMaterial;
+use App\Models\MedicinShape;
+use App\Models\MedicinType;
+use App\Models\Unit;
 use Session;
 class MedicinController extends Controller
 {
@@ -28,7 +32,10 @@ class MedicinController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.medicins.medicin_add');
+        $effective_materials = EffectiveMaterial::all();
+        $medicin_shapes = MedicinShape::all();
+        $medicin_types = MedicinType::all();
+        return view('admin.pages.medicins.medicin_add', compact('effective_materials','medicin_shapes','medicin_types'));
     }
 
     /**
@@ -37,14 +44,28 @@ class MedicinController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {  
+        $unit = new Unit();
+        $unit->big = $request->big;
+        $unit->center = $request->center;
+        $unit->small = $request->small;
+        $unit->save();
+
         $medicin = new Medicin();
         $medicin->barcode = $request->input('barcode');
         $medicin
         ->setTranslation('name', 'en', $request->input('name_en'))
         ->setTranslation('name', 'ar', $request->input('name_ar')) ;
-        $medicin->price = $request->input('price');
+        $medicin->effective_material_id = $request->input('effective_material_id');
+        $medicin->barcode = $request->input('barcode');
+        $medicin->tags = $request->input('tags');
+        $medicin->description = $request->input('description');
+        $medicin->producing_company = $request->input('producing_company');
+        $medicin->medicin_type_id = $request->input('medicin_type_id');
+        $medicin->medicin_shape_id = $request->input('medicin_shape_id');
+        $medicin->expected_discount = $request->input('expected_discount');
+        $medicin->unit_id = $unit->id;
         $medicin->save();
         Session::flash('success','Medicin Added Successfully');
         return redirect()->route('medicins.index');
@@ -70,7 +91,11 @@ class MedicinController extends Controller
     public function edit($id)
     {
         $medicin = Medicin::find($id);
-        return view('admin.pages.medicins.medicin_details', compact('medicin'));
+        $effective_materials = EffectiveMaterial::all();
+        $medicin_shapes = MedicinShape::all();
+        $medicin_types = MedicinType::all();
+        $medicin_unit = Unit::where('id', $medicin->unit_id)->first();
+        return view('admin.pages.medicins.medicin_details', compact('medicin','effective_materials','medicin_shapes','medicin_types','medicin_unit'));
     }
 
     /**
@@ -80,15 +105,28 @@ class MedicinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $medicin = Medicin::find($id);
         $medicin->barcode = $request->input('barcode');
         $medicin
         ->setTranslation('name', 'en', $request->input('name_en'))
         ->setTranslation('name', 'ar', $request->input('name_ar')) ;
-        $medicin->price = $request->input('price');
+        $medicin->effective_material_id = $request->input('effective_material_id');
+        $medicin->barcode = $request->input('barcode');
+        $medicin->tags = $request->input('tags');
+        $medicin->description = $request->input('description');
+        $medicin->producing_company = $request->input('producing_company');
+        $medicin->medicin_type_id = $request->input('medicin_type_id');
+        $medicin->medicin_shape_id = $request->input('medicin_shape_id');
+        $medicin->expected_discount = $request->input('expected_discount');
         $medicin->save();
+
+        $medicin_unit = Unit::where('id', $medicin->unit_id)->first();
+        $medicin_unit->big = $request->big;
+        $medicin_unit->center = $request->center;
+        $medicin_unit->small = $request->small;
+        $medicin_unit->save();
         Session::flash('success','Medicin Updated Successfully');
         return redirect()->route('medicins.index');
     }

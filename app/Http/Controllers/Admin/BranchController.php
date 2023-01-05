@@ -49,6 +49,9 @@ class BranchController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        // for return page after update
+        $org_id = $request->input('organization_id');
+
         $branch = new Branch();
         $branch
         ->setTranslation('name', 'en', $request->input('name_en'))
@@ -65,8 +68,7 @@ class BranchController extends Controller
             $branch->photo=$filename;
             }
         $branch->save();
-        Session::flash('success','Branch Added Successfully');
-        return redirect()->route('branchs.index');
+        return redirect()->route('organizations.show',$org_id)->with('success','Branch Added Successfully');
     }
 
     /**
@@ -107,6 +109,9 @@ class BranchController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        // for return page after update
+        $org_id = $request->input('organization_id');
+
         $branch = Branch::find($id);
         $branch
         ->setTranslation('name', 'en', $request->input('name_en'))
@@ -123,8 +128,7 @@ class BranchController extends Controller
             $branch->photo=$filename;
             }
         $branch->save();
-        Session::flash('success','Branch Updated Successfully');
-        return redirect()->route('branchs.index');
+        return redirect()->route('organizations.show',$org_id)->with('success','Branch Updated Successfully');
     }
 
     /**
@@ -139,7 +143,6 @@ class BranchController extends Controller
         $branch->JobPost()->delete();
         $branch->MissedItem()->delete();
         $branch->delete();
-        Session::flash('success','Branch Deleted Successfully');
-        return redirect()->route('branchs.index');
+        return redirect()->back()->with('success','Branch Deleted Successfully');
     }
 }

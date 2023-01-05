@@ -4,7 +4,7 @@
           $('#organization').on('change', function () {
               var organization_id = $('.organization_id').val();
               $.ajax({
-                  url: "{{route('fetch_branch')}}",
+                  url: "{{route('fetch_branchs')}}",
                   type: "POST",
                   data: {
                       organization_id: organization_id,

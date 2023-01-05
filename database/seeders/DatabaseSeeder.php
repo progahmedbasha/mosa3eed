@@ -35,6 +35,10 @@ class DatabaseSeeder extends Seeder
         UserBranchSeeder::class,
         EmployeeSeeder::class,
         AdSeeder::class,
+        EffectiveMaterialSeeder::class,
+        MedicinShapeSeeder::class,
+        MedicinTypeSeeder::class,
+        SupplierSeeder::class,
     ]);
     }
 }

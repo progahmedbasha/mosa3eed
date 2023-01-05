@@ -49,6 +49,8 @@ Route::get('/', function () {
 Route::get('sign_out', 'Auth\AuthController@logout')->name('sign_out');
 Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
 Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
+Route::post('fetch_branch', 'Fetch_branchController@fetch_branch')->name('fetch_branchs');
+
 // routes for admin
 Route::group(
     [
@@ -69,6 +71,9 @@ Route::group(
               
 
                     Route::resource('organizations', Admin\OrganizationController::class);
+
+                    Route::get('organization_branches/{id}', [OrganizationController::class, 'branches'])->name('organization_branches');
+                    // branch_admins here make
                      Route::get('org_admins/{id}', [OrganizationController::class,'org_admins'])->name('org_admins');
                     Route::resource('countries', CountryController::class);
                     Route::resource('cities', CityController::class);
@@ -107,8 +112,10 @@ Route::group(
                     Route::resource('employees', EmployeeController::class);
                     Route::resource('ads', AdController::class);
                     Route::post('add_comment_ajax', [TimelinePostController::class,'add_comment_ajax'])->name('add_comment_ajax');
-                    
-                    
+                    Route::resource('effective_materials', Effective_MaterialController::class);
+                    Route::resource('suppliers', SupplierController::class);
+                    Route::resource('medicin_shapes', Medicin_shapesController::class);
+                    Route::resource('medicin_types', Medicin_typesController::class);
                 });  
 });
 // routes for organization(pharmacy)
@@ -124,38 +131,42 @@ Route::group(
                     'middleware' => [ 'auth:sanctum', 'verified' , 'organization'],
                 ], function()
                 {
-                        // Route::get('organization_dashboard', function () {
-                        //     return view('organization.dashboard')->name('organization_dashboard');
-                        // })->name('dashboard');
-                    // Route::post('fetch_branch', [Jobs\JobPostController::class,'fetch_branch'])->name('fetch_branch');
+                    
                     Route::resource('organization_dashboard', OrganizationAdmin\DashboardController::class);
-                    Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
+                    Route::resource('user_organizations', OrganizationAdmin\OrganizationController::class);
+
+                    ///////
                     Route::get('organization_admin_edit/{user_id}/{id}', 'OrganizationAdmin\PharmacyAdminController@edite')->name('organization_admin_edit');
 
                     Route::resource('organization_medicins', OrganizationAdmin\MedicinController::class);
                     Route::resource('organization_profile', OrganizationAdmin\ProfileController::class);
                     Route::resource('organization_branchs', OrganizationAdmin\BranchController::class);
-                    
+                    Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
+                    Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
 
-                    Route::resource('organization_sale_page', OrganizationAdmin\SalePageController::class);
-                    Route::get('item_edite/{order}/{id}', 'OrganizationAdmin\SalePageController@item_edite')->name('org_item_edite');
-                    Route::patch('item_update/{id}', 'OrganizationAdmin\SalePageController@item_update')->name('org_item_update');
-                    Route::delete('order_item_delete/{order}/{id}', 'OrganizationAdmin\SalePageController@order_item_delete')->name('org_order_item_delete');
-                    Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('org_sale_store_ajax');
-                    Route::post('org_update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('org_update_qty_ajax');
-                    Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('org_sale_ajax_destroy');
-                    Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('org_get_bill_number_ajax');
-                    Route::post('get_order_disc_num_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_num_ajax')->name('org_get_order_disc_num_ajax');
-                    Route::post('get_order_disc_persent_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_persent_ajax')->name('org_get_order_disc_persent_ajax');
+
+                    // Route::resource('organization_sale_page', OrganizationAdmin\SalePageController::class);
+                    // Route::get('item_edite/{order}/{id}', 'OrganizationAdmin\SalePageController@item_edite')->name('org_item_edite');
+                    // Route::patch('item_update/{id}', 'OrganizationAdmin\SalePageController@item_update')->name('org_item_update');
+                    // Route::delete('order_item_delete/{order}/{id}', 'OrganizationAdmin\SalePageController@order_item_delete')->name('org_order_item_delete');
+                    // Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('org_sale_store_ajax');
+                    // Route::post('org_update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('org_update_qty_ajax');
+                    // Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('org_sale_ajax_destroy');
+                    // Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('org_get_bill_number_ajax');
+                    // Route::post('get_order_disc_num_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_num_ajax')->name('org_get_order_disc_num_ajax');
+                    // Route::post('get_order_disc_persent_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_persent_ajax')->name('org_get_order_disc_persent_ajax');
                     
                     // Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
-                    Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
-                    Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
-                    Route::resource('organization_timeline_posts', OrganizationAdmin\TimelinePostController::class);
-                     Route::post('change_comment_satus', 'OrganizationAdmin\TimelinePostController@change_comment_satus')->name('org_change_comment_satus');
-                      Route::resource('org_ads',OrganizationAdmin\AdController::class);
-                    Route::post('add_comment_ajax', 'OrganizationAdmin\TimelinePostController@add_comment_ajax')->name('org_add_comment_ajax');
+                    // Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
+                    // Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
+                    // Route::resource('organization_timeline_posts', OrganizationAdmin\TimelinePostController::class);
+                    // Route::post('change_comment_satus', 'OrganizationAdmin\TimelinePostController@change_comment_satus')->name('org_change_comment_satus');
+                    // Route::resource('org_ads',OrganizationAdmin\AdController::class);
+                    // Route::post('add_comment_ajax', 'OrganizationAdmin\TimelinePostController@add_comment_ajax')->name('org_add_comment_ajax');
 
+                    // Route::resource('org_shifts', OrganizationAdmin\OrganizationshiftController::class);
+                    // Route::resource('org_attendances', OrganizationAdmin\OrganizationAttendanceController::class);
+                    // Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
 
                 });  
 });
@@ -194,10 +205,13 @@ Route::group(
                     
                     Route::resource('branch_admin_timeline_posts', BranchAdmin\TimelinePostController::class);
                    
-                    Route::post('change_comment_satus', 'OrganizationAdmin\TimelinePostController@change_comment_satus')->name('branch_change_comment_satus');
+                    Route::post('change_comment_satus', 'BranchAdmin\TimelinePostController@change_comment_satus')->name('branch_change_comment_satus');
                     Route::resource('branch_ads',BranchAdmin\AdController::class);
-                    Route::post('add_comment_ajax', 'OrganizationAdmin\TimelinePostController@add_comment_ajax')->name('branch_add_comment_ajax');
+                    Route::post('add_comment_ajax', 'BranchAdmin\TimelinePostController@add_comment_ajax')->name('branch_add_comment_ajax');
                     
+                    Route::resource('branch_shifts', BranchAdmin\OrganizationshiftController::class);
+                    Route::resource('branch_attendances', BranchAdmin\OrganizationAttendanceController::class);
+                    Route::resource('branch_employees', BranchAdmin\EmployeeController::class);
 
                 });  
 });

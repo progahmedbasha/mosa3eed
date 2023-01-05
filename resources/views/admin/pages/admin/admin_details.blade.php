@@ -1,10 +1,10 @@
 @extends('admin.layouts.master')
 @section('content')
+
 <div id="content-wrapper">
 
 	<div class="container-fluid pb-0">
 		<div class="top-category section-padding mb-4">
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="main-title">
@@ -14,208 +14,173 @@
 			</div>
 		</div>
 		<hr>
-		<div class="row">
-			<div class="col-xl-12 mb-30">
-				<div class="card card-statistics h-100">
-					<div class="card-body">
-						<div class="row">
-							<h5 class="card-title">Form Admin</h5>
+		<form action="{{route('admin.update',$data->id)}}" method="post" enctype="multipart/form-data">
+			@csrf
+			@method('patch')
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								<label for="inputName">Name</label>
+								<input type="text" class="form-control" placeholder="Name" value="{{$data->name}}"
+									name="name" required />
+								@error('name')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputCity">Phone</label>
+								<input type="text" class="form-control" id="inputCity" value="{{$data->phone}}"
+									name="phone">
+								@error('phone')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
 						</div>
-						<form action="{{route('admin.update',$data->id)}}" method="post" enctype="multipart/form-data">
-							@csrf
-							@method('patch')
-							<div class="form-row">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								<label for="inputEmail4">Email</label>
+								<input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+									value="{{$data->email}}" name="email">
+								@error('email')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputPassword4">Password</label>
+								<input type="password" class="form-control" id="inputPassword4" placeholder="Password"
+									value="{{old('password')}}" name="password">
+								@error('password')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			{{-- end of row --}}
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								<label for="inputState">User Type</label>
+								<select id="inputState" class="form-control" name="user_type_id">
+									<option value="">Select User Type</option>
+									@foreach($user_types as $item)
+									<option value="{{$item->id}}" {{($data->user_type_id==$item->id)?
+										'selected':''}}
+										>{{$item->type}}</option>
+									@endforeach
+								</select>
+								@error('user_type_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputState">Organization</label>
+								<select id="inputState" class="form-control" name="organization_id">
+									<option value="">Select Organization</option>
+									@foreach($organizations as $org)
+									<option value="{{$org->id}}" {{($data->organization_id==$org->id)?
+										'selected':''}}>{{$org->name}}</option>
+									@endforeach
+								</select>
+								@error('organization_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputState">Photo</label>
 								<div class="col">
-									<label for="inputName">Name</label>
-									<input type="text" class="form-control" placeholder="Name" value="{{$data->name}}"
-										name="name" required />
-									@error('name')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputEmail4">Email</label>
-									<input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-										value="{{$data->email}}" name="email">
-									@error('email')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputPassword4">Password</label>
-									<input type="password" class="form-control" id="inputPassword4"
-										placeholder="Password" value="{{old('password')}}" name="password">
-									@error('password')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputCity">Phone</label>
-									<input type="text" class="form-control" id="inputCity" value="{{$data->phone}}"
-										name="phone">
-									@error('phone')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputState">Organization</label>
-									<select id="inputState" class="form-control" name="organization_id">
-										@foreach($organizations as $org)
-										<option value="{{$org->id}}" {{($data->organization_id==$org->id)?
-											'selected':''}}>{{$org->name}}</option>
-										@endforeach
-									</select>
-									@error('organization_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputState">User Type</label>
-									<select id="inputState" class="form-control" name="user_type_id">
-										{{-- <option value="">Select User Type</option> --}}
-										@foreach($user_types as $item)
-										<option value="{{$item->id}}" {{($data->user_type_id==$item->id)?
-											'selected':''}}
-											>{{$item->type}}</option>
-										@endforeach
-									</select>
-									@error('user_type_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputState">Country</label>
-									<select id="country-dd" class="form-control" name="country_id">
-										<option {{($country_id=$country_id)? 'selected' : '' }}> {{$country_id->name}}
-										</option>
-										<option value="">Select Country</option>
-										@foreach ($countries as $country)
-										<option value="{{$country->id}}">
-											{{$country->name}}
-										</option>
-										@endforeach
-									</select>
-									@error('country_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputState">City</label>
-									<select id="city-dd" class="form-control" name="city_id">
-										<option {{($city_id=$city_id)? 'selected' : '' }}> {{$city_id->name}}</option>
-									</select>
-									@error('city_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputState">District</label>
-									<select id="state-dd" class="form-control" name="district_id">
-										<option value="{{$data->district_id}}" {{($data->district_id ==
-											$data->district_id)?
-											'selected' : '' }}> {{$data->District->name}}</option>
-									</select>
-									@error('district_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="form-group col-md-6" style="margin-top:24px;">
 									<input type="file" class="custom-file-input" id="validatedCustomFile"
 										value="{{old('photo')}}" name="photo">
 									<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
 									<div class="invalid-feedback">Example invalid custom file feedback</div>
 								</div>
 							</div>
-							<br>
-							<button type="submit" class="btn btn-primary">Save</button>
-						</form>
+						</div>
 					</div>
 				</div>
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								<label for="inputState">Country</label>
+								<select id="country-dd" class="form-control" name="country_id">
+
+									<option value="">Select Country</option>
+									@foreach ($countries as $country)
+									<option value="{{$country->id}}" {{($country_id=$country)? 'selected' : '' }}>
+										{{$country->name}}
+									</option>
+									@endforeach
+								</select>
+								@error('country_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputState">City</label>
+								<select id="city-dd" class="form-control" name="city_id">
+									<option {{($city_id=$city_id)? 'selected' : '' }}> {{$city_id->name}}</option>
+								</select>
+								@error('city_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputState">District</label>
+								<select id="state-dd" class="form-control" name="district_id">
+									<option value="{{$data->district_id}}" {{($data->district_id ==
+										$data->district_id)?
+										'selected' : '' }}> {{$data->District->name}}</option>
+								</select>
+								@error('district_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
 			</div>
-		</div>
-		{{--div for show photo --}}
-		<br>
-		<div class="row">
-			<div class="col-xl-12 mb-30">
-				<div class="card card-statistics h-100">
-					<div class="card-body">
-						@if(!empty($data->photo))
+			<br>
+			<button type="submit" class="btn btn-primary">Save</button>
+		</form>
+		{{-- div for show photo --}}
+			<br>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								@if(!empty($data->photo))
 						<img src="{{url('/data/admins')}}/{{$data->photo }}" class="w3-round" width="200px"
 							alt="Norway">
 						@else
 						<img src="{{url('/data/error.png')}}" class="w3-round" width="200px" alt="Norway">
 						@endif
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		{{--div for show photo --}}
+			{{-- div for show photo --}}
+
 		<hr>
 	</div>
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function () {
-            $('#country-dd').on('change', function () {
-                var idCountry = this.value;
-                $("#city-dd").html('');
-                $.ajax({
-                    url: "{{route('fetch_city')}}",
-                    type: "POST",
-                    data: {
-                        city_id: idCountry,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (result) {
-                  console.log(result.cities);
-   
-                        $('#city-dd').html('<option value="">Select City</option>');
-                        $.each(result.cities, function (key, value) {
-                            $("#city-dd").append('<option value="' + value
-                                .id + '">' + value.name_en + '</option>');
-                        });
-                        // $('#city-dd').html('<option value="">Select City</option>');
-                    },
-                    
-                });
-            });
-                    $('#city-dd').on('change', function () {
-                        var idcity = this.value;
-                        $("#state-dd").html('');
-                        
-                        $.ajax({
-                            url: "{{route('fetchdistrict')}}",
-                            type: "POST",
-                            
-                            data: {
-                                city_id: idcity,
-                                _token: '{{csrf_token()}}'
-                            },
-                            dataType: 'json',
-                            success: function (result) {
-                             var locate = {!! json_encode(app()->getLocale()) !!};
-                          console.log(result.districts);
-   
-                                $('#state-dd').html('<option value="">Select City</option>');
-                                $.each(result.districts, function (key, value) {
-                                    $("#state-dd").append('<option value="' + value
-                                        .id + '">' + value.name[locate]+ '</option>');
-                                });
-                                // $('#city-dd').html('<option value="">Select City</option>');
-                            },
-                            
-                        });
-                    });
-        });
-</script>
+@include('admin.pages.component.country_city_district')
 @endsection

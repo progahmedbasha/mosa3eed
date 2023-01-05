@@ -20,14 +20,14 @@ class UsertypeSeeder extends Seeder
             'type' => 'Mosa3ed admin',
         ]);
           DB::table('user_types')->insert([
-            'type' => 'Pharmacy Admin',
+            'type' => 'Owner Admin',
         ]);
            DB::table('user_types')->insert([
-            'type' => 'Branch Admin',
+            'type' => 'Organization Admin',
         ]);
        
           DB::table('user_types')->insert([
-            'type' => 'supplier admin',
+            'type' => 'Branch admin',
         ]);
     }
 }

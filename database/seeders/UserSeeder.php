@@ -24,30 +24,35 @@ class UserSeeder extends Seeder
             
         ]);
         DB::table('users')->insert([
-            'name' => 'org',
-            'email' => 'org@gmail.com',
+            'name' => 'mosa3eed',
+            'email' => 'mosa3eed@gmail.com',
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
-            'organization_id' => '1',
-            'user_type_id' => '3',
+            'user_type_id' => '2',
             'district_id' => '1',
         ]);
         DB::table('users')->insert([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
+            'name' => 'owner',
+            'email' => 'owner@gmail.com',
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
-            'organization_id' => '1',
             'user_type_id' => '3',
             'district_id' => '1',
         ]);
             DB::table('users')->insert([
+            'name' => 'org',
+            'email' => 'org@gmail.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '123456789',
+            'user_type_id' => '4',
+            'district_id' => '1',
+        ]);
+         DB::table('users')->insert([
             'name' => 'branch',
             'email' => 'branch@gmail.com',
             'password' => Hash::make('12345678'),
             'phone' => '123456789',
-            'organization_id' => '1',
-            'user_type_id' => '4',
+            'user_type_id' => '5',
             'district_id' => '1',
         ]);
     }
