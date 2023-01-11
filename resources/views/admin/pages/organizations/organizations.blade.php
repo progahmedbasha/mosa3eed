@@ -7,7 +7,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="main-title">
-                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Organization List :</h1>
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Organization List d :</h1>
                </div>
             </div>
          </div>
@@ -19,10 +19,10 @@
                <div class="card-body">
                   <div class="row">
                      <div class="col mb-3">
-                         <button type="submit" data-effect="effect-sign" 
-                        data-toggle="modal" href="#modaldemo9" class="btn btn-primary">Add</button>
+                        <button type="submit" data-effect="effect-sign" data-toggle="modal" href="#modaldemo9"
+                           class="btn btn-primary">Add</button>
                      </div>
-                     
+
                      @include('admin.pages.organizations.modal_add')
                      {{-- search --}}
                      <div class="col mb-3">
