@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Models\organization;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 class BranchShift extends Model
 {
-    use HasFactory,HasTranslations;
-
-    public $translatable = ['name'];
+    use HasFactory;
     public $guarded = [];
     // protected $casts =['days' => 'array'];
     public function getDaysAttribute($value)
@@ -25,9 +22,9 @@ class BranchShift extends Model
                   ->orWhere('name','like',"%$search%");
           });
         }
-    public function Organization()
+    public function ShiftDay()
     {
-      return $this->belongsTo('App\Models\admin\Organization');
+      return $this->hasMany('App\Models\ShiftDay');
     }
     public function Branch()
     {

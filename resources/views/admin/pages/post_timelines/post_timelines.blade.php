@@ -129,7 +129,7 @@
                                     <div class="reviews-members-header">
                                        <h6 class="mb-1"><a class="text-black" href="#">{{ $post_timeline->User->name }}
                                           </a> <small
-                                             class="text-gray">{{ $post_timeline->User->Organization->name }}</small>
+                                             class="text-gray">Org name</small>
                                        </h6>
                                        {{-- dropdown --}}
                                        <div class="dropdown" style="margin-left: 100%; margin-top: -3%;">

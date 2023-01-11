@@ -30,10 +30,7 @@ class Organization extends Model
    {
      return $this->hasMany('App\Models\User');
    }
-    public function Owner()
-    {
-      return $this->belongsTo('App\Models\Owner');
-    }
+
     public function Branch()
    {
      return $this->hasMany('App\Models\admin\Branch');
@@ -42,4 +39,8 @@ class Organization extends Model
     {
       return $this->belongsTo('App\Models\District');
     }
+      public function OrganizationAdmin()
+   {
+     return $this->hasMany('App\Models\organization\OrganizationAdmin');
+   }
 }

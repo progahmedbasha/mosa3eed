@@ -14,7 +14,10 @@ use App\Models\City;
 use App\Models\User;
 use App\Models\District;
 use App\Models\Owner;
+use App\Models\BranchShift;
+use App\Models\ShiftDay;
 use Session;
+use Illuminate\Support\Facades\Hash;
 class OrganizationController extends Controller
 {
     /**
@@ -52,17 +55,9 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
-        // save owner 
-        if( request()->owner_name )
-        {
-            $owner = new Owner();
-            $owner->name = $request->owner_name;
-            $owner->phone = $request->owner_phone;
-            $owner->email = $request->owner_email;
-            $owner->save();
-
-            // save organization
+        // return $request;
+    
+         // save organization
             $org = new Organization();
             $org
             ->setTranslation('name', 'en', $request->input('name_en'))
@@ -75,46 +70,90 @@ class OrganizationController extends Controller
             $org->district_id = $request->input('district_id');
             $org->address = $request->input('address');
             $org->status = $request->input('status');
-            $org->owner_id = $owner->id;
             if (request()->photo){
                 $filename = time().'.'.request()->photo->getClientOriginalExtension();
                 request()->photo->move(public_path('data/organizations'), $filename);
                 $org->photo=$filename;
                 }
             $org->save();
-                    // save branch
+            
+              // save owner
+              if( request()->owner_name ){
+                 $user = new User();
+                    $user->name = $request->owner_name;
+                    $user->email = $request->owner_email;
+                    $user->password = Hash::make($request['owner_password']);
+                    $user->phone = $request->owner_phone;
+                    $user->user_type_id = 3 ;
+                       if (request()->owner_photo){
+                        $filename = time().'.'.request()->owner_photo->getClientOriginalExtension();
+                        request()->owner_photo->move(public_path('data/admins'), $filename);
+                        $user->photo=$filename;
+                        }
+                    $user->save();
+                    $owner = new OrganizationAdmin();
+                    $owner->organization_id = $org->id;
+                    $owner->user_id = $user->id;
+                    $owner->type = "Owner Admin";
+                    $owner->save();
+                }
+                // save admin
+              if( request()->admin_name ){
+                    $user = new User();
+                    $user->name = $request->input('admin_name');
+                    $user->email = $request->input('admin_email');
+                    $user->password = Hash::make($request['admin_password']);
+                    $user->phone = $request->input('admin_phone');
+                    $user->user_type_id = 4 ;
+                    //    if (request()->photo){
+                    //     $filename = time().'.'.request()->photo->getClientOriginalExtension();
+                    //     request()->photo->move(public_path('data/admins'), $filename);
+                    //     $user->photo=$filename;
+                    //     }
+                    $user->save();
+                    $owner = new OrganizationAdmin();
+                    $owner->organization_id = $org->id;
+                    $owner->user_id = $user->id;
+                    $owner->type = "Organization Admin";
+                    $owner->save();
+                }
+                // save branch
                 if(request()->branch_name_en)
                 {
-                        $branch = new Branch();
-                        $branch
-                        ->setTranslation('name', 'en', $request->input('branch_name_en'))
-                        ->setTranslation('name', 'ar', $request->input('branch_name_ar')) ;
-                        $branch->phone_1 = $request->input('branch_phone_1');
-                        $branch->phone_2 = $request->input('branch_phone_2');
-                        $branch->email = $request->input('branch_email');
-                        $branch->organization_id = $org->id;
-                        $branch->district_id = $org->district_id;
-                        $branch->address = $request->input('branch_address');
-                        if (request()->photo){
-                            $filename = time().'.'.request()->photo->getClientOriginalExtension();
-                            request()->photo->move(public_path('data/branchs'), $filename);
-                            $branch->photo=$filename;
-                            }
-                        $branch->save();
-                }
-
-                        // save employee
-                        if(request()->employee_name)
-                        {
-                            $employee = new Employee();
-                            $employee->name = $request->employee_name;
-                            $employee->phone = $request->employee_phone;
-                            $employee->organization_id = $org->id;
-                            $employee->branch_id = $branch->id;
-                            $employee->save();
+                    $branch = new Branch();
+                    $branch
+                    ->setTranslation('name', 'en', $request->input('branch_name_en'))
+                    ->setTranslation('name', 'ar', $request->input('branch_name_ar')) ;
+                    $branch->phone_1 = $request->input('branch_phone_1');
+                    $branch->phone_2 = $request->input('branch_phone_2');
+                    $branch->email = $request->input('branch_email');
+                    $branch->organization_id = $org->id;
+                    $branch->district_id = $org->district_id;
+                    $branch->address = $request->input('branch_address');
+                    if (request()->photo){
+                        $filename = time().'.'.request()->photo->getClientOriginalExtension();
+                        request()->photo->move(public_path('data/branchs'), $filename);
+                        $branch->photo=$filename;
                         }
-             
-        }
+                    $branch->save();
+                }
+                 if(request()->shift_name)
+                 {
+                    $shift  = new BranchShift();
+                    $shift->name = $request->shift_name;
+                    $shift->branch_id = $branch->id;
+                    $shift->save();
+                        $countItems = count($request->day);
+                        for($i=0; $i<$countItems; $i++){
+                            $shift_day  = new ShiftDay();
+                            $shift_day->branch_shift_id = $shift->id;
+                            $shift_day->day = $request->day[$i];
+                            $shift_day->from = $request->from[$i];
+                            $shift_day->to = $request->to[$i];
+                            $shift_day->save();
+                        }
+                    }
+      
         return redirect()->route('organizations.index')->with('success','Organization Added Successfully');
     }
 
@@ -127,6 +166,8 @@ class OrganizationController extends Controller
     public function show($id)
     {
         $organization = Organization::find($id);
+        $owner = OrganizationAdmin::where('organization_id', $id)->where('type','Owner Admin')->first();
+        // return $owner->User->name;
         $countries = Country::all();
         $cities = City::all();
         $districts = District::all();
@@ -135,12 +176,12 @@ class OrganizationController extends Controller
         $branchs = Branch::where('organization_id', $id)->get();
         $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
         $employees = Employee::where('organization_id', $id)->get();
-        return view('admin.pages.organizations.organizaion_show', compact('organization','countries','cities','districts','country_id','city_id','branchs','organization_admins','employees'));
+        return view('admin.pages.organizations.organizaion_show', compact('organization','owner','countries','cities','districts','country_id','city_id','branchs','organization_admins','employees'));
     }
     public function branches($id)
     {
         $branchs = Branch::where('organization_id', $id)->get();
-        return view('admin.pages.branchs.branchs', compact('branchs'));
+        return view('admin.pages.branchs.branchs', compact('branchs','id'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -210,7 +251,7 @@ class OrganizationController extends Controller
     public function org_admins($id)
     {
          $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
-        return view('admin.pages.organization_admins.organization_admins', compact('organization_admins'));
+        return view('admin.pages.organization_admins.organization_admins', compact('organization_admins','id'));
 
     }
 }

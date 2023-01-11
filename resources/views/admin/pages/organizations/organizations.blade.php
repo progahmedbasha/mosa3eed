@@ -19,7 +19,7 @@
                <div class="card-body">
                   <div class="row">
                      <div class="col mb-3">
-                        <button type="submit" data-effect="effect-sign" 
+                         <button type="submit" data-effect="effect-sign" 
                         data-toggle="modal" href="#modaldemo9" class="btn btn-primary">Add</button>
                      </div>
                      

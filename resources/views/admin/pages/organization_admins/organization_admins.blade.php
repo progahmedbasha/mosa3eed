@@ -16,7 +16,7 @@
 
          <div class="row">
             <div class="col mb-3" style="margin-bottom:-1rem!important;">
-               <a href="{{ route('organization_admins.create') }}" class="btn btn-primary">Add</a>
+               <a href="{{ route('organization_admins_create',$id) }}" class="btn btn-primary">Add</a>
             </div>
 
          </div>

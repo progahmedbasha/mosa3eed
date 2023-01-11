@@ -77,7 +77,7 @@
                                  </div>
                                  <br>
                                  <div class="reviews-members-header">
-                                    <h6 class="mb-1"><a class="text-black">Owner : {{ $organization->Owner->name }} </a> </h6>
+                                    <h6 class="mb-1"><a class="text-black">Owner : {{ $owner->User->name }} </a> </h6>
                                  </div>
                               </div>
 
@@ -109,7 +109,7 @@
                <div class="card-body">
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('branchs.create') }}" class="btn  btn-outline-primary">Add</a>
+                        <a href="{{ route('branch_add',$organization->id) }}" class="btn  btn-outline-primary">Add</a>
                      </div>
                   </div>
                   <div class="table-responsive" style="text-align:center;">
@@ -166,7 +166,7 @@
          <hr>
          <div class="row">
             <div class="col mb-3" style="margin-bottom:-1rem!important;">
-               <a href="{{ route('organization_admins.create') }}" class="btn btn-primary">Add</a>
+               <a href="{{ route('organization_admins_create',$organization->id) }}" class="btn btn-primary">Add</a>
             </div>
          </div>
       </div>

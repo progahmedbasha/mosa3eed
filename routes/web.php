@@ -5,9 +5,9 @@ use App\Http\Controllers\Country_state_cityController;
 use App\Http\Controllers\Admin\MedicinController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BranchController;
-// use App\Http\Controllers\Admin\UserBranchController;
+use App\Http\Controllers\Admin\UserBranchController;
 use App\Http\Controllers\Organization\OrganizationAdminController;
-use App\Http\Controllers\Organization\OrganizationshiftController;
+use App\Http\Controllers\BranchshiftController;
 use App\Http\Controllers\Organization\OrganizationAttendanceController;
 use App\Http\Controllers\Organization\PurchaseController;
 use App\Http\Controllers\Jobs\JobTitleController;
@@ -74,16 +74,30 @@ Route::group(
 
                     Route::get('organization_branches/{id}', [OrganizationController::class, 'branches'])->name('organization_branches');
                     // branch_admins here make
-                     Route::get('org_admins/{id}', [OrganizationController::class,'org_admins'])->name('org_admins');
+                    Route::get('org_admins/{id}', [OrganizationController::class,'org_admins'])->name('org_admins');
+                    Route::get('organization_admins_create/{id}', 'Organization\OrganizationAdminController@create')->name('organization_admins_create');
+                    Route::resource('organization_admins', Organization\OrganizationAdminController::class);
+
+                    
                     Route::resource('countries', CountryController::class);
                     Route::resource('cities', CityController::class);
                     Route::resource('districts', DistrictController::class);
                     Route::resource('medicins', Admin\MedicinController::class);
                     Route::resource('settings', Admin\SettingController::class);
                     Route::resource('branchs', Admin\BranchController::class);
+                    // Route::get('org_branch/{id}', [Admin\BranchController::class,'create'])->name('branch_Add');
+                    Route::get('branch_add/{id}', 'Admin\BranchController@create')->name('branch_add');
+
                     Route::resource('branch_admins', Admin\UserBranchController::class);
-                    Route::resource('organization_admins', Organization\OrganizationAdminController::class);
-                    Route::resource('organization_shifts', Organization\OrganizationshiftController::class);
+                    Route::get('admins_branch/{id}', [UserBranchController::class,'admins_branch'])->name('admins_branch');
+                    Route::get('branch_admins_create/{id}', [UserBranchController::class,'create'])->name('branch_admins_create');
+                    
+
+                    
+                    Route::resource('organization_shifts', 'BranchShiftController');
+                    Route::get('shift_create/{id}', [BranchShiftController::class,'create'])->name('shift_create');
+                    //
+                    Route::get('branch_shifts/{id}', [BranchShiftController::class,'shifts'])->name('branch_shifts');
                     Route::resource('organization_attendances', Organization\OrganizationAttendanceController::class);
                     Route::resource('purchases', Organization\PurchaseController::class);
                     Route::resource('job_titles', Jobs\JobTitleController::class);

@@ -25,56 +25,26 @@
 							@csrf
 							<div class="form-row">
 								<div class="col">
-									<label for="inputName">Organization</label>
-									<select id="country-dd" class="form-control" name="organization_id">
-										<option value="">Select Organization</option>
-										@foreach ($organizations as $org)
-										<option value="{{$org->id}}" {{(old('organization_id')==$org->id)?
-											'selected':''}}>{{$org->name}}</option>
-										@endforeach
-									</select>
-									@error('organization_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="col">
-									<label for="inputName">Branch</label>
-									<select id="country-dd" class="form-control" name="branch_id">
-										<option value="">Select Branches</option>
-										@foreach ($branches as $branch)
-										<option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)?
-											'selected':''}}>{{$branch->name}}</option>
-										@endforeach
-									</select>
-									@error('branch_id')
+									<label for="inputName">Shift Name</label>
+									<input type="text" class="form-control form-control-solid" placeholder="Shift Name"
+										value="{{old('shift_name')}}" name="shift_name">
+									@error('shift_name')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 							</div>
+							<input type="hidden" value="{{ $id }}" name="branch_id">
 							<br>
 							<div class="form-row">
 								<div class="col">
-									<label for="inputName">Shift Name En</label>
-									<input type="text" class="form-control form-control-solid"
-										placeholder="Shift Name En" value="{{old('name_en')}}" name="name_en">
-									@error('name_en')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
+									<label for="inputName">Days</label>
+									<h4>Saturday :</h4>
+									<input type="hidden" name="day[]" value="saturday">
 								</div>
-								<div class="col">
-									<label for="inputName">Shift Name Ar</label>
-									<input type="text" class="form-control form-control-solid"
-										placeholder="Shift Name Ar" value="{{old('name_ar')}}" name="name_ar">
-									@error('name_ar')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-							<div class="form-row">
 								<div class="col">
 									<label for="inputName">Time From</label>
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from">
+										value="{{old('from')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -82,33 +52,128 @@
 								<div class="col">
 									<label for="inputName">Time To</label>
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to">
+										value="{{old('to')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 							</div>
-							<br>
 							<div class="form-row">
 								<div class="col">
-									{{-- input ckeck box --}}
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sat"
-											name="days[]">
-										<label class="form-check-label" for="inlineCheckbox1">sat</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sun"
-											name="days[]">
-										<label class="form-check-label" for="inlineCheckbox1">sun</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="mon"
-											name="days[]">
-										<label class="form-check-label" for="inlineCheckbox1">mon</label>
-									</div>
-									{{-- input ckeck box --}}
-									@error('days')
+									<h4>Sunday :</h4>
+									<input type="hidden" name="day[]" value="sunday">
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time From"
+										value="{{old('from')}}" name="from[]">
+									@error('from')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time To"
+										value="{{old('to')}}" name="to[]">
+									@error('to')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<h4>Monday :</h4>
+									<input type="hidden" name="day[]" value="Monday">
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time From"
+										value="{{old('from')}}" name="from[]">
+									@error('from')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time To"
+										value="{{old('to')}}" name="to[]">
+									@error('to')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<h4>Tuesday :</h4>
+									<input type="hidden" name="day[]" value="Tuesday">
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time From"
+										value="{{old('from')}}" name="from[]">
+									@error('from')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time To"
+										value="{{old('to')}}" name="to[]">
+									@error('to')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<h4>Wednesday :</h4>
+									<input type="hidden" name="day[]" value="Wednesday">
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time From"
+										value="{{old('from')}}" name="from[]">
+									@error('from')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time To"
+										value="{{old('to')}}" name="to[]">
+									@error('to')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<h4>Thursday :</h4>
+									<input type="hidden" name="day[]" value="Thursday">
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time From"
+										value="{{old('from')}}" name="from[]">
+									@error('from')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time To"
+										value="{{old('to')}}" name="to[]">
+									@error('to')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col">
+									<h4>Friday :</h4>
+									<input type="hidden" name="day[]" value="Friday">
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time From"
+										value="{{old('from')}}" name="from[]">
+									@error('from')
+									<div class="alert alert-danger">{{ $message }}</div>
+									@enderror
+								</div>
+								<div class="col">
+									<input type="time" class="form-control form-control-solid" placeholder="Time To"
+										value="{{old('to')}}" name="to[]">
+									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>

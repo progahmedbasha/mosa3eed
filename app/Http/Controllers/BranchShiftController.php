@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Organization;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\organization\OrganizationShift;
+use App\Models\BranchShift;
 use App\Http\Requests\OrganizationShift\StoreRequest;
-use App\Models\organization\ShiftDay;
 use App\Models\organization\Shift;
 use App\Models\admin\Organization;
 use App\Models\admin\Branch;
 use App\Models\User;
+use App\Models\ShiftDay;
 use Session;
-class OrganizationshiftController extends Controller
+class BranchShiftController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +21,8 @@ class OrganizationshiftController extends Controller
      */
     public function index(Request $request)
     {
-        $organization_shifts = OrganizationShift::whenSearch($request->search)->paginate(20);
-        return view('admin.pages.organization_shifts.organization_shifts', compact('organization_shifts'));
+        $branch_shifts = BranchShift::whenSearch($request->search)->paginate(20);
+        return view('admin.pages.organization_shifts.organization_shifts', compact('branch_shifts'));
     }
 
     /**
@@ -30,12 +30,9 @@ class OrganizationshiftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $organizations = Organization::all();
-        $branches = Branch::all();
-        // $days = Day::all();
-        return view('admin.pages.organization_shifts.organization_shift_add', compact('organizations','branches'));
+        return view('admin.pages.organization_shifts.organization_shift_add', compact('id'));
     }
 
     /**
@@ -44,21 +41,25 @@ class OrganizationshiftController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
-    
-            $org_shift = new OrganizationShift();
-            $org_shift->organization_id = $request->input('organization_id');
-            $org_shift->branch_id = $request->input('branch_id');
-            $org_shift
-                ->setTranslation('name', 'en', $request->input('name_en'))
-                ->setTranslation('name', 'ar', $request->input('name_ar')) ;
-             $org_shift->days =  json_encode($request->days);
-            $org_shift->from = $request->input('from');
-            $org_shift->to = $request->input('to');
-            $org_shift->save();
-        Session::flash('success','Organization Shifts Added Successfully');
-        return redirect()->route('organization_shifts.index');
+        // return 1;
+        $branch_id = $request->branch_id;
+           $shift  = new BranchShift();
+                    $shift->name = $request->shift_name;
+                    $shift->branch_id = $request->branch_id;
+                    $shift->save();
+                    $countItems = count($request->day);
+                    for($i=0; $i<$countItems; $i++){
+                        $shift_day  = new ShiftDay();
+                        $shift_day->branch_shift_id = $shift->id;
+                        $shift_day->day = $request->day[$i];
+                        $shift_day->from = $request->from[$i];
+                        $shift_day->to = $request->to[$i];
+                        $shift_day->save();
+                    }
+        Session::flash('success','Branch Shifts Added Successfully');
+        return redirect()->route('branch_shifts',$branch_id);
     }
 
     /**
@@ -122,5 +123,10 @@ class OrganizationshiftController extends Controller
         $shift->delete();
         Session::flash('success','Purchase Deleted Successfully');
         return redirect()->route('purchases.index');
+    }
+        public function shifts($id)
+    {
+        $branch_shifts = BranchShift::where('branch_id', $id)->get();
+        return view('admin.pages.organization_shifts.organization_shifts', compact('branch_shifts','id'));
     }
 }

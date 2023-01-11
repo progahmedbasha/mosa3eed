@@ -19,10 +19,10 @@ class AdminRole
         if(auth()->user()->user_type_id == 1){
             return $next($request);
         }
-        if(auth()->user()->user_type_id == 3){
+        if(auth()->user()->user_type_id == 4){
             return redirect()->route('organization_dashboard.index');
         }
-        if(auth()->user()->user_type_id == 4){
+        if(auth()->user()->user_type_id == 5){
             return redirect()->route('branch_dashboard.index');
         }
         // if(auth()->user()->user_type_id == 3){

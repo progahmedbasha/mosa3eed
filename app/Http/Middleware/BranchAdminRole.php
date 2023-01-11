@@ -16,7 +16,7 @@ class BranchAdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->user_type_id == 4){
+        if(auth()->user()->user_type_id == 5){
             return $next($request);
         }
         

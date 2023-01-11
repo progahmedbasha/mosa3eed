@@ -15,7 +15,7 @@
 
          <div class="row">
             <div class="col mb-3" style="margin-bottom:-1rem!important;">
-               <a href="{{ route('branch_admins.create') }}" class="btn btn-primary">Add</a>
+               <a href="{{ route('branch_admins_create',$id) }}" class="btn btn-primary">Add</a>
             </div>
 
          </div>
@@ -42,7 +42,7 @@
                   @endif
 
                   <div class="channels-card-image-btn"><button type="button" class="btn btn-success btn-sm border-none">
-                        {{ $admin->User->Organization->name }}
+                        {{ $admin->Branch->Organization->name }}
                      </button> <a href="branch_admins/{{$admin->id}}/edit" class="btn btn-warning btn-sm border-none"><i
                            class="fas fa-eye"></i></a>
                   </div>
@@ -54,12 +54,12 @@
                            data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span></a>
                   </div>
                   <div class="channels-view">
-                     {{-- {{ $admin->UserType->type }} --}}
+                     {{-- {{ $admin->User->UserType->type }} --}}
                      <form action="{{route('branch_admins.destroy',$admin->id)}} " method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="menu-link px-3" style="background: transparent;border: 0;"
-                           data-kt-customer-table-filter="delete_row">{{ $admin->type }}<i
+                           data-kt-customer-table-filter="delete_row">{{ $admin->User->UserType->type }} <i
                               class="fas fa-trash"></i></button>
                      </form>
                   </div>

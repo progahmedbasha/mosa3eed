@@ -22,8 +22,6 @@ class BranchController extends Controller
     {
         $branchs = Branch::whenSearch($request->search)->paginate(50);
 //    $branchs =   Branch::where('name', 'like', '%' . $request->search . '%')->paginate(50);
-       
-     
         return view('admin.pages.branchs.branchs', compact('branchs'));
     }
 
@@ -32,13 +30,9 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $countries = Country::all();
-        $cities = City::all();
-        $districts = District::all();
-        $organizations = Organization::all();
-        return view('admin.pages.branchs.branch_add', compact('organizations','countries','cities','districts'));
+        return view('admin.pages.branchs.branch_add', compact('id'));
     }
 
     /**
@@ -47,10 +41,12 @@ class BranchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
+        // return $request;
         // for return page after update
         $org_id = $request->input('organization_id');
+        $org_district = Organization::where('id',$org_id)->first();
 
         $branch = new Branch();
         $branch
@@ -59,8 +55,8 @@ class BranchController extends Controller
         $branch->phone_1 = $request->input('phone_1');
         $branch->phone_2 = $request->input('phone_2');
         $branch->email = $request->input('email');
-        $branch->organization_id = $request->input('organization_id');
-        $branch->district_id = $request->input('district_id');
+        $branch->organization_id = $org_id;
+        $branch->district_id = $org_district->district_id;
         $branch->address = $request->input('address');
         if (request()->photo){
             $filename = time().'.'.request()->photo->getClientOriginalExtension();
@@ -68,7 +64,7 @@ class BranchController extends Controller
             $branch->photo=$filename;
             }
         $branch->save();
-        return redirect()->route('organizations.show',$org_id)->with('success','Branch Added Successfully');
+        return redirect()->route('organization_branches',$org_id)->with('success','Branch Added Successfully');
     }
 
     /**

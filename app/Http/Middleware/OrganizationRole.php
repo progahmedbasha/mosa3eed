@@ -16,7 +16,7 @@ class OrganizationRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->user_type_id == 3){
+        if(auth()->user()->user_type_id == 4){
             return $next($request);
         }
         

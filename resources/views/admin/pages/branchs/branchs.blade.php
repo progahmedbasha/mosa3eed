@@ -10,7 +10,6 @@
                   <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Branches List :</h1>
                </div>
             </div>
-
          </div>
       </div>
       <hr>
@@ -18,12 +17,11 @@
          <div class="col-xl-12 mb-30">
             <div class="card card-statistics h-100">
                <div class="card-body">
-
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('branchs.create') }}" class="btn  btn-outline-primary">Add</a>
+                        <a href="{{ route('branch_add',$id) }}" class="btn  btn-outline-primary">Add</a>
                      </div>
-                     {{-- search --}}
+                 {{-- search --}}
                      <div class="col mb-3">
                         <form method="get" class="form-inline" action="{{url('admin/branchs')}}"
                            style="margin-left: 45%;">
@@ -36,49 +34,82 @@
                         </form>
                      </div>
                      {{-- search --}}
-
                   </div>
                   @if(Session::has('success'))
                   <script>
                      toastr.success(" {{ Session::get('success') }} ");
                   </script>
                   @endif
-                  <div class="table-responsive" style="text-align:center;">
-                     <table id="datatable" class="table table-striped table-bordered p-0">
-                        <thead>
-                           <tr>
-                              <th style="width:21px;" style="text-align:center;">#</th>
-                              <th style="text-align:center;">Branch Name</th>
-                              <th style="text-align:center;">Organization</th>
-                              <th style="text-align:center;">Email</th>
-                              <th style="text-align:center;">Address</th>
-                              <th style="text-align:center;">Actions</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           @foreach($branchs as $index=>$branch)
-                           <tr>
-                              <td>{{ $index+1 }}</td>
-                              <td>{{ $branch->name }}</td>
-                              <td>{{ $branch->Organization->name }}</td>
-                              <td>{{ $branch->email}}</td>
-                              <td>{{ $branch->address}}</td>
-                              <td>
-                                 <div class="btn-icon-list">
-                                    <form action="{{route('branchs.destroy',$branch->id)}}" method="POST">
-                                       @csrf
-                                       @method('DELETE')
-                                       <a href="{{route('branchs.edit',$branch->id)}}" class="btn btn-info"><i
-                                             class="fa fa-edit"></i></a>
+                  <div class="row">
 
-                                       <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                 </div>
-                              </td>
-                           </tr>
-                           @endforeach
-                        </tbody>
-                     </table>
+                     @foreach ($branchs  as $branch )
+                     <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="video-card history-video">
+                           <div class="video-card-image">
+                              {{-- <a class="video-close" href="#"><i class="fas fa-times-circle"></i></a> --}}
+                              <div class="dropdown">
+                                 <a type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                    aria-expanded="false" style="margin-top: 13px;margin-left: 220px;">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                 </a>
+                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" style="padding: 3px 14px!important"
+                                          href="{{route('branchs.edit',$branch->id)}} "><i class="fas fa-eye"></i>
+                                          View &
+                                          Edit
+                                       </a></li>
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                          href="{{route('branch_shifts',$branch->id)}} "><i
+                                             class="fas fa-university"></i>
+                                          Shifts</a>
+                                    </li>
+                                   
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                          href="{{ route('admins_branch',$branch->id) }}"><i
+                                             class="fas fa-user-circle"></i>
+                                          Branch Admins</a>
+                                    </li>
+                                
+                                    <li>
+                                       <form action="{{route('branchs.destroy',$branch->id)}} "
+                                          method="POST">
+                                          @csrf
+                                          @method('DELETE')
+                                          <div class="channels-card-image-btn">
+                                             <button class="dropdown-item"
+                                                style="background: transparent;border: 0;padding: 0px 14px!important"
+                                                data-kt-customer-table-filter="delete_row"><i class="fas fa-trash"></i>
+                                                Delete</button>
+                                          </div>
+                                       </form>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <a href="{{route('branchs.edit',$branch->id)}} ">
+                                 @if(!empty($branch->photo))
+                                 <img class="img-fluid" src="{{url('/data/branchs')}}/{{$branch->photo }}"
+                                    alt="" style="height: 154px;">
+                                 @else
+                                 <img src="{{url('/data/error.png')}}" class="w3-round" style="height: 154px;"
+                                    alt="Norway">
+                                 @endif
+                              </a>
+                           </div>
+                           <div class="video-card-body">
+                              <div class="video-title" style="text-align: center;">
+                                 <a href="#">{{$branch->name }}</a>
+                              </div>
+                              <div class="video-page text-success" style="text-align: center;">
+                                 {{$branch->Organization->name }} <a title="" data-placement="top" data-toggle="tooltip"
+                                    href="#" data-original-title="Verified"><i
+                                       class="fas fa-check-circle text-success"></i></a>
+                              </div>
+
+                           </div>
+                        </div>
+                     </div>
+                     @endforeach
+
                   </div>
                </div>
             </div>

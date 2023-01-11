@@ -92,4 +92,9 @@ class User extends Authenticatable implements JWTSubject
     {
       return $this->hasMany('App\Models\TimelinePost');
     }
+        public function OrganizationAdmin()
+    {
+      return $this->hasMany('App\Models\organization\OrganizationAdmin');
+    }
+    
 }

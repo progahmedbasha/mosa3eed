@@ -6,8 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserBranch;
 use App\Models\User;
+use App\Models\Country;
+use App\Models\City;
+use App\Models\District;
 use App\Models\Admin\Branch;
+use App\Models\BranchShift;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserBranchController extends Controller
 {
@@ -27,11 +32,13 @@ class UserBranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $users = User::all();
-        $branches = Branch::all();
-        return view('admin.pages.branch_admins.branch_admin_add', compact('users', 'branches'));
+        $countries = Country::all();
+         $cities = City::all();
+         $districts = District::all();
+         $shifts = BranchShift::where('branch_id',$id)->get();
+        return view('admin.pages.branch_admins.branch_admin_add', compact('id','countries','cities','districts','shifts'));
     }
 
     /**
@@ -42,9 +49,27 @@ class UserBranchController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        UserBranch::create($data);
-        return redirect()->route('branch_admins.index')->with('success','Branch Admin Added Successfully');
+        $branch_district = Branch::where('id', $request->branch_id)->first();
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request['password']);
+        $user->phone = $request->input('phone');
+        $user->user_type_id = 5 ;
+        $user->district_id = $branch_district->district_id ;
+            if (request()->photo){
+            $filename = time().'.'.request()->photo->getClientOriginalExtension();
+            request()->photo->move(public_path('data/admins'), $filename);
+            $user->photo=$filename;
+            }
+        $user->save();
+            $admin_branch = new UserBranch();
+            $admin_branch->branch_id = $request->branch_id;
+            $admin_branch->user_id = $user->id;
+            $admin_branch->branch_shift_id = $request->branch_shift_id;
+            $admin_branch->save();
+        $branch_id = $request->branch_id;
+        return redirect()->route('admins_branch',$branch_id)->with('success','Branch Admin Added Successfully');
     }
 
     /**
@@ -90,5 +115,10 @@ class UserBranchController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function admins_branch($id)
+    {
+        $admins = UserBranch::where('branch_id', $id)->get();
+        return view('admin.pages.branch_admins.branch_admins', compact('admins','id'));
     }
 }

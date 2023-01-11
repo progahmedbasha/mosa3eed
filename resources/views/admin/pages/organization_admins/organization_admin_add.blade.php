@@ -2,6 +2,7 @@
 @section('content')
 
 <div id="content-wrapper">
+
 	<div class="container-fluid pb-0">
 		<div class="top-category section-padding mb-4">
 			<div class="row">
@@ -13,83 +14,85 @@
 			</div>
 		</div>
 		<hr>
-		<div class="row">
-			<div class="col-xl-12 mb-30">
-				<div class="card card-statistics h-100">
-					<div class="card-body">
-						<div class="row">
-							<h5 class="card-title">Form Organization Admin</h5>
+		<form action="{{route('organization_admins.store')}}" method="post" enctype="multipart/form-data">
+			@csrf
+			<input type="hidden" value="{{ $id }}" name="organization_id">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								<label for="inputName">Name</label>
+								<input type="text" class="form-control" placeholder="Name" value="{{old('name')}}"
+									name="name" required />
+								@error('name')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputCity">Phone</label>
+								<input type="text" class="form-control" id="inputCity" placeholder="Phone"
+									value="{{old('phone')}}" name="phone">
+								@error('phone')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
 						</div>
-						<form action="{{route('organization_admins.store')}}" method="post"
-							enctype="multipart/form-data">
-							@csrf
-							<div class="form-row">
-								<div class="col">
-									<label for="inputName">Organization</label>
-									<select id="country-dd" class="form-control" name="organization_id">
-										<option value="">Select Organization</option>
-										@foreach ($organizations as $org)
-										<option value="{{$org->id}}" {{(old('organization_id')==$org->id)?
-											'selected':''}}>{{$org->name}}</option>
-										@endforeach
-									</select>
-									@error('organization_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="col">
-									<label for="inputName">User</label>
-									<select id="country-dd" class="form-control" name="user_id">
-										<option value="">Select Users</option>
-										@foreach ($users as $user)
-										<option value="{{$user->id}}" {{(old('user_id')==$user->id)?
-											'selected':''}}>{{$user->name}}</option>
-										@endforeach
-									</select>
-									@error('user_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								<label for="inputEmail4">Email</label>
+								<input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+									value="{{old('email')}}" name="email">
+								@error('email')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
 							</div>
-							<br>
-							<div class="form-row">
-								<div class="col">
-									<label for="inputName">Branches</label>
-									<select id="country-dd" class="form-control" name="branch_id[]" multiple>
-										<option value="">Select Branches</option>
-										@foreach ($branches as $branch)
-										<option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)?
-											'selected':''}}>{{$branch->name}}</option>
-										@endforeach
-									</select>
-									@error('branch_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="col">
-									<label for="inputName">Shift</label>
-									<select id="country-dd" class="form-control" name="organization_shift_id">
-										<option value="">Select shift</option>
-										@foreach ($shifts as $shift)
-										<option value="{{$shift->id}}" {{(old('organization_shift_id')==$shift->id)?
-											'selected':''}}>{{$shift->name}}</option>
-										@endforeach
-									</select>
-									@error('organization_shift_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
+							<div class="col">
+								<label for="inputPassword4">Password</label>
+								<input type="password" class="form-control" id="inputPassword4" placeholder="Password"
+									value="{{old('password')}}" name="password">
+								@error('password')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
 							</div>
-							<br>
 
-							<button type="submit" class="btn btn-primary">Save</button>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<br>
+			{{-- end of row --}}
+			<div class="row">
+
+
+				<div class="col-sm-6">
+					<div class="card" style="border-radius: 17px;">
+						<div class="card-body">
+							<div class="col">
+								<label for="inputState">Photo</label>
+								<div class="col">
+									<input type="file" class="custom-file-input" id="validatedCustomFile"
+										value="{{old('photo')}}" name="photo">
+									<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+									<div class="invalid-feedback">Example invalid custom file feedback</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<button type="submit" class="btn btn-primary">Save</button>
+		</form>
+
 		<hr>
 	</div>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@include('admin.pages.component.country_city_district')
 @endsection

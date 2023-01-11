@@ -21,7 +21,7 @@
 
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('organization_shifts.create') }}" class="btn  btn-outline-primary">Add</a>
+                        <a href="{{route('shift_create',$id)}}" class="btn  btn-outline-primary">Add</a>
                      </div>
                      {{-- search --}}
                      <div class="col mb-3">
@@ -55,11 +55,11 @@
                            </tr>
                         </thead>
                         <tbody>
-                           @foreach($organization_shifts as $index=>$shift)
+                           @foreach($branch_shifts as $index=>$shift)
                            <tr>
                               <td>{{ $index+1 }}</td>
                               <td>{{ $shift->name }}</td>
-                              <td>{{ $shift->Organization->name }}</td>
+                              <td>{{ $shift->Branch->Organization->name }}</td>
                               <td>{{ $shift->Branch->name}}</td>
                               <td>
                                  <div class="btn-icon-list">

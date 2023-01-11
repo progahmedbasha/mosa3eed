@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchShiftsTable extends Migration
+class CreateShiftDaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateBranchShiftsTable extends Migration
      */
     public function up()
     {
-        Schema::create('branch_shifts', function (Blueprint $table) {
+        Schema::create('shift_days', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
-            $table->integer('branch_id')->unsigned();
-            $table->foreign('branch_id')->references('id')->on('branches');
+            $table->integer('branch_shift_id')->unsigned();
+            $table->foreign('branch_shift_id')->references('id')->on('branch_shifts');
+            $table->text('day');
+            $table->string('from');
+            $table->string('to');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateBranchShiftsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organization_shifts');
+        Schema::dropIfExists('shift_days');
     }
 }
