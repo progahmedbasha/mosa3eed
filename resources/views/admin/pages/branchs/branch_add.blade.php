@@ -19,8 +19,12 @@
 			<input type="hidden" value="{{ $id }}" name="organization_id">
 			<div class="row">
 				<div class="col-sm-6">
-					<div class="card" style="border-radius: 17px;">
+					<div class="card">
 						<div class="card-body">
+							<div class="col">
+								<h6 class="card-title"><i class="fa fa-list"></i> Name :</h6>
+								<hr>
+							</div>
 							<div class="col">
 								<label for="inputName">Name En</label>
 								<input type="text" class="form-control" placeholder="Name En" value="{{old('name_en')}}"
@@ -41,8 +45,12 @@
 					</div>
 				</div>
 				<div class="col-sm-6">
-					<div class="card" style="border-radius: 17px;">
+					<div class="card">
 						<div class="card-body">
+							<div class="col">
+								<h6 class="card-title"><i class="fa fa-list"></i> Phone :</h6>
+								<hr>
+							</div>
 							<div class="col">
 								<label for="inputName">Phone 1</label>
 								<input type="text" class="form-control" placeholder="Phone 1" value="{{old('phone_1')}}"
@@ -70,10 +78,13 @@
 
 
 				<div class="col-sm-6">
-					<div class="card" style="border-radius: 17px;">
+					<div class="card">
 						<div class="card-body">
 							<div class="col">
-								<label for="inputState">Contact</label>
+								<h6 class="card-title"><i class="fa fa-list"></i> Contact :</h6>
+								<hr>
+							</div>
+						
 								<div class="col">
 									<label for="inputName">Email</label>
 									<input type="email" class="form-control" placeholder="Email"
@@ -90,25 +101,55 @@
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
-							</div>
+								<div class="col">
+									<label class="form-label" for="customFile">Photo</label>
+									<input type="file" class="form-control" id="customFile" />
+								</div>
 						</div>
 					</div>
 				</div>
 				{{-- // --}}
 				<div class="col-sm-6">
-					<div class="card" style="border-radius: 17px;">
+					<div class="card">
 						<div class="card-body">
 							<div class="col">
-								<label for="inputState">Photo</label>
-								<div class="col">
-									<label class="form-label" for="customFile">Photo</label>
-									<input type="file" class="form-control" id="customFile" />
-								</div>
-
+								<h6 class="card-title"><i class="fa fa-list"></i> Address :</h6>
+								<hr>
+							</div>
+							<div class="col">
+								<label for="inputState">Country</label>
+								<select id="country-dd" class="form-control" name="country_id">
+									<option value="">Select Country</option>
+									@foreach ($countries as $data)
+									<option value="{{$data->id}}">
+										{{$data->name}}
+									</option>
+									@endforeach
+								</select>
+								@error('country_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputState">City</label>
+								<select id="city-dd" class="form-control" name="city_id">
+								</select>
+								@error('city_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputState">District</label>
+								<select id="state-dd" class="form-control" name="district_id">
+								</select>
+								@error('district_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
 							</div>
 						</div>
 					</div>
 				</div>
+
 				{{-- // --}}
 			</div>
 			<br>

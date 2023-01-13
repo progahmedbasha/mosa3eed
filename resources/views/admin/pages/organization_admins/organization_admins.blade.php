@@ -8,7 +8,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="main-title">
-                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Admins For s : ({{ $organization_name->name }}) </h1>
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Admins For  : ({{ $organization_name->name }}) </h1>
                </div>
             </div>
 

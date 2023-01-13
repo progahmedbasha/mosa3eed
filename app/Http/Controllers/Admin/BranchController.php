@@ -20,9 +20,9 @@ class BranchController extends Controller
      */
     public function index(Request $request)
     {
-        $branchs = Branch::whenSearch($request->search)->paginate(50);
-//    $branchs =   Branch::where('name', 'like', '%' . $request->search . '%')->paginate(50);
-        return view('admin.pages.branchs.branchs', compact('branchs'));
+//         $branchs = Branch::whenSearch($request->search)->paginate(50);
+// //    $branchs =   Branch::where('name', 'like', '%' . $request->search . '%')->paginate(50);
+//         return view('admin.pages.branchs.branchs', compact('branchs'));
     }
 
     /**
@@ -32,7 +32,10 @@ class BranchController extends Controller
      */
     public function create($id)
     {
-        return view('admin.pages.branchs.branch_add', compact('id'));
+        $countries = Country::all();
+        $cities = City::all();
+        $districts = District::all();
+        return view('admin.pages.branchs.branch_add', compact('id','countries','cities','districts'));
     }
 
     /**
@@ -46,7 +49,6 @@ class BranchController extends Controller
         // return $request;
         // for return page after update
         $org_id = $request->input('organization_id');
-        $org_district = Organization::where('id',$org_id)->first();
 
         $branch = new Branch();
         $branch
@@ -56,7 +58,7 @@ class BranchController extends Controller
         $branch->phone_2 = $request->input('phone_2');
         $branch->email = $request->input('email');
         $branch->organization_id = $org_id;
-        $branch->district_id = $org_district->district_id;
+        $branch->district_id = $request->district_id;
         $branch->address = $request->input('address');
         if (request()->photo){
             $filename = time().'.'.request()->photo->getClientOriginalExtension();
