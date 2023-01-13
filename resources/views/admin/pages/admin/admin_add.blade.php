@@ -18,8 +18,12 @@
          @csrf
          <div class="row">
             <div class="col-sm-6">
-               <div class="card" style="border-radius: 17px;">
+               <div class="card">
                   <div class="card-body">
+                     <div class="col">
+                        <h6 class="card-title"><i class="fa fa-list"></i> Contact :</h6>
+                        <hr>
+                     </div>
                      <div class="col">
                         <label for="inputName">Name</label>
                         <input type="text" class="form-control" placeholder="Name" value="{{old('name')}}" name="name"
@@ -30,17 +34,12 @@
                      </div>
                      <div class="col">
                         <label for="inputCity">Phone</label>
-                        <input type="text" class="form-control" id="inputCity" placeholder="Phone" value="{{old('phone')}}" name="phone">
+                        <input type="text" class="form-control" id="inputCity" placeholder="Phone"
+                           value="{{old('phone')}}" name="phone">
                         @error('phone')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                      </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-6">
-               <div class="card" style="border-radius: 17px;">
-                  <div class="card-body">
                      <div class="col">
                         <label for="inputEmail4">Email</label>
                         <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
@@ -48,6 +47,16 @@
                         @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-6">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="col">
+                        <h6 class="card-title"><i class="fa fa-list"></i> Password :</h6>
+                        <hr>
                      </div>
                      <div class="col">
                         <label for="inputPassword4">Password</label>
@@ -57,6 +66,15 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                      </div>
+                     <div class="col">
+                        <label for="inputPassword4">Re-Password</label>
+                        <input type="password" class="form-control" id="inputPassword4" placeholder="Re-Enter Password"
+                           value="{{old('re-password')}}" name="re-password">
+                        @error('password')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                     </div>
+                     <br><br><br>
 
                   </div>
                </div>
@@ -66,14 +84,18 @@
          {{-- end of row --}}
          <div class="row">
             <div class="col-sm-6">
-               <div class="card" style="border-radius: 17px;">
+               <div class="card">
                   <div class="card-body">
+                     <div class="col">
+                        <h6 class="card-title"><i class="fa fa-list"></i> Setting :</h6>
+                        <hr>
+                     </div>
                      <div class="col">
                         <label for="inputState">User Type</label>
                         <select id="inputState" class="form-control" name="user_type_id">
                            <option value="">Select User Type</option>
                            @foreach($user_types as $item)
-                           <option value="{{$item->id}}" {{(old('institution_id')==$item->id)? 'selected':''}}
+                           <option value="{{$item->id}}" {{(old('user_type_id')==$item->id)? 'selected':''}}
                               >{{$item->type}}</option>
                            @endforeach
                         </select>
@@ -81,34 +103,27 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                      </div>
-                     <div class="col">
-                        <label for="inputState">Organization</label>
-                        <select id="inputState" class="form-control" name="organization_id">
-                           <option value="">Select Organization</option>
-                           @foreach($organizations as $org)
-                           <option value="{{$org->id}}" {{(old('organization_id')==$org->id)?
-                              'selected':''}}>{{$org->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('organization_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                     </div>
+
                      <div class="col">
                         <label for="inputState">Photo</label>
-                        <div class="col" >
+                        <div class="col">
                            <input type="file" class="custom-file-input" id="validatedCustomFile"
                               value="{{old('photo')}}" name="photo">
                            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                            <div class="invalid-feedback">Example invalid custom file feedback</div>
                         </div>
                      </div>
+                     <br><br><br>
                   </div>
                </div>
             </div>
             <div class="col-sm-6">
-               <div class="card" style="border-radius: 17px;">
+               <div class="card">
                   <div class="card-body">
+                     <div class="col">
+                        <h6 class="card-title"><i class="fa fa-list"></i> Address :</h6>
+                        <hr>
+                     </div>
                      <div class="col">
                         <label for="inputState">Country</label>
                         <select id="country-dd" class="form-control" name="country_id">
@@ -147,9 +162,9 @@
          <br>
          <button type="submit" class="btn btn-primary">Save</button>
       </form>
-    
-<hr>
-</div>
+
+      <hr>
+   </div>
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

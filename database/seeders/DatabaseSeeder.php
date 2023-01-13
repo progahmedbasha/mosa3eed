@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
         PostLikeSeeder::class,
         PostCommentSeeder::class,
         OrganizationAdminSeeder::class,
+        BranchShiftSeeder::class,
+        ShiftDaysSeeder::class,
         UserBranchSeeder::class,
         EmployeeSeeder::class,
         AdSeeder::class,

@@ -16,7 +16,7 @@ class CreateShiftDaysTable extends Migration
         Schema::create('shift_days', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('branch_shift_id')->unsigned();
-            $table->foreign('branch_shift_id')->references('id')->on('branch_shifts');
+            $table->foreign('branch_shift_id')->references('id')->on('branch_shifts')->onDelete('cascade');
             $table->text('day');
             $table->string('from');
             $table->string('to');

@@ -8,7 +8,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="main-title">
-                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Admins For Organization List :</h1>
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Admins For : ({{ $organization_name->name }}) </h1>
                </div>
             </div>
 
@@ -68,7 +68,7 @@
 
             <div class="channels-card-image-btn"><button type="button" class="btn btn-success btn-sm border-none">
                   {{ $organization_admin->Organization->name }}
-               </button> <a href=" {{route('organization_admins.edit',$organization_admin->id)}} "
+               </button> <a href=" {{route('organization_admins_edit', ['id'	=> $organization_admin->user_id, 'org' => $organization_name->id])}} "
                   class="btn btn-warning btn-sm border-none"><i class="fas fa-eye"></i></a>
             </div>
 

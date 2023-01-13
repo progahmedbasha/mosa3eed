@@ -37,6 +37,7 @@ class UserBranchController extends Controller
         $countries = Country::all();
          $cities = City::all();
          $districts = District::all();
+         $branch = Branch::where('organization_id',$id)->first();
          $shifts = BranchShift::where('branch_id',$id)->get();
         return view('admin.pages.branch_admins.branch_admin_add', compact('id','countries','cities','districts','shifts'));
     }

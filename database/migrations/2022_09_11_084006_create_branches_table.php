@@ -23,7 +23,7 @@ class CreateBranchesTable extends Migration
             $table->integer('organization_id')->unsigned();
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->integer('district_id')->unsigned();
-            $table->foreign('district_id')->references('id')->on('districts');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
             $table->string('address');
             // $table->integer('organization_shift_id')->unsigned()->nullable();
             // $table->foreign('organization_shift_id')->references('id')->on('organization_shifts');

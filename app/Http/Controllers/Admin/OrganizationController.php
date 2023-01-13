@@ -53,10 +53,9 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        // return $request;
-    
+
          // save organization
             $org = new Organization();
             $org
@@ -207,7 +206,7 @@ class OrganizationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         // return $request;
         $org = Organization::find($id);
@@ -242,16 +241,15 @@ class OrganizationController extends Controller
     {
         // return $org = Organization::has('User')->get();
         $org = Organization::find($id);
-        $org->Branch()->delete();
-        $org->User()->delete();
         $org->delete();
         Session::flash('success','Organization Deleted Successfully');
         return redirect()->route('organizations.index');
     }
     public function org_admins($id)
     {
+        
          $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
-        return view('admin.pages.organization_admins.organization_admins', compact('organization_admins','id'));
-
+         $organization_name = Organization::where('id',$id)->first();
+        return view('admin.pages.organization_admins.organization_admins', compact('organization_admins','id','organization_name'));
     }
 }

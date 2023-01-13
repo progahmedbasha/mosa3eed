@@ -104,13 +104,13 @@
                     <h1>Name:</h1>
                     <hr>
                     <label for="inputName">Name En</label>
-                    <p><input class="form-control" placeholder="Name En" value="{{old('name_en')}}" name="name_en"></p>
+                    <p><input class="form-control" placeholder="Name En" value="{{old('name_en')}}" name="name_en" required/></p>
                     @error('name_en')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="inputName">Name Ar</label>
                     <p><input placeholder="Name Ar" class="form-control form-control-solid" value="{{old('name_ar')}}"
-                            name="name_ar"></p>
+                            name="name_ar" required/></p>
                     @error('name_ar')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

@@ -2,111 +2,161 @@
 @section('content')
 
 <div id="content-wrapper">
+
 	<div class="container-fluid pb-0">
 		<div class="top-category section-padding mb-4">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="main-title">
-						<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Add New Organization Admin</h1>
+						<h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Admin Edit</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 		<hr>
-		<div class="row">
-			<div class="col-xl-12 mb-30">
-				<div class="card card-statistics h-100">
-					<div class="card-body">
-						<div class="row">
-							<h5 class="card-title">Form Organization Admin</h5>
+		<form action="{{route('organization_admins.update',$org_admin->id)}}" method="post"
+			enctype="multipart/form-data">
+			@csrf
+			@method('patch')
+			<input type="hidden" value="{{ $organization->id }}" name="organization_id">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="col">
+								<h6 class="card-title"><i class="fa fa-list"></i> Contact :</h6>
+								<hr>
+							</div>
+							<div class="col">
+								<label for="inputName">Name</label>
+								<input type="text" class="form-control" placeholder="Name" value="{{$org_admin->name}}"
+									name="name" required />
+								@error('name')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputCity">Phone</label>
+								<input type="text" class="form-control" id="inputCity" placeholder="Phone"
+									value="{{$org_admin->phone}}" name="phone">
+								@error('phone')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<div class="col">
+								<label for="inputEmail4">Email</label>
+								<input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+									value="{{$org_admin->email}}" name="email">
+								@error('email')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
 						</div>
-						<form action="{{route('organization_admins.update',$org_admin->id)}}" method="post"
-							enctype="multipart/form-data">
-							@csrf
-							@method('patch')
-							<div class="form-row">
-								<div class="col">
-									<label for="inputName">Organization</label>
-									<select id="country-dd" class="form-control" name="organization_id">
-										<option value="{{$org_admin->organization_id}}" {{($org_admin->organization_id
-											== $org_admin->organization_id)? 'selected' : ''
-											}}>{{$org_admin->Organization->name}}</option>
-										@foreach ($organizations as $org)
-										<option value="{{$org->id}}" {{(old('organization_id')==$org->id)?
-											'selected':''}}>{{$org->name}}</option>
-										@endforeach
-									</select>
-									@error('organization_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="col">
-									<label for="inputName">User</label>
-									<select id="country-dd" class="form-control" name="user_id">
-										<option value="{{$org_admin->user_id}}" {{($org_admin->user_id ==
-											$org_admin->user_id)? 'selected' : '' }}>{{$org_admin->User->name}}</option>
-										@foreach ($users as $user)
-										<option value="{{$user->id}}" {{(old('user_id')==$user->id)?
-											'selected':''}}>{{$user->name}}</option>
-										@endforeach
-									</select>
-									@error('user_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="col">
+								<h6 class="card-title"><i class="fa fa-list"></i> Password :</h6>
+								<hr>
 							</div>
-							<br>
-							<div class="form-row">
-								<div class="col">
-									<label for="inputName">Branches</label>
-									{{-- if first for send specifi branches only , second if for send all branches --}}
-									@if($org_admin->type =="Branch Admin")
-									<select id="country-dd" class="form-control" style="padding: 10px;"
-										name="branch_id[]" multiple>
-										<option value="">Select Branches</option>
-										@foreach ($user_branch as $branch)
-										<option value="{{$branch->branch_id}}" selected>{{$branch->Branch->name}}
-										</option>
-										@endforeach
-									</select>
-									@endif
-									@if($org_admin->type =="Organization Admin")
-									<select id="country-dd" class="form-control" style="padding: 10px;"
-										name="branch_id[]" multiple>
-										<option value="" selected>Select Branches</option>
-										@foreach ($user_branch as $branch)
-										<option value="{{$branch->branch_id}}">{{$branch->Branch->name}}</option>
-										@endforeach
-									</select>
-									@endif
-									@error('branch_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="col">
-									<label for="inputName">Shift</label>
-									<select id="country-dd" class="form-control" name="organization_shift_id">
-										<option value="">Select shift</option>
-										@foreach ($shifts as $shift)
-										<option value="{{$shift->id}}" {{(old('organization_shift_id')==$shift->id)?
-											'selected':''}}>{{$shift->name}}</option>
-										@endforeach
-									</select>
-									@error('organization_shift_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
+							<div class="col">
+								<label for="inputPassword4">Password</label>
+								<input type="password" class="form-control" id="inputPassword4" placeholder="Password"
+									value="{{old('password')}}" name="password">
+								@error('password')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
 							</div>
-							<br>
+							<div class="col">
+								<label for="inputPassword4">Re-Password</label>
+								<input type="password" class="form-control" id="inputPassword4"
+									placeholder="Re-Enter Password" value="{{old('re-password')}}" name="re-password">
+								@error('password')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+							<br><br><br>
 
-							<button type="submit" class="btn btn-primary">Save</button>
-						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			{{-- end of row --}}
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="col">
+								<h6 class="card-title"><i class="fa fa-list"></i> Type :</h6>
+								<hr>
+							</div>
+							<div class="col">
+								<label for="inputState">User Type</label>
+								<select id="inputState" class="form-control" name="user_type_id">
+									<option value="">Select User Type</option>
+									@foreach($user_types as $item)
+									<option value="{{$item->id}}" {{($org_admin->user_type_id==$item->id)?
+										'selected':''}}
+										>{{$item->type}}</option>
+									@endforeach
+								</select>
+								@error('user_type_id')
+								<div class="alert alert-danger">{{ $message }}</div>
+								@enderror
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="col">
+								<h6 class="card-title"><i class="fa fa-list"></i> Photo :</h6>
+								<hr>
+							</div>
+							<div class="col">
+								<label for="inputState">Photo</label>
+								<div class="col">
+									<input type="file" class="custom-file-input" id="validatedCustomFile"
+										value="{{old('photo')}}" name="photo">
+									<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+									<div class="invalid-feedback">Example invalid custom file feedback</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<br>
+			<button type="submit" class="btn btn-primary">Save</button>
+		</form>
+	{{-- div for show photo --}}
+		<br>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="col">
+							@if(!empty($org_admin->photo))
+							<img src="{{url('/data/admins')}}/{{$org_admin->photo }}" class="w3-round" width="200px"
+								alt="Norway">
+							@else
+							<img src="{{url('/data/error.png')}}" class="w3-round" width="200px" alt="Norway">
+							@endif
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		{{-- div for show photo --}}
 		<hr>
 	</div>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@include('admin.pages.component.country_city_district')
 @endsection

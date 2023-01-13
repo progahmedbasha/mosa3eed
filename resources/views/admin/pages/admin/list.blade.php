@@ -50,7 +50,7 @@
                   </div>
                   @else
                   <div class="channels-card-image-btn"><button type="button" class="btn btn-success btn-sm border-none">
-                        Admin
+                        {{ $user->UserType->type }}
                      </button> <a href="admin/{{$user->id}}/edit" class="btn btn-warning btn-sm border-none"><i
                            class="fas fa-eye"></i></a>
                   </div>
@@ -62,12 +62,11 @@
                            data-original-title="Verified"><i class="fas fa-check-circle text-success"></i></span></a>
                   </div>
                   <div class="channels-view">
-                     {{-- {{ $user->UserType->type }} --}}
                      <form action="{{route('admin.destroy',$user->id)}} " method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="menu-link px-3" style="background: transparent;border: 0;"
-                           data-kt-customer-table-filter="delete_row">{{ $user->UserType->type }}<i
+                           data-kt-customer-table-filter="delete_row"><i
                               class="fas fa-trash"></i></button>
                      </form>
                   </div>

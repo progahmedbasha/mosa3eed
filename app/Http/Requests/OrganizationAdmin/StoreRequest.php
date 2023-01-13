@@ -25,9 +25,12 @@ class StoreRequest extends FormRequest
     {
         return [
   
-             'user_id'=> 'required',
-             'organization_id'=> 'required',
-            
+             'name'=> 'required|min:2|max:150',
+            'email' => 'required|unique:users|email|max:200',
+            'password' => 'min:6|max:50|required_with:re-password|same:re-password',
+            're-password' => 'min:6',
+            'phone' => 'required|min:4|max:20',  
+            'user_type_id' => 'required',
         ];
     }
 }

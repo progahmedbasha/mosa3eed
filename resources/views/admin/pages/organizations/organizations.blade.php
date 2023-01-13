@@ -7,7 +7,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="main-title">
-                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Organization List d :</h1>
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Organization List :</h1>
                </div>
             </div>
          </div>
@@ -38,6 +38,7 @@
                      </div>
                      {{-- search --}}
                   </div>
+               
                   @if(Session::has('success'))
                   <script>
                      toastr.success(" {{ Session::get('success') }} ");
@@ -52,33 +53,26 @@
                               {{-- <a class="video-close" href="#"><i class="fas fa-times-circle"></i></a> --}}
                               <div class="dropdown">
                                  <a type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                    aria-expanded="false" style="margin-top: 13px;margin-left: 220px;">
+                                    aria-expanded="false" style="margin-top: 13px;margin-left: 220px; font-size: medium;">
                                     <i class="fas fa-ellipsis-v"></i>
                                  </a>
                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" style="padding: 3px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 3px 14px!important; font-size:14px;"
                                           href="organizations/{{$organization->id}}/edit"><i class="fas fa-eye"></i>
                                           View &
                                           Edit
                                        </a></li>
-                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important; font-size:14px;"
                                           href="organization_branches/{{$organization->id}}"><i
                                              class="fas fa-university"></i>
                                           Branches</a>
                                     </li>
-                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important; font-size:14px;"
                                           href="org_admins/{{ $organization->id }}"><i class="fas fa-user-circle"></i>
                                           Admins</a>
                                     </li>
-                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
-                                          href="branch_admins/{{ $organization->id }}"><i
-                                             class="fas fa-user-circle"></i>
-                                          Branch Admins</a>
-                                    </li>
-                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
-                                          href="employees/{{ $organization->id }}"><i class="fas fa-users"></i>
-                                          employees</a>
-                                    </li>
+                             
+                               
                                     <li>
                                        <form action="{{route('organizations.destroy',$organization->id)}} "
                                           method="POST">
@@ -86,7 +80,7 @@
                                           @method('DELETE')
                                           <div class="channels-card-image-btn">
                                              <button class="dropdown-item"
-                                                style="background: transparent;border: 0;padding: 0px 14px!important"
+                                                style="background: transparent;border: 0;padding: 0px 14px!important; font-size:14px;"
                                                 data-kt-customer-table-filter="delete_row"><i class="fas fa-trash"></i>
                                                 Delete</button>
                                           </div>

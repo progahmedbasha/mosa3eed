@@ -77,6 +77,8 @@ Route::group(
                     Route::get('org_admins/{id}', [OrganizationController::class,'org_admins'])->name('org_admins');
                     Route::get('organization_admins_create/{id}', 'Organization\OrganizationAdminController@create')->name('organization_admins_create');
                     Route::resource('organization_admins', Organization\OrganizationAdminController::class);
+                    
+                      Route::get('organization_admins_edit/{id}/{org}', 'Organization\OrganizationAdminController@edit')->name('organization_admins_edit');
 
                     
                     Route::resource('countries', CountryController::class);

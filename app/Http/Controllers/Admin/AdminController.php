@@ -40,9 +40,8 @@ class AdminController extends Controller
          $countries = Country::all();
          $cities = City::all();
          $districts = District::all();
-         $user_types = UserType::get();
-         $organizations = Organization::get();
-          return view('admin.pages.admin.admin_add', compact('user_types','countries','cities','districts','organizations'));
+         $user_types = UserType::take(2)->get();
+          return view('admin.pages.admin.admin_add', compact('user_types','countries','cities','districts'));
     }
 
     /**
@@ -108,14 +107,13 @@ class AdminController extends Controller
     public function edit($id)
     {
         $data = User::with('District')->find($id);
-        $user_types = UserType::get();
-        $organizations = Organization::all();
+        $user_types = UserType::take(2)->get();
         $districts = District::all();
         $country_id = Country::where('id',$data->District->City->country_id)->first();
         $countries = Country::all();
         $cities = City::all();
         $city_id = City::where('id',$data->District->city_id)->first(); 
-        return view('admin.pages.admin.admin_details' ,compact('data','user_types','districts','country_id','city_id','organizations','countries','cities'));
+        return view('admin.pages.admin.admin_details' ,compact('data','user_types','districts','country_id','city_id','countries','cities'));
     }
 
     /**

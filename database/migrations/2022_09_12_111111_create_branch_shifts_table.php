@@ -17,7 +17,7 @@ class CreateBranchShiftsTable extends Migration
             $table->increments('id');
             $table->text('name');
             $table->integer('branch_id')->unsigned();
-            $table->foreign('branch_id')->references('id')->on('branches');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->timestamps();
         });
     }

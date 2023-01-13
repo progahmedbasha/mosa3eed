@@ -25,8 +25,10 @@ class StoreRequest extends FormRequest
         return [
             'name'=> 'required|min:2|max:150',
             'email' => 'required|unique:users|email|max:200',
-            'password' => 'required|min:4|max:25',
-            'phone' => 'required|min:9|max:15',  
+            // 'password' => 'required|min:4|max:25',
+            'password' => 'min:6|max:50|required_with:re-password|same:re-password',
+            're-password' => 'min:6',
+            'phone' => 'required|min:4|max:20',  
             'user_type_id' => 'required',
             'country_id' => 'required', 
             'city_id' => 'required', 
