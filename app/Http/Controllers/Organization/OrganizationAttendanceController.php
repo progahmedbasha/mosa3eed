@@ -17,14 +17,30 @@ class OrganizationAttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $search = $request->search;
-        $organization_attendances = OrganizationAttendance::whereHas('User' , function($q) use($search) {
-                $q->where('name',$search)->orWhere('phone', 'like', '%' .$search. '%');})->paginate(20);
-        return view('admin.pages.organization_attendances.organization_attendances', compact('organization_attendances'));
-    }
+    // public function index(Request $request)
+    // {
+    //     $search = $request->search;
+    //     $organization_attendances = OrganizationAttendance::whereHas('User' , function($q) use($search) {
+    //             $q->where('name',$search)->orWhere('phone', 'like', '%' .$search. '%');})->paginate(20);
+    //     return view('admin.pages.organization_attendances.organization_attendances', compact('organization_attendances'));
+    // }
 
+    public function allorg_attendance(Request $request)
+    {
+        $organizations = Organization::whenSearch($request->search)->paginate(50);
+        return view('admin.pages.organization_attendances.all_organization', compact('organizations'));
+
+    }
+    public function all_branch_attendance($id)
+    {
+        $branchs = Branch::where('organization_id',$id)->paginate(20);
+        return view('admin.pages.organization_attendances.all_branches', compact('branchs','id'));
+    }
+    public function attendance($id)
+    {
+         $organization_attendances  = OrganizationAttendance::where('branch_id', $id)->get();
+        return view('admin.pages.organization_attendances.organization_attendances', compact('organization_attendances','id'));
+    }
     /**
      * Show the form for creating a new resource.
      *

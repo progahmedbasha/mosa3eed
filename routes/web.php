@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\UserBranchController;
 use App\Http\Controllers\Organization\OrganizationAdminController;
-use App\Http\Controllers\BranchshiftController;
+use App\Http\Controllers\BranchShiftController;
 use App\Http\Controllers\Organization\OrganizationAttendanceController;
 use App\Http\Controllers\Organization\PurchaseController;
 use App\Http\Controllers\Jobs\JobTitleController;
@@ -95,12 +95,19 @@ Route::group(
                     Route::get('branch_admins_create/{id}', [UserBranchController::class,'create'])->name('branch_admins_create');
                     
 
-                    
+                    // shifts
                     Route::resource('organization_shifts', 'BranchShiftController');
+                    Route::get('allorganizations_shift', [BranchShiftController::class,'allorganizations_shift'])->name('allorganizations_shift');
+                    Route::get('all_branch_shift/{id}', [BranchShiftController::class,'all_branch_shift'])->name('all_branch_shift');
+                    Route::get('branch_shift/{id}', [BranchShiftController::class,'branch_shift'])->name('branch_shift');
                     Route::get('shift_create/{id}', [BranchShiftController::class,'create'])->name('shift_create');
-                    //
                     Route::get('branch_shifts/{id}', [BranchShiftController::class,'shifts'])->name('branch_shifts');
+                    // attendance
                     Route::resource('organization_attendances', Organization\OrganizationAttendanceController::class);
+                    Route::get('allorg_attendance', 'Organization\OrganizationAttendanceController@allorg_attendance')->name('allorg_attendance');
+                    Route::get('all_branch_attendance/{id}', 'Organization\OrganizationAttendanceController@all_branch_attendance')->name('all_branch_attendance');
+                    Route::get('org_branch_attendance/{id}', 'Organization\OrganizationAttendanceController@attendance')->name('org_branch_attendance');
+
                     Route::resource('purchases', Organization\PurchaseController::class);
                     Route::resource('job_titles', Jobs\JobTitleController::class);
                     Route::resource('job_posts', Jobs\JobPostController::class);

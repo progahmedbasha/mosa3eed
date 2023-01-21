@@ -160,9 +160,9 @@
          <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-container">
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('organization_shifts.index')}}">Shifts</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('allorganizations_shift')}}">Shifts</a>
          <a class="dropdown-item" style="margin-left: 17px;"
-            href="{{route('organization_attendances.index')}}">Attendance</a>
+            href="{{route('allorg_attendance')}}">Attendance</a>
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('organization_attendances.create')}}">Easy
             Sign</a>
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees.index')}}">Employee</a>

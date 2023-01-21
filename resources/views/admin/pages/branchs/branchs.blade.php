@@ -49,22 +49,22 @@
                               {{-- <a class="video-close" href="#"><i class="fas fa-times-circle"></i></a> --}}
                               <div class="dropdown">
                                  <a type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                    aria-expanded="false" style="margin-top: 13px;margin-left: 220px;">
+                                    aria-expanded="false"  style="margin-top: 13px;margin-left: 255px; font-size: medium;">
                                     <i class="fas fa-ellipsis-v"></i>
                                  </a>
                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" style="padding: 3px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 3px 14px!important; font-size:14px;"
                                           href="{{route('branchs.edit',$branch->id)}} "><i class="fas fa-eye"></i>
                                           View &
                                           Edit
                                        </a></li>
-                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important; font-size:14px;"
                                           href="{{route('branch_shifts',$branch->id)}} "><i
                                              class="fas fa-university"></i>
                                           Shifts</a>
                                     </li>
                                    
-                                    <li><a class="dropdown-item" style="padding: 0px 14px!important"
+                                    <li><a class="dropdown-item" style="padding: 0px 14px!important; font-size:14px;"
                                           href="{{ route('admins_branch',$branch->id) }}"><i
                                              class="fas fa-user-circle"></i>
                                           Branch Admins</a>
@@ -77,7 +77,7 @@
                                           @method('DELETE')
                                           <div class="channels-card-image-btn">
                                              <button class="dropdown-item"
-                                                style="background: transparent;border: 0;padding: 0px 14px!important"
+                                                style="background: transparent;border: 0;padding: 0px 14px!important; font-size:14px;"
                                                 data-kt-customer-table-filter="delete_row"><i class="fas fa-trash"></i>
                                                 Delete</button>
                                           </div>

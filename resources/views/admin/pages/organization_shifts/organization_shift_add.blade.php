@@ -27,7 +27,7 @@
 								<div class="col">
 									<label for="inputName">Shift Name</label>
 									<input type="text" class="form-control form-control-solid" placeholder="Shift Name"
-										value="{{old('shift_name')}}" name="shift_name">
+										value="{{old('shift_name')}}" name="shift_name" required/>
 									@error('shift_name')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BranchShift;
-use App\Http\Requests\OrganizationShift\StoreRequest;
+use App\Http\Requests\BranchShift\StoreRequest;
 use App\Models\organization\Shift;
 use App\Models\admin\Organization;
 use App\Models\admin\Branch;
@@ -19,10 +19,27 @@ class BranchShiftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    // public function index(Request $request)
+    // {
+
+    //     $branch_shifts = BranchShift::whenSearch($request->search)->paginate(20);
+    //     return view('admin.pages.organization_shifts.organization_shifts', compact('branch_shifts'));
+    // }
+    public function allorganizations_shift(Request $request)
     {
-        $branch_shifts = BranchShift::whenSearch($request->search)->paginate(20);
-        return view('admin.pages.organization_shifts.organization_shifts', compact('branch_shifts'));
+        $organizations = Organization::whenSearch($request->search)->paginate(50);
+        return view('admin.pages.organization_shifts.all_organization', compact('organizations'));
+
+    }
+    public function all_branch_shift($id)
+    {
+        $branchs = Branch::where('organization_id',$id)->paginate(20);
+        return view('admin.pages.organization_shifts.all_branches', compact('branchs','id'));
+    }
+    public function branch_shift(Request $request ,$id)
+    {
+         $branch_shifts = BranchShift::where('branch_id',$id)->whenSearch($request->search)->paginate(20);
+        return view('admin.pages.organization_shifts.organization_shifts', compact('branch_shifts','id'));   
     }
 
     /**
@@ -43,7 +60,6 @@ class BranchShiftController extends Controller
      */
     public function store(Request $request)
     {
-        // return 1;
         $branch_id = $request->branch_id;
            $shift  = new BranchShift();
                     $shift->name = $request->shift_name;
@@ -81,11 +97,9 @@ class BranchShiftController extends Controller
      */
     public function edit($id)
     {
-        $org_shift = OrganizationShift::find($id);
-        $organizations = Organization::all();
-        $branches = Branch::all();
-        
-        return view('admin.pages.organization_shifts.organization_shift_details', compact('org_shift','organizations','branches'));
+        $branch_shift = BranchShift::find($id);
+        $shift_days = ShiftDay::where('branch_shift_id', $id)->get();
+        return view('admin.pages.organization_shifts.organization_shift_details', compact('branch_shift','shift_days'));
     }
 
     /**
@@ -95,20 +109,33 @@ class BranchShiftController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
-            $org_shift = OrganizationShift::find($id);
-            $org_shift->organization_id = $request->input('organization_id');
-            $org_shift->branch_id = $request->input('branch_id');
-            $org_shift
-                ->setTranslation('name', 'en', $request->input('name_en'))
-                ->setTranslation('name', 'ar', $request->input('name_ar')) ;
-            $org_shift->days =  json_encode($request->days);
-            $org_shift->from = $request->input('from');
-            $org_shift->to = $request->input('to');
-            $org_shift->save();
+        // return $request;
+
+        $shift  = BranchShift::find($id);
+        $shift->name = $request->shift_name;
+        $shift->branch_id = $request->branch_id;
+        $shift->save();
+       
+            $shift_day  = ShiftDay::where('branch_shift_id', $id)->get();
+            foreach ($shift_day as $key => $value) {
+            $value->delete();
+            }
+            $countItems = count($request->from);
+            for($i=0; $i<$countItems; $i++){
+                $shift_day  = new ShiftDay();
+                $shift_day->branch_shift_id = $shift->id;
+                $shift_day->day = $request->day[$i];
+                $shift_day->from = $request->from[$i];
+                $shift_day->to = $request->to[$i];
+                $shift_day->save();
+            }
+            // for return routes organization branch
+        $branch = Branch::where('id', $request->branch_id)->first();
+
         Session::flash('success','Organization Shifts Updated Successfully');
-        return redirect()->route('organization_shifts.index');
+        return redirect()->route('branch_shift',$branch);
     }
 
     /**

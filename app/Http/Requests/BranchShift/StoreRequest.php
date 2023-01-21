@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\OrganizationShift;
+namespace App\Http\Requests\BranchShift;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,12 +24,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar'=> 'required|min:2|max:250',
-            'days'=> 'required',
-            'from'=> 'required',
-            'to'=> 'required',
-            'organization_id'=> 'required',
+            'name'=> 'required|min:2|max:250',
+            // 'day'=> 'max:250',
+            // 'from' => 'max:250',
+            // 'to' => 'max:250',
         ];
     }
 }
