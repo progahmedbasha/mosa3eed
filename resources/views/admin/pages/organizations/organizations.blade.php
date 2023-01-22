@@ -53,7 +53,7 @@
                               {{-- <a class="video-close" href="#"><i class="fas fa-times-circle"></i></a> --}}
                               <div class="dropdown">
                                  <a type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                    aria-expanded="false" style="margin-top: 13px;margin-left: 255px; font-size: medium;">
+                                    aria-expanded="false" style="margin-top: 13px;margin-left: 92%; font-size: medium;">
                                     <i class="fas fa-ellipsis-v"></i>
                                  </a>
                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

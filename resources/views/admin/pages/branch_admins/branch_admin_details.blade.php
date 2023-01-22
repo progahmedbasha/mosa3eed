@@ -14,9 +14,10 @@
             </div>
         </div>
         <hr>
-        <form action="{{route('branch_admins.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('branch_admins.update',$user->id)}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="{{ $id }}" name="branch_id">
+            @method('patch')
+            <input type="hidden" value="{{ $branch }}" name="branch_id">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
@@ -27,7 +28,7 @@
                             </div>
                             <div class="col">
                                 <label for="inputName">Name</label>
-                                <input type="text" class="form-control" placeholder="Name" value="{{old('name')}}"
+                                <input type="text" class="form-control" placeholder="Name" value="{{$user->name}}"
                                     name="name" required />
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -36,7 +37,7 @@
                             <div class="col">
                                 <label for="inputCity">Phone</label>
                                 <input type="text" class="form-control" id="inputCity" placeholder="Phone"
-                                    value="{{old('phone')}}" name="phone">
+                                    value="{{$user->phone}}" name="phone">
                                 @error('phone')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -44,7 +45,7 @@
                             <div class="col">
                                 <label for="inputEmail4">Email</label>
                                 <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-                                    value="{{old('email')}}" name="email">
+                                    value="{{$user->email}}" name="email">
                                 @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -89,21 +90,19 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-						<div class="col">
-                        <h6 class="card-title"><i class="fa fa-list"></i> Setting :</h6>
-                        <hr>
-                     </div>
+                            <div class="col">
+                                <h6 class="card-title"><i class="fa fa-list"></i> Setting :</h6>
+                                <hr>
+                            </div>
                             <div class="col">
                                 <label for="inputState">Shift</label>
                                 <select id="input-shift" class="form-control" name="branch_shift_id">
                                     <option value="">Select Shift</option>
                                     @foreach ($shifts as $shift)
-                                    <option value="{{$shift->id}}">
-                                        {{$shift->name}}
-                                    </option>
+                                        <option value="{{$shift->id}}" {{($user->branch_shift_id=$shift->id)? 'selected' : '' }}> {{$shift->name}}</option>
                                     @endforeach
                                 </select>
-                                @error('country_id')
+                                @error('branch_shift_id')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

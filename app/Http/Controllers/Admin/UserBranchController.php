@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BranchAdmin\BranchAdminStoreRequest;
+use App\Http\Requests\BranchAdmin\BranchAdminUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\UserBranch;
 use App\Models\User;
@@ -48,7 +50,7 @@ class UserBranchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BranchAdminStoreRequest $request)
     {
         $branch_district = Branch::where('id', $request->branch_id)->first();
         $user = new User();
@@ -90,9 +92,11 @@ class UserBranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $branch)
     {
-        //
+        $user = User::where('id', $id)->first();
+        $shifts = BranchShift::where('branch_id',$branch)->get();
+        return view('admin.pages.branch_admins.branch_admin_details', compact('id','user','shifts','branch'));
     }
 
     /**
@@ -102,9 +106,23 @@ class UserBranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BranchAdminUpdateRequest $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        if (request()->password){
+        $user->password = Hash::make($request['password']);
+        }
+        $user->phone = $request->input('phone');
+        if (request()->photo){
+            $filename = time().'.'.request()->photo->getClientOriginalExtension();
+            request()->photo->move(public_path('data/admins'), $filename);
+            $user->photo=$filename;
+            }
+        $user->save();
+        $branch_id = $request->branch_id;
+        return redirect()->route('admins_branch',$branch_id)->with('success','Branch Admin Updated Successfully');
     }
 
     /**
@@ -115,7 +133,9 @@ class UserBranchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with('success','Admin Deleted Successfully');
     }
     public function admins_branch($id)
     {

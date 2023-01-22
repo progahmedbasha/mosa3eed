@@ -89,10 +89,12 @@ Route::group(
                     Route::resource('branchs', Admin\BranchController::class);
                     // Route::get('org_branch/{id}', [Admin\BranchController::class,'create'])->name('branch_Add');
                     Route::get('branch_add/{id}', 'Admin\BranchController@create')->name('branch_add');
-
+                    
+                    // branch admins
                     Route::resource('branch_admins', Admin\UserBranchController::class);
                     Route::get('admins_branch/{id}', [UserBranchController::class,'admins_branch'])->name('admins_branch');
                     Route::get('branch_admins_create/{id}', [UserBranchController::class,'create'])->name('branch_admins_create');
+                    Route::get('branch_admin_edit/{id}/{branch}', [UserBranchController::class,'edit'])->name('branch_admin_edit');
                     
 
                     // shifts
