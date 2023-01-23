@@ -44,7 +44,7 @@ class BranchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         // return $request;
         // for return page after update
@@ -126,7 +126,7 @@ class BranchController extends Controller
             $branch->photo=$filename;
             }
         $branch->save();
-        return redirect()->route('organizations.show',$org_id)->with('success','Branch Updated Successfully');
+        return redirect()->route('organization_branches',$org_id)->with('success','Branch Updated Successfully');
     }
 
     /**

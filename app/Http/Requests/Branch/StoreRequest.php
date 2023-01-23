@@ -26,11 +26,9 @@ class StoreRequest extends FormRequest
         return [
             'name_en'=> 'required|min:2|max:250',
             'name_ar' => 'required|min:2|max:250',
-            'phone_1'=> 'required|min:4|max:15',
-            'phone_2'=> 'max:15',
+            'phone_1'=> 'required|min:2|max:20',
+            'phone_2'=> 'min:2|max:20',
             'email' => 'required|email|max:200',
-            'country_id' => 'required',
-            'city_id' => 'required',
             'district_id' => 'required',
             'organization_id' => 'required',
             'address' => 'required|max:400',
