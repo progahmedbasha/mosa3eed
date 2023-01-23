@@ -58,7 +58,7 @@ class BranchShiftController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $branch_id = $request->branch_id;
            $shift  = new BranchShift();
@@ -146,10 +146,10 @@ class BranchShiftController extends Controller
      */
     public function destroy($id)
     {
-        $shift = OrganizationShift::find($id);
+        $shift = BranchShift::find($id);
         $shift->delete();
         Session::flash('success','Purchase Deleted Successfully');
-        return redirect()->route('purchases.index');
+        return redirect()->back();
     }
         public function shifts($id)
     {

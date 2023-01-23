@@ -24,10 +24,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'required|min:2|max:250',
-            // 'day'=> 'max:250',
-            // 'from' => 'max:250',
-            // 'to' => 'max:250',
+            'shift_name'=> 'required|min:2|max:250',
+            'day.*'=> 'max:250',
+            'from.*' => 'max:250',
+            'to.*' => 'max:250',
         ];
     }
 }

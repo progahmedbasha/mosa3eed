@@ -27,7 +27,7 @@
 								<div class="col">
 									<label for="inputName">Shift Name</label>
 									<input type="text" class="form-control form-control-solid" placeholder="Shift Name"
-										value="{{old('shift_name')}}" name="shift_name" required/>
+										value="{{old('shift_name')}}" name="shift_name" >
 									@error('shift_name')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -44,7 +44,7 @@
 								<div class="col">
 									<label for="inputName">Time From</label>
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from[]">
+										value="{{old('from[]')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -52,7 +52,7 @@
 								<div class="col">
 									<label for="inputName">Time To</label>
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to[]">
+										value="{{old('to[]')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -65,14 +65,14 @@
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from[]">
+										value="{{old('from[]')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to[]">
+										value="{{old('to[]')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -85,14 +85,14 @@
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from[]">
+										value="{{old('from[]')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to[]">
+										value="{{old('to[]')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -105,14 +105,14 @@
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from[]">
+										value="{{old('from[]')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to[]">
+										value="{{old('to[]')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -125,14 +125,14 @@
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from[]">
+										value="{{old('from[]')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to[]">
+										value="{{old('to[]')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -145,14 +145,14 @@
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from[]">
+										value="{{old('from[]')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to[]">
+										value="{{old('to[]')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
@@ -165,14 +165,14 @@
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time From"
-										value="{{old('from')}}" name="from[]">
+										value="{{old('from[]')}}" name="from[]">
 									@error('from')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror
 								</div>
 								<div class="col">
 									<input type="time" class="form-control form-control-solid" placeholder="Time To"
-										value="{{old('to')}}" name="to[]">
+										value="{{old('to[]')}}" name="to[]">
 									@error('to')
 									<div class="alert alert-danger">{{ $message }}</div>
 									@enderror

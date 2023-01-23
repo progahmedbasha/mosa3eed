@@ -1,5 +1,5 @@
 <style>
-    /* * {
+/* * {
         box-sizing: border-box;
     }
 
@@ -7,81 +7,81 @@
         background-color: #f1f1f1;
     } */
 
-    #regForm {
-        background-color: #ffffff;
-        /* margin: 100px auto; */
-        font-family: Raleway;
-        padding: 21px;
-        margin: auto;
-        width: 90%;
-        min-width: 300px;
-    }
+#regForm {
+    background-color: #ffffff;
+    /* margin: 100px auto; */
+    font-family: Raleway;
+    padding: 21px;
+    margin: auto;
+    width: 90%;
+    min-width: 300px;
+}
 
-    h1 {
-        text-align: left;
-    }
+h1 {
+    text-align: left;
+}
 
-    input {
-        padding: 10px;
-        width: 100%;
-        font-size: 17px;
-        font-family: Raleway;
-        border: 1px solid #aaaaaa;
-    }
+input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
 
-    /* Mark input boxes that gets an error on validation: */
-    input.invalid {
-        background-color: #ffdddd;
-    }
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+    background-color: #ffdddd;
+}
 
-    /* Hide all steps by default: */
-    .tab {
-        display: none;
-    }
+/* Hide all steps by default: */
+.tab {
+    display: none;
+}
 
-    button {
-        background-color: #04AA6D;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 17px;
-        font-family: Raleway;
-        cursor: pointer;
-    }
+button {
+    background-color: #04AA6D;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+}
 
-    button:hover {
-        opacity: 0.8;
-    }
+button:hover {
+    opacity: 0.8;
+}
 
-    #prevBtn {
-        background-color: #bbbbbb;
-    }
+#prevBtn {
+    background-color: #bbbbbb;
+}
 
-    /* Make circles that indicate the steps of the form: */
-    .step {
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbbbbb;
-        border: none;
-        border-radius: 50%;
-        display: inline-block;
-        opacity: 0.5;
-    }
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
 
-    .step.active {
-        opacity: 1;
-    }
+.step.active {
+    opacity: 1;
+}
 
-    /* Mark the steps that are finished and valid: */
-    .step.finish {
-        background-color: #04AA6D;
-    }
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #04AA6D;
+}
 
-    /* for widt modal */
-    .modal-dialog {
-        max-width: 663px;
-    }
+/* for widt modal */
+.modal-dialog {
+    max-width: 663px;
+}
 </style>
 <div class="modal" id="modaldemo9">
 
@@ -99,18 +99,29 @@
             <form id="regForm" action="{{route('organizations.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- <h1>Add Organization:</h1> --}}
+                <div style="text-align:center;margin-top:0px;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <h1>Name:</h1>
                     <hr>
                     <label for="inputName">Name En</label>
-                    <p><input class="form-control" placeholder="Name En" value="{{old('name_en')}}" name="name_en" required/></p>
+                    <p><input class="form-control" placeholder="Name En" value="{{old('name_en')}}" name="name_en"
+                            required /></p>
                     @error('name_en')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="inputName">Name Ar</label>
                     <p><input placeholder="Name Ar" class="form-control form-control-solid" value="{{old('name_ar')}}"
-                            name="name_ar" required/></p>
+                            name="name_ar" required /></p>
                     @error('name_ar')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -214,7 +225,7 @@
                     <hr>
                     <label for="inputName">Name </label>
                     <input type="text" class="form-control" placeholder="Name " value="{{old('owner_name')}}"
-                        name="owner_name" required />
+                        name="owner_name" >
                     @error('owner_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -361,7 +372,7 @@
                         <div class="col">
                             <label for="inputName">Time From</label>
                             <input type="time" class="form-control form-control-solid" placeholder="Time From"
-                                value="{{old('from')}}" name="from[]">
+                                value="{{old('from[]')}}" name="from[]">
                             @error('from')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -369,7 +380,7 @@
                         <div class="col">
                             <label for="inputName">Time To</label>
                             <input type="time" class="form-control form-control-solid" placeholder="Time To"
-                                value="{{old('to')}}" name="to[]">
+                                value="{{old('to[]')}}" name="to[]">
                             @error('to')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -382,14 +393,14 @@
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time From"
-                                value="{{old('from')}}" name="from[]">
+                                value="{{old('from[]')}}" name="from[]">
                             @error('from')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time To"
-                                value="{{old('to')}}" name="to[]">
+                                value="{{old('to[]')}}" name="to[]">
                             @error('to')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -402,14 +413,14 @@
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time From"
-                                value="{{old('from')}}" name="from[]">
+                                value="{{old('from[]')}}" name="from[]">
                             @error('from')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time To"
-                                value="{{old('to')}}" name="to[]">
+                                value="{{old('to[]')}}" name="to[]">
                             @error('to')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -422,14 +433,14 @@
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time From"
-                                value="{{old('from')}}" name="from[]">
+                                value="{{old('from[]')}}" name="from[]">
                             @error('from')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time To"
-                                value="{{old('to')}}" name="to[]">
+                                value="{{old('to[]')}}" name="to[]">
                             @error('to')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -442,14 +453,14 @@
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time From"
-                                value="{{old('from')}}" name="from[]">
+                                value="{{old('from[]')}}" name="from[]">
                             @error('from')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time To"
-                                value="{{old('to')}}" name="to[]">
+                                value="{{old('to[]')}}" name="to[]">
                             @error('to')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -462,14 +473,14 @@
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time From"
-                                value="{{old('from')}}" name="from[]">
+                                value="{{old('from[]')}}" name="from[]">
                             @error('from')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time To"
-                                value="{{old('to')}}" name="to[]">
+                                value="{{old('to[]')}}" name="to[]">
                             @error('to')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -482,14 +493,14 @@
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time From"
-                                value="{{old('from')}}" name="from[]">
+                                value="{{old('from[]')}}" name="from[]">
                             @error('from')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col">
                             <input type="time" class="form-control form-control-solid" placeholder="Time To"
-                                value="{{old('to')}}" name="to[]">
+                                value="{{old('to[]')}}" name="to[]">
                             @error('to')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -501,11 +512,14 @@
                 <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                        <button type="button" style="background: gainsboro;color: black;" id="skiptBtn" onclick="skipPrev(1)">Skip</button>
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                        <button type="submit" style="display:none;" id="submit" >Submit</button>
+
                     </div>
                 </div>
                 <!-- Circles which indicates the steps of the form: -->
-                <div style="text-align:center;margin-top:40px;">
+                <!-- <div style="text-align:center;margin-top:40px;">
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
@@ -514,7 +528,7 @@
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
-                </div>
+                </div> -->
             </form>
 
         </div>
@@ -523,76 +537,99 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @include('admin.pages.component.country_city_district')
 <script>
-    var currentTab = 0; // Current tab is set to be the first tab (0)
+var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
-  // This function will display the specified tab of the form...
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
-  //... and fix the Previous/Next buttons:
-  if (n == 0) {
-    document.getElementById("prevBtn").style.display = "none";
-  } else {
-    document.getElementById("prevBtn").style.display = "inline";
-  }
-  if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
-  }
-  //... and run a function that will display the correct step indicator:
-  fixStepIndicator(n)
+    // This function will display the specified tab of the form...
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+    //... and fix the Previous/Next buttons:
+    if (n == 0) {
+        document.getElementById("prevBtn").style.display = "none";
+    } else {
+        document.getElementById("prevBtn").style.display = "inline";
+    }
+    if (n == (x.length - 1)) {
+        document.getElementById("submit").style.display  = "inline";
+        document.getElementById("submit").innerHTML = "Submit";
+        document.getElementById("skiptBtn").style.display = "none";
+        document.getElementById("nextBtn").style.display = "none";
+
+    } else {
+        document.getElementById("nextBtn").innerHTML = "Next";
+    }
+    //... and run a function that will display the correct step indicator:
+    fixStepIndicator(n)
 }
 
 function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form...
-  if (currentTab >= x.length) {
-    // ... the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-  }
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+        // ... the form gets submitted:
+        document.getElementById("regForm").submit();
+        return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
+}
+
+function skipPrev(n) {
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    // if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+        // ... the form gets submitted:
+        document.getElementById("regForm").submit();
+        return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
 }
 
 function validateForm() {
-  // This function deals with validation of the form fields
-  var x, y, i, valid = true;
-  x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByTagName("input");
-  // A loop that checks every input field in the current tab:
-  for (i = 0; i < y.length; i++) {
-    // If a field is empty...
-    if (y[i].value == "") {
-      // add an "invalid" class to the field:
-      y[i].className += " invalid";
-      // and set the current valid status to false
-      valid = true;
+    // This function deals with validation of the form fields
+    var x, y, i, valid = true;
+    x = document.getElementsByClassName("tab");
+    y = x[currentTab].getElementsByTagName("input");
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+        // If a field is empty...
+        if (y[i].value == "") {
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false
+            valid = false;
+        }
     }
-  }
-  // If the valid status is true, mark the step as finished and valid:
-  if (valid) {
-    document.getElementsByClassName("step")[currentTab].className += " finish";
-  }
-  return valid; // return the valid status
+    // If the valid status is true, mark the step as finished and valid:
+    if (valid) {
+        document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return valid; // return the valid status
 }
 
 function fixStepIndicator(n) {
-  // This function removes the "active" class of all steps...
-  var i, x = document.getElementsByClassName("step");
-  for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
-  }
-  //... and adds the "active" class on the current step:
-  x[n].className += " active";
+    // This function removes the "active" class of all steps...
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class on the current step:
+    x[n].className += " active";
 }
 </script>

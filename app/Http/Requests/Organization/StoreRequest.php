@@ -33,8 +33,28 @@ class StoreRequest extends FormRequest
             'city_id' => 'required',
             'district_id' => 'required',
             'address' => 'required|max:400',
-             'type' => 'required',
-             'status' => 'required',
+            'type' => 'required',
+            'status' => 'required',
+            ///owner
+            'owner_name' => 'max:400',
+            'owner_phone'=> 'max:400',
+            'owner_email'=> 'max:400',
+            'owner_password'=> 'max:400',
+            //branch
+            'branch_name_en'=> 'max:400',
+            'branch_name_ar'=> 'max:400',
+            'branch_phone_1'=> 'max:400',
+            'branch_phone_2'=> 'max:400',
+            'branch_email'=> 'max:400',
+            'branch_address'=> 'max:400',
+            // admin
+            'admin_name'=> 'max:400',
+            'admin_email'=> 'max:400',
+            'admin_phone'=> 'max:400',
+            'admin_password'=> 'max:400',
+            // shift
+            'shift_name'=> 'max:400',
+
         ];
     }
 }

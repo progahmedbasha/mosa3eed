@@ -29,8 +29,8 @@ class StoreRequest extends FormRequest
             'phone_1'=> 'required|min:2|max:20',
             'phone_2'=> 'min:2|max:20',
             'email' => 'required|email|max:200',
-            'district_id' => 'required',
-            'organization_id' => 'required',
+            // 'district_id' => 'required',
+            // 'organization_id' => 'required',
             'address' => 'required|max:400',
         ];
     }

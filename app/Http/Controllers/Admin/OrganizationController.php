@@ -55,7 +55,7 @@ class OrganizationController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
+        // return $request;
          // save organization
             $org = new Organization();
             $org
