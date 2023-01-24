@@ -44,8 +44,8 @@ class MedicinController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {  
+    public function store(StoreRequest $request)
+    {
         $unit = new Unit();
         $unit->big = $request->big;
         $unit->center = $request->center;
@@ -105,7 +105,7 @@ class MedicinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         $medicin = Medicin::find($id);
         $medicin->barcode = $request->input('barcode');

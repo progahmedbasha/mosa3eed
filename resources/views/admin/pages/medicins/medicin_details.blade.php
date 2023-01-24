@@ -55,7 +55,8 @@
 								<select id="inputState" class="form-control" name="effective_material_id">
 									<option value="">Select Effective Material</option>
 									@foreach($effective_materials as $effective_material)
-									<option value="{{$effective_material->id}}" {{($medicin->effective_material_id==$effective_material->id)?
+									<option value="{{$effective_material->id}}" {{($medicin->
+										effective_material_id==$effective_material->id)?
 										'selected':''}}>{{$effective_material->name}}</option>
 									@endforeach
 								</select>
@@ -68,7 +69,8 @@
 								<select id="inputState" class="form-control" name="medicin_shape_id">
 									<option value="">Select Medicin Shape</option>
 									@foreach($medicin_shapes as $medicin_shape)
-									<option value="{{$medicin_shape->id}}" {{($medicin->medicin_shape_id==$medicin_shape->id)?
+									<option value="{{$medicin_shape->id}}" {{($medicin->
+										medicin_shape_id==$medicin_shape->id)?
 										'selected':''}}>{{$medicin_shape->name}}</option>
 									@endforeach
 								</select>
@@ -92,8 +94,8 @@
 							</div>
 							<div class="col">
 								<label for="inputName">Barcode</label>
-								<input type="text" class="form-control" placeholder="Barcode" value="{{$medicin->barcode}}"
-									name="barcode">
+								<input type="text" class="form-control" placeholder="Barcode"
+									value="{{$medicin->barcode}}" name="barcode">
 								@error('barcode')
 								<div class="alert alert-danger">{{ $message }}</div>
 								@enderror
@@ -137,7 +139,8 @@
 								<select id="inputState" class="form-control" name="medicin_type_id">
 									<option value="">Select Medicin Type</option>
 									@foreach($medicin_types as $medicin_type)
-									<option value="{{$medicin_type->id}}" {{($medicin->medicin_type_id==$medicin_type->id)?
+									<option value="{{$medicin_type->id}}" {{($medicin->
+										medicin_type_id==$medicin_type->id)?
 										'selected':''}}>{{$medicin_type->type}}</option>
 									@endforeach
 								</select>
@@ -159,46 +162,51 @@
 				</div>
 			</div>
 			<br>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="card">
-						<div class="card-body">
-							<div class="col">
-								<h6 class="card-title"><i class="fa fa-list"></i> Units:</h6>
-								<hr>
-							</div>
-							<div class="form-row">
-								<div class="col">
-									<label for="inputName">Biggest Unite</label>
-									<input type="text" class="form-control form-control-solid" placeholder="Name En"
-										value="{{$medicin_unit->big}}" name="big">
-									@error('big')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="col">
-									<label for="inputName">Center Unite</label>
-									<input type="text" class="form-control form-control-solid" placeholder="Name Ar"
-										value="{{$medicin_unit->center}}" name="center">
-									@error('center')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="col">
-									<label for="inputName">smallest Unite</label>
-									<input type="text" class="form-control form-control-solid" placeholder="Name Ar"
-										value="{{ $medicin_unit->small }}" name="small">
-									@error('small')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		 <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col">
+                                <h6 class="card-title"><i class="fa fa-list"></i> Units:</h6>
+                                <hr>
+                            </div>
+                            <table id="datatable" class="table table-striped table-bordered p-0">
+                                <thead>
+                                    <tr>
+                                        <th>Big Unit</th>
+                                        <th>Center Unit</th>
+                                        <th>Small Unit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="number" class="form-control form-control-solid" value="{{ $medicin_unit->big}}"
+                                                name="big">
+                                            @error('big')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-solid"
+                                                value="{{ $medicin_unit->center }}" name="center">
+                                            @error('center')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-solid"
+                                                value="{{ $medicin_unit->small }}" name="small">
+                                            @error('small')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
 			<br>
 			<button type="submit" class="btn btn-primary">Save</button>
 		</form>

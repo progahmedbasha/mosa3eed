@@ -27,7 +27,16 @@ class StoreRequest extends FormRequest
             'name_en'=> 'required|min:2|max:250',
             'name_ar' => 'required|min:2|max:250',
             'barcode'=> 'required|max:250',
-            'price'=> 'required|max:250',
+            'effective_material_id'=> 'required',
+            'medicin_shape_id' => 'required',
+            'tags' => 'required|max:250',
+            'description' => 'required|max:1000',
+            'producing_company' => 'required|max:250',
+            'medicin_type_id' => 'required',
+            'expected_discount' => 'required|numeric',
+            'big' => 'required|numeric',
+            'center' => 'required|numeric',
+            'small' => 'required|numeric',
         ];
     }
 }

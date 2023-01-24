@@ -98,8 +98,8 @@ button:hover {
 
             <form id="regForm" action="{{route('organizations.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                {{-- <h1>Add Organization:</h1> --}}
-                <div style="text-align:center;margin-top:0px;">
+
+                <!-- <div style="text-align:center;margin-top:0px;">
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
@@ -108,10 +108,13 @@ button:hover {
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
-                </div>
+                </div> -->
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
-                    <h1>Name:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 1 )</h5>&nbsp;&nbsp;
+                        <h1> Name:</h1>
+                    </div>
                     <hr>
                     <label for="inputName">Name En</label>
                     <p><input class="form-control" placeholder="Name En" value="{{old('name_en')}}" name="name_en"
@@ -137,7 +140,10 @@ button:hover {
                     <br>
                 </div>
                 <div class="tab">
-                    <h1>Contact Info:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 2 )</h5>&nbsp;&nbsp;
+                        <h1>Contact Info:</h1>
+                    </div>
                     <hr>
                     <label for="inputEmail4">Contact Email</label>
                     <p><input placeholder="E-mail..." class="form-control form-control-solid" value="{{old('email')}}"
@@ -160,7 +166,10 @@ button:hover {
                     <br>
                 </div>
                 <div class="tab">
-                    <h1>Setting:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 3 )</h5>&nbsp;&nbsp;
+                        <h1>Setting:</h1>
+                    </div>
                     <hr>
                     <label for="inputName">Bio</label>
                     <input type="text" class="form-control form-control-solid" placeholder="Bio" value="{{old('bio')}}"
@@ -182,7 +191,10 @@ button:hover {
                     <br>
                 </div>
                 <div class="tab">
-                    <h1>Address:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 4 )</h5>&nbsp;&nbsp;
+                        <h1>Address:</h1>
+                    </div>
                     <hr>
                     <label for="inputState">Country</label>
                     <select id="country-dd" class="form-control" name="country_id">
@@ -221,11 +233,14 @@ button:hover {
                     <br>
                 </div>
                 <div class="tab">
-                    <h1>Owner:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 5 )</h5>&nbsp;&nbsp;
+                        <h1>Owner:</h1>
+                    </div>
                     <hr>
                     <label for="inputName">Name </label>
                     <input type="text" class="form-control" placeholder="Name " value="{{old('owner_name')}}"
-                        name="owner_name" >
+                        name="owner_name">
                     @error('owner_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -256,7 +271,10 @@ button:hover {
                     <br>
                 </div>
                 <div class="tab">
-                    <h1>Branch:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 6 )</h5>&nbsp;&nbsp;
+                        <h1>Branch:</h1>
+                    </div>
                     <hr>
                     <div class="form-row">
                         <div class="col">
@@ -315,7 +333,10 @@ button:hover {
                     <br>
                 </div>
                 <div class="tab">
-                    <h1>Add Admin:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 7 )</h5>&nbsp;&nbsp;
+                        <h1>Branch Admin:</h1>
+                    </div>
                     <hr>
 
                     <label for="inputName">Name</label>
@@ -351,7 +372,10 @@ button:hover {
                     <br>
                 </div>
                 <div class="tab">
-                    <h1>Shift:</h1>
+                    <div class="row">
+                        <h5 style="color: #888;">( 8 )</h5>&nbsp;&nbsp;
+                        <h1>Shift:</h1>
+                    </div>
                     <hr>
                     <div class="form-row">
                         <div class="col">
@@ -512,14 +536,15 @@ button:hover {
                 <div style="overflow:auto;">
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                        <button type="button" style="background: gainsboro;color: black;" id="skiptBtn" onclick="skipPrev(1)">Skip</button>
+                        <button type="button" style="background: gainsboro;color: black;" id="skiptBtn"
+                            onclick="skipPrev(1)">Skip</button>
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                        <button type="submit" style="display:none;" id="submit" >Submit</button>
+                        <button type="submit" style="display:none;" id="submit">Submit</button>
 
                     </div>
                 </div>
                 <!-- Circles which indicates the steps of the form: -->
-                <!-- <div style="text-align:center;margin-top:40px;">
+                <div style="text-align:center;margin-top:40px;">
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
@@ -528,7 +553,7 @@ button:hover {
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
-                </div> -->
+                </div>
             </form>
 
         </div>
@@ -551,7 +576,7 @@ function showTab(n) {
         document.getElementById("prevBtn").style.display = "inline";
     }
     if (n == (x.length - 1)) {
-        document.getElementById("submit").style.display  = "inline";
+        document.getElementById("submit").style.display = "inline";
         document.getElementById("submit").innerHTML = "Submit";
         document.getElementById("skiptBtn").style.display = "none";
         document.getElementById("nextBtn").style.display = "none";
