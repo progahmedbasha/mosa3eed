@@ -28,11 +28,11 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        $organizations = Organization::whenSearch($request->search)->paginate(50);
-        $countries = Country::all();
-        $cities = City::all();
-        $districts = District::all();
-        return view('admin.pages.organizations.organizations', compact('organizations','countries','cities','districts'));
+        // $organizations = Organization::whenSearch($request->search)->paginate(50);
+        // $countries = Country::all();
+        // $cities = City::all();
+        // $districts = District::all();
+        // return view('admin.pages.organizations.organizations', compact('organizations','countries','cities','districts'));
     }
 
     /**
@@ -185,8 +185,9 @@ class OrganizationController extends Controller
     }
     public function branches($id)
     {
+        $organization_name = Organization::where('id', $id)->first("name"); 
         $branchs = Branch::where('organization_id', $id)->get();
-        return view('admin.pages.branchs.branchs', compact('branchs','id'));
+        return view('admin.pages.branchs.branchs', compact('branchs','id','organization_name'));
     }
     /**
      * Show the form for editing the specified resource.

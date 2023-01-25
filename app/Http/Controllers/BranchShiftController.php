@@ -153,7 +153,8 @@ class BranchShiftController extends Controller
     }
         public function shifts($id)
     {
+        $branch_name = Branch::where('id', $id)->first("name");
         $branch_shifts = BranchShift::where('branch_id', $id)->get();
-        return view('admin.pages.organization_shifts.organization_shifts', compact('branch_shifts','id'));
+        return view('admin.pages.organization_shifts.organization_shifts', compact('branch_shifts','id','branch_name'));
     }
 }

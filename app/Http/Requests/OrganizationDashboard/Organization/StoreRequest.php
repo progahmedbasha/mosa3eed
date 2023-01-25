@@ -24,18 +24,15 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_en'=> 'required|min:2|max:250',
-            'name_ar' => 'required|min:2|max:250',
-            'contact_en'=> 'required|min:2|max:250',
-            'contact_ar'=> 'required|min:2|max:250',
-            'email' => 'required|email|max:200',
+            'name'=> 'required|min:2|max:250',
             'phone' => 'required|min:9|max:15',  
+            'email' => 'required|email|max:200',
             'country_id' => 'required',
             'city_id' => 'required',
             'district_id' => 'required',
-            'address' => 'required|max:400',
-             'type' => 'required',
-             'status' => 'required',
+            'password' => 'max:100|same:re-password',
+            're-password' => 'max:100',
+    
         ];
     }
 }

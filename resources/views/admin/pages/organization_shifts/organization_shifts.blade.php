@@ -7,7 +7,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="main-title">
-                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Shift List :</h1>
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">({{ $branch_name->name }}) Shift List :</h1>
                </div>
             </div>
 

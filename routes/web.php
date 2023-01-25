@@ -157,13 +157,13 @@ Route::group(
                 {
                     
                     Route::resource('organization_dashboard', OrganizationAdmin\DashboardController::class);
+                    Route::resource('organization_profile', OrganizationAdmin\ProfileController::class);
                     Route::resource('user_organizations', OrganizationAdmin\OrganizationController::class);
 
                     ///////
                     Route::get('organization_admin_edit/{user_id}/{id}', 'OrganizationAdmin\PharmacyAdminController@edite')->name('organization_admin_edit');
 
                     Route::resource('organization_medicins', OrganizationAdmin\MedicinController::class);
-                    Route::resource('organization_profile', OrganizationAdmin\ProfileController::class);
                     Route::resource('organization_branchs', OrganizationAdmin\BranchController::class);
                     Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
                     Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
