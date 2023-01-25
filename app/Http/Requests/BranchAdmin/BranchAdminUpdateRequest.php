@@ -25,8 +25,8 @@ class BranchAdminUpdateRequest extends FormRequest
         return [
             'name'=> 'required|min:2|max:150',
             'phone' => 'required|min:4|max:20',
-            'email' => 'required|min:2|max:30',
-            'password' => 'max:50|required_with:re-password|same:re-password',
+            'email' => '|max:30',
+            'password' => 'max:50|same:re-password',
             're-password' => 'max:50',  
         ];
     }

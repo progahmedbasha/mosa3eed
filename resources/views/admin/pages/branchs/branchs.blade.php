@@ -65,7 +65,7 @@
                                     </li>
                                    
                                     <li><a class="dropdown-item" style="padding: 0px 14px!important; font-size:14px;"
-                                          href="{{ route('admins_branch',$branch->id) }}"><i
+                                          href="{{ route('admins_branch', ['org'	=> $id, 'branch' => $branch->id])}}"><i
                                              class="fas fa-user-circle"></i>
                                           Branch Admins</a>
                                     </li>

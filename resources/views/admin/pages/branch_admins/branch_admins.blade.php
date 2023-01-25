@@ -15,9 +15,8 @@
 
             <div class="row">
                 <div class="col mb-3" style="margin-bottom:-1rem!important;">
-                    <a href="{{ route('branch_admins_create',$id) }}" class="btn btn-primary">Add</a>
+                    <a href="{{ route('branch_admins_create',['org'	=> $org, 'branch' => $branch])}}" class="btn btn-primary">Add</a>
                 </div>
-
             </div>
         </div>
         <hr>
@@ -34,10 +33,10 @@
                 <div class="channels-card">
                     <div class="channels-card-image">
                         @if(!empty($admin->User->photo))
-                        <a href="{{route('branch_admin_edit', ['id' =>$admin->user_id , 'branch' => $admin->branch_id ])}}"><img
+                        <a href="{{route('branch_admin_edit', ['org' => $org , 'branch' => $admin->branch_id ,'id' =>$admin->user_id ])}}"><img
                                 src="{{url('/data/admins')}}/{{$admin->User->photo }}" class="img-fluid" alt=""></a>
                         @else
-                        <a href="{{route('branch_admin_edit', ['id' =>$admin->user_id , 'branch' => $admin->branch_id ])}}"><img src="{{url('/data/user_error.png')}}"
+                        <a href="{{route('branch_admin_edit', ['org' => $org , 'branch' => $admin->branch_id ,'id' =>$admin->user_id ])}}"><img src="{{url('/data/user_error.png')}}"
                                 class="img-fluid" alt=""></a>
                         @endif
 
@@ -45,7 +44,7 @@
                                 class="btn btn-success btn-sm border-none">
                                 {{ $admin->Branch->Organization->name }}
                             </button> <a
-                                href="{{route('branch_admin_edit', ['id' =>$admin->user_id , 'branch' => $admin->branch_id ])}}"
+                                href="{{route('branch_admin_edit', ['org' => $org , 'branch' => $admin->branch_id ,'id' =>$admin->user_id ])}}"
                                 class="btn btn-warning btn-sm border-none"><i class="fas fa-eye"></i></a>
                         </div>
 

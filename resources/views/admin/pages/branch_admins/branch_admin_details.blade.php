@@ -18,6 +18,7 @@
             @csrf
             @method('patch')
             <input type="hidden" value="{{ $branch }}" name="branch_id">
+            <input type="hidden" value="{{ $org }}" name="org_id">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
@@ -99,7 +100,9 @@
                                 <select id="input-shift" class="form-control" name="branch_shift_id">
                                     <option value="">Select Shift</option>
                                     @foreach ($shifts as $shift)
-                                        <option value="{{$shift->id}}" {{($user->branch_shift_id=$shift->id)? 'selected' : '' }}> {{$shift->name}}</option>
+                                    <option value="{{$shift->id}}" {{($user_branch->branch_shift_id ==$shift->id)?
+                                        'selected':''}}
+                                        >{{$shift->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('branch_shift_id')

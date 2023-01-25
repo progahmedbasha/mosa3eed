@@ -92,9 +92,9 @@ Route::group(
                     
                     /************************************ Branch Admins ************************************************/
                     Route::resource('branch_admins', Admin\UserBranchController::class);
-                    Route::get('admins_branch/{id}', [UserBranchController::class,'admins_branch'])->name('admins_branch');
-                    Route::get('branch_admins_create/{id}', [UserBranchController::class,'create'])->name('branch_admins_create');
-                    Route::get('branch_admin_edit/{id}/{branch}', [UserBranchController::class,'edit'])->name('branch_admin_edit');
+                    Route::get('admins_branch/{org}/{branch}', [UserBranchController::class,'admins_branch'])->name('admins_branch');
+                    Route::get('branch_admins_create/{org}/{branch}', [UserBranchController::class,'create'])->name('branch_admins_create');
+                    Route::get('branch_admin_edit/{org}/{branch}/{id}', [UserBranchController::class,'edit'])->name('branch_admin_edit');
                     
                     /************************************ Branch Shifts Admins ************************************************/
                     Route::resource('organization_shifts', 'BranchShiftController');

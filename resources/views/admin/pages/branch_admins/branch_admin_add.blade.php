@@ -16,7 +16,8 @@
         <hr>
         <form action="{{route('branch_admins.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="{{ $id }}" name="branch_id">
+            <input type="hidden" value="{{ $branch_id }}" name="branch_id">
+             <input type="hidden" value="{{ $org }}" name="org_id">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">

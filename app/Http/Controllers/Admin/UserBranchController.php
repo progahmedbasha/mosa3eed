@@ -34,14 +34,14 @@ class UserBranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($org, $branch_id )
     {
         $countries = Country::all();
          $cities = City::all();
          $districts = District::all();
-         $branch = Branch::where('organization_id',$id)->first();
-         $shifts = BranchShift::where('branch_id',$id)->get();
-        return view('admin.pages.branch_admins.branch_admin_add', compact('id','countries','cities','districts','shifts'));
+         $branch = Branch::where('organization_id',$branch_id)->first();
+         $shifts = BranchShift::where('branch_id',$branch_id)->get();
+        return view('admin.pages.branch_admins.branch_admin_add', compact('branch_id','org','countries','cities','districts','shifts'));
     }
 
     /**
@@ -52,6 +52,7 @@ class UserBranchController extends Controller
      */
     public function store(BranchAdminStoreRequest $request)
     {
+        // return $request;
         $branch_district = Branch::where('id', $request->branch_id)->first();
         $user = new User();
         $user->name = $request->input('name');
@@ -67,12 +68,14 @@ class UserBranchController extends Controller
             }
         $user->save();
             $admin_branch = new UserBranch();
+            $admin_branch->organization_id = $request->org_id;
             $admin_branch->branch_id = $request->branch_id;
             $admin_branch->user_id = $user->id;
             $admin_branch->branch_shift_id = $request->branch_shift_id;
             $admin_branch->save();
-        $branch_id = $request->branch_id;
-        return redirect()->route('admins_branch',$branch_id)->with('success','Branch Admin Added Successfully');
+        $org = $request->org_id;
+        $branch = $request->branch_id;
+        return redirect()->route('admins_branch', ['org' => $org,'branch' => $branch])->with('success','Branch Admin Added Successfully');
     }
 
     /**
@@ -92,11 +95,13 @@ class UserBranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, $branch)
+    public function edit($org , $branch ,$id )
     {
+        // return $id;
         $user = User::where('id', $id)->first();
         $shifts = BranchShift::where('branch_id',$branch)->get();
-        return view('admin.pages.branch_admins.branch_admin_details', compact('id','user','shifts','branch'));
+        $user_branch = UserBranch::where('user_id', $id)->where('branch_id',$branch)->first();
+        return view('admin.pages.branch_admins.branch_admin_details', compact('id','user','shifts','branch','org','user_branch'));
     }
 
     /**
@@ -122,7 +127,8 @@ class UserBranchController extends Controller
             }
         $user->save();
         $branch_id = $request->branch_id;
-        return redirect()->route('admins_branch',$branch_id)->with('success','Branch Admin Updated Successfully');
+        $org = $request->org_id;
+        return redirect()->route('admins_branch', ['org' => $org,'branch' => $branch_id])->with('success','Branch Admin Updated Successfully');
     }
 
     /**
@@ -137,9 +143,9 @@ class UserBranchController extends Controller
         $user->delete();
         return redirect()->back()->with('success','Admin Deleted Successfully');
     }
-    public function admins_branch($id)
+    public function admins_branch($org , $branch)
     {
-        $admins = UserBranch::where('branch_id', $id)->get();
-        return view('admin.pages.branch_admins.branch_admins', compact('admins','id'));
+        $admins = UserBranch::where('branch_id', $branch)->get();
+        return view('admin.pages.branch_admins.branch_admins', compact('admins','org','branch'));
     }
 }
