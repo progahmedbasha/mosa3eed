@@ -36,7 +36,7 @@
                             {{-- search --}}
                             <div class="col mb-3">
                                 <form method="get" class="form-inline" action="{{url('admin/organizations')}}"
-                                    style="margin-left: 45%;">
+                                    style="margin-left: 40%;">
                                     <input class=" form-control form-control-solid w-250px ps-15" name="search"
                                         type="text" placeholder="Search organizations" required>
                                     <button type="submit" class="btn btn-light-primary me-3"><i

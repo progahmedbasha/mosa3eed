@@ -562,6 +562,9 @@ function showTab(n) {
         document.getElementById("prevBtn").style.display = "none";
     } else {
         document.getElementById("prevBtn").style.display = "inline";
+        document.getElementById("submit").style.display = "none";
+        document.getElementById("skiptBtn").style.display = "inline";
+        document.getElementById("nextBtn").style.display = "inline";
     }
     if (n == (x.length - 1)) {
         document.getElementById("submit").style.display = "inline";
