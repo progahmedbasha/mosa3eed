@@ -27,8 +27,6 @@ class CreateUsersTable extends Migration
             $table->integer('district_id')->unsigned()->nullable();
             $table->foreign('district_id')->references('id')->on('districts');
             
-            $table->integer('organization_id')->unsigned()->nullable();
-            $table->foreign('organization_id')->references('id')->on('organizations');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -67,44 +67,43 @@ Route::group(
                         Route::get('dashboard', function () {
                             return view('admin.dashboard');
                         })->name('dashboard');
+                    /************************************ Admins And Owners ************************************************/
                     Route::resource('admin', Admin\AdminController::class);
-              
-
+                    /************************************ Organizations ************************************************/
                     Route::resource('organizations', Admin\OrganizationController::class);
-
+                    /************************************ Organization Branches ************************************************/
                     Route::get('organization_branches/{id}', [OrganizationController::class, 'branches'])->name('organization_branches');
+                    /************************************ Organization Admins ************************************************/
                     // branch_admins here make
                     Route::get('org_admins/{id}', [OrganizationController::class,'org_admins'])->name('org_admins');
-                    Route::get('organization_admins_create/{id}', 'Organization\OrganizationAdminController@create')->name('organization_admins_create');
                     Route::resource('organization_admins', Organization\OrganizationAdminController::class);
+                    Route::get('organization_admins_create/{id}', 'Organization\OrganizationAdminController@create')->name('organization_admins_create');
+                    Route::get('organization_admins_edit/{id}/{org}', 'Organization\OrganizationAdminController@edit')->name('organization_admins_edit');
                     
-                      Route::get('organization_admins_edit/{id}/{org}', 'Organization\OrganizationAdminController@edit')->name('organization_admins_edit');
-
-                    
+                    /************************************ Section Countries ************************************************/
                     Route::resource('countries', CountryController::class);
                     Route::resource('cities', CityController::class);
                     Route::resource('districts', DistrictController::class);
                     Route::resource('medicins', Admin\MedicinController::class);
                     Route::resource('settings', Admin\SettingController::class);
+                    /************************************ Section Brsnches ************************************************/
                     Route::resource('branchs', Admin\BranchController::class);
-                    // Route::get('org_branch/{id}', [Admin\BranchController::class,'create'])->name('branch_Add');
                     Route::get('branch_add/{id}', 'Admin\BranchController@create')->name('branch_add');
                     
-                    // branch admins
+                    /************************************ Branch Admins ************************************************/
                     Route::resource('branch_admins', Admin\UserBranchController::class);
                     Route::get('admins_branch/{id}', [UserBranchController::class,'admins_branch'])->name('admins_branch');
                     Route::get('branch_admins_create/{id}', [UserBranchController::class,'create'])->name('branch_admins_create');
                     Route::get('branch_admin_edit/{id}/{branch}', [UserBranchController::class,'edit'])->name('branch_admin_edit');
                     
-
-                    // shifts
+                    /************************************ Branch Shifts Admins ************************************************/
                     Route::resource('organization_shifts', 'BranchShiftController');
                     Route::get('allorganizations_shift', [BranchShiftController::class,'allorganizations_shift'])->name('allorganizations_shift');
                     Route::get('all_branch_shift/{id}', [BranchShiftController::class,'all_branch_shift'])->name('all_branch_shift');
                     Route::get('branch_shift/{id}', [BranchShiftController::class,'branch_shift'])->name('branch_shift');
                     Route::get('shift_create/{id}', [BranchShiftController::class,'create'])->name('shift_create');
                     Route::get('branch_shifts/{id}', [BranchShiftController::class,'shifts'])->name('branch_shifts');
-                    // attendance
+                    /************************************ Branch Attendances ************************************************/
                     Route::resource('organization_attendances', Organization\OrganizationAttendanceController::class);
                     Route::get('allorg_attendance', 'Organization\OrganizationAttendanceController@allorg_attendance')->name('allorg_attendance');
                     Route::get('all_branch_attendance/{id}', 'Organization\OrganizationAttendanceController@all_branch_attendance')->name('all_branch_attendance');

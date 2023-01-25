@@ -98,18 +98,6 @@ button:hover {
 
             <form id="regForm" action="{{route('organizations.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-
-                <!-- <div style="text-align:center;margin-top:0px;">
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                </div> -->
-                <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <div class="row">
                         <h5 style="color: #888;">( 1 )</h5>&nbsp;&nbsp;
@@ -117,19 +105,19 @@ button:hover {
                     </div>
                     <hr>
                     <label for="inputName">Name En</label>
-                    <p><input class="form-control" placeholder="Name En" value="{{old('name_en')}}" name="name_en"
+                    <p><input class="form-control validate"  placeholder="Name En" value="{{old('name_en')}}" name="name_en"
                             required /></p>
                     @error('name_en')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="inputName">Name Ar</label>
-                    <p><input placeholder="Name Ar" class="form-control form-control-solid" value="{{old('name_ar')}}"
+                    <p><input placeholder="Name Ar" class="form-control form-control-solid validate" value="{{old('name_ar')}}"
                             name="name_ar" required /></p>
                     @error('name_ar')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="inputState">Type</label>
-                    <select class="form-control" name="type">
+                    <select class="form-control validate" name="type">
                         <option value="">Select Type</option>
                         <option value="Pharmacy">Pharmacy</option>
                         <option value="Store">Store</option>
@@ -146,19 +134,19 @@ button:hover {
                     </div>
                     <hr>
                     <label for="inputEmail4">Contact Email</label>
-                    <p><input placeholder="E-mail..." class="form-control form-control-solid" value="{{old('email')}}"
+                    <p><input placeholder="E-mail..." class="form-control form-control-solid validate" value="{{old('email')}}"
                             name="email"></p>
                     @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="inputName">Phone</label>
-                    <p><input placeholder="Phone..." class="form-control form-control-solid" value="{{old('phone')}}"
+                    <p><input placeholder="Phone..." class="form-control form-control-solid validate" value="{{old('phone')}}"
                             name="phone"></p>
                     @error('phone')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="inputName">Contact</label>
-                    <input type="text" class="form-control form-control-solid" placeholder="Contact"
+                    <input type="text" class="form-control form-control-solid validate" placeholder="Contact"
                         value="{{old('contact_name')}}" name="contact_name">
                     @error('contact_name')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -172,13 +160,13 @@ button:hover {
                     </div>
                     <hr>
                     <label for="inputName">Bio</label>
-                    <input type="text" class="form-control form-control-solid" placeholder="Bio" value="{{old('bio')}}"
+                    <input type="text" class="form-control form-control-solid validate" placeholder="Bio" value="{{old('bio')}}"
                         name="bio">
                     @error('bio')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label for="inputState">Verified Status</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control validate" name="status">
                         <option value="">Select Status</option>
                         <option value="Verified">Verified</option>
                         <option value="Not Verified">Not Verified</option>
@@ -197,7 +185,7 @@ button:hover {
                     </div>
                     <hr>
                     <label for="inputState">Country</label>
-                    <select id="country-dd" class="form-control" name="country_id">
+                    <select id="country-dd" class="form-control validate" name="country_id">
                         <option value="">Select Country</option>
                         @foreach ($countries as $data)
                         <option value="{{$data->id}}">
@@ -210,21 +198,21 @@ button:hover {
                     @enderror
 
                     <label for="inputState">City</label>
-                    <select id="city-dd" class="form-control" name="city_id">
+                    <select id="city-dd" class="form-control validate" name="city_id">
                     </select>
                     @error('city_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputState">District</label>
-                    <select id="state-dd" class="form-control" name="district_id">
+                    <select id="state-dd" class="form-control validate" name="district_id">
                     </select>
                     @error('district_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputState">Address</label>
-                    <input type="text" class="form-control form-control-solid" placeholder="Address"
+                    <input type="text" class="form-control form-control-solid validate" placeholder="Address"
                         value="{{old('address')}}" name="address">
                     @error('address')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -239,28 +227,28 @@ button:hover {
                     </div>
                     <hr>
                     <label for="inputName">Name </label>
-                    <input type="text" class="form-control" placeholder="Name " value="{{old('owner_name')}}"
+                    <input type="text" class="form-control validate" placeholder="Name " value="{{old('owner_name')}}"
                         name="owner_name">
                     @error('owner_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputName">Phone</label>
-                    <input type="text" class="form-control form-control-solid" placeholder="Phone"
+                    <input type="text" class="form-control form-control-solid validate" placeholder="Phone"
                         value="{{old('owner_phone')}}" name="owner_phone">
                     @error('owner_phone')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputName">Email</label>
-                    <input type="email" class="form-control form-control-solid" placeholder="Email"
+                    <input type="email" class="form-control form-control-solid validate" placeholder="Email"
                         value="{{old('owner_email')}}" name="owner_email">
                     @error('owner_email')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputName">Password</label>
-                    <input type="password" class="form-control form-control-solid" placeholder="Password"
+                    <input type="password" class="form-control form-control-solid validate" placeholder="Password"
                         value="{{old('owner_password')}}" name="owner_password">
                     @error('owner_password')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -279,7 +267,7 @@ button:hover {
                     <div class="form-row">
                         <div class="col">
                             <label for="inputName">Name En</label>
-                            <input type="text" class="form-control" placeholder="Name En"
+                            <input type="text" class="form-control validate" placeholder="Name En"
                                 value="{{old('branch_name_en')}}" name="branch_name_en">
                             @error('branch_name_en')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -287,7 +275,7 @@ button:hover {
                         </div>
                         <div class="col">
                             <label for="inputName">Name Ar</label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Name Ar"
+                            <input type="text" class="form-control form-control-solid validate" placeholder="Name Ar"
                                 value="{{old('branch_name_ar')}}" name="branch_name_ar">
                             @error('branch_name_ar')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -297,7 +285,7 @@ button:hover {
                     <div class="form-row">
                         <div class="col">
                             <label for="inputName">Phone 1</label>
-                            <input type="text" class="form-control" placeholder="Phone 1"
+                            <input type="text" class="form-control validate" placeholder="Phone 1"
                                 value="{{old('branch_phone_1')}}" name="branch_phone_1" />
                             @error('branch_phone_1')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -305,7 +293,7 @@ button:hover {
                         </div>
                         <div class="col">
                             <label for="inputName">Phone 2</label>
-                            <input type="text" class="form-control" placeholder="Phone 2"
+                            <input type="text" class="form-control validate" placeholder="Phone 2"
                                 value="{{old('branch_phone_2')}}" name="branch_phone_2">
                             @error('branch_phone_2')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -317,14 +305,14 @@ button:hover {
 
 
                     <label for="inputName">Email</label>
-                    <input type="email" class="form-control" placeholder="Email" value="{{old('branch_email')}}"
+                    <input type="email" class="form-control validate" placeholder="Email" value="{{old('branch_email')}}"
                         name="branch_email" />
                     @error('branch_email')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputName">Address</label>
-                    <input type="text" class="form-control form-control-solid" placeholder="Address"
+                    <input type="text" class="form-control form-control-solid validate" placeholder="Address"
                         value="{{old('branch_address')}}" name="branch_address">
                     @error('branch_address')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -340,28 +328,28 @@ button:hover {
                     <hr>
 
                     <label for="inputName">Name</label>
-                    <input type="text" class="form-control" placeholder="Name" value="{{old('admin_name')}}"
+                    <input type="text" class="form-control validate" placeholder="Name" value="{{old('admin_name')}}"
                         name="admin_name">
                     @error('admin_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputName">Email</label>
-                    <input type="email" class="form-control form-control-solid" placeholder="Email"
+                    <input type="email" class="form-control form-control-solid validate" placeholder="Email"
                         value="{{old('admin_email')}}" name="admin_email">
                     @error('admin_email')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputName">Phone</label>
-                    <input type="text" class="form-control form-control-solid" placeholder="Phone"
+                    <input type="text" class="form-control form-control-solid validate" placeholder="Phone"
                         value="{{old('admin_phone')}}" name="admin_phone">
                     @error('admin_phone')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <label for="inputName">Passowrd</label>
-                    <input type="password" class="form-control" placeholder="Passowrd" value="{{old('admin_password')}}"
+                    <input type="password" class="form-control validate" placeholder="Passowrd" value="{{old('admin_password')}}"
                         name="admin_password">
                     @error('admin_password')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -380,7 +368,7 @@ button:hover {
                     <div class="form-row">
                         <div class="col">
                             <label for="inputName">Shift Name</label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Shift Name"
+                            <input type="text" class="form-control form-control-solid validate" placeholder="Shift Name"
                                 value="{{old('shift_name')}}" name="shift_name">
                             @error('shift_name')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -630,7 +618,7 @@ function validateForm() {
     // This function deals with validation of the form fields
     var x, y, i, valid = true;
     x = document.getElementsByClassName("tab");
-    y = x[currentTab].getElementsByTagName("input");
+    y = x[currentTab].getElementsByClassName("validate");
     // A loop that checks every input field in the current tab:
     for (i = 0; i < y.length; i++) {
         // If a field is empty...

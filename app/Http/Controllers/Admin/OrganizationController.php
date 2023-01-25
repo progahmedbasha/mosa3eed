@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserBranch;
 use Illuminate\Http\Request;
 use App\Http\Requests\Organization\StoreRequest;
 use App\Models\admin\Organization;
@@ -27,11 +28,11 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-          $organizations = Organization::whenSearch($request->search)->paginate(50);
-          $countries = Country::all();
+        $organizations = Organization::whenSearch($request->search)->paginate(50);
+        $countries = Country::all();
         $cities = City::all();
         $districts = District::all();
-          return view('admin.pages.organizations.organizations', compact('organizations','countries','cities','districts'));
+        return view('admin.pages.organizations.organizations', compact('organizations','countries','cities','districts'));
     }
 
     /**
@@ -39,13 +40,13 @@ class OrganizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $countries = Country::all();
-        $cities = City::all();
-        $districts = District::all();
-        return view('admin.pages.organizations.organizations_add', compact('countries','cities','districts'));
-    }
+    // public function create()
+    // {
+    //     $countries = Country::all();
+    //     $cities = City::all();
+    //     $districts = District::all();
+    //     return view('admin.pages.organizations.organizations_add', compact('countries','cities','districts'));
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -97,25 +98,7 @@ class OrganizationController extends Controller
                     $owner->save();
                 }
                 // save admin
-              if( request()->admin_name ){
-                    $user = new User();
-                    $user->name = $request->input('admin_name');
-                    $user->email = $request->input('admin_email');
-                    $user->password = Hash::make($request['admin_password']);
-                    $user->phone = $request->input('admin_phone');
-                    $user->user_type_id = 4 ;
-                    //    if (request()->photo){
-                    //     $filename = time().'.'.request()->photo->getClientOriginalExtension();
-                    //     request()->photo->move(public_path('data/admins'), $filename);
-                    //     $user->photo=$filename;
-                    //     }
-                    $user->save();
-                    $owner = new OrganizationAdmin();
-                    $owner->organization_id = $org->id;
-                    $owner->user_id = $user->id;
-                    $owner->type = "Organization Admin";
-                    $owner->save();
-                }
+           
                 // save branch
                 if(request()->branch_name_en)
                 {
@@ -136,6 +119,7 @@ class OrganizationController extends Controller
                         }
                     $branch->save();
                 }
+              
                  if(request()->shift_name)
                  {
                     $shift  = new BranchShift();
@@ -152,6 +136,27 @@ class OrganizationController extends Controller
                             $shift_day->save();
                         }
                     }
+                      // save branch admin
+                   if( request()->admin_name ){
+                    $user = new User();
+                    $user->name = $request->input('admin_name');
+                    $user->email = $request->input('admin_email');
+                    $user->password = Hash::make($request['admin_password']);
+                    $user->phone = $request->input('admin_phone');
+                    $user->user_type_id = 5 ;
+                    //    if (request()->photo){
+                    //     $filename = time().'.'.request()->photo->getClientOriginalExtension();
+                    //     request()->photo->move(public_path('data/admins'), $filename);
+                    //     $user->photo=$filename;
+                    //     }
+                    $user->save();
+                    $user_branch = new UserBranch();
+                    $user_branch->user_id = $user->id;
+                    $user_branch->organization_id = $org->id;
+                    $user_branch->branch_id = $branch->id;
+                    $user_branch->branch_shift_id = $shift->id;
+                    $user_branch->save();
+                }
       
         return redirect()->route('organizations.index')->with('success','Organization Added Successfully');
     }
@@ -174,6 +179,7 @@ class OrganizationController extends Controller
         $city_id = City::where('id',$organization->District->city_id)->first(); 
         $branchs = Branch::where('organization_id', $id)->get();
         $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
+        // $employees = Employee::where('organization_id', $id)->get();
         $employees = Employee::where('organization_id', $id)->get();
         return view('admin.pages.organizations.organizaion_show', compact('organization','owner','countries','cities','districts','country_id','city_id','branchs','organization_admins','employees'));
     }
