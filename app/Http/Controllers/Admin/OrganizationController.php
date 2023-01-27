@@ -28,11 +28,11 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        // $organizations = Organization::whenSearch($request->search)->paginate(50);
-        // $countries = Country::all();
-        // $cities = City::all();
-        // $districts = District::all();
-        // return view('admin.pages.organizations.organizations', compact('organizations','countries','cities','districts'));
+        $organizations = Organization::whenSearch($request->search)->paginate(50);
+        $countries = Country::all();
+        $cities = City::all();
+        $districts = District::all();
+        return view('admin.pages.organizations.organizations', compact('organizations','countries','cities','districts'));
     }
 
     /**
