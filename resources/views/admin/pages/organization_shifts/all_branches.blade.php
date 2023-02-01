@@ -48,7 +48,7 @@
                                     <div class="video-card-image">
                                         {{-- <a class="video-close" href="#"><i class="fas fa-times-circle"></i></a> --}}
                                        
-                                        <a href="{{route('branch_shift',$branch->id)}} ">
+                                        <a href="{{route('branch_shifts',$branch->id)}} ">
                                             @if(!empty($branch->photo))
                                             <img class="img-fluid" src="{{url('/data/branchs')}}/{{$branch->photo }}"
                                                 alt="" style="height: 154px;">

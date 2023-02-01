@@ -163,7 +163,7 @@
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('allorganizations_shift')}}">Shifts</a>
          <a class="dropdown-item" style="margin-left: 17px;"
             href="{{route('allorg_attendance')}}">Attendance</a>
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('organization_attendances.create')}}">Easy
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('easysign')}}">Easy
             Sign</a>
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees.index')}}">Employee</a>
       </div>

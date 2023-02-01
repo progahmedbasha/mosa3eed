@@ -10,11 +10,15 @@ class UserBranch extends Model
     use HasFactory;
     public $guarded = [];
 
-       public function Branch()
+    public function Branch()
     {
       return $this->belongsTo('App\Models\admin\Branch');
     }
-       public function User()
+    public function Organization()
+    {
+      return $this->belongsTo('App\Models\admin\Organization');
+    }
+    public function User()
     {
       return $this->belongsTo('App\Models\User');
     }

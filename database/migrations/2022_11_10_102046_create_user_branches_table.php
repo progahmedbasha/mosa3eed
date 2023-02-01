@@ -23,6 +23,7 @@ class CreateUserBranchesTable extends Migration
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->integer('branch_shift_id')->unsigned()->nullable();
             $table->foreign('branch_shift_id')->references('id')->on('branch_shifts')->onDelete('cascade');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

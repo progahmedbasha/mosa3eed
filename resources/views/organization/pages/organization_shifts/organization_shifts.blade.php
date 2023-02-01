@@ -7,7 +7,7 @@
          <div class="row">
             <div class="col-md-12">
                <div class="main-title">
-                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Shift List :</h1>
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">({{ $branch_name->name }}) Shift List :</h1>
                </div>
             </div>
 
@@ -21,17 +21,17 @@
 
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('org_shifts.create') }}" class="btn  btn-outline-primary">Add</a>
+                        <a href="{{route('org_shift_create',$id)}}" class="btn  btn-outline-primary">Add</a>
                      </div>
                      {{-- search --}}
                      <div class="col mb-3">
-                        <form method="get" class="form-inline" action="{{url('organization/org_shifts')}}"
+                        <form method="get" class="form-inline" action="{{url('admin/organization_shifts')}}"
                            style="margin-left: 45%;">
                            <input class=" form-control form-control-solid w-250px ps-15" name="search" type="text"
                               placeholder="Search organization_shifts" required>
                            <button type="submit" class="btn btn-light-primary me-3"><i
                                  class="fa fa-search"></i></button>
-                           <a href="{{url('organization/org_shifts')}}" class="btn btn-light-primary me-3"
+                           <a href="{{url('admin/organization_shifts')}}" class="btn btn-light-primary me-3"
                               style="margin-top:0px;"><i class="fa fa-times"></i></a>
                         </form>
                      </div>
@@ -55,18 +55,18 @@
                            </tr>
                         </thead>
                         <tbody>
-                           @foreach($organization_shifts as $index=>$shift)
+                           @foreach($branch_shifts as $index=>$shift)
                            <tr>
                               <td>{{ $index+1 }}</td>
                               <td>{{ $shift->name }}</td>
-                              <td>{{ $shift->Organization->name }}</td>
+                              <td>{{ $shift->Branch->Organization->name }}</td>
                               <td>{{ $shift->Branch->name}}</td>
                               <td>
                                  <div class="btn-icon-list">
-                                    <form action="{{route('org_shifts.destroy',$shift->id)}}" method="POST">
+                                    <form action="{{route('org_branch_shifts.destroy',$shift->id)}}" method="POST">
                                        @csrf
                                        @method('DELETE')
-                                       <a href="org_shifts/{{$shift->id}}/edit" class="btn btn-info"><i
+                                       <a href="{{route('org_branch_shifts.edit',$shift->id)}}" class="btn btn-info"><i
                                              class="fa fa-edit"></i></a>
 
                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>

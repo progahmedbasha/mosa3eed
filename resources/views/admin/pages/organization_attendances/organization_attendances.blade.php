@@ -21,8 +21,7 @@
 
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('organization_attendances.create') }}"
-                           class="btn  btn-outline-primary">Add</a>
+                        <a href="{{route('attendance_create',$id)}}" class="btn  btn-outline-primary">Add</a>
                      </div>
                      {{-- search --}}
                      <div class="col mb-3">
@@ -49,7 +48,7 @@
                         <thead>
                            <tr>
                               <th style="width:21px;" style="text-align:center;">#</th>
-                              <th style="text-align:center;">Shift Name</th>
+                              <th style="text-align:center;">User Name</th>
                               <th style="text-align:center;">Organization Name</th>
                               <th style="text-align:center;">Branch</th>
                               <th style="text-align:center;">Date</th>

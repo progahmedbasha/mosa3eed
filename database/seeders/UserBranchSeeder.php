@@ -14,7 +14,7 @@ class UserBranchSeeder extends Seeder
     public function run()
     {
           DB::table('user_branches')->insert([
-            'user_id' => 2,
+            'user_id' => 5,
             'organization_id' => 1,
             'branch_id' => 1,
             'branch_shift_id' => 1,

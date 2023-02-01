@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\UserBranchController;
 use App\Http\Controllers\Organization\OrganizationAdminController;
 use App\Http\Controllers\BranchShiftController;
-use App\Http\Controllers\Organization\OrganizationAttendanceController;
 use App\Http\Controllers\Organization\PurchaseController;
 use App\Http\Controllers\Jobs\JobTitleController;
 use App\Http\Controllers\Jobs\JobPostController;
@@ -100,14 +99,16 @@ Route::group(
                     Route::resource('organization_shifts', 'BranchShiftController');
                     Route::get('allorganizations_shift', [BranchShiftController::class,'allorganizations_shift'])->name('allorganizations_shift');
                     Route::get('all_branch_shift/{id}', [BranchShiftController::class,'all_branch_shift'])->name('all_branch_shift');
-                    Route::get('branch_shift/{id}', [BranchShiftController::class,'branch_shift'])->name('branch_shift');
+                    // Route::get('branch_shift/{id}', [BranchShiftController::class,'branch_shift'])->name('branch_shift');
                     Route::get('shift_create/{id}', [BranchShiftController::class,'create'])->name('shift_create');
                     Route::get('branch_shifts/{id}', [BranchShiftController::class,'shifts'])->name('branch_shifts');
                     /************************************ Branch Attendances ************************************************/
-                    Route::resource('organization_attendances', Organization\OrganizationAttendanceController::class);
-                    Route::get('allorg_attendance', 'Organization\OrganizationAttendanceController@allorg_attendance')->name('allorg_attendance');
-                    Route::get('all_branch_attendance/{id}', 'Organization\OrganizationAttendanceController@all_branch_attendance')->name('all_branch_attendance');
-                    Route::get('org_branch_attendance/{id}', 'Organization\OrganizationAttendanceController@attendance')->name('org_branch_attendance');
+                    Route::resource('organization_attendances', BranchAttendanceController::class);
+                    Route::get('allorg_attendance', 'BranchAttendanceController@allorg_attendance')->name('allorg_attendance');
+                    Route::get('all_branch_attendance/{id}', 'BranchAttendanceController@all_branch_attendance')->name('all_branch_attendance');
+                    Route::get('org_branch_attendance/{id}', 'BranchAttendanceController@attendance')->name('org_branch_attendance');
+                    Route::get('attendance_create/{id}', 'BranchAttendanceController@create')->name('attendance_create');
+                    Route::get('easysign', 'BranchAttendanceController@easysign')->name('easysign');
 
                     Route::resource('purchases', Organization\PurchaseController::class);
                     Route::resource('job_titles', Jobs\JobTitleController::class);
@@ -159,14 +160,35 @@ Route::group(
                     Route::resource('organization_dashboard', OrganizationAdmin\DashboardController::class);
                     Route::resource('organization_profile', OrganizationAdmin\ProfileController::class);
                     Route::resource('user_organizations', OrganizationAdmin\OrganizationController::class);
+                    Route::get('org_branches/{id}', 'OrganizationAdmin\OrganizationController@branches')->name('org_branches');
+                    Route::get('org_branch_add/{id}', 'OrganizationAdmin\BranchController@create')->name('org_branch_add');
+                    Route::resource('organization_branchs', OrganizationAdmin\BranchController::class);
+                    /************************************ Branch Shifts Admins ************************************************/
+                    Route::resource('org_branch_shifts', OrganizationAdmin\BranchShiftController::class);
+                    // Route::get('allorganizations_shift', [BranchShiftController::class,'allorganizations_shift'])->name('allorganizations_shift');
+                    // Route::get('all_branch_shift/{id}', [BranchShiftController::class,'all_branch_shift'])->name('all_branch_shift');
+                    Route::get('org_branch_shift/{id}', 'OrganizationAdmin\BranchShiftController@branch_shift')->name('org_branch_shift');
+                    Route::get('org_shift_create/{id}', 'OrganizationAdmin\BranchShiftController@create')->name('org_shift_create');
+                    Route::get('organization_branch_shifts/{id}', 'OrganizationAdmin\BranchShiftController@shifts')->name('organization_branch_shifts');
+                    /************************************ Branch Admins ************************************************/
+                    Route::resource('org_branch_admins', OrganizationAdmin\UserBranchController::class);
+                    Route::get('org_admins_branch/{org}/{branch}', 'OrganizationAdmin\UserBranchController@admins_branch')->name('org_admins_branch');
+                    Route::get('org_branch_admins_create/{org}/{branch}', 'OrganizationAdmin\UserBranchController@create')->name('org_branch_admins_create');
+                    Route::get('org_branch_admin_edit/{org}/{branch}/{id}', 'OrganizationAdmin\UserBranchController@edit')->name('org_branch_admin_edit');
+                    
+                    /************************************ Organization Admins ************************************************/
+                    Route::get('organiz_admins/{id}', 'OrganizationAdmin\OrganizationController@org_admins')->name('org_admins');
+                    Route::resource('org_admins', OrganizationAdmin\OrganizationAdminController::class);
+                    Route::get('org_admins_create/{id}', 'OrganizationAdmin\OrganizationAdminController@create')->name('org_admins_create');
+                    Route::get('org_admins_edit/{id}/{org}', 'OrganizationAdmin\OrganizationAdminController@edit')->name('org_admins_edit');
+                    // Route::resource('org_shifts', OrganizationAdmin\OrganizationshiftController::class);
 
                     ///////
-                    Route::get('organization_admin_edit/{user_id}/{id}', 'OrganizationAdmin\PharmacyAdminController@edite')->name('organization_admin_edit');
+                    // Route::get('organization_admin_edit/{user_id}/{id}', 'OrganizationAdmin\PharmacyAdminController@edite')->name('organization_admin_edit');
 
-                    Route::resource('organization_medicins', OrganizationAdmin\MedicinController::class);
-                    Route::resource('organization_branchs', OrganizationAdmin\BranchController::class);
-                    Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
-                    Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
+                    // Route::resource('organization_medicins', OrganizationAdmin\MedicinController::class);
+                    // Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
+                    // Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
 
 
                     // Route::resource('organization_sale_page', OrganizationAdmin\SalePageController::class);
@@ -194,50 +216,6 @@ Route::group(
 
                 });  
 });
-// routes for Branch Admin
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ], 
-    ], function()
-    {
-            Route::group(
-                [
-                    'prefix' => 'branch_admin',
-                    'middleware' => [ 'auth:sanctum', 'verified' , 'BranchAdmin'],
-                ], function()
-                {
-                  
-                    Route::resource('branch_dashboard', BranchAdmin\DashboardController::class);
-                    Route::resource('branch_admin_profile', BranchAdmin\ProfileController::class);
-                    // Route::post('fetch_city', [Country_state_cityController::class,'fetchCity'])->name('fetch_city');
-                    // Route::post('fetchdistrict', [Country_state_cityController::class,'fetchdistrict'])->name('fetchdistrict');
-                    // Route::resource('branch_admin_branches', BranchAdmin\UserBranchController::class);
-                     Route::resource('branch_admin_purchases', BranchAdmin\PurchaseController::class);
-                    Route::resource('branch_admin_branch_medicins', BranchAdmin\BranchMedicinController::class);
-                    Route::resource('branch_admin_sale_page', BranchAdmin\SalePageController::class);
-                    
-                    Route::get('item_edite/{order}/{id}', 'BranchAdmin\SalePageController@item_edite')->name('item_edite');
-                    Route::patch('item_update/{id}', 'BranchAdmin\SalePageController@item_update')->name('item_update');
-                    Route::delete('order_item_delete/{order}/{id}', 'BranchAdmin\SalePageController@order_item_delete')->name('order_item_delete');
-                    Route::post('sale_store_ajax', 'BranchAdmin\SalePageController@sale_store_ajax')->name('sale_store_ajax');
-                    Route::post('update_qty_ajax', 'BranchAdmin\SalePageController@update_qty_ajax')->name('branch_update_qty_ajax');
-                    Route::delete('sale_ajax_destroy', 'BranchAdmin\SalePageController@sale_ajax_destroy')->name('sale_ajax_destroy');
-                    Route::post('get_bill_number_ajax', 'BranchAdmin\SalePageController@get_bill_number_ajax')->name('get_bill_number_ajax');
-                    Route::post('get_order_disc_num_ajax', 'BranchAdmin\SalePageController@get_order_disc_num_ajax')->name('get_order_disc_num_ajax');
-                    Route::post('get_order_disc_persent_ajax', 'BranchAdmin\SalePageController@get_order_disc_persent_ajax')->name('get_order_disc_persent_ajax');
-                    
-                    Route::resource('branch_admin_timeline_posts', BranchAdmin\TimelinePostController::class);
-                   
-                    Route::post('change_comment_satus', 'BranchAdmin\TimelinePostController@change_comment_satus')->name('branch_change_comment_satus');
-                    Route::resource('branch_ads',BranchAdmin\AdController::class);
-                    Route::post('add_comment_ajax', 'BranchAdmin\TimelinePostController@add_comment_ajax')->name('branch_add_comment_ajax');
-                    
-                    Route::resource('branch_shifts', BranchAdmin\OrganizationshiftController::class);
-                    Route::resource('branch_attendances', BranchAdmin\OrganizationAttendanceController::class);
-                    Route::resource('branch_employees', BranchAdmin\EmployeeController::class);
 
-                });  
-});
     Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

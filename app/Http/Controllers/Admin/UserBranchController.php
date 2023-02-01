@@ -25,8 +25,8 @@ class UserBranchController extends Controller
      */
     public function index()
     {
-        $admins = UserBranch::paginate(50);
-        return view('admin.pages.branch_admins.branch_admins', compact('admins'));
+        // $admins = UserBranch::paginate(50);
+        // return view('admin.pages.branch_admins.branch_admins', compact('admins'));
     }
 
     /**

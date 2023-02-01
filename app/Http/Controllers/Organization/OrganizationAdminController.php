@@ -37,7 +37,6 @@ class OrganizationAdminController extends Controller
     public function create($id)
     {
         $user_types = UserType::skip(1)->skip(2)->take(2)->get();
-     
         return view('admin.pages.organization_admins.organization_admin_add', compact('id','user_types'));
     }
 

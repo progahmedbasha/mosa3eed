@@ -23,35 +23,7 @@
 						<form action="{{route('organization_attendances.store')}}" method="post"
 							enctype="multipart/form-data">
 							@csrf
-							<div class="form-row">
-								<div class="col">
-									<label for="inputName">Organization</label>
-									<select id="country-dd" class="form-control" name="organization_id">
-										<option value="">Select Organization</option>
-										@foreach ($organizations as $org)
-										<option value="{{$org->id}}" {{(old('organization_id')==$org->id)?
-											'selected':''}}>{{$org->name}}</option>
-										@endforeach
-									</select>
-									@error('organization_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-								<div class="col">
-									<label for="inputName">Branch</label>
-									<select id="country-dd" class="form-control" name="branch_id">
-										<option value="">Select Branches</option>
-										@foreach ($branches as $branch)
-										<option value="{{$branch->id}}" {{(old('branch_id')==$branch->id)?
-											'selected':''}}>{{$branch->name}}</option>
-										@endforeach
-									</select>
-									@error('branch_id')
-									<div class="alert alert-danger">{{ $message }}</div>
-									@enderror
-								</div>
-							</div>
-							<br>
+							<input type="hidden" value="{{ $id }}" name="branch_id">
 							<div class="form-row">
 								<div class="col">
 									<label for="inputName">User</label>

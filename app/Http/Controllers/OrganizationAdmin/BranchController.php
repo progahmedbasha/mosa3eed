@@ -30,13 +30,12 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $countries = Country::all();
         $cities = City::all();
         $districts = District::all();
-        $organizations = Organization::all();
-        return view('organization.pages.branchs.branch_add', compact('organizations','countries','cities','districts'));
+        return view('organization.pages.branchs.branch_add', compact('id','countries','cities','districts'));
     }
 
     /**
@@ -47,6 +46,10 @@ class BranchController extends Controller
      */
     public function store(StoreRequest $request)
     {
+       // return $request;
+        // for return page after update
+        $org_id = $request->input('organization_id');
+
         $branch = new Branch();
         $branch
         ->setTranslation('name', 'en', $request->input('name_en'))
@@ -54,8 +57,8 @@ class BranchController extends Controller
         $branch->phone_1 = $request->input('phone_1');
         $branch->phone_2 = $request->input('phone_2');
         $branch->email = $request->input('email');
-        $branch->organization_id = $request->input('organization_id');
-        $branch->district_id = $request->input('district_id');
+        $branch->organization_id = $org_id;
+        $branch->district_id = $request->district_id;
         $branch->address = $request->input('address');
         if (request()->photo){
             $filename = time().'.'.request()->photo->getClientOriginalExtension();
@@ -63,8 +66,7 @@ class BranchController extends Controller
             $branch->photo=$filename;
             }
         $branch->save();
-        Session::flash('success','Branch Added Successfully');
-        return redirect()->route('organization_branchs.index');
+        return redirect()->route('org_branches',$org_id)->with('success','Branch Added Successfully');
     }
 
     /**
@@ -105,6 +107,9 @@ class BranchController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+  // for return page after update
+        $org_id = $request->input('organization_id');
+
         $branch = Branch::find($id);
         $branch
         ->setTranslation('name', 'en', $request->input('name_en'))
@@ -121,8 +126,7 @@ class BranchController extends Controller
             $branch->photo=$filename;
             }
         $branch->save();
-        Session::flash('success','Branch Updated Successfully');
-        return redirect()->route('organization_branchs.index');
+        return redirect()->route('org_branches',$org_id)->with('success','Branch Updated Successfully');
     }
 
     /**
@@ -137,7 +141,6 @@ class BranchController extends Controller
         $branch->JobPost()->delete();
         $branch->MissedItem()->delete();
         $branch->delete();
-        Session::flash('success','Branch Deleted Successfully');
-        return redirect()->route('organization_branchs.index');
+        return redirect()->back()->with('success','Branch Deleted Successfully');
     }
 }

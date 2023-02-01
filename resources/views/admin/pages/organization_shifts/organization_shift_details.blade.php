@@ -24,7 +24,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             @method('patch')
-							<input type="hidden" value="{{$branch_shift->branch_id}}" name="branch_id"/>
+                            <input type="hidden" value="{{$branch_shift->branch_id}}" name="branch_id" />
                             <div class="form-row">
                                 <div class="col">
                                     <label for="inputName">Shift Name</label>

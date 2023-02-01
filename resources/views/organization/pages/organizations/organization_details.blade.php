@@ -15,7 +15,7 @@
 		<hr>
 
 
-		<form action="{{route('organizations.update',$organization->id)}}" method="post" enctype="multipart/form-data">
+		<form action="{{route('user_organizations.update',$organization->id)}}" method="post" enctype="multipart/form-data">
 			@csrf
 			@method('patch')
 			<div class="row">

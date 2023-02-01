@@ -1,10 +1,10 @@
 <style>
    .sidebar .nav-item .nav-link {
-          padding: 12px 22px!important;
+      padding: 12px 22px !important;
    }
+
    /* Fixed sidenav, full height */
    .sidenav {
-
       padding-top: 0px;
    }
 
@@ -38,7 +38,7 @@
 
    /* Main content */
    /* .main {
-  margin-left: 200px; /* Same as the width of the sidenav */
+   margin-left: 200px; /* Same as the width of the sidenav */
    font-size: 20px;
    /* Increased text to enable scrolling */
    padding: 0px 10px;
@@ -90,61 +90,33 @@
       </a>
    </li>
    <li class="nav-item">
-      <a class="nav-link" href="{{route('branch_admin_purchases.index')}}">
-         <i class="fa fa-shopping-cart"></i>
-         <span>Purchases</span>
+      <a class="nav-link" href="{{route('branches.index')}}">
+         <i class="fas fa-fw fa-user"></i>
+         <span>Branches</span>
       </a>
-   </li>
-   <li class="nav-item">
-      <a class="nav-link" href="{{route('branch_admin_branch_medicins.index')}}">
-         <i class="fa fa-plus-square"></i>
-         <span>Branch Medicins</span>
-      </a>
-   </li>
-
-   <li class="nav-item">
-      <a class="nav-link" href="{{route('branch_admin_sale_page.index')}}">
-         <i class="fa fa-shopping-basket"></i>
-         <span>Orders</span>
-      </a>
-   </li>
-   <li class=" nav-item">
-            <a class="nav-link" target="__blank" href="{{route('branch_admin_sale_page.create')}}">
-               <i class="fas fa-receipt"></i>
-               <span>POS</span>
-            </a>
    </li>
       <div class="sidenav">
       <button class="dropdown-btn"><i class="fa fa-bars"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>HR</span>
          <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-container">
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('branch_shifts.index')}}">Shifts</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('all_shift_branches')}}">Shifts</a>
          <a class="dropdown-item" style="margin-left: 17px;"
-            href="{{route('branch_attendances.index')}}">Attendance</a>
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('branch_shifts.create')}}">Easy
+            href="{{route('all_attendance_branches')}}">Attendance</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('bran_easysign')}}">Easy
             Sign</a>
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('branch_employees.index')}}">Employee</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees.index')}}">Employee</a>
       </div>
 
    </div>
-   <li class="nav-item">
-      <a class="nav-link" href="{{route('branch_admin_timeline_posts.index')}}">
-         <i class="fas fa-fw fa-indent"></i>
-         <span>TimeLine Posts</span>
-      </a>
-   </li>
-
- 
-<hr>
+   <hr>
 </ul>
 <script>
    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
+   var dropdown = document.getElementsByClassName("dropdown-btn");
+   var i;
+   for (i = 0; i < dropdown.length; i++) {
+   dropdown[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var dropdownContent = this.nextElementSibling;
     if (dropdownContent.style.display === "block") {
@@ -152,6 +124,6 @@ for (i = 0; i < dropdown.length; i++) {
     } else {
       dropdownContent.style.display = "block";
     }
-  });
-}
+   });
+   }
 </script>

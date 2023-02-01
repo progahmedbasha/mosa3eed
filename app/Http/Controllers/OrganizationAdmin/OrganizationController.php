@@ -25,9 +25,12 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        //   $organizations = Organization::whenSearch($request->search)->paginate(50);
-             $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->paginate(50);
-          return view('organization.pages.organizations.organizations', compact('organizations'));
+        //  $organizations = Organization::whenSearch($request->search)->paginate(50);
+            $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->paginate(50);
+            $countries = Country::all();
+            $cities = City::all();
+            $districts = District::all();
+          return view('organization.pages.organizations.organizations', compact('organizations','countries','cities','districts'));
     }
 
     /**
@@ -145,9 +148,11 @@ class OrganizationController extends Controller
     }
     public function branches($id)
     {
-        $branchs = Branch::where('organization_id', $id)->get();
-        return view('organization.pages.branchs.branchs', compact('branchs'));
+        $organization_name = Organization::where('id', $id)->first("name"); 
+        $branchs = Branch::where('organization_id', $id)->paginate();
+        return view('organization.pages.branchs.branchs', compact('branchs','id','organization_name'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -215,8 +220,9 @@ class OrganizationController extends Controller
     }
     public function org_admins($id)
     {
-         $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
-        return view('organization.pages.organization_admins.organization_admins', compact('organization_admins'));
+          $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
+         $organization_name = Organization::where('id',$id)->first();
+        return view('organization.pages.organization_admins.organization_admins', compact('organization_admins','id','organization_name'));
 
     }
 }
