@@ -57,7 +57,6 @@ class AdminController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request['password']);
         $user->phone = $request->input('phone');
-        $user->organization_id = $request->input('organization_id');
         $user->district_id = $request->input('district_id');
          $user->user_type_id = $request->input('user_type_id');     
         if (request()->photo){

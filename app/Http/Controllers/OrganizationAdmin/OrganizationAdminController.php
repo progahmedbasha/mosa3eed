@@ -77,7 +77,7 @@ class OrganizationAdminController extends Controller
         // $branch_id = $request->branch_id;
 
         
-        return redirect()->route('org_admins',$org_id)->with('success','Organization Admin Added Successfully');
+        return redirect()->route('org_org_admins',$org_id)->with('success','Organization Admin Added Successfully');
     }
 
     /**
@@ -130,7 +130,7 @@ class OrganizationAdminController extends Controller
             $user->photo=$filename;
             }
         $user->save();
-        return redirect()->route('org_admins',$org_id)->with('success','Organization Admin Updated Successfully');
+        return redirect()->route('org_org_admins',$org_id)->with('success','Organization Admin Updated Successfully');
     }
 
     /**

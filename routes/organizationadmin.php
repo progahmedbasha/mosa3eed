@@ -46,7 +46,7 @@ Route::group(
                     Route::get('org_branch_admin_edit/{org}/{branch}/{id}', 'OrganizationAdmin\UserBranchController@edit')->name('org_branch_admin_edit');
                     
                     /************************************ Organization Admins ************************************************/
-                    Route::get('organiz_admins/{id}', 'OrganizationAdmin\OrganizationController@org_admins')->name('org_admins');
+                    Route::get('organiz_admins/{id}', 'OrganizationAdmin\OrganizationController@org_admins')->name('org_org_admins');
                     Route::resource('org_admins', OrganizationAdmin\OrganizationAdminController::class);
                     Route::get('org_admins_create/{id}', 'OrganizationAdmin\OrganizationAdminController@create')->name('org_admins_create');
                     Route::get('org_admins_edit/{id}/{org}', 'OrganizationAdmin\OrganizationAdminController@edit')->name('org_admins_edit');
