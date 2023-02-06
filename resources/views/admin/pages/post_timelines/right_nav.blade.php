@@ -82,7 +82,7 @@
                     <div class="btn-group float-right right-action" style="position: absolute;">
                         <a href="#" class="right-action-link text-gray" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            <i class="fa fa-ellipsis-v" aria-hidden="true" style="margin-left: 268px;"></i>
+                            <i class="fa fa-ellipsis-v" aria-hidden="true" style="margin-left: 295px;"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" data-effect="effect-sign" data-toggle="modal"

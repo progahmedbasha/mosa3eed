@@ -29,6 +29,7 @@ Route::group(
                     Route::resource('branch_dashboard', BranchAdmin\DashboardController::class);
                     Route::resource('branch_admin_profile', BranchAdmin\ProfileController::class);
                     Route::resource('branches', BranchAdmin\BranchController::class);
+                    Route::get('user_branch_accept/{id}', 'BranchAdmin\BranchController@accept')->name('user_branch_accept');
                     /************************************ Branch Shifts ************************************************/
                     Route::resource('shifts', 'BranchAdmin\BranchShiftController');
                     Route::get('all_shift_branches', 'BranchAdmin\BranchShiftController@all_branch_shift')->name('all_shift_branches');

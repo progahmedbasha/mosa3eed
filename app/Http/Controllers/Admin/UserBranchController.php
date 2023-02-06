@@ -72,6 +72,7 @@ class UserBranchController extends Controller
             $admin_branch->branch_id = $request->branch_id;
             $admin_branch->user_id = $user->id;
             $admin_branch->branch_shift_id = $request->branch_shift_id;
+            $admin_branch->status = 1;
             $admin_branch->save();
         $org = $request->org_id;
         $branch = $request->branch_id;

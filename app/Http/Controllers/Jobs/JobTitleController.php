@@ -38,7 +38,7 @@ class JobTitleController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        return $request;
+        // return $request;
         $job_title = new JobTitle();
         $job_title
         ->setTranslation('name', 'en', $request->input('name_en'))

@@ -116,4 +116,11 @@ class BranchController extends Controller
     {
         //
     }
+    public function accept($id)
+    {
+        // return $id;
+        $user_branch = UserBranch::where('id', $id)->first();
+        $user_branch->update(['status' => 0]);
+        return redirect()->back()->with('success','Branch Accepted Successfully'); 
+    }
 }
