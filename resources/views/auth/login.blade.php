@@ -31,10 +31,11 @@
                         <div class="login-main-left">
                             <div class="text-center mb-5 login-main-left-header pt-4">
                                 <img src="img/favicon.png" class="img-fluid" alt="LOGO">
-                                <h5 class="mt-3 mb-3">Welcome to Vidoe</h5>
+                                <h5 class="mt-3 mb-3">Welcome to Mosa3eed</h5>
                                 <p>It is a long established fact that a reader <br> will be distracted by the readable.
                                 </p>
                             </div>
+
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
@@ -69,7 +70,8 @@
                                 </div>
                             </form>
                             <div class="text-center mt-5">
-                                <p class="light-gray">Don’t have an account? <a href="register.html">Sign Up</a></p>
+                                <p class="light-gray">Don’t have an Organization? <a
+                                        href="{{ route('organization_create') }}">Create Organization</a></p>
                             </div>
                         </div>
                     </div>

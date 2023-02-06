@@ -40,13 +40,13 @@ class OrganizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     $countries = Country::all();
-    //     $cities = City::all();
-    //     $districts = District::all();
-    //     return view('admin.pages.organizations.organizations_add', compact('countries','cities','districts'));
-    // }
+    public function create()
+    {
+        $countries = Country::all();
+        $cities = City::all();
+        $districts = District::all();
+        return view('admin.pages.organizations.organizations_add', compact('countries','cities','districts'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -158,7 +158,7 @@ class OrganizationController extends Controller
                     $user_branch->save();
                 }
       
-        return redirect()->route('organizations.index')->with('success','Organization Added Successfully');
+        return redirect()->back()->with('success','Organization Added Successfully');
     }
 
     /**
