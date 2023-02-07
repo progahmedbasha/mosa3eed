@@ -175,7 +175,7 @@ button:hover {
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <label class="form-label" for="customFile">Photo</label>
-                    <input type="file" class="form-control" id="customFile" />
+                    <input type="file" class="form-control" id="customFile" name="photo"/>
                     <br>
                 </div>
                 <div class="tab">
@@ -317,6 +317,8 @@ button:hover {
                     @error('branch_address')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+                    <label class="form-label" for="customFile">Photo</label>
+                    <input type="file" class="form-control" id="customFile" name="branch_photo" />
 
                     <br>
                 </div>

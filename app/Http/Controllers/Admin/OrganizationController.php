@@ -112,9 +112,9 @@ class OrganizationController extends Controller
                     $branch->organization_id = $org->id;
                     $branch->district_id = $org->district_id;
                     $branch->address = $request->input('branch_address');
-                    if (request()->photo){
-                        $filename = time().'.'.request()->photo->getClientOriginalExtension();
-                        request()->photo->move(public_path('data/branchs'), $filename);
+                    if (request()->branch_photo){
+                        $filename = time().'.'.request()->branch_photo->getClientOriginalExtension();
+                        request()->branch_photo->move(public_path('data/branchs'), $filename);
                         $branch->photo=$filename;
                         }
                     $branch->save();
@@ -128,12 +128,14 @@ class OrganizationController extends Controller
                     $shift->save();
                         $countItems = count($request->day);
                         for($i=0; $i<$countItems; $i++){
-                            $shift_day  = new ShiftDay();
+                        if ($request->from[$i] != null) {
+                            $shift_day = new ShiftDay();
                             $shift_day->branch_shift_id = $shift->id;
                             $shift_day->day = $request->day[$i];
                             $shift_day->from = $request->from[$i];
                             $shift_day->to = $request->to[$i];
                             $shift_day->save();
+                        }
                         }
                     }
                       // save branch admin
@@ -144,17 +146,19 @@ class OrganizationController extends Controller
                     $user->password = Hash::make($request['admin_password']);
                     $user->phone = $request->input('admin_phone');
                     $user->user_type_id = 5 ;
-                    //    if (request()->photo){
-                    //     $filename = time().'.'.request()->photo->getClientOriginalExtension();
-                    //     request()->photo->move(public_path('data/admins'), $filename);
-                    //     $user->photo=$filename;
-                    //     }
+                       if (request()->admin_photo){
+                        $filename = time().'.'.request()->admin_photo->getClientOriginalExtension();
+                        request()->admin_photo->move(public_path('data/admins'), $filename);
+                        $user->photo=$filename;
+                        }
                     $user->save();
                     $user_branch = new UserBranch();
                     $user_branch->user_id = $user->id;
                     $user_branch->organization_id = $org->id;
                     $user_branch->branch_id = $branch->id;
-                    $user_branch->branch_shift_id = $shift->id;
+                     if($request->shift_name !=null){
+                        $user_branch->branch_shift_id = $shift->id;
+                     }
                     $user_branch->save();
                 }
       

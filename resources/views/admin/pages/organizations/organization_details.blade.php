@@ -197,7 +197,7 @@
 							</div>
 							<div class="col">
 								<label class="form-label" for="customFile">Photo</label>
-								<input type="file" class="form-control" id="customFile" />
+								<input type="file" class="form-control" id="customFile"  name="photo"/>
 							</div>
 						</div>
 					</div>
