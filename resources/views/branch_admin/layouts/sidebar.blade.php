@@ -109,6 +109,12 @@
       </div>
 
    </div>
+      <li class="nav-item">
+      <a class="nav-link" target="__blank" href="{{route('organization_sale_page.create')}}">
+         <i class="fa fa-receipt"></i>
+         <span>POS</span>
+      </a>
+   </li>
    <hr>
 </ul>
 <script>

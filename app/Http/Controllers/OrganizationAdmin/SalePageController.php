@@ -39,14 +39,14 @@ class SalePageController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->user_type_id == 4)
+        if(Auth::user()->user_type_id == 5)
         {
             $branches = UserBranch::where('user_id' , Auth::user()->id)->get();
         }
-        elseif(Auth::user()->user_type_id == 3)
-        {
-            $branches = Branch::where('organization_id' , Auth::user()->organization_id)->get();
-        }
+        // elseif(Auth::user()->user_type_id == 3)
+        // {
+        //     $branches = Branch::where('organization_id' , Auth::user()->organization_id)->get();
+        // }
         // $branches = UserBranch::where('user_id' , Auth::user()->id)->get();
          $empty = SaleBill::where('branch_id',Auth::user()->branch_id)->get();
         if($empty->count() < 1)
@@ -232,10 +232,11 @@ class SalePageController extends Controller
             if($old_qty >= $new_qty)
             {        
                 $medicin = Medicin::where('barcode', $request->product_id)->first();
+                $medicin_price = BranchMedicin::where('medicin_id', $medicin->id)->first();
                 $product_bill = new OrderItem();
                 $product_bill->bill_number = $request->order_number;
                 $product_bill->medicin_id = $medicin->id;
-                $product_bill->price = $medicin->price;
+                $product_bill->price = $medicin_price->price;
                 $product_bill->qty = $request->qty;
                 $product_bill->discnum = $request->discnum;
                 $product_bill->discpersent = $request->discpersent;

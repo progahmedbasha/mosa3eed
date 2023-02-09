@@ -85,7 +85,7 @@
                   <input type="text"  class="form-control pr"  id="order_number"  name="order_number" readonly>
                <label>Branch :</label>
                {{-- لو كان اليوزر مدير صيدليه هظهر كل الفروع ولو كان مدير فرع هظهر الفروع التابع لها من تابل userbranches --}}
-               @if (Auth::user()->user_type_id == 4)
+               @if (Auth::user()->user_type_id == 5)
                 <select  class="form-control" name="branch_id" id="branch">
                         <option value="">Select Branch</option>
                         @foreach ($branches as $branch)

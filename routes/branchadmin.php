@@ -41,5 +41,14 @@ Route::group(
                     Route::get('bran_attendance/{id}', 'BranchAdmin\BranchAttendanceController@attendance')->name('bran_attendance');
                     Route::get('bran_attendance_create/{id}', 'BranchAdmin\BranchAttendanceController@create')->name('bran_attendance_create');
                     Route::get('bran_easysign', 'BranchAdmin\BranchAttendanceController@easysign')->name('bran_easysign');
+                    /************************************ pos ************************************************/
+                    Route::resource('organization_sale_page', OrganizationAdmin\SalePageController::class);
+                    Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('org_sale_store_ajax');
+                    Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('org_get_bill_number_ajax');
+                    Route::post('get_order_disc_num_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_num_ajax')->name('org_get_order_disc_num_ajax');
+                    Route::post('get_order_disc_persent_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_persent_ajax')->name('org_get_order_disc_persent_ajax');
+                    Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('org_sale_ajax_destroy');
+                    Route::post('org_update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('org_update_qty_ajax');
+
                 });  
 });
