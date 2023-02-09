@@ -4,6 +4,7 @@ namespace App\Http\Controllers\OrganizationAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BranchShift;
+use App\Models\organization\OrganizationAdmin;
 use App\Models\ShiftDay;
 use Illuminate\Http\Request;
 use App\Models\organization\OrganizationShift;
@@ -29,12 +30,17 @@ class BranchShiftController extends Controller
     {
         $organizations = Organization::whenSearch($request->search)->paginate(50);
         return view('organization.pages.organization_shifts.all_organization', compact('organizations'));
-
     }
-    public function all_branch_shift($id)
+    public function all_org_shift()
     {
-        $branchs = Branch::where('organization_id',$id)->paginate(20);
-        return view('organization.pages.organization_shifts.all_branches', compact('branchs','id'));
+           $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->get();
+        return view('organization.pages.organization_shifts.all_organizations', compact('organizations'));
+    }
+        public function all_branch_shift($id)
+    {
+           $branchs = Branch::where('organization_id', $id)->get();
+            $organization_name = Organization::where('id', $id)->first("name"); 
+        return view('organization.pages.organization_shifts.all_branches', compact('branchs','organization_name','id'));
     }
     public function branch_shift(Request $request ,$id)
     {

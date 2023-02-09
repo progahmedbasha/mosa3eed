@@ -212,11 +212,8 @@ class OrganizationController extends Controller
     {
         // return $org = Organization::has('User')->get();
         $org = Organization::find($id);
-        $org->Branch()->delete();
-        $org->User()->delete();
         $org->delete();
-        Session::flash('success','Organization Deleted Successfully');
-        return redirect()->route('organizations.index');
+        return redirect()->back()->with('success','Organization Deleted Successfully');
     }
     public function org_admins($id)
     {

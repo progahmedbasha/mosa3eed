@@ -32,7 +32,7 @@ Route::group(
                     Route::get('org_branches/{id}', 'OrganizationAdmin\OrganizationController@branches')->name('org_branches');
                     Route::get('org_branch_add/{id}', 'OrganizationAdmin\BranchController@create')->name('org_branch_add');
                     Route::resource('organization_branchs', OrganizationAdmin\BranchController::class);
-                    /************************************ Branch Shifts Admins ************************************************/
+                    /************************************ Branch Shifts  ************************************************/
                     Route::resource('org_branch_shifts', OrganizationAdmin\BranchShiftController::class);
                     // Route::get('allorganizations_shift', [BranchShiftController::class,'allorganizations_shift'])->name('allorganizations_shift');
                     // Route::get('all_branch_shift/{id}', [BranchShiftController::class,'all_branch_shift'])->name('all_branch_shift');
@@ -50,6 +50,19 @@ Route::group(
                     Route::resource('org_admins', OrganizationAdmin\OrganizationAdminController::class);
                     Route::get('org_admins_create/{id}', 'OrganizationAdmin\OrganizationAdminController@create')->name('org_admins_create');
                     Route::get('org_admins_edit/{id}/{org}', 'OrganizationAdmin\OrganizationAdminController@edit')->name('org_admins_edit');
+                            // shifts all
+                    Route::resource('orgshifts', 'OrganizationAdmin\BranchShiftController');
+                    Route::get('all_org_shift_branches', 'OrganizationAdmin\BranchShiftController@all_org_shift')->name('all_org_shift_branches');
+                    Route::get('user_org_branches/{id}', 'OrganizationAdmin\BranchShiftController@all_branch_shift')->name('user_org_branches');
+                        // attendances all
+                    Route::resource('org_attendances', OrganizationAdmin\OrganizationAttendanceController::class);
+                    Route::get('all_org_attendance_branches', 'OrganizationAdmin\OrganizationAttendanceController@all_org_attendance')->name('all_org_attendance_branches');
+                    Route::get('user_org_attendance/{id}', 'OrganizationAdmin\OrganizationAttendanceController@all_branch_attendance')->name('user_org_attendance');
+                    Route::get('org_branch_attendance/{id}', 'OrganizationAdmin\OrganizationAttendanceController@branch_attendance')->name('org_branch_attendance');
+                    Route::get('bran_org_attendance_create/{id}', 'OrganizationAdmin\OrganizationAttendanceController@create')->name('bran_org_attendance_create');
+                    // easy signup
+                    Route::get('easysign_org', 'OrganizationAdmin\OrganizationAttendanceController@easysign')->name('easysign_org');
+                    
                     // Route::resource('org_shifts', OrganizationAdmin\OrganizationshiftController::class);
 
                     ///////
@@ -80,7 +93,7 @@ Route::group(
                     // Route::post('add_comment_ajax', 'OrganizationAdmin\TimelinePostController@add_comment_ajax')->name('org_add_comment_ajax');
 
                     // Route::resource('org_shifts', OrganizationAdmin\OrganizationshiftController::class);
-                    // Route::resource('org_attendances', OrganizationAdmin\OrganizationAttendanceController::class);
+                    
                     // Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
 
                 });  

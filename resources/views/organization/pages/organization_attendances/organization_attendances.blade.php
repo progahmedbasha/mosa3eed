@@ -21,7 +21,7 @@
 
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('org_attendances.create') }}"
+                        <a href="{{ route('bran_org_attendance_create',$id) }}"
                            class="btn  btn-outline-primary">Add</a>
                      </div>
                      {{-- search --}}

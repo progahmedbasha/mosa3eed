@@ -28,11 +28,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col mb-3">
-                                <button type="submit" data-effect="effect-sign" data-toggle="modal" href="#modaldemo9"
-                                    class="btn btn-primary">Add</button>
+                                {{-- <button type="submit" data-effect="effect-sign" data-toggle="modal" href="#modaldemo9"
+                                    class="btn btn-primary">Add</button> --}}
                             </div>
 
-                            @include('organization.pages.organizations.modal_add')
                             {{-- search --}}
                             <div class="col mb-3">
                                 <form method="get" class="form-inline"
@@ -106,7 +105,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <a href="user_organizations/{{$organization->Organization->id}}">
+                                        <a href="user_org_attendance/{{$organization->Organization->id}}">
                                             @if(!empty($organization->photo))
                                             <img class="img-fluid"
                                                 src="{{url('/data/organizations')}}/{{$organization->Organization->photo }}"

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         OrganizationSeeder::class,
         BranchSeeder::class,
         UserSeeder::class,
+        UniteSeeder::class,
         MedicinSeeder::class,
         MissedItemSeeder::class,
         JobTitleSeeder::class,

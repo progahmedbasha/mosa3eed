@@ -96,6 +96,20 @@
          <span>Organizations</span>
       </a>
    </li>
+         <div class="sidenav">
+      <button class="dropdown-btn"><i class="fa fa-bars"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>HR</span>
+         <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('all_org_shift_branches')}}">Shifts</a>
+         <a class="dropdown-item" style="margin-left: 17px;"
+            href="{{route('all_org_attendance_branches')}}">Attendance</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('easysign_org')}}">Easy
+            Sign</a>
+         {{-- <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees.index')}}">Employee</a> --}}
+      </div>
+
+   </div>
    {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('pharmacy_admins.index')}}">
          <i class="fa fa-users"></i>

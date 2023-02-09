@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\OrganizationAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BranchAttendance;
+use App\Models\organization\OrganizationAdmin;
+use App\Models\UserBranch;
 use Illuminate\Http\Request;
-use App\Models\organization\OrganizationAttendance;
 use App\Models\admin\Organization;
 use App\Models\admin\Branch;
 use App\Models\User;
@@ -17,25 +19,21 @@ class OrganizationAttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $search = $request->search;
-        $organization_attendances = OrganizationAttendance::where('organization_id', Auth::user()->organization_id)->whereHas('User' , function($q) use($search) {
-                $q->where('name',$search)->orWhere('phone', 'like', '%' .$search. '%');})->paginate(20);
-        return view('organization.pages.organization_attendances.organization_attendances', compact('organization_attendances'));
-    }
+    // public function index(Request $request)
+    // {
+        //
+    // }
+    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $organizations = Organization::all();
-        $users = User::all();
-        $branches = Branch::all();
-        return view('organization.pages.organization_attendances.organization_attendance_add', compact('organizations','users','branches'));
+        $users = UserBranch::where('branch_id' , $id)->get();
+        return view('organization.pages.organization_attendances.organization_attendance_add', compact('users','id'));
     }
 
     /**
@@ -46,18 +44,20 @@ class OrganizationAttendanceController extends Controller
      */
     public function store(Request $request)
     {
+       // return $request;
+        $branch = Branch::where('id', $request->branch_id)->first();
         $date_time = Carbon::now();
         $date = $date_time->toDateString();
         $time = $date_time->toTimeString();
-        OrganizationAttendance::create([
-            'organization_id' => Auth::user()->organization_id ,
+        BranchAttendance::create([
+            'organization_id' => $branch->organization_id ,
             'branch_id' => $request->branch_id ,
             'user_id' => $request->user_id ,
             'type' => $request->type ,
             'date' => $date ,
             'time' => $time ,
           ]);
-        return redirect()->route('org_attendances.index')->with('success','Organization Attendance Added Successfully');  
+        return redirect()->route('org_branch_attendance',$branch->id)->with('success','Branch Attendance Added Successfully');  
     }
 
     /**
@@ -102,6 +102,31 @@ class OrganizationAttendanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $shift = BranchAttendance::find($id);
+        $shift->delete();
+        return redirect()->back()->with('success','Shift Deleted Successfully');
+    }
+    public function all_org_attendance()
+    {
+        $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->get();
+        return view('organization.pages.organization_attendances.all_organizations', compact('organizations'));
+    }
+    public function all_branch_attendance($id)
+    {
+           $branchs = Branch::where('organization_id', $id)->get();
+            $organization_name = Organization::where('id', $id)->first("name"); 
+        return view('organization.pages.organization_attendances.all_branches', compact('branchs','organization_name','id'));
+    }
+    public function branch_attendance($id)
+    {
+         $organization_attendances = BranchAttendance::where('branch_id',$id)->paginate(20);
+        return view('organization.pages.organization_attendances.organization_attendances', compact('organization_attendances','id'));   
+    }
+    public function easysign()
+    {
+        $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->get();
+        $users = User::all();
+        $branches = Branch::all();
+        return view('organization.pages.organization_attendances.sign_add', compact('users','branches','organizations'));
     }
 }

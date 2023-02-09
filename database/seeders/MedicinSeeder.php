@@ -18,6 +18,7 @@ class MedicinSeeder extends Seeder
             'barcode' => '1',
             'producing_company' => 'Al motahida',
             'description' => 'description',
+            'unit_id' => 1,
         ]);
     }
 }
