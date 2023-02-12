@@ -106,7 +106,7 @@
             href="{{route('all_org_attendance_branches')}}">Attendance</a>
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('easysign_org')}}">Easy
             Sign</a>
-         {{-- <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees.index')}}">Employee</a> --}}
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('all_org_employees')}}">Employee</a>
       </div>
 
    </div>

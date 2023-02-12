@@ -50,51 +50,25 @@ Route::group(
                     Route::resource('org_admins', OrganizationAdmin\OrganizationAdminController::class);
                     Route::get('org_admins_create/{id}', 'OrganizationAdmin\OrganizationAdminController@create')->name('org_admins_create');
                     Route::get('org_admins_edit/{id}/{org}', 'OrganizationAdmin\OrganizationAdminController@edit')->name('org_admins_edit');
-                            // shifts all
+                    /************************************ shifts ************************************************/
                     Route::resource('orgshifts', 'OrganizationAdmin\BranchShiftController');
                     Route::get('all_org_shift_branches', 'OrganizationAdmin\BranchShiftController@all_org_shift')->name('all_org_shift_branches');
                     Route::get('user_org_branches/{id}', 'OrganizationAdmin\BranchShiftController@all_branch_shift')->name('user_org_branches');
-                        // attendances all
+                    /************************************ attendances ************************************************/
                     Route::resource('org_attendances', OrganizationAdmin\OrganizationAttendanceController::class);
                     Route::get('all_org_attendance_branches', 'OrganizationAdmin\OrganizationAttendanceController@all_org_attendance')->name('all_org_attendance_branches');
                     Route::get('user_org_attendance/{id}', 'OrganizationAdmin\OrganizationAttendanceController@all_branch_attendance')->name('user_org_attendance');
                     Route::get('org_branch_attendance/{id}', 'OrganizationAdmin\OrganizationAttendanceController@branch_attendance')->name('org_branch_attendance');
                     Route::get('bran_org_attendance_create/{id}', 'OrganizationAdmin\OrganizationAttendanceController@create')->name('bran_org_attendance_create');
-                    // easy signup
+                    /************************************ easy signup ************************************************/
                     Route::get('easysign_org', 'OrganizationAdmin\OrganizationAttendanceController@easysign')->name('easysign_org');
+                    /************************************ employees ************************************************/ 
+                    Route::get('all_org_employees', 'OrganizationAdmin\EmployeeController@all_org_employees')->name('all_org_employees');
+                    Route::get('employees_org_branches/{id}', 'OrganizationAdmin\EmployeeController@all_branchs')->name('employees_org_branches');
+                    Route::get('org_get_employees/{id}', 'OrganizationAdmin\EmployeeController@org_get_employees')->name('org_get_employees');
+                    Route::get('org_employees_create/{id}', 'OrganizationAdmin\EmployeeController@create')->name('org_employees_create');
+                    Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
                     
-                    // Route::resource('org_shifts', OrganizationAdmin\OrganizationshiftController::class);
-
-                    ///////
-                    // Route::get('organization_admin_edit/{user_id}/{id}', 'OrganizationAdmin\PharmacyAdminController@edite')->name('organization_admin_edit');
-
-                    // Route::resource('organization_medicins', OrganizationAdmin\MedicinController::class);
-                    // Route::resource('pharmacy_admins', OrganizationAdmin\PharmacyAdminController::class);
-                    // Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
-
-
-                    // Route::resource('organization_sale_page', OrganizationAdmin\SalePageController::class);
-                    // Route::get('item_edite/{order}/{id}', 'OrganizationAdmin\SalePageController@item_edite')->name('org_item_edite');
-                    // Route::patch('item_update/{id}', 'OrganizationAdmin\SalePageController@item_update')->name('org_item_update');
-                    // Route::delete('order_item_delete/{order}/{id}', 'OrganizationAdmin\SalePageController@order_item_delete')->name('org_order_item_delete');
-                    // Route::post('sale_store_ajax', 'OrganizationAdmin\SalePageController@sale_store_ajax')->name('org_sale_store_ajax');
-                    // Route::post('org_update_qty_ajax', 'OrganizationAdmin\SalePageController@update_qty_ajax')->name('org_update_qty_ajax');
-                    // Route::delete('sale_ajax_destroy', 'OrganizationAdmin\SalePageController@sale_ajax_destroy')->name('org_sale_ajax_destroy');
-                    // Route::post('get_bill_number_ajax', 'OrganizationAdmin\SalePageController@get_bill_number_ajax')->name('org_get_bill_number_ajax');
-                    // Route::post('get_order_disc_num_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_num_ajax')->name('org_get_order_disc_num_ajax');
-                    // Route::post('get_order_disc_persent_ajax', 'OrganizationAdmin\SalePageController@get_order_disc_persent_ajax')->name('org_get_order_disc_persent_ajax');
-                    
-                    // Route::resource('organization_branches', OrganizationAdmin\UserBranchController::class);
-                    // Route::resource('organization_branch_medicins', OrganizationAdmin\BranchMedicinController::class);
-                    // Route::resource('organization_purchases', OrganizationAdmin\PurchaseController::class);
-                    // Route::resource('organization_timeline_posts', OrganizationAdmin\TimelinePostController::class);
-                    // Route::post('change_comment_satus', 'OrganizationAdmin\TimelinePostController@change_comment_satus')->name('org_change_comment_satus');
-                    // Route::resource('org_ads',OrganizationAdmin\AdController::class);
-                    // Route::post('add_comment_ajax', 'OrganizationAdmin\TimelinePostController@add_comment_ajax')->name('org_add_comment_ajax');
-
-                    // Route::resource('org_shifts', OrganizationAdmin\OrganizationshiftController::class);
-                    
-                    // Route::resource('org_employees', OrganizationAdmin\EmployeeController::class);
-
+            
                 });  
 });

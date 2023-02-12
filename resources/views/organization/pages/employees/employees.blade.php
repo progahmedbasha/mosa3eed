@@ -20,7 +20,7 @@
 
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('org_employees.create') }}" class="btn  btn-outline-primary">Add</a>
+                        <a href="{{ route('org_employees_create', $id) }}" class="btn  btn-outline-primary">Add</a>
                      </div>
                      {{-- search --}}
                      <div class="col mb-3">

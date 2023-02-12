@@ -1,4 +1,4 @@
-@extends('organization.layouts.master')
+@extends('branch_admin.layouts.master')
 @section('content')
 
 <div id="content-wrapper">
@@ -13,7 +13,7 @@
          </div>
       </div>
       <hr>
-      <form action="{{route('org_employees.update',$employee->id)}}" method="post" enctype="multipart/form-data">
+      <form action="{{route('branch_employees.update',$employee->id)}}" method="post" enctype="multipart/form-data">
          @csrf
          @method('patch')
          <div class="row">

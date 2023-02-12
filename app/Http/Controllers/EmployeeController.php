@@ -41,11 +41,8 @@ class EmployeeController extends Controller
      */
     public function store(Store_Employee_Request $request)
     {
-        // for return page after update
-        $org_id = $request->input('organization_id');
-
         Employee::create($request->all());
-        return redirect()->route('organizations.show',$org_id)->with('success','Employee Added Successfully');
+        return redirect()->route('employees.index')->with('success','Employee Added Successfully');
     }
 
     /**
@@ -82,16 +79,13 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // for return page after update
-        $org_id = $request->input('organization_id');
-
         $employee = Employee::find($id);
         $employee->name = $request->input('name');
         $employee->phone = $request->input('phone');
         $employee->organization_id = $request->input('organization_id');
         $employee->branch_id = $request->input('branch_id');
         $employee->save();
-        return redirect()->route('organizations.show',$org_id)->with('success','Employee Added Successfully');
+        return redirect()->route('employees.index')->with('success','Employee Added Successfully');
     }
 
     /**

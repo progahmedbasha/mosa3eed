@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\OrganizationAdmin;
+namespace App\Http\Controllers\BranchAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\organization\OrganizationAdmin;
 use App\Models\UserBranch;
@@ -18,21 +18,15 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function all_org_employees()
+    public function all_branchs()
     {
-        $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->get();
-        return view('organization.pages.employees.allorganizations', compact('organizations'));
-    }
-    public function all_branchs($id)
-    {
-        $branchs = UserBranch::where('organization_id', $id)->get();
-        $organization_name = Organization::where('id', $id)->first("name"); 
-        return view('organization.pages.employees.allbranches', compact('branchs','organization_name','id'));
+        $branchs = UserBranch::where('user_id', Auth::user()->id)->get();
+        return view('branch_admin.pages.employees.allbranches', compact('branchs'));
     }
     public function org_get_employees($id)
     {
         $employees = Employee::where('branch_id', $id)->get();
-        return view('organization.pages.employees.employees', compact('employees','id'));
+        return view('branch_admin.pages.employees.employees', compact('employees','id'));
     }
 
     /**
@@ -43,7 +37,7 @@ class EmployeeController extends Controller
     public function create($id)
     {
         // id >> for branch
-        return view('organization.pages.employees.employee_add', compact('id'));
+        return view('branch_admin.pages.employees.employee_add', compact('id'));
     }
 
     /**
@@ -62,7 +56,7 @@ class EmployeeController extends Controller
         $employee->organization_id = $branch->organization_id;
         $employee->branch_id = $request->input('branch_id');
         $employee->save();
-        return redirect()->route('org_get_employees',$branch->id)->with('success','Employee Added Successfully');
+        return redirect()->route('branch_get_employees',$branch->id)->with('success','Employee Added Successfully');
     }
 
     /**
@@ -85,7 +79,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::find($id);
-        return view('organization.pages.employees.employee_details', compact('employee'));
+        return view('branch_admin.pages.employees.employee_details', compact('employee'));
     }
 
     /**
@@ -101,7 +95,7 @@ class EmployeeController extends Controller
         $employee->name = $request->input('name');
         $employee->phone = $request->input('phone');
         $employee->save();
-        return redirect()->route('org_get_employees', $employee->branch_id)->with('success','Employee Updated Successfully');
+        return redirect()->route('branch_get_employees', $employee->branch_id)->with('success','Employee Updated Successfully');
     }
 
     /**

@@ -215,13 +215,13 @@
          </div>
          @endforeach
       </div>
-      {{--div for show employees --}}
+      {{--div for show Branch Admin --}}
       <br>
       <div class="top-category section-padding mb-4">
          <div class="row">
             <div class="col-md-12">
                <div class="main-title">
-                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Employees :</h1>
+                  <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Branch Admins :</h1>
                </div>
             </div>
          </div>
@@ -234,7 +234,7 @@
 
                   <div class="row">
                      <div class="col mb-3">
-                        <a href="{{ route('employees.create') }}" class="btn  btn-outline-primary">Add</a>
+                        {{-- <a href="{{ route('employees.create') }}" class="btn btn-outline-primary">Add</a> --}}
                      </div>
                   </div>
                   <div class="table-responsive" style="text-align:center;">
@@ -250,19 +250,19 @@
                            </tr>
                         </thead>
                         <tbody>
-                           @foreach($employees as $index=>$employee)
+                           @foreach($branch_admins as $index=>$branch_admin)
                            <tr>
                               <td>{{ $index+1 }}</td>
-                              <td>{{ $employee->name }}</td>
-                              <td>{{ $employee->phone}}</td>
-                              <td>{{ $employee->Organization->name }}</td>
-                              <td>{{ $employee->Branch->name}}</td>
+                              <td>{{ $branch_admin->User->name }}</td>
+                              <td>{{ $branch_admin->User->phone}}</td>
+                              <td>{{ $branch_admin->Organization->name }}</td>
+                              <td>{{ $branch_admin->Branch->name}}</td>
                               <td>
                                  <div class="btn-icon-list">
-                                    <form action="{{route('employees.destroy',$employee->id)}}" method="POST">
+                                    <form action="{{route('branch_admins.destroy',$branch_admin->id)}}" method="POST">
                                        @csrf
                                        @method('DELETE')
-                                       <a href="{{route('employees.edit',$employee->id)}}" class="btn btn-info"><i
+                                       <a href="{{route('branch_admin_edit',['org' => $branch_admin->organization_id , 'branch' => $branch_admin->branch_id ,'id' =>$branch_admin->user_id ])}}" class="btn btn-info"><i
                                              class="fa fa-edit"></i></a>
 
                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>

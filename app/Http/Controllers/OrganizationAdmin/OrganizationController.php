@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\OrganizationAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserBranch;
 use Illuminate\Http\Request;
 use App\Http\Requests\Organization\StoreRequest;
 use App\Models\admin\Organization;
@@ -136,6 +137,7 @@ class OrganizationController extends Controller
     public function show($id)
     {
         $organization = Organization::find($id);
+        $owner = OrganizationAdmin::where('organization_id', $id)->where('type','Owner Admin')->first();
         $countries = Country::all();
         $cities = City::all();
         $districts = District::all();
@@ -143,8 +145,8 @@ class OrganizationController extends Controller
         $city_id = City::where('id',$organization->District->city_id)->first(); 
         $branchs = Branch::where('organization_id', $id)->get();
         $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
-        $employees = Employee::where('organization_id', $id)->get();
-        return view('organization.pages.organizations.organizaion_show', compact('organization','countries','cities','districts','country_id','city_id','branchs','organization_admins','employees'));
+        $branch_admins = UserBranch::where('organization_id', $id)->get();
+        return view('organization.pages.organizations.organizaion_show', compact('organization','owner','countries','cities','districts','country_id','city_id','branchs','organization_admins','branch_admins'));
     }
     public function branches($id)
     {

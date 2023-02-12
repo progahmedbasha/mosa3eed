@@ -15,6 +15,7 @@
       <hr>
       <form action="{{route('org_employees.store')}}" method="post" enctype="multipart/form-data">
          @csrf
+         <input type="hidden" name="branch_id" value="{{ $id }}">
          <div class="row">
             <div class="col-sm-6">
                <div class="card">
@@ -38,40 +39,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-sm-6">
-               <div class="card">
-                  <div class="card-body">
-                     <div class="col">
-                        <label for="inputState">Organizations</label>
-                        <select id="organization" class="form-control organization_id" name="organization_id">
-                           <option value="">Select Organization</option>
-                           @foreach($organizations as $organization)
-                           <option value="{{$organization->id}}" {{(old('organization_id')==$organization->id)?
-                              'selected':''}}>{{$organization->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('organization_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                     </div>
-                     <div class="col">
-                        <label for="inputState">Branch</label>
-                        <select id="inputState" class="form-control" name="branch_id">
-                           <option value="">Select Branch</option>
-                           @foreach($branches as $branch)
-                           <option value="{{$branch->id}}" {{(old('organization_id')==$branch->id)?
-                              'selected':''}}>{{$branch->name}}</option>
-                           @endforeach
-                        </select>
-                        @error('branch_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                     </div>
-                  
-
-                  </div>
-               </div>
-            </div>
+         
          </div>
          <br>
          <button type="submit" class="btn btn-primary">Save</button>

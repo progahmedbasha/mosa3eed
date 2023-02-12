@@ -105,7 +105,7 @@
             href="{{route('all_attendance_branches')}}">Attendance</a>
          <a class="dropdown-item" style="margin-left: 17px;" href="{{route('bran_easysign')}}">Easy
             Sign</a>
-         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees.index')}}">Employee</a>
+         <a class="dropdown-item" style="margin-left: 17px;" href="{{route('employees_branch_branches')}}">Employee</a>
       </div>
 
    </div>

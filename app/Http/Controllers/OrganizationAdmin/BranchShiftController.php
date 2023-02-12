@@ -33,7 +33,7 @@ class BranchShiftController extends Controller
     }
     public function all_org_shift()
     {
-           $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->get();
+        $organizations = OrganizationAdmin::where('user_id', Auth::user()->id)->get();
         return view('organization.pages.organization_shifts.all_organizations', compact('organizations'));
     }
         public function all_branch_shift($id)

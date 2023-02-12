@@ -75,7 +75,7 @@
                                             </li>
                                             <li><a class="dropdown-item"
                                                     style="padding: 0px 14px!important; font-size:14px;"
-                                                    href="{{route('branch_shifts',$branch->branch_id)}} "><i
+                                                    href="{{route('bran_shifts',$branch->branch_id)}} "><i
                                                         class="fas fa-university"></i>
                                                     Shifts</a>
                                             </li>

@@ -184,8 +184,8 @@ class OrganizationController extends Controller
         $branchs = Branch::where('organization_id', $id)->get();
         $organization_admins = OrganizationAdmin::where('organization_id', $id)->get();
         // $employees = Employee::where('organization_id', $id)->get();
-        $employees = Employee::where('organization_id', $id)->get();
-        return view('admin.pages.organizations.organizaion_show', compact('organization','owner','countries','cities','districts','country_id','city_id','branchs','organization_admins','employees'));
+        $branch_admins = UserBranch::where('organization_id', $id)->get();
+        return view('admin.pages.organizations.organizaion_show', compact('organization','owner','countries','cities','districts','country_id','city_id','branchs','organization_admins','branch_admins'));
     }
     public function branches($id)
     {
